@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { getAllPokemonNames } from './lib/pokemonCache.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -15,6 +16,17 @@ app.use(express.static(path.join(__dirname, '../../public')));
 // API Routes
 app.get('/api/health', (req, res) => {
     res.json({ status: 'Server is running!' });
+});
+
+app.get('/api/pokemon/names/:languageId', async (req, res) => {
+    try {
+        const languageId = parseInt(req.params.languageId, 10);
+        const pokemonNames = await getAllPokemonNames(languageId);
+        res.json(pokemonNames);
+    } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+        res.status(400).json({ error: errorMessage });
+    }
 });
 
 // Serve client app
