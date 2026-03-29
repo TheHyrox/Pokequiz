@@ -108,9 +108,22 @@ export async function pixelateImage(
             const scaledW = Math.max(1, Math.ceil(w / pixelSize));
             const scaledH = Math.max(1, Math.ceil(h / pixelSize));
 
-            // Draw small then scale up for pixelation effect
-            ctx.drawImage(img, 0, 0, scaledW, scaledH);
-            ctx.drawImage(canvas, 0, 0, scaledW, scaledH, 0, 0, w, h);
+            // Create temporary canvas for small pixelated version
+            const tempCanvas = document.createElement('canvas');
+            const tempCtx = tempCanvas.getContext('2d');
+            
+            if (!tempCtx) {
+                reject(new Error('Temporary canvas context not available'));
+                return;
+            }
+
+            tempCanvas.width = scaledW;
+            tempCanvas.height = scaledH;
+            tempCtx.imageSmoothingEnabled = false;
+            tempCtx.drawImage(img, 0, 0, scaledW, scaledH);
+
+            // Draw scaled-up from temp canvas to main canvas
+            ctx.drawImage(tempCanvas, 0, 0, scaledW, scaledH, 0, 0, w, h);
 
             resolve(canvas.toDataURL('image/png'));
         };
