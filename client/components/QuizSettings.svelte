@@ -1,26 +1,21 @@
 <script lang="ts">
     import Slider from './Slider.svelte';
     import ToggleOption from './ToggleOption.svelte';
+    import { getLabel } from '../src/lib/translations';
 
     export let onStartQuiz: (settings: QuizSettings) => void;
+    export let languageCode: string = 'en';
 
     interface QuizSettings {
         hasTimeLimit: boolean;
         timeLimit: number;
-        gameMode: 'score' | 'infinite';
+        gameMode: 'score' | 'infinite' | 'challenge';
         changeDescription: boolean;
     }
 
-    let settings: QuizSettings = {
-        hasTimeLimit: false,
-        timeLimit: 15,
-        gameMode: 'score',
-        changeDescription: false
-    };
-
     let timeLimit = 15;
     let hasTimeLimit = false;
-    let gameMode: 'score' | 'infinite' = 'score';
+    let gameMode: 'score' | 'infinite' | 'challenge' = 'score';
     let changeDescription = false;
 
     function handleStartQuiz() {
@@ -35,21 +30,18 @@
 </script>
 
 <div class="settings-container">
-    <div class="settings-header">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6">Game Settings</h2>
-    </div>
 
     <!-- Time Limit Section -->
     <div class="settings-section">
-        <h3 class="settings-section-title">Time Management</h3>
+        <h3 class="settings-section-title">{getLabel(languageCode, 'timeManagement')}</h3>
         <ToggleOption 
-            label="Limite de temps par round" 
+            label={getLabel(languageCode, 'timeLimit')}
             bind:enabled={hasTimeLimit}
         />
         {#if hasTimeLimit}
             <div class="ml-8">
                 <Slider 
-                    label="Temps limite (secondes)"
+                    label={getLabel(languageCode, 'timeSeconds')}
                     min={5}
                     max={30}
                     bind:value={timeLimit}
@@ -60,7 +52,7 @@
 
     <!-- Game Mode Section -->
     <div class="settings-section">
-        <h3 class="settings-section-title">Game Mode</h3>
+        <h3 class="settings-section-title">{getLabel(languageCode, 'gameMode')}</h3>
         <div class="game-mode-options">
             <label class="radio-label">
                 <input
@@ -70,8 +62,8 @@
                     bind:group={gameMode}
                     class="radio-input"
                 />
-                <span class="radio-text">Mode Score</span>
-                <span class="radio-description">Trouvez du premier coup = plus de points</span>
+                <span class="radio-text">{getLabel(languageCode, 'scoreMode')}</span>
+                <span class="radio-description">{getLabel(languageCode, 'scoreFirst')}</span>
             </label>
             <label class="radio-label">
                 <input
@@ -81,20 +73,31 @@
                     bind:group={gameMode}
                     class="radio-input"
                 />
-                <span class="radio-text">Mode Infini</span>
-                <span class="radio-description">Continuez tant que vous ne vous trompez pas (1 point par réussite)</span>
+                <span class="radio-text">{getLabel(languageCode, 'infiniteMode')}</span>
+                <span class="radio-description">{getLabel(languageCode, 'continueUntilWrong')}</span>
+            </label>
+            <label class="radio-label">
+                <input
+                    type="radio"
+                    name="gameMode"
+                    value="challenge"
+                    bind:group={gameMode}
+                    class="radio-input"
+                />
+                <span class="radio-text">{getLabel(languageCode, 'challengeMode')}</span>
+                <span class="radio-description">{getLabel(languageCode, 'tenQuestionsChallenge')}</span>
             </label>
         </div>
     </div>
 
     <!-- Game Options Section -->
     <div class="settings-section">
-        <h3 class="settings-section-title">Options de Jeu</h3>
+        <h3 class="settings-section-title">{getLabel(languageCode, 'gameOptions')}</h3>
         <ToggleOption 
-            label="Changement de description" 
+            label={getLabel(languageCode, 'changeDescription')}
             bind:enabled={changeDescription}
         />
-        <p class="option-description">Passez d'une description Pokédex à une autre</p>
+        <p class="option-description">{getLabel(languageCode, 'multipleDescriptions')}</p>
     </div>
 
     <!-- Start Button -->
@@ -102,7 +105,7 @@
         on:click={handleStartQuiz}
         class="start-button"
     >
-        Commencer le Quiz
+        {getLabel(languageCode, 'startQuiz')}
     </button>
 </div>
 

@@ -1,10 +1,11 @@
 import { generationToId } from './utils/utils';
 
-export async function getPokemonDescription(pokemon : string, lang: string, generation: string | null) {
+export async function getPokemonDescription(pokemon : string, languageId: string, generation: string | null) {
     const url = `https://pokeapi.co/api/v2/pokemon-species/${pokemon}/`;
 
     let generationId : number[] | null = null;
     let descriptions : string[] = [];
+    const langId = parseInt(languageId);
 
     if (generation != null) {
         generationId = await generationToId(generation);
@@ -15,20 +16,23 @@ export async function getPokemonDescription(pokemon : string, lang: string, gene
         const data = await response.json();
 
         data.flavor_text_entries.forEach((entry: { language: { url: string; }; flavor_text: string; version: { url: string; }; }) => {
+            // Get language ID from the URL
+            const entryLangId = parseInt(entry.language.url.split('/').filter((part: string) => part).pop() || '0');
+            
             if (generationId == null && generation == null) {
-                if (entry.language.url.endsWith(`/${lang}/`)) {
+                if (entryLangId === langId) {
                     descriptions.push(entry.flavor_text.replace(/\n/g, ' '));
                 }
             } else if (generationId != null) {
                 for (let i = 0; i < generationId.length; i++) {
-                    if (entry.language.url.endsWith(`/${lang}/`) && entry.version.url.endsWith(`/${generationId[i]}/`)) {
+                    if (entryLangId === langId && entry.version.url.endsWith(`/${generationId[i]}/`)) {
                         descriptions.push(entry.flavor_text.replace(/\n/g, ' '));
                     }
                 }
             }
         });
 
-        return await noSpoilerDescription(descriptions, lang, data);
+        return await noSpoilerDescription(descriptions, languageId, data);
     } catch (e) {
         console.log("Got an error: ", e);
     }

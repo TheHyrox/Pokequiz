@@ -1,15 +1,21 @@
 import { generationToId } from './utils/utils';
 
-export async function getPokemonNameLocalized(pokemon : number, lang: string) {
+export async function getPokemonNameLocalized(pokemon : number, languageId: number) {
     const url = `https://pokeapi.co/api/v2/pokemon-species/${pokemon}/`;
     try {
         const response = await fetch(url);
         const data = await response.json();
 
-        let nameLocalized = data.names.find((name: { language: { url: string; }; }) => name.language.url.endsWith(`/${lang}/`));
+        // Find the name by language ID
+        const nameLocalized = data.names.find((name: { language: { url: string; }; }) => {
+            const langId = name.language.url.split('/').filter((part: string) => part).pop();
+            return langId ? parseInt(langId) === languageId : false;
+        });
+        
         return nameLocalized ? nameLocalized.name : null;
     } catch (e) {
         console.log("Got an error: ", e);
+        return null;
     }
 }
 

@@ -1,6 +1,9 @@
 <script lang="ts">
+    import { onMount } from 'svelte';
     import QuizSettings from '../components/QuizSettings.svelte';
     import DescriptionQuiz from './quiz_description.svelte';
+    import LanguageSelector from '../components/LanguageSelector.svelte';
+    import { getLabel } from './lib/translations';
 
     interface Game {
         id: string;
@@ -12,7 +15,7 @@
     interface QuizSettingsType {
         hasTimeLimit: boolean;
         timeLimit: number;
-        gameMode: 'score' | 'infinite';
+        gameMode: 'score' | 'infinite' | 'challenge';
         changeDescription: boolean;
     }
 
@@ -28,7 +31,31 @@
     let selectedGame: Game | null = null;
     let quizStarted = false;
     let quizSettings: QuizSettingsType | null = null;
+    let selectedLanguageId: number = 9; 
+    let languageCodeMap: Record<number, string> = {
+        1: 'ja-hrkt',
+        3: 'ko',
+        4: 'zh-hant',
+        5: 'fr',
+        6: 'de',
+        7: 'es',
+        8: 'it',
+        9: 'en',
+        11: 'ja',
+        12: 'zh-hans'
+    };
+    
+    $: currentLanguageCode = languageCodeMap[selectedLanguageId] || 'en';    
+    $: if (typeof window !== 'undefined') {
+        localStorage.setItem('selectedLanguageId', selectedLanguageId.toString());
+    }
 
+    onMount(() => {
+        const savedLanguageId = localStorage.getItem('selectedLanguageId');
+        if (savedLanguageId) {
+            selectedLanguageId = parseInt(savedLanguageId);
+        }
+    });
     function selectGame(game: Game) {
         selectedGame = game;
         quizStarted = false;
@@ -47,12 +74,20 @@
 </script>
 
 <main class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100">
+    <!-- Language Selector -->
+    <div class="absolute top-6 right-6">
+        <LanguageSelector 
+            bind:selectedLanguageId
+            currentLanguageCode={currentLanguageCode}
+        />
+    </div>
+
     <!-- Main Hub -->
     {#if !selectedGame}
         <div class="flex flex-col items-center justify-center min-h-screen px-4">
             <div class="text-center mb-12">
-                <h1 class="text-5xl font-bold text-gray-800 mb-4">Pokequiz</h1>
-                <p class="text-lg text-gray-600">Test your Pokemon knowledge!</p>
+                <h1 class="text-5xl font-bold text-gray-800 mb-4">{getLabel(currentLanguageCode, 'pokequiz')}</h1>
+                <p class="text-lg text-gray-600">{getLabel(currentLanguageCode, 'testYourKnowledge')}</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl">
@@ -62,8 +97,8 @@
                         class="game-card"
                     >
                         <div class="game-icon">{game.icon}</div>
-                        <h2 class="game-name">{game.name}</h2>
-                        <p class="game-description">{game.description}</p>
+                        <h2 class="game-name">{getLabel(currentLanguageCode, 'descriptionQuiz')}</h2>
+                        <p class="game-description">{getLabel(currentLanguageCode, 'guessFromDescription')}</p>
                     </button>
                 {/each}
             </div>
@@ -76,10 +111,13 @@
                     on:click={backToHub}
                     class="mb-6 px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg transition-colors"
                 >
-                    ← Back
+                    {getLabel(currentLanguageCode, 'back')}
                 </button>
                 <div class="flex justify-center">
-                    <QuizSettings onStartQuiz={handleStartQuiz} />
+                    <QuizSettings 
+                        onStartQuiz={handleStartQuiz}
+                        languageCode={currentLanguageCode}
+                    />
                 </div>
             </div>
         </div>
@@ -88,6 +126,8 @@
         <DescriptionQuiz 
             settings={quizSettings}
             onBackToHub={backToHub}
+            languageCode={currentLanguageCode}
+            languageId={selectedLanguageId}
         />
     {/if}
 </main>
