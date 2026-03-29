@@ -1,29 +1,34 @@
 <script lang="ts">
+    /**
+     * @brief Pokemon card component
+     * @description Clickable card displaying a Pokemon with sprite and name
+     */
     import { createEventDispatcher } from 'svelte';
-    
-    interface Pokemon {
-        name: string;
-        id: number;
-        isCorrect: boolean;
-    }
-    
-    export let pokemon: Pokemon;
+    import { capitalizeFirst } from '../src/lib/utils/textUtils';
+    import { getSpriteUrl } from '../../shared/constants/sprites';
+    import type { PokemonOption } from '../../shared/types';
+
+    /** Pokemon data to display */
+    export let pokemon: PokemonOption;
+    /** Show error styling (wrong answer) */
     export let showError: boolean = false;
+    /** Disable interactions */
     export let disabled: boolean = false;
 
     const dispatch = createEventDispatcher();
-    
-    const pokemonId = pokemon.id.toString() || '0';
-    const spriteUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemonId}.png`;
-    
-    function handleClick() {
+    const spriteUrl = getSpriteUrl(pokemon.id, 'home');
+
+    /**
+     * @brief Handles card click/selection
+     */
+    function handleClick(): void {
         if (!disabled) {
             dispatch('selected', { pokemon });
         }
     }
 </script>
 
-<div 
+<div
     class={`pokemon-card ${showError ? 'error' : ''} ${disabled ? 'disabled' : ''}`}
     on:click={handleClick}
     role="button"
@@ -31,13 +36,13 @@
     on:keydown={(e) => e.key === 'Enter' && handleClick()}
 >
     <div class="card-inner">
-        <img 
+        <img
             src={spriteUrl}
             alt={pokemon.name}
             class="pokemon-image"
         />
         <p class="pokemon-name">
-            {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+            {capitalizeFirst(pokemon.name)}
         </p>
     </div>
 </div>

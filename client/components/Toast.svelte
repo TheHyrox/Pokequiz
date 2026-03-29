@@ -1,8 +1,19 @@
 <script lang="ts">
+    /**
+     * @brief Toast notification component
+     * @description Displays temporary notifications with auto-close support
+     */
+    import type { ToastType } from '../../shared/types';
+
+    /** Message to display */
     export let message: string;
-    export let type: 'error' | 'success' | 'info' = 'info';
+    /** Toast type for styling */
+    export let type: ToastType = 'info';
+    /** Callback when toast closes */
     export let onClose: () => void = () => {};
+    /** Whether to auto-close after duration */
     export let autoClose: boolean = true;
+    /** Duration in ms before auto-close */
     export let duration: number = 3000;
 
     let show = true;
@@ -14,7 +25,10 @@
         }, duration);
     }
 
-    function handleClose() {
+    /**
+     * @brief Manually close the toast
+     */
+    function handleClose(): void {
         show = false;
         onClose();
     }
@@ -67,17 +81,6 @@
         to {
             transform: translateX(0);
             opacity: 1;
-        }
-    }
-
-    @keyframes slideOut {
-        from {
-            transform: translateX(0);
-            opacity: 1;
-        }
-        to {
-            transform: translateX(-100%);
-            opacity: 0;
         }
     }
 

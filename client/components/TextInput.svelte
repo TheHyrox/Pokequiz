@@ -1,23 +1,37 @@
 <script lang="ts">
+    /**
+     * @brief Text input component
+     * @description Styled text input with keyboard navigation support
+     */
+    import { createEventDispatcher } from 'svelte';
+
+    /** Placeholder text */
     export let placeholder: string = '';
+    /** Input value (two-way binding) */
     export let value: string = '';
+    /** Whether input is disabled */
     export let disabled: boolean = false;
+    /** Whether to auto-focus on mount */
     export let autofocus: boolean = false;
 
     let inputElement: HTMLInputElement;
+    const dispatch = createEventDispatcher();
 
-    export function focus() {
+    /**
+     * @brief Programmatically focus the input
+     */
+    export function focus(): void {
         inputElement?.focus();
     }
 
-    function handleKeyDown(event: KeyboardEvent) {
+    /**
+     * @brief Handles Enter key to dispatch submit event
+     */
+    function handleKeyDown(event: KeyboardEvent): void {
         if (event.key === 'Enter') {
             dispatch('submit');
         }
     }
-
-    import { createEventDispatcher } from 'svelte';
-    const dispatch = createEventDispatcher();
 </script>
 
 <!-- svelte-ignore a11y-autofocus -->

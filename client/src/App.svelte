@@ -1,22 +1,20 @@
 <script lang="ts">
+    /**
+     * @brief Main application component
+     * @description Hub for navigating between games and settings
+     */
     import { onMount } from 'svelte';
     import QuizSettings from '../components/QuizSettings.svelte';
-    import DescriptionQuiz from './quiz_description.svelte';
+    import DescriptionQuiz from './QuizDescription.svelte';
     import LanguageSelector from '../components/LanguageSelector.svelte';
-    import { getLabel } from './lib/translations';
+    import { getLabel, LANGUAGE_ID_TO_CODE } from './lib/translations';
+    import type { QuizSettings as QuizSettingsType } from '../../shared/types';
 
     interface Game {
         id: string;
         name: string;
         description: string;
         icon: string;
-    }
-
-    interface QuizSettingsType {
-        hasTimeLimit: boolean;
-        timeLimit: number;
-        gameMode: 'score' | 'infinite' | 'challenge' | 'hardcore';
-        changeDescription: boolean;
     }
 
     const games: Game[] = [
@@ -31,21 +29,12 @@
     let selectedGame: Game | null = null;
     let quizStarted = false;
     let quizSettings: QuizSettingsType | null = null;
-    let selectedLanguageId: number = 9; 
-    let languageCodeMap: Record<number, string> = {
-        1: 'ja-hrkt',
-        3: 'ko',
-        4: 'zh-hant',
-        5: 'fr',
-        6: 'de',
-        7: 'es',
-        8: 'it',
-        9: 'en',
-        11: 'ja',
-        12: 'zh-hans'
-    };
-    
-    $: currentLanguageCode = languageCodeMap[selectedLanguageId] || 'en';    
+    let selectedLanguageId: number = 9;
+
+    // Derive language code from shared constants (removes duplicate mapping)
+    $: currentLanguageCode = LANGUAGE_ID_TO_CODE[selectedLanguageId] || 'en';
+
+    // Persist language selection
     $: if (typeof window !== 'undefined') {
         localStorage.setItem('selectedLanguageId', selectedLanguageId.toString());
     }
@@ -56,17 +45,27 @@
             selectedLanguageId = parseInt(savedLanguageId);
         }
     });
-    function selectGame(game: Game) {
+
+    /**
+     * @brief Selects a game to configure
+     */
+    function selectGame(game: Game): void {
         selectedGame = game;
         quizStarted = false;
     }
 
-    function handleStartQuiz(settings: QuizSettingsType) {
+    /**
+     * @brief Starts the quiz with given settings
+     */
+    function handleStartQuiz(settings: QuizSettingsType): void {
         quizSettings = settings;
         quizStarted = true;
     }
 
-    function backToHub() {
+    /**
+     * @brief Returns to the main hub
+     */
+    function backToHub(): void {
         selectedGame = null;
         quizStarted = false;
         quizSettings = null;
@@ -76,7 +75,7 @@
 <main class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100">
     <!-- Language Selector -->
     <div class="absolute top-6 right-6">
-        <LanguageSelector 
+        <LanguageSelector
             bind:selectedLanguageId
             currentLanguageCode={currentLanguageCode}
         />
@@ -86,19 +85,24 @@
     {#if !selectedGame}
         <div class="flex flex-col items-center justify-center min-h-screen px-4">
             <div class="text-center mb-12">
-                <h1 class="text-5xl font-bold text-gray-800 mb-4">{getLabel(currentLanguageCode, 'pokequiz')}</h1>
-                <p class="text-lg text-gray-600">{getLabel(currentLanguageCode, 'testYourKnowledge')}</p>
+                <h1 class="text-5xl font-bold text-gray-800 mb-4">
+                    {getLabel(currentLanguageCode, 'pokequiz')}
+                </h1>
+                <p class="text-lg text-gray-600">
+                    {getLabel(currentLanguageCode, 'testYourKnowledge')}
+                </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl">
                 {#each games as game (game.id)}
-                    <button
-                        on:click={() => selectGame(game)}
-                        class="game-card"
-                    >
+                    <button on:click={() => selectGame(game)} class="game-card">
                         <div class="game-icon">{game.icon}</div>
-                        <h2 class="game-name">{getLabel(currentLanguageCode, 'descriptionQuiz')}</h2>
-                        <p class="game-description">{getLabel(currentLanguageCode, 'guessFromDescription')}</p>
+                        <h2 class="game-name">
+                            {getLabel(currentLanguageCode, 'descriptionQuiz')}
+                        </h2>
+                        <p class="game-description">
+                            {getLabel(currentLanguageCode, 'guessFromDescription')}
+                        </p>
                     </button>
                 {/each}
             </div>
@@ -114,7 +118,7 @@
                     {getLabel(currentLanguageCode, 'back')}
                 </button>
                 <div class="flex justify-center">
-                    <QuizSettings 
+                    <QuizSettings
                         onStartQuiz={handleStartQuiz}
                         languageCode={currentLanguageCode}
                     />
@@ -123,7 +127,7 @@
         </div>
     {:else if selectedGame.id === 'description-quiz' && quizStarted && quizSettings}
         <!-- Quiz Game -->
-        <DescriptionQuiz 
+        <DescriptionQuiz
             settings={quizSettings}
             onBackToHub={backToHub}
             languageCode={currentLanguageCode}

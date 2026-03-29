@@ -1,4 +1,8 @@
 <script context="module" lang="ts">
+    /**
+     * @brief Pokemon option interface for autocomplete
+     * @deprecated Use Pokemon from shared/types instead
+     */
     export interface PokemonOption {
         id: number;
         name: string;
@@ -6,15 +10,25 @@
 </script>
 
 <script lang="ts">
+    /**
+     * @brief Autocomplete input for Pokemon selection
+     * @description Provides filtered dropdown suggestions as user types
+     */
     import { createEventDispatcher } from 'svelte';
+    import { normalizeText } from '../src/lib/utils/textUtils';
+    import { getSpriteUrl } from '../../shared/constants/sprites';
 
     export type { PokemonOption };
 
-
+    /** List of Pokemon to search */
     export let pokemonList: PokemonOption[] = [];
+    /** Placeholder text */
     export let placeholder: string = '';
+    /** Current input value (two-way binding) */
     export let value: string = '';
+    /** Whether input is disabled */
     export let disabled: boolean = false;
+    /** Whether to auto-focus on mount */
     export let autofocus: boolean = false;
 
     let inputElement: HTMLInputElement;
@@ -22,35 +36,47 @@
     let filteredList: PokemonOption[] = [];
 
     const dispatch = createEventDispatcher();
+    const MAX_SUGGESTIONS = 15;
 
-    export function focus() {
+    /**
+     * @brief Programmatically focus the input
+     */
+    export function focus(): void {
         inputElement?.focus();
     }
 
-    function filterPokemon() {
+    /**
+     * @brief Filters Pokemon list based on current input
+     */
+    function filterPokemon(): void {
         if (!value.trim()) {
-            filteredList = pokemonList.slice(0, 15);
+            filteredList = pokemonList.slice(0, MAX_SUGGESTIONS);
             showSuggestions = true;
             return;
         }
 
-        const searchTerm = value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        const searchTerm = normalizeText(value);
         filteredList = pokemonList
-            .filter(p => 
-                p.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').startsWith(searchTerm)
-            )
-            .slice(0, 15);
+            .filter(p => normalizeText(p.name).startsWith(searchTerm))
+            .slice(0, MAX_SUGGESTIONS);
 
         showSuggestions = filteredList.length > 0;
     }
 
-    function selectPokemon(pokemon: PokemonOption) {
+    /**
+     * @brief Handles selection of a Pokemon from suggestions
+     * @param pokemon - Selected Pokemon option
+     */
+    function selectPokemon(pokemon: PokemonOption): void {
         value = pokemon.name;
         showSuggestions = false;
         dispatch('select', { pokemon });
     }
 
-    function handleKeyDown(event: KeyboardEvent) {
+    /**
+     * @brief Handles keyboard navigation
+     */
+    function handleKeyDown(event: KeyboardEvent): void {
         if (event.key === 'Enter') {
             showSuggestions = false;
             dispatch('submit');
@@ -59,16 +85,16 @@
         }
     }
 
-    function handleInput() {
+    function handleInput(): void {
         filterPokemon();
     }
 
-    function handleFocus() {
-        filterPokemon(); 
+    function handleFocus(): void {
+        filterPokemon();
         dispatchEvent(new Event('focus', { bubbles: true }));
     }
 
-    function handleBlur() {
+    function handleBlur(): void {
         setTimeout(() => {
             showSuggestions = false;
         }, 200);
@@ -102,8 +128,8 @@
                     class="suggestion-item"
                 >
                     <img
-                        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{pokemon.id}.png"
-                        alt="{pokemon.name}"
+                        src={getSpriteUrl(pokemon.id)}
+                        alt={pokemon.name}
                         class="pokemon-icon"
                         on:error
                     />
