@@ -1,9 +1,14 @@
 <script lang="ts">
-    import { getPokemonDescription } from '../../server/src/lib/description';
+    // import { getPokemonDescription } from '../../server/src/lib/description';
+    import { getPokemonNames} from '../../server/src/lib/name';
 
-    getPokemonDescription('pikachu', '5', null).then(description => {
-        console.log(description);
+    getPokemonNames(355).then(names => {
+        console.log(names);
     });
+
+    // getPokemonDescription('pikachu', '5', null).then(description => {
+    //     console.log(description);
+    // });
 </script>
 
 <main class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 flex items-center justify-center">
