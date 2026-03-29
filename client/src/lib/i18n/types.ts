@@ -7,6 +7,7 @@ import type { CommonLabelKey } from './labels/common';
 import type { QuizLabelKey } from './labels/quiz';
 import type { SettingsLabelKey } from './labels/settings';
 import type { ChallengeLabelKey } from './labels/challenge';
+import type { SpriteLabelKey } from './labels/sprites';
 
 /** All available language codes */
 export type LanguageCode =
@@ -26,4 +27,5 @@ export type LabelKey =
     | CommonLabelKey
     | QuizLabelKey
     | SettingsLabelKey
-    | ChallengeLabelKey;
+    | ChallengeLabelKey
+    | SpriteLabelKey;

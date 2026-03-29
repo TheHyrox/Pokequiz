@@ -116,3 +116,93 @@ export interface GenerationRange {
     /** Last Pokemon ID in generation */
     max: number;
 }
+
+// ============================================================
+// SPRITES QUIZ TYPES
+// ============================================================
+
+/**
+ * @brief Sprite view type options
+ * @description Front or back view of Pokemon sprite
+ */
+export type SpriteType = 'front' | 'back';
+
+/**
+ * @brief Sprite source/quality options
+ * @description Different sprite styles available from PokeAPI
+ */
+export type SpriteSource = 'default' | 'home' | 'official';
+
+/**
+ * @brief Image effect settings for sprites quiz
+ * @description Controls visual modifications applied to sprites
+ */
+export interface SpriteEffectSettings {
+    /** Enable blur effect */
+    blurEnabled: boolean;
+    /** Blur strength (1-10 pixels) */
+    blurStrength: number;
+    /** Enable pixelation effect */
+    pixelateEnabled: boolean;
+    /** Pixelation strength (2-20 pixel blocks) */
+    pixelateStrength: number;
+    /** Enable silhouette (painted black) effect */
+    silhouetteEnabled: boolean;
+    /** Enable random rotation (0, 90, 180, 270 degrees) */
+    rotationEnabled: boolean;
+}
+
+/**
+ * @brief Sprites quiz game settings
+ * @description All customizable options for a sprites quiz session
+ */
+export interface SpriteQuizSettings {
+    /** Whether time limit is enabled */
+    hasTimeLimit: boolean;
+    /** Time limit per question in seconds */
+    timeLimit: number;
+    /** Selected game mode */
+    gameMode: GameMode;
+    /** Array of selected generation numbers (1-9) */
+    selectedGenerations: number[];
+    /** Selected sprite types (front/back) */
+    selectedSpriteTypes: SpriteType[];
+    /** Sprite source/quality to use */
+    spriteSource: SpriteSource;
+    /** Image effect settings */
+    effects: SpriteEffectSettings;
+}
+
+/**
+ * @brief Hardcore mode lives state
+ * @description Tracks lives and consecutive correct answers in hardcore mode
+ */
+export interface HardcoreModeState {
+    /** Current lives remaining (max 3) */
+    lives: number;
+    /** Consecutive correct answers without errors */
+    consecutiveCorrect: number;
+}
+
+/**
+ * @brief Challenge question for sprites quiz
+ * @description Stores question data for end-of-quiz review (sprites version)
+ */
+export interface SpriteChallengeQuestion {
+    /** Question number (1-10) */
+    questionNumber: number;
+    /** The sprite URL shown to the user */
+    spriteUrl: string;
+    /** Correct Pokemon name */
+    correctPokemonName: string;
+    /** Correct Pokemon ID */
+    correctPokemonId: number;
+    /** ID of user's selected Pokemon */
+    userAnswerId: number;
+    /** Name of user's selected Pokemon */
+    userAnswerName: string;
+    /** All available options for this question */
+    allOptions: PokemonOption[];
+    /** Whether the user answered correctly */
+    isCorrect: boolean;
+}

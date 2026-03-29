@@ -5,10 +5,12 @@
      */
     import { onMount } from 'svelte';
     import QuizSettings from '../components/QuizSettings.svelte';
+    import SpriteQuizSettings from '../components/SpriteQuizSettings.svelte';
     import DescriptionQuiz from './QuizDescription.svelte';
+    import SpritesQuiz from './QuizSprites.svelte';
     import LanguageSelector from '../components/LanguageSelector.svelte';
     import { getLabel, LANGUAGE_ID_TO_CODE } from './lib/translations';
-    import type { QuizSettings as QuizSettingsType } from '../../shared/types';
+    import type { QuizSettings as QuizSettingsType, SpriteQuizSettings as SpriteQuizSettingsType } from '../../shared/types';
 
     interface Game {
         id: string;
@@ -23,12 +25,19 @@
             name: 'Description Quiz',
             description: 'Guess the Pokemon from its Pokédex description',
             icon: '📝'
+        },
+        {
+            id: 'sprites-quiz',
+            name: 'Sprites Quiz',
+            description: 'Guess the Pokemon from its sprite',
+            icon: '🎮'
         }
     ];
 
     let selectedGame: Game | null = null;
     let quizStarted = false;
     let quizSettings: QuizSettingsType | null = null;
+    let spriteQuizSettings: SpriteQuizSettingsType | null = null;
     let selectedLanguageId: number = 9;
 
     // Derive language code from shared constants (removes duplicate mapping)
@@ -55,10 +64,18 @@
     }
 
     /**
-     * @brief Starts the quiz with given settings
+     * @brief Starts the description quiz with given settings
      */
-    function handleStartQuiz(settings: QuizSettingsType): void {
+    function handleStartDescriptionQuiz(settings: QuizSettingsType): void {
         quizSettings = settings;
+        quizStarted = true;
+    }
+
+    /**
+     * @brief Starts the sprites quiz with given settings
+     */
+    function handleStartSpritesQuiz(settings: SpriteQuizSettingsType): void {
+        spriteQuizSettings = settings;
         quizStarted = true;
     }
 
@@ -69,6 +86,7 @@
         selectedGame = null;
         quizStarted = false;
         quizSettings = null;
+        spriteQuizSettings = null;
     }
 </script>
 
@@ -98,10 +116,10 @@
                     <button on:click={() => selectGame(game)} class="game-card">
                         <div class="game-icon">{game.icon}</div>
                         <h2 class="game-name">
-                            {getLabel(currentLanguageCode, 'descriptionQuiz')}
+                            {getLabel(currentLanguageCode, game.id === 'description-quiz' ? 'description_quiz' : 'sprites_quiz')}
                         </h2>
                         <p class="game-description">
-                            {getLabel(currentLanguageCode, 'guessFromDescription')}
+                            {getLabel(currentLanguageCode, game.id === 'description-quiz' ? 'description_guessFromDescription' : 'sprites_guessFromSprite')}
                         </p>
                     </button>
                 {/each}
@@ -109,26 +127,41 @@
         </div>
     {:else if !quizStarted}
         <!-- Settings Page -->
-        <div class="flex items-center justify-center min-h-screen px-4">
-            <div class="w-full">
-                <button
-                    on:click={backToHub}
-                    class="mb-6 px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg transition-colors"
-                >
-                    {getLabel(currentLanguageCode, 'back')}
-                </button>
-                <div class="flex justify-center">
-                    <QuizSettings
-                        onStartQuiz={handleStartQuiz}
-                        languageCode={currentLanguageCode}
-                    />
+        <div class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 p-8 flex flex-col">
+            <button
+                on:click={backToHub}
+                class="mb-6 px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg transition-colors w-fit"
+            >
+                {getLabel(currentLanguageCode, 'back')}
+            </button>
+            <div class="flex items-center justify-center flex-1">
+                <div class="w-full">
+                    {#if selectedGame?.id === 'description-quiz'}
+                        <QuizSettings
+                            onStartQuiz={handleStartDescriptionQuiz}
+                            languageCode={currentLanguageCode}
+                        />
+                    {:else if selectedGame?.id === 'sprites-quiz'}
+                        <SpriteQuizSettings
+                            onStartQuiz={handleStartSpritesQuiz}
+                            languageCode={currentLanguageCode}
+                        />
+                    {/if}
                 </div>
             </div>
         </div>
-    {:else if selectedGame.id === 'description-quiz' && quizStarted && quizSettings}
-        <!-- Quiz Game -->
+    {:else if selectedGame?.id === 'description-quiz' && quizStarted && quizSettings}
+        <!-- Description Quiz Game -->
         <DescriptionQuiz
             settings={quizSettings}
+            onBackToHub={backToHub}
+            languageCode={currentLanguageCode}
+            languageId={selectedLanguageId}
+        />
+    {:else if selectedGame?.id === 'sprites-quiz' && quizStarted && spriteQuizSettings}
+        <!-- Sprites Quiz Game -->
+        <SpritesQuiz
+            settings={spriteQuizSettings}
             onBackToHub={backToHub}
             languageCode={currentLanguageCode}
             languageId={selectedLanguageId}

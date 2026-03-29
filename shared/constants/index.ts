@@ -3,7 +3,7 @@
  * @description Single source of truth for languages, generations, and configuration
  */
 
-import type { Language, GenerationRange } from '../types';
+import type { Language, GenerationRange, SpriteEffectSettings, SpriteQuizSettings, HardcoreModeState } from '../types';
 
 /**
  * @brief Supported languages with PokeAPI IDs
@@ -123,3 +123,54 @@ export const DEFAULT_QUIZ_SETTINGS = {
     truncateStrength: 0,
     enableScramble: false
 };
+
+// ============================================================
+// SPRITES QUIZ CONSTANTS
+// ============================================================
+
+/**
+ * @brief Default sprite effect settings
+ */
+export const DEFAULT_SPRITE_EFFECTS: SpriteEffectSettings = {
+    blurEnabled: true,
+    blurStrength: 5,
+    pixelateEnabled: false,
+    pixelateStrength: 10,
+    silhouetteEnabled: false,
+    rotationEnabled: false
+};
+
+/**
+ * @brief Default sprites quiz settings
+ */
+export const DEFAULT_SPRITE_QUIZ_SETTINGS: SpriteQuizSettings = {
+    hasTimeLimit: false,
+    timeLimit: 15,
+    gameMode: 'score',
+    selectedGenerations: [...ALL_GENERATIONS],
+    selectedSpriteTypes: ['front'],
+    spriteSource: 'home',
+    effects: { ...DEFAULT_SPRITE_EFFECTS }
+};
+
+// ============================================================
+// HARDCORE MODE CONSTANTS
+// ============================================================
+
+/**
+ * @brief Initial state for hardcore mode
+ */
+export const HARDCORE_INITIAL_STATE: HardcoreModeState = {
+    lives: 3,
+    consecutiveCorrect: 0
+};
+
+/**
+ * @brief Maximum lives in hardcore mode
+ */
+export const HARDCORE_MAX_LIVES = 3;
+
+/**
+ * @brief Consecutive correct answers needed to gain a life
+ */
+export const HARDCORE_LIFE_REWARD_THRESHOLD = 10;
