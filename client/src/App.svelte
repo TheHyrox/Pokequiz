@@ -15,7 +15,7 @@
     interface QuizSettingsType {
         hasTimeLimit: boolean;
         timeLimit: number;
-        gameMode: 'score' | 'infinite' | 'challenge';
+        gameMode: 'score' | 'infinite' | 'challenge' | 'hardcore';
         changeDescription: boolean;
     }
 

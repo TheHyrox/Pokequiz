@@ -1,9 +1,11 @@
 <script lang="ts">
+    import { onMount } from 'svelte';
     import { getPokemonDescription } from '../../server/src/lib/description';
     import { getPokemonNameLocalized } from '../../server/src/lib/name';
     import { getRandomInt } from '../../server/src/lib/utils/utils';
     import Pokecard from '../components/pokecard.svelte';
     import Toast from '../components/Toast.svelte';
+    import Autocomplete from '../components/Autocomplete.svelte';
     import { getLabel } from './lib/translations';
 
     export let onBackToHub: () => void;
@@ -13,7 +15,7 @@
     export let settings = {
         hasTimeLimit: false,
         timeLimit: 15,
-        gameMode: 'score' as 'score' | 'infinite' | 'challenge',
+        gameMode: 'score' as 'score' | 'infinite' | 'challenge' | 'hardcore',
         changeDescription: false
     };
 
@@ -52,6 +54,10 @@
     let selectedLanguageId = languageId;
     let challengeQuestions: ChallengeQuestion[] = [];
     let showChallengeReview = false;
+    let hardcoreUserInput: string = '';
+    let correctPokemonName: string = '';
+    let allPokemonList: Array<{ id: number; name: string }> = [];
+    let autocompleteRef: any;
 
     // Timer
     let timerInterval: NodeJS.Timeout | null = null;
@@ -90,6 +96,35 @@
         }, 2000);
     }
 
+    function handleHardcoreSubmit() {
+        if (timerInterval) clearInterval(timerInterval);
+        
+        const userInputNormalized = normalizeText(hardcoreUserInput);
+        const correctNameNormalized = normalizeText(correctPokemonName);
+        const isCorrect = userInputNormalized === correctNameNormalized;
+
+        if (isCorrect) {
+            score += 1;
+            showSuccessToast(getLabel(languageCode, 'correct'));
+            
+            setTimeout(() => {
+                if (currentQuestion < 10) {
+                    currentQuestion++;
+                    loadQuestion();
+                } else {
+                    endQuiz();
+                }
+            }, 1500);
+        } else {
+            errorCountThisQuestion++;
+            showErrorToast(getLabel(languageCode, 'incorrect'));
+            setTimeout(() => {
+                hardcoreUserInput = '';
+                autocompleteRef?.focus();
+            }, 1500);
+        }
+    }
+
     function showErrorToast(message: string) {
         toastMessage = message;
         toastType = 'error';
@@ -100,6 +135,28 @@
         toastMessage = message;
         toastType = 'success';
         showToast = true;
+    }
+
+    function normalizeText(text: string): string {
+        return text
+            .toLowerCase()
+            .trim()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '');
+    }
+
+    async function loadAllPokemonNames() {
+        if (settings.gameMode === 'hardcore') {
+            try {
+                const response = await fetch(`/api/pokemon/names/${selectedLanguageId}`);
+                if (!response.ok) {
+                    throw new Error('Failed to load pokemon names');
+                }
+                allPokemonList = await response.json();
+            } catch (error) {
+                showErrorToast(getLabel(languageCode, 'loading'));
+            }
+        }
     }
 
     async function loadQuestion() {
@@ -113,6 +170,7 @@
         disabledCards = false;
         showToast = false;
         errorCountThisQuestion = 0;
+        hardcoreUserInput = '';
         
         // Get 4 different random pokemon IDs
         const selectedPokemon = new Set<number>();
@@ -133,13 +191,14 @@
                 pokemonIds.push(randomId);
             }
         }
-        
-        // Get descriptions for the correct pokemon with language ID
+
         const descriptions = await getPokemonDescription(correctId.toString(), selectedLanguageId.toString(), null);
         allDescriptions = descriptions || ['No description found'];
         description = allDescriptions[0];
-        
-        // Create options with localized names
+
+        const correctName = await getPokemonNameLocalized(correctId, selectedLanguageId);
+        correctPokemonName = correctName || '';
+
         const options: PokemonOption[] = [];
         for (const pokemonId of pokemonIds) {
             const name = await getPokemonNameLocalized(pokemonId, selectedLanguageId);
@@ -149,11 +208,16 @@
                 isCorrect: pokemonId === correctId
             });
         }
-        
-        // Shuffle options
+
         pokemonOptions = options.sort(() => Math.random() - 0.5);
         loading = false;
         startTimer();
+
+        if (settings.gameMode === 'hardcore') {
+            setTimeout(() => {
+                autocompleteRef?.focus();
+            }, 100);
+        }
     }
 
     function changeDescription() {
@@ -165,7 +229,7 @@
 
     function calculatePoints(): number {
         if (settings.gameMode === 'infinite') {
-            return 1; // 1 point per correct answer in infinite mode
+            return 1; 
         }
 
         if (settings.hasTimeLimit) {
@@ -188,7 +252,7 @@
             } else if (errorCountThisQuestion === 2) {
                 return 1;
             }
-            return 0; // 3+ errors: 0 points
+            return 0; 
         }
     }
 
@@ -204,7 +268,6 @@
         if (timerInterval) clearInterval(timerInterval);
 
         if (settings.gameMode === 'challenge') {
-            // In challenge mode, just record the answer and move to next question
             const selectedOption = pokemonOptions.find(p => p.id === pokemonId);
             const correctOption = pokemonOptions.find(p => p.isCorrect);
             
@@ -223,7 +286,6 @@
                 currentQuestion++;
                 loadQuestion();
             } else {
-                // End challenge mode
                 showChallengeReview = true;
             }
             return;
@@ -232,13 +294,11 @@
         if (isCorrect) {
             wrongAnsweredIds.clear();
             wrongAnsweredIds = wrongAnsweredIds;
-            
-            // Calculate and add points
+
             const points = calculatePoints();
             score += points;
 
             if (settings.gameMode === 'infinite') {
-                // Continue loading new questions
                 loadQuestion();
             } else if (currentQuestion < totalQuestions) {
                 currentQuestion++;
@@ -261,14 +321,12 @@
             }
 
             if (settings.gameMode === 'infinite') {
-                // End infinite mode on wrong answer
                 disabledCards = true;
                 showErrorToast(getLabel(languageCode, 'quizEnded'));
                 setTimeout(() => {
                     onBackToHub();
                 }, 2000);
             } else {
-                // Score mode: just mark this card as wrong and show toast
                 showErrorToast(`${getLabel(languageCode, 'wrongAnswer')} ${getLabel(languageCode, 'keepGoing')}`);
             }
         }
@@ -276,9 +334,11 @@
 
     loadQuestion();
 
-
-
-
+    onMount(async () => {
+        if (settings.gameMode === 'hardcore') {
+            await loadAllPokemonNames();
+        }
+    });
 </script>
 
 <main class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 p-8 flex items-center justify-center">
@@ -345,6 +405,8 @@
                     <p class="text-lg text-gray-600">{getLabel(languageCode, 'score')}: {score} | {getLabel(languageCode, 'infiniteModeLabel')}</p>
                 {:else if settings.gameMode === 'challenge'}
                     <p class="text-lg text-gray-600">{getLabel(languageCode, 'question')} {currentQuestion}/10</p>
+                {:else if settings.gameMode === 'hardcore'}
+                    <p class="text-lg text-gray-600">{getLabel(languageCode, 'question')} {currentQuestion}/10 | {getLabel(languageCode, 'score')}: {score}</p>
                 {:else}
                     <p class="text-lg text-gray-600">{getLabel(languageCode, 'question')} {currentQuestion}/{totalQuestions} | {getLabel(languageCode, 'score')}: {score}</p>
                 {/if}
@@ -390,17 +452,47 @@
                 {/if}
             </div>
 
-            <!-- Pokemon Cards Grid -->
-            <div class="grid grid-cols-2 gap-6 md:grid-cols-4">
-                {#each pokemonOptions as pokemon (pokemon.name)}
-                    <Pokecard 
-                        {pokemon}
-                        showError={wrongAnsweredIds.has(pokemon.id)}
-                        disabled={disabledCards}
-                        on:selected={() => handleAnswer(pokemon.isCorrect, pokemon.id)}
-                    />
-                {/each}
-            </div>
+            <!-- Pokemon Cards Grid or Hardcore Input -->
+            {#if settings.gameMode === 'hardcore'}
+                <!-- Hardcore Mode - Autocomplete Input -->
+                <div class="max-w-2xl mx-auto">
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <div class="mb-4">
+                            <span class="block text-lg font-semibold text-gray-700 mb-2">
+                                {getLabel(languageCode, 'enterPokemonName')}
+                            </span>
+                            <Autocomplete
+                                bind:this={autocompleteRef}
+                                pokemonList={allPokemonList}
+                                placeholder={getLabel(languageCode, 'enterPokemonName')}
+                                bind:value={hardcoreUserInput}
+                                disabled={disabledCards}
+                                autofocus={true}
+                                on:submit={handleHardcoreSubmit}
+                            />
+                        </div>
+                        <button
+                            on:click={handleHardcoreSubmit}
+                            disabled={disabledCards || !hardcoreUserInput.trim()}
+                            class="w-full bg-blue-500 hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-bold py-3 px-4 rounded-lg transition-colors"
+                        >
+                            {getLabel(languageCode, 'submit')}
+                        </button>
+                    </div>
+                </div>
+            {:else}
+                <!-- Normal Mode - Pokemon Cards Grid -->
+                <div class="grid grid-cols-2 gap-6 md:grid-cols-4">
+                    {#each pokemonOptions as pokemon (pokemon.name)}
+                        <Pokecard 
+                            {pokemon}
+                            showError={wrongAnsweredIds.has(pokemon.id)}
+                            disabled={disabledCards}
+                            on:selected={() => handleAnswer(pokemon.isCorrect, pokemon.id)}
+                        />
+                    {/each}
+                </div>
+            {/if}
         {/if}
         {/if}
     </div>

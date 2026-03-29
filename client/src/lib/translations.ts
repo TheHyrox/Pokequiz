@@ -53,6 +53,12 @@ export const LABELS = {
         reviewAnswers: 'Review Answers',
         yourAnswer: 'Your answer',
         correctAnswer: 'Correct answer',
+        hardcoreMode: 'Hardcore Mode',
+        typeThePokemonName: 'Type the Pokémon name (in the current language)',
+        enterPokemonName: 'Enter Pokémon name',
+        submit: 'Submit',
+        correct: 'Correct!',
+        incorrect: 'Incorrect!',
         language: 'Language'
     },
     fr: {
@@ -89,6 +95,12 @@ export const LABELS = {
         reviewAnswers: 'Examinez vos réponses',
         yourAnswer: 'Votre réponse',
         correctAnswer: 'Bonne réponse',
+        hardcoreMode: 'Mode Hardcore',
+        typeThePokemonName: 'Tapez le nom du Pokémon (dans la langue actuelle)',
+        enterPokemonName: 'Entrez le nom du Pokémon',
+        submit: 'Soumettre',
+        correct: 'Correct!',
+        incorrect: 'Incorrect!',
         language: 'Langue'
     },
     de: {
@@ -125,6 +137,12 @@ export const LABELS = {
         reviewAnswers: 'Antworten überprüfen',
         yourAnswer: 'Ihre Antwort',
         correctAnswer: 'Richtige Antwort',
+        hardcoreMode: 'Hardcore-Modus',
+        typeThePokemonName: 'Geben Sie den Pokémon-Namen ein (in der aktuellen Sprache)',
+        enterPokemonName: 'Pokémon-Namen eingeben',
+        submit: 'Absenden',
+        correct: 'Richtig!',
+        incorrect: 'Falsch!',
         language: 'Sprache'
     },
     es: {
@@ -161,6 +179,12 @@ export const LABELS = {
         reviewAnswers: 'Revisa tus respuestas',
         yourAnswer: 'Tu respuesta',
         correctAnswer: 'Respuesta correcta',
+        hardcoreMode: 'Modo Hardcore',
+        typeThePokemonName: 'Escriba el nombre del Pokémon (en el idioma actual)',
+        enterPokemonName: 'Ingresa el nombre del Pokémon',
+        submit: 'Enviar',
+        correct: '¡Correcto!',
+        incorrect: '¡Incorrecto!',
         language: 'Idioma'
     },
     it: {
@@ -197,6 +221,12 @@ export const LABELS = {
         reviewAnswers: 'Rivedi le tue risposte',
         yourAnswer: 'La tua risposta',
         correctAnswer: 'Risposta corretta',
+        hardcoreMode: 'Modalità Hardcore',
+        typeThePokemonName: 'Digita il nome del Pokémon (nella lingua attuale)',
+        enterPokemonName: 'Inserisci il nome del Pokémon',
+        submit: 'Invia',
+        correct: 'Corretto!',
+        incorrect: 'Sbagliato!',
         language: 'Lingua'
     },
     ja: {
@@ -233,6 +263,12 @@ export const LABELS = {
         reviewAnswers: 'あなたの答えを確認する',
         yourAnswer: 'あなたの答え',
         correctAnswer: '正解',
+        hardcoreMode: 'ハードコアモード',
+        typeThePokemonName: 'ポケモンの名前を入力してください（現在の言語）',
+        enterPokemonName: 'ポケモンの名前を入力',
+        submit: '提出',
+        correct: '正解!',
+        incorrect: '不正解!',
         language: '言語'
     },
     ko: {
@@ -269,6 +305,12 @@ export const LABELS = {
         reviewAnswers: '답변 검토',
         yourAnswer: '당신의 답',
         correctAnswer: '정답',
+        hardcoreMode: '하드코어 모드',
+        typeThePokemonName: '포켓몬 이름 입력(현재 언어)',
+        enterPokemonName: '포켓몬 이름 입력',
+        submit: '제출',
+        correct: '정답!',
+        incorrect: '오답!',
         language: '언어'
     },
     'zh-hans': {
@@ -305,6 +347,12 @@ export const LABELS = {
         reviewAnswers: '查看你的答案',
         yourAnswer: '你的答案',
         correctAnswer: '正确答案',
+        hardcoreMode: '硬核模式',
+        typeThePokemonName: '输入口袋妖怪的名字（用当前语言）',
+        enterPokemonName: '输入口袋妖怪名称',
+        submit: '提交',
+        correct: '正确!',
+        incorrect: '错误!',
         language: '语言'
     }
 };

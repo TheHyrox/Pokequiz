@@ -9,13 +9,13 @@
     interface QuizSettings {
         hasTimeLimit: boolean;
         timeLimit: number;
-        gameMode: 'score' | 'infinite' | 'challenge';
+        gameMode: 'score' | 'infinite' | 'challenge' | 'hardcore';
         changeDescription: boolean;
     }
 
     let timeLimit = 15;
     let hasTimeLimit = false;
-    let gameMode: 'score' | 'infinite' | 'challenge' = 'score';
+    let gameMode: 'score' | 'infinite' | 'challenge' | 'hardcore' = 'score';
     let changeDescription = false;
 
     function handleStartQuiz() {
@@ -86,6 +86,17 @@
                 />
                 <span class="radio-text">{getLabel(languageCode, 'challengeMode')}</span>
                 <span class="radio-description">{getLabel(languageCode, 'tenQuestionsChallenge')}</span>
+            </label>
+            <label class="radio-label">
+                <input
+                    type="radio"
+                    name="gameMode"
+                    value="hardcore"
+                    bind:group={gameMode}
+                    class="radio-input"
+                />
+                <span class="radio-text">{getLabel(languageCode, 'hardcoreMode')}</span>
+                <span class="radio-description">{getLabel(languageCode, 'typeThePokemonName')}</span>
             </label>
         </div>
     </div>
