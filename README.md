@@ -58,6 +58,8 @@ And more features to come! I'm thinking on addings new quiz modes, more customiz
 ![](./screenshots/Quiz_Description_Simple.png)
 ![](./screenshots/Quiz_Truncated_Description.png)
 
+</details>
+
 ---
 
 ## How to Build and Play
