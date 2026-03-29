@@ -9,6 +9,8 @@
 
     /** Current language code for translations */
     export let languageCode: string;
+    /** Quiz title label key for getLabel() */
+    export let quizTitleLabel: string = 'description_quiz';
     /** Current game mode */
     export let gameMode: GameMode;
     /** Current question number */
@@ -19,11 +21,18 @@
     export let score: number;
     /** Callback when back button is clicked */
     export let onBackToHub: () => void;
+
+    /**
+     * @brief Get the quiz title with proper type casting
+     */
+    function getQuizTitle(): string {
+        return getLabel(languageCode, quizTitleLabel as string);
+    }
 </script>
 
 <div class="header">
     <div>
-        <h1 class="title">Pokequiz - {getLabel(languageCode, 'descriptionQuiz')}</h1>
+        <h1 class="title">Pokequiz - {getQuizTitle()}</h1>
         {#if gameMode === 'infinite'}
             <p class="subtitle">
                 {getLabel(languageCode, 'score')}: {score} | {getLabel(languageCode, 'infiniteModeLabel')}
@@ -49,7 +58,7 @@
 
 <style lang="postcss">
     .header {
-        @apply flex justify-between items-center mb-8;
+        @apply flex justify-between items-start mb-8 gap-4;
     }
 
     .title {
@@ -61,7 +70,8 @@
     }
 
     .back-button {
-        @apply px-4 py-2 bg-gray-500 text-white rounded-lg transition-colors;
+        @apply px-4 py-2 bg-gray-500 text-white rounded-lg transition-colors flex-shrink-0 whitespace-nowrap;
+        margin-top: 0.25rem;
     }
     
     .back-button:hover {
