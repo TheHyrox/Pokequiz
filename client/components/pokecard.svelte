@@ -8,18 +8,23 @@
     }
     
     export let pokemon: Pokemon;
+    export let showError: boolean = false;
+    export let disabled: boolean = false;
+
     const dispatch = createEventDispatcher();
     
     const pokemonId = pokemon.id.toString() || '0';
     const spriteUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemonId}.png`;
     
     function handleClick() {
-        dispatch('selected', { pokemon });
+        if (!disabled) {
+            dispatch('selected', { pokemon });
+        }
     }
 </script>
 
 <div 
-    class="pokemon-card"
+    class={`pokemon-card ${showError ? 'error' : ''} ${disabled ? 'disabled' : ''}`}
     on:click={handleClick}
     role="button"
     tabindex="0"
@@ -42,14 +47,27 @@
         @apply cursor-pointer h-full;
     }
 
+    .pokemon-card.disabled {
+        @apply cursor-not-allowed;
+    }
+
     .card-inner {
         @apply bg-white rounded-xl shadow-md p-6 flex flex-col items-center justify-center h-full;
         @apply transition-all duration-300 ease-out;
         @apply border-4 border-transparent;
     }
 
-    .card-inner:hover {
+    .pokemon-card:not(.disabled) .card-inner:hover {
         @apply scale-110 shadow-xl border-blue-500;
+    }
+
+    .pokemon-card.error .card-inner {
+        @apply border-red-500;
+        animation: shake 0.5s ease-in-out;
+    }
+
+    .pokemon-card.disabled .card-inner {
+        @apply bg-gray-300 opacity-50;
     }
 
     .pokemon-card:focus-visible .card-inner {
@@ -61,12 +79,32 @@
         @apply transition-transform duration-300;
     }
 
+    .pokemon-card.disabled .pokemon-image {
+        @apply grayscale;
+    }
+
     .pokemon-name {
         @apply text-lg font-semibold text-gray-800;
         @apply transition-colors duration-300;
     }
 
-    .pokemon-card:hover .pokemon-name {
+    .pokemon-card:not(.disabled):hover .pokemon-name {
         @apply text-blue-600;
+    }
+
+    .pokemon-card.disabled .pokemon-name {
+        @apply text-gray-500;
+    }
+
+    @keyframes shake {
+        0%, 100% {
+            transform: translateX(0);
+        }
+        10%, 30%, 50%, 70%, 90% {
+            transform: translateX(-5px);
+        }
+        20%, 40%, 60%, 80% {
+            transform: translateX(5px);
+        }
     }
 </style>
