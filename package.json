@@ -1,0 +1,13 @@
+{
+  "name": "pokequiz",
+  "version": "0.0.1",
+  "description": "Quick website to play with pokeapi",
+  "repository": "https://github.com/TheHyrox/Pokequiz",
+  "license": "Apache-2.0",
+  "author": "TheHyrox",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
