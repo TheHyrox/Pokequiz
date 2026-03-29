@@ -95,3 +95,59 @@ async function deleteDupplicateDescriptions(descriptions : string[]) {
 
     return uniqueDescriptions;
 }
+
+export function truncateDescription(description: string, strength: number): string {
+    const words = description.split(' ');
+    const maskedWords = words.map((word, index) => {
+        let shouldMask = false;
+        
+        if (strength === 1 && index % 2 === 0) {
+            shouldMask = true;
+        } else if (strength === 2 && index % 3 === 0) {
+            shouldMask = true;
+        } else if (strength === 3 && index % 4 === 0) {
+            shouldMask = true;
+        }
+        
+        if (shouldMask) {
+            return '█'.repeat(Math.max(word.length, 1));
+        }
+        return word;
+    });
+    
+    return maskedWords.join(' ');
+}
+
+export function scrambleDescription(description: string): string {
+    const words = description.split(' ');
+    const algorithm = Math.floor(Math.random() * 5);
+    
+    let scrambledWords = [...words];
+    
+    switch (algorithm) {
+        case 0: // Alphabetical order
+            scrambledWords.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+            break;
+        case 1: // Shortest to longest
+            scrambledWords.sort((a, b) => a.length - b.length);
+            break;
+        case 2: // Longest to shortest
+            scrambledWords.sort((a, b) => b.length - a.length);
+            break;
+        case 3: // Most vowels first
+            scrambledWords.sort((a, b) => {
+                const vowelsA = (a.match(/[aeiouàâäæëéèêïîôöœùûüœAEIOUÀÂÄÆËÉÈÊÏÎÔÖŒÙÛÜŒ]/gi) || []).length;
+                const vowelsB = (b.match(/[aeiouàâäæëéèêïîôöœùûüœAEIOUÀÂÄÆËÉÈÊÏÎÔÖŒÙÛÜŒ]/gi) || []).length;
+                return vowelsB - vowelsA;
+            });
+            break;
+        case 4: // Complete chaos
+            for (let i = scrambledWords.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [scrambledWords[i], scrambledWords[j]] = [scrambledWords[j], scrambledWords[i]];
+            }
+            break;
+    }
+    
+    return scrambledWords.join(' ');
+}

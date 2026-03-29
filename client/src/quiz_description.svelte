@@ -2,11 +2,13 @@
     import { onMount } from 'svelte';
     import { getPokemonDescription } from '../../server/src/lib/description';
     import { getPokemonNameLocalized } from '../../server/src/lib/name';
-    import { getRandomInt } from '../../server/src/lib/utils/utils';
+    import { getRandomInt, getRandomPokemonId } from '../../server/src/lib/utils/utils';
+    import { truncateDescription, scrambleDescription } from '../../server/src/lib/description';
     import Pokecard from '../components/pokecard.svelte';
     import Toast from '../components/Toast.svelte';
     import Autocomplete from '../components/Autocomplete.svelte';
     import { getLabel } from './lib/translations';
+    import { createToastHandlers, type ToastState } from './lib/toastUtils';
 
     export let onBackToHub: () => void;
     export let languageCode: string = 'en';
@@ -16,7 +18,10 @@
         hasTimeLimit: false,
         timeLimit: 15,
         gameMode: 'score' as 'score' | 'infinite' | 'challenge' | 'hardcore',
-        changeDescription: false
+        changeDescription: false,
+        selectedGenerations: [1, 2, 3, 4, 5, 6, 7, 8, 9] as number[],
+        truncateStrength: 0 as number,
+        enableScramble: false
     };
 
     interface PokemonOption {
@@ -47,9 +52,11 @@
     let allDescriptions: string[] = [];
     let wrongAnsweredIds: Set<number> = new Set();
     let disabledCards = false;
-    let toastMessage = '';
-    let toastType: 'error' | 'success' | 'info' = 'info';
-    let showToast = false;
+    let toastState: ToastState = {
+        message: '',
+        type: 'info',
+        show: false
+    };
     let errorCountThisQuestion = 0;
     let selectedLanguageId = languageId;
     let challengeQuestions: ChallengeQuestion[] = [];
@@ -58,6 +65,11 @@
     let correctPokemonName: string = '';
     let allPokemonList: Array<{ id: number; name: string }> = [];
     let autocompleteRef: any;
+
+    // Create toast handlers
+    const { showErrorToast, showSuccessToast } = createToastHandlers((state: ToastState) => {
+        toastState = state;
+    });
 
     // Timer
     let timerInterval: NodeJS.Timeout | null = null;
@@ -125,18 +137,6 @@
         }
     }
 
-    function showErrorToast(message: string) {
-        toastMessage = message;
-        toastType = 'error';
-        showToast = true;
-    }
-
-    function showSuccessToast(message: string) {
-        toastMessage = message;
-        toastType = 'success';
-        showToast = true;
-    }
-
     function normalizeText(text: string): string {
         return text
             .toLowerCase()
@@ -168,7 +168,7 @@
         currentDescriptionIndex = 0;
         wrongAnsweredIds.clear();
         disabledCards = false;
-        showToast = false;
+        toastState.show = false;
         errorCountThisQuestion = 0;
         hardcoreUserInput = '';
         
@@ -176,16 +176,16 @@
         const selectedPokemon = new Set<number>();
         const pokemonIds: number[] = [];
         
-        let correctId = getRandomInt(1025);
+        let correctId = getRandomPokemonId(settings.selectedGenerations);
         while (selectedPokemon.has(correctId)) {
-            correctId = getRandomInt(1025);
+            correctId = getRandomPokemonId(settings.selectedGenerations);
         }
         selectedPokemon.add(correctId);
         pokemonIds.push(correctId);
         
         // Get 3 more random different pokemon
         while (pokemonIds.length < 4) {
-            const randomId = getRandomInt(1025);
+            const randomId = getRandomPokemonId(settings.selectedGenerations);
             if (!selectedPokemon.has(randomId)) {
                 selectedPokemon.add(randomId);
                 pokemonIds.push(randomId);
@@ -195,6 +195,14 @@
         const descriptions = await getPokemonDescription(correctId.toString(), selectedLanguageId.toString(), null);
         allDescriptions = descriptions || ['No description found'];
         description = allDescriptions[0];
+
+        // Apply description transformations
+        if (settings.truncateStrength > 0) {
+            description = truncateDescription(description, settings.truncateStrength);
+        }
+        if (settings.enableScramble) {
+            description = scrambleDescription(description);
+        }
 
         const correctName = await getPokemonNameLocalized(correctId, selectedLanguageId);
         correctPokemonName = correctName || '';
@@ -499,13 +507,13 @@
 </main>
 
 <!-- Toast -->
-{#if showToast}
+{#if toastState.show}
     <Toast 
-        message={toastMessage}
-        type={toastType}
+        message={toastState.message}
+        type={toastState.type}
         autoClose={true}
         duration={2000}
-        onClose={() => { showToast = false; }}
+        onClose={() => { toastState.show = false; }}
     />
 {/if}
 
