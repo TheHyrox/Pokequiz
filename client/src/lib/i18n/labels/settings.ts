@@ -31,6 +31,9 @@ export const SETTINGS_LABELS = {
         truncateStrength: 'Truncate Strength',
         scrambleDescription: 'Scramble Description',
         scrambleDescriptionInfo: 'Words are randomly reordered using different algorithms',
+        numberOfPokemonOptions: 'Number of Options',
+        pokemonOptionsDescription: 'Choose how many Pokemon options to display per question',
+        pokemonOptions: 'Options',
         selectAtLeastOneGeneration: 'Please select at least one generation'
     },
     fr: {
@@ -60,6 +63,9 @@ export const SETTINGS_LABELS = {
         truncateStrength: 'Force de Troncature',
         scrambleDescription: 'Brouiller la Description',
         scrambleDescriptionInfo: "Les mots sont réorganisés de manière aléatoire à l'aide de différents algorithmes",
+        numberOfPokemonOptions: 'Nombre d\'Options',
+        pokemonOptionsDescription: 'Choisissez combien d\'options Pokémon afficher par question',
+        pokemonOptions: 'Options',
         selectAtLeastOneGeneration: 'Veuillez sélectionner au moins une génération'
     },
     de: {
@@ -89,6 +95,9 @@ export const SETTINGS_LABELS = {
         truncateStrength: 'Kürzungsstärke',
         scrambleDescription: 'Beschreibung Verwirren',
         scrambleDescriptionInfo: 'Wörter werden mit verschiedenen Algorithmen zufällig neu angeordnet',
+        numberOfPokemonOptions: 'Anzahl der Optionen',
+        pokemonOptionsDescription: 'Wählen Sie, wie viele Pokémon-Optionen pro Frage angezeigt werden sollen',
+        pokemonOptions: 'Optionen',
         selectAtLeastOneGeneration: 'Bitte wählen Sie mindestens eine Generation aus'
     },
     es: {
@@ -118,6 +127,9 @@ export const SETTINGS_LABELS = {
         truncateStrength: 'Fuerza de Truncado',
         scrambleDescription: 'Revolver Descripción',
         scrambleDescriptionInfo: 'Las palabras se reordenan aleatoriamente usando diferentes algoritmos',
+        numberOfPokemonOptions: 'Número de Opciones',
+        pokemonOptionsDescription: 'Elige cuántas opciones de Pokémon mostrar por pregunta',
+        pokemonOptions: 'Opciones',
         selectAtLeastOneGeneration: 'Por favor selecciona al menos una generación'
     },
     it: {
@@ -147,6 +159,9 @@ export const SETTINGS_LABELS = {
         truncateStrength: 'Forza di Tronco',
         scrambleDescription: 'Mescola Descrizione',
         scrambleDescriptionInfo: 'Le parole vengono riordinate casualmente utilizzando diversi algoritmi',
+        numberOfPokemonOptions: 'Numero di Opzioni',
+        pokemonOptionsDescription: 'Scegli quante opzioni Pokémon visualizzare per domanda',
+        pokemonOptions: 'Opzioni',
         selectAtLeastOneGeneration: 'Per favore seleziona almeno una generazione'
     },
     'ja-hrkt': {
@@ -176,6 +191,9 @@ export const SETTINGS_LABELS = {
         truncateStrength: 'たんしゅく の きょうど',
         scrambleDescription: 'せつめい を こんらん させる',
         scrambleDescriptionInfo: 'ことば は さまざま な あるごりずむ を つかって ランダム に さい はんていあい される',
+        numberOfPokemonOptions: 'おぷしょん の かず',
+        pokemonOptionsDescription: 'しつもん ごと に ぽけもん おぷしょん を いくつ ひょうじ するか を えらぶ',
+        pokemonOptions: 'おぷしょん',
         selectAtLeastOneGeneration: 'すくなくとも ひとつ の しゅつげん を えらんで ください'
     },
     ja: {
@@ -205,6 +223,9 @@ export const SETTINGS_LABELS = {
         truncateStrength: '切り詰めの強さ',
         scrambleDescription: '説明をスクランブル',
         scrambleDescriptionInfo: '単語は様々なアルゴリズムを使用してランダムに並べ替えられます',
+        numberOfPokemonOptions: 'オプション数',
+        pokemonOptionsDescription: '質問ごとに表示するポケモンオプション数を選択してください',
+        pokemonOptions: 'オプション',
         selectAtLeastOneGeneration: '少なくとも1つの世代を選択してください'
     },
     ko: {
@@ -234,6 +255,9 @@ export const SETTINGS_LABELS = {
         truncateStrength: '자르기 강도',
         scrambleDescription: '설명 섞기',
         scrambleDescriptionInfo: '단어는 다양한 알고리즘을 사용하여 무작위로 재정렬됩니다',
+        numberOfPokemonOptions: '옵션 수',
+        pokemonOptionsDescription: '질문당 표시할 포켓몬 옵션 수를 선택하세요',
+        pokemonOptions: '옵션',
         selectAtLeastOneGeneration: '최소한 하나의 세대를 선택하세요'
     },
     'zh-hans': {
@@ -263,6 +287,9 @@ export const SETTINGS_LABELS = {
         truncateStrength: '截断强度',
         scrambleDescription: '打乱描述',
         scrambleDescriptionInfo: '使用不同的算法随机重新排序单词',
+        numberOfPokemonOptions: '选项数量',
+        pokemonOptionsDescription: '选择每个问题显示多少个宝可梦选项',
+        pokemonOptions: '选项',
         selectAtLeastOneGeneration: '请选择至少一个世代'
     },
     'zh-hant': {
@@ -292,6 +319,9 @@ export const SETTINGS_LABELS = {
         truncateStrength: '截斷強度',
         scrambleDescription: '打亂描述',
         scrambleDescriptionInfo: '使用不同的算法隨機重新排序單詞',
+        numberOfPokemonOptions: '選項數量',
+        pokemonOptionsDescription: '選擇每個問題顯示多少個寶可夢選項',
+        pokemonOptions: '選項',
         selectAtLeastOneGeneration: '請選擇至少一個世代'
     }
 } as const;

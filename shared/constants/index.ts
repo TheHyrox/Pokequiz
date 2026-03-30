@@ -121,7 +121,8 @@ export const DEFAULT_QUIZ_SETTINGS = {
     changeDescription: false,
     selectedGenerations: [...ALL_GENERATIONS],
     truncateStrength: 0,
-    enableScramble: false
+    enableScramble: false,
+    numberOfOptions: 4
 };
 
 // ============================================================
@@ -150,7 +151,8 @@ export const DEFAULT_SPRITE_QUIZ_SETTINGS: SpriteQuizSettings = {
     selectedGenerations: [...ALL_GENERATIONS],
     selectedSpriteTypes: ['front'],
     spriteSource: 'home',
-    effects: { ...DEFAULT_SPRITE_EFFECTS }
+    effects: { ...DEFAULT_SPRITE_EFFECTS },
+    numberOfOptions: 4
 };
 
 // ============================================================

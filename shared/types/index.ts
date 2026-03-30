@@ -63,6 +63,8 @@ export interface DescriptionQuizSettings {
     truncateStrength: number;
     /** Enable word scrambling */
     enableScramble: boolean;
+    /** Number of Pokemon options to display (2-10) */
+    numberOfOptions: number;
 }
 
 /**
@@ -171,6 +173,8 @@ export interface SpriteQuizSettings {
     spriteSource: SpriteSource;
     /** Image effect settings */
     effects: SpriteEffectSettings;
+    /** Number of Pokemon options to display (2-10) */
+    numberOfOptions: number;
 }
 
 /**
