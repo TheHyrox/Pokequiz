@@ -18,7 +18,7 @@
     import { createToastHandlers } from './lib/toastUtils';
     import { normalizeText } from './lib/utils/textUtils';
     import { CHALLENGE_QUESTION_COUNT, DEFAULT_QUIZ_SETTINGS, HARDCORE_INITIAL_STATE, HARDCORE_MAX_LIVES, HARDCORE_LIFE_REWARD_THRESHOLD } from '../../shared/constants';
-    import type { QuizSettings, PokemonOption, ChallengeQuestion, ToastState, HardcoreModeState } from '../../shared/types';
+    import type { DescriptionQuizSettings, PokemonOption, ChallengeQuestion, ToastState, HardcoreModeState } from '../../shared/types';
 
     /** Callback to return to hub */
     export let onBackToHub: () => void;
@@ -27,7 +27,7 @@
     /** Current language ID */
     export let languageId: number = 9;
     /** Quiz settings */
-    export let settings: QuizSettings = DEFAULT_QUIZ_SETTINGS;
+    export let settings: DescriptionQuizSettings = DEFAULT_QUIZ_SETTINGS;
 
     // Quiz state
     let currentQuestion = 1;

@@ -11,10 +11,10 @@
     import { getLabel } from '../src/lib/translations';
     import { createToastHandlers } from '../src/lib/toastUtils';
     import { ALL_GENERATIONS } from '../../shared/constants';
-    import type { QuizSettings, GameMode, ToastState } from '../../shared/types';
+    import type { DescriptionQuizSettings, GameMode, ToastState } from '../../shared/types';
 
     /** Callback when quiz starts with settings */
-    export let onStartQuiz: (settings: QuizSettings) => void;
+    export let onStartQuiz: (settings: DescriptionQuizSettings) => void;
     /** Current language code for translations */
     export let languageCode: string = 'en';
 
@@ -47,7 +47,7 @@
             return;
         }
 
-        const finalSettings: QuizSettings = {
+        const finalSettings: DescriptionQuizSettings = {
             hasTimeLimit,
             timeLimit,
             gameMode,
