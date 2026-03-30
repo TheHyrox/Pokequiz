@@ -21,8 +21,14 @@ export const QUIZ_LABELS = {
         enterPokemonName: 'Enter Pokémon name',
         lifeGained: 'Life gained!',
         livesRemaining: 'lives remaining',
-        gameOver: 'Game Over! You lost all your lives.',
-        spriteFallbackUsed: 'The loaded sprite differs from the selected rules because it is not possible to obtain the Pokémon\'s sprite according to the defined rules.'
+        gameOver: 'Game Over!',
+        spriteFallbackUsed: 'The loaded sprite differs from the selected rules because it is not possible to obtain the Pokémon\'s sprite according to the defined rules.',
+        youWin: 'You Win!',
+        finalScore: 'Final Score',
+        correctAnswer: 'Correct Answer',
+        home: 'Home',
+        changeSettings: 'Settings',
+        retry: 'Retry'
     },
     fr: {
         description_quiz: 'Quiz Description',
@@ -41,8 +47,14 @@ export const QUIZ_LABELS = {
         enterPokemonName: 'Entrez le nom du Pokémon',
         lifeGained: 'Vie gagnée!',
         livesRemaining: 'vies restantes',
-        gameOver: 'Fin de la partie! Vous avez perdu toutes vos vies.',
-        spriteFallbackUsed: 'Le sprite chargé diffère des règles sélectionnées car il n\'est pas possible d\'obtenir le sprite du Pokémon selon les règles définies.'
+        gameOver: 'Fin de la partie!',
+        spriteFallbackUsed: 'Le sprite chargé diffère des règles sélectionnées car il n\'est pas possible d\'obtenir le sprite du Pokémon selon les règles définies.',
+        youWin: 'Vous avez gagné!',
+        finalScore: 'Score Final',
+        correctAnswer: 'Bonne Réponse',
+        home: 'Accueil',
+        changeSettings: 'Paramètres',
+        retry: 'Réessayer'
     },
     de: {
         description_quiz: 'Beschreibungs-Quiz',
@@ -61,8 +73,14 @@ export const QUIZ_LABELS = {
         enterPokemonName: 'Pokémon-Namen eingeben',
         lifeGained: 'Leben gewonnen!',
         livesRemaining: 'Leben verbleibend',
-        gameOver: 'Spielende! Sie haben alle Leben verloren.',
-        spriteFallbackUsed: 'Das geladene Sprite unterscheidet sich von den ausgewählten Regeln, da es nicht möglich ist, das Sprite des Pokémon gemäß den definierten Regeln zu erhalten.'
+        gameOver: 'Spielende!',
+        spriteFallbackUsed: 'Das geladene Sprite unterscheidet sich von den ausgewählten Regeln, da es nicht möglich ist, das Sprite des Pokémon gemäß den definierten Regeln zu erhalten.',
+        youWin: 'Sie Gewinnen!',
+        finalScore: 'Endergebnis',
+        correctAnswer: 'Richtige Antwort',
+        home: 'Startseite',
+        changeSettings: 'Einstellungen',
+        retry: 'Wiederholen'
     },
     es: {
         description_quiz: 'Quiz de Descripción',
@@ -81,8 +99,14 @@ export const QUIZ_LABELS = {
         enterPokemonName: 'Ingresa el nombre del Pokémon',
         lifeGained: '¡Vida ganada!',
         livesRemaining: 'vidas restantes',
-        gameOver: '¡Fin del juego! Perdiste todas tus vidas.',
-        spriteFallbackUsed: 'El sprite cargado difiere de las reglas seleccionadas porque no es posible obtener el sprite del Pokémon según las reglas definidas.'
+        gameOver: '¡Fin del juego!',
+        spriteFallbackUsed: 'El sprite cargado difiere de las reglas seleccionadas porque no es posible obtener el sprite del Pokémon según las reglas definidas.',
+        youWin: '¡Ganaste!',
+        finalScore: 'Puntuación Final',
+        correctAnswer: 'Respuesta Correcta',
+        home: 'Inicio',
+        changeSettings: 'Ajustes',
+        retry: 'Reintentar'
     },
     it: {
         description_quiz: 'Quiz Descrizione',
@@ -101,8 +125,14 @@ export const QUIZ_LABELS = {
         enterPokemonName: 'Inserisci il nome del Pokémon',
         lifeGained: 'Vita guadagnata!',
         livesRemaining: 'vite rimanenti',
-        gameOver: 'Gioco Finito! Hai perso tutte le tue vite.',
-        spriteFallbackUsed: 'Lo sprite caricato differisce dalle regole selezionate perché non è possibile ottenere lo sprite del Pokémon secondo le regole definite.'
+        gameOver: 'Gioco Finito!',
+        spriteFallbackUsed: 'Lo sprite caricato differisce dalle regole selezionate perché non è possibile ottenere lo sprite del Pokémon secondo le regole definite.',
+        youWin: 'Hai Vinto!',
+        finalScore: 'Punteggio Finale',
+        correctAnswer: 'Risposta Corretta',
+        home: 'Home',
+        changeSettings: 'Impostazioni',
+        retry: 'Riprova'
     },
     'ja-hrkt': {
         description_quiz: 'せつめい くいず',
@@ -121,8 +151,14 @@ export const QUIZ_LABELS = {
         enterPokemonName: 'ぽけもん の なまえ を にゅうりょく',
         lifeGained: 'いのち を えた!',
         livesRemaining: 'いのち のこってる',
-        gameOver: 'げーむ おーばー! すべての いのち を うしなった。',
-        spriteFallbackUsed: 'よみこんだ すぷらいと は せんたく した ルール から ことなります。ていぎ された ルール に もとづいて ぽけもん の すぷらいと を える ことが できません。'
+        gameOver: 'げーむ おーばー!',
+        spriteFallbackUsed: 'よみこんだ すぷらいと は せんたく した ルール から ことなります。ていぎ された ルール に もとづいて ぽけもん の すぷらいと を える ことが できません。',
+        youWin: 'かった!',
+        finalScore: 'さいしゅう すこあ',
+        correctAnswer: 'ただしい こたえ',
+        home: 'ほーむ',
+        changeSettings: 'せってい',
+        retry: 'りとらい'
     },
     ja: {
         description_quiz: '説明クイズ',
@@ -141,8 +177,14 @@ export const QUIZ_LABELS = {
         enterPokemonName: 'ポケモンの名前を入力',
         lifeGained: '命を得た!',
         livesRemaining: '命が残っている',
-        gameOver: 'ゲームオーバー! すべての命を失った。',
-        spriteFallbackUsed: '読み込まれたスプライトは選択されたルールから異なります。定義されたルールに基づいてポケモンのスプライトを取得することができません。'
+        gameOver: 'ゲームオーバー!',
+        spriteFallbackUsed: '読み込まれたスプライトは選択されたルールから異なります。定義されたルールに基づいてポケモンのスプライトを取得することができません。',
+        youWin: 'あなたが勝った!',
+        finalScore: '最終スコア',
+        correctAnswer: '正解',
+        home: 'ホーム',
+        changeSettings: '設定',
+        retry: '再試行'
     },
     ko: {
         description_quiz: '설명 퀴즈',
@@ -161,8 +203,14 @@ export const QUIZ_LABELS = {
         enterPokemonName: '포켓몬 이름 입력',
         lifeGained: '생명 획득!',
         livesRemaining: '남은 생명',
-        gameOver: '게임 종료! 모든 생명을 잃었습니다.',
-        spriteFallbackUsed: '로드된 스프라이트는 선택한 규칙과 다릅니다. 정의된 규칙에 따라 포켓몬의 스프라이트를 가져올 수 없습니다.'
+        gameOver: '게임 종료!',
+        spriteFallbackUsed: '로드된 스프라이트는 선택한 규칙과 다릅니다. 정의된 규칙에 따라 포켓몬의 스프라이트를 가져올 수 없습니다.',
+        youWin: '당신이 이겼어요!',
+        finalScore: '최종 스코어',
+        correctAnswer: '정답',
+        home: '홈',
+        changeSettings: '설정',
+        retry: '다시 시도'
     },
     'zh-hans': {
         description_quiz: '描述测验',
@@ -181,8 +229,14 @@ export const QUIZ_LABELS = {
         enterPokemonName: '输入口袋妖怪名称',
         lifeGained: '获得生命!',
         livesRemaining: '剩余生命',
-        gameOver: '游戏结束! 你失去了所有的生命。',
-        spriteFallbackUsed: '加载的精灵图与所选规则不同,因为无法根据定义的规则获取精灵的精灵图。'
+        gameOver: '游戏结束!',
+        spriteFallbackUsed: '加载的精灵图与所选规则不同,因为无法根据定义的规则获取精灵的精灵图。',
+        youWin: '你赢了!',
+        finalScore: '最终分数',
+        correctAnswer: '正确答案',
+        home: '首页',
+        changeSettings: '设置',
+        retry: '重试'
     },
     'zh-hant': {
         description_quiz: '描述測驗',
@@ -201,8 +255,14 @@ export const QUIZ_LABELS = {
         enterPokemonName: '輸入口袋妖怪名稱',
         lifeGained: '獲得生命!',
         livesRemaining: '剩餘生命',
-        gameOver: '遊戲結束! 你失去了所有的生命。',
-        spriteFallbackUsed: '載入的精靈圖與所選規則不同,因為無法根據定義的規則獲取精靈的精靈圖。'
+        gameOver: '遊戲結束!',
+        spriteFallbackUsed: '載入的精靈圖與所選規則不同,因為無法根據定義的規則獲取精靈的精靈圖。',
+        youWin: '你贏了!',
+        finalScore: '最終分數',
+        correctAnswer: '正確答案',
+        home: '首頁',
+        changeSettings: '設定',
+        retry: '重試'
     }
 } 
 

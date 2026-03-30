@@ -18,16 +18,30 @@
     export let onStartQuiz: (settings: DescriptionQuizSettings) => void;
     /** Current language code for translations */
     export let languageCode: string = 'en';
+    /** Initial settings from cache (or null if new game) */
+    export let initialSettings: DescriptionQuizSettings | null = null;
 
-    // Settings state
-    let timeLimit = 15;
-    let hasTimeLimit = false;
-    let gameMode: GameMode = 'score';
-    let changeDescription = false;
-    let selectedGenerations: Set<number> = new Set(ALL_GENERATIONS);
-    let truncateStrength: number = 0;
-    let enableScramble: boolean = false;
-    let numberOfOptions: number = 4;
+    // Settings state - initialize from cache if available
+    let timeLimit = initialSettings?.timeLimit ?? 15;
+    let hasTimeLimit = initialSettings?.hasTimeLimit ?? false;
+    let gameMode: GameMode = initialSettings?.gameMode ?? 'score';
+    let changeDescription = initialSettings?.changeDescription ?? false;
+    let selectedGenerations: Set<number> = new Set(initialSettings?.selectedGenerations ?? ALL_GENERATIONS);
+    let truncateStrength: number = initialSettings?.truncateStrength ?? 0;
+    let enableScramble: boolean = initialSettings?.enableScramble ?? false;
+    let numberOfOptions: number = initialSettings?.numberOfOptions ?? 4;
+
+    // Reactively update state when initialSettings changes (when returning from quiz)
+    $: if (initialSettings) {
+        timeLimit = initialSettings.timeLimit ?? 15;
+        hasTimeLimit = initialSettings.hasTimeLimit ?? false;
+        gameMode = initialSettings.gameMode ?? 'score';
+        changeDescription = initialSettings.changeDescription ?? false;
+        selectedGenerations = new Set(initialSettings.selectedGenerations ?? ALL_GENERATIONS);
+        truncateStrength = initialSettings.truncateStrength ?? 0;
+        enableScramble = initialSettings.enableScramble ?? false;
+        numberOfOptions = initialSettings.numberOfOptions ?? 4;
+    }
 
     // Toast state
     let toastState: ToastState = {

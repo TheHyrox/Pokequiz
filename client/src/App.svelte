@@ -10,6 +10,7 @@
     import SpritesQuiz from './QuizSprites.svelte';
     import LanguageSelector from '../components/LanguageSelector.svelte';
     import { getLabel, LANGUAGE_ID_TO_CODE } from './lib/translations';
+    import { getCachedDescriptionSettings, getCachedSpriteSettings } from './lib/storage';
     import type { DescriptionQuizSettings as QuizSettingsType, SpriteQuizSettings as SpriteQuizSettingsType } from '../../shared/types';
 
     interface Game {
@@ -38,7 +39,10 @@
     let quizStarted = false;
     let quizSettings: QuizSettingsType | null = null;
     let spriteQuizSettings: SpriteQuizSettingsType | null = null;
-    let selectedLanguageId: number = 9;
+    let selectedLanguageId: number = typeof window !== 'undefined' && localStorage.getItem('selectedLanguageId') 
+        ? parseInt(localStorage.getItem('selectedLanguageId')!) 
+        : 9;
+    let showingSettingsAfterQuiz = false;
 
     // Derive language code from shared constants (removes duplicate mapping)
     $: currentLanguageCode = LANGUAGE_ID_TO_CODE[selectedLanguageId] || 'en';
@@ -49,10 +53,7 @@
     }
 
     onMount(() => {
-        const savedLanguageId = localStorage.getItem('selectedLanguageId');
-        if (savedLanguageId) {
-            selectedLanguageId = parseInt(savedLanguageId);
-        }
+        // Language is already loaded from localStorage at initialization
     });
 
     /**
@@ -87,6 +88,15 @@
         quizStarted = false;
         quizSettings = null;
         spriteQuizSettings = null;
+        showingSettingsAfterQuiz = false;
+    }
+
+    /**
+     * @brief Returns to settings from quiz with changeSettings button
+     */
+    function backToSettingsFromQuiz(): void {
+        quizStarted = false;
+        showingSettingsAfterQuiz = true;
     }
 </script>
 
@@ -129,7 +139,13 @@
         <!-- Settings Page -->
         <div class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 p-8 flex flex-col">
             <button
-                on:click={backToHub}
+                on:click={() => {
+                    if (showingSettingsAfterQuiz) {
+                        backToHub();
+                    } else {
+                        backToHub();
+                    }
+                }}
                 class="mb-6 px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg transition-colors w-fit"
             >
                 {getLabel(currentLanguageCode, 'back')}
@@ -140,11 +156,13 @@
                         <DescriptionQuizSettings
                             onStartQuiz={handleStartDescriptionQuiz}
                             languageCode={currentLanguageCode}
+                            initialSettings={getCachedDescriptionSettings()}
                         />
                     {:else if selectedGame?.id === 'sprites-quiz'}
                         <SpriteQuizSettings
                             onStartQuiz={handleStartSpritesQuiz}
                             languageCode={currentLanguageCode}
+                            initialSettings={getCachedSpriteSettings()}
                         />
                     {/if}
                 </div>
@@ -155,6 +173,7 @@
         <DescriptionQuiz
             settings={quizSettings}
             onBackToHub={backToHub}
+            onBackToSettings={backToSettingsFromQuiz}
             languageCode={currentLanguageCode}
             languageId={selectedLanguageId}
         />
@@ -163,6 +182,7 @@
         <SpritesQuiz
             settings={spriteQuizSettings}
             onBackToHub={backToHub}
+            onBackToSettings={backToSettingsFromQuiz}
             languageCode={currentLanguageCode}
             languageId={selectedLanguageId}
         />

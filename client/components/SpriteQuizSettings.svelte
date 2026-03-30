@@ -21,16 +21,30 @@
     export let onStartQuiz: (settings: SpriteQuizSettings) => void;
     /** Current language code for translations */
     export let languageCode: string = 'en';
+    /** Initial settings from cache (or null if new game) */
+    export let initialSettings: SpriteQuizSettings | null = null;
 
-    // Settings state
-    let timeLimit = 15;
-    let hasTimeLimit = false;
-    let gameMode: GameMode = 'score';
-    let selectedGenerations: Set<number> = new Set(ALL_GENERATIONS);
-    let selectedSpriteTypes: SpriteType[] = ['front'];
-    let spriteSource: SpriteSource = 'home';
-    let effects: SpriteEffectSettings = { ...DEFAULT_SPRITE_EFFECTS };
-    let numberOfOptions: number = 4;
+    // Settings state - initialize from cache if available
+    let timeLimit = initialSettings?.timeLimit ?? 15;
+    let hasTimeLimit = initialSettings?.hasTimeLimit ?? false;
+    let gameMode: GameMode = initialSettings?.gameMode ?? 'score';
+    let selectedGenerations: Set<number> = new Set(initialSettings?.selectedGenerations ?? ALL_GENERATIONS);
+    let selectedSpriteTypes: SpriteType[] = initialSettings?.selectedSpriteTypes ?? ['front'];
+    let spriteSource: SpriteSource = initialSettings?.spriteSource ?? 'home';
+    let effects: SpriteEffectSettings = initialSettings?.effects ?? { ...DEFAULT_SPRITE_EFFECTS };
+    let numberOfOptions: number = initialSettings?.numberOfOptions ?? 4;
+
+    // Reactively update state when initialSettings changes (when returning from quiz)
+    $: if (initialSettings) {
+        timeLimit = initialSettings.timeLimit ?? 15;
+        hasTimeLimit = initialSettings.hasTimeLimit ?? false;
+        gameMode = initialSettings.gameMode ?? 'score';
+        selectedGenerations = new Set(initialSettings.selectedGenerations ?? ALL_GENERATIONS);
+        selectedSpriteTypes = initialSettings.selectedSpriteTypes ?? ['front'];
+        spriteSource = initialSettings.spriteSource ?? 'home';
+        effects = initialSettings.effects ?? { ...DEFAULT_SPRITE_EFFECTS };
+        numberOfOptions = initialSettings.numberOfOptions ?? 4;
+    }
 
     // Toast state
     let toastState: ToastState = {
