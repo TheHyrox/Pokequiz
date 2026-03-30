@@ -1,10 +1,9 @@
 <script lang="ts">
     /**
-     * @brief Description quiz page component
-     * @description Main quiz gameplay with multiple game modes
+     * @brief Sprites quiz game component
+     * @description Main quiz gameplay with multiple game modes for sprite guessing
      */
     import { onMount } from 'svelte';
-    import { getPokemonDescription, truncateDescription, scrambleDescription } from '../../server/src/lib/description';
     import { getPokemonNameLocalized } from '../../server/src/lib/name';
     import { getRandomPokemonId } from '../../server/src/lib/utils/utils';
     import Pokecard from '../components/pokecard.svelte';
@@ -12,21 +11,16 @@
     import Autocomplete from '../components/Autocomplete.svelte';
     import QuizHeader from '../components/quiz/QuizHeader.svelte';
     import TimerDisplay from '../components/quiz/TimerDisplay.svelte';
-    import ChallengeReviewScreen from '../components/quiz/ChallengeReviewScreen.svelte';
-<<<<<<< HEAD
-    import { getLabel } from './lib/translations';
-    import { createToastHandlers } from './lib/toastUtils';
-    import { normalizeText } from './lib/utils/textUtils';
-    import { CHALLENGE_QUESTION_COUNT, DEFAULT_QUIZ_SETTINGS } from '../../shared/constants';
-    import type { QuizSettings, PokemonOption, ChallengeQuestion, ToastState } from '../../shared/types';
-=======
+    import SpriteChallengeReviewScreen from '../components/quiz/SpriteChallengeReviewScreen.svelte';
     import HardcoreLivesDisplay from '../components/quiz/HardcoreLivesDisplay.svelte';
     import { getLabel } from './lib/translations';
     import { createToastHandlers } from './lib/toastUtils';
     import { normalizeText } from './lib/utils/textUtils';
-    import { CHALLENGE_QUESTION_COUNT, DEFAULT_QUIZ_SETTINGS, HARDCORE_INITIAL_STATE, HARDCORE_MAX_LIVES, HARDCORE_LIFE_REWARD_THRESHOLD } from '../../shared/constants';
-    import type { QuizSettings, PokemonOption, ChallengeQuestion, ToastState, HardcoreModeState } from '../../shared/types';
->>>>>>> main
+    import { pixelateImage, getCssFiltersFromSettings, getRandomRotation } from './lib/utils/imageEffects';
+    import { getQuizSpriteUrl, getQuizSpriteUrlWithFallback } from '../../shared/constants/sprites';
+    import type { SpriteUrlResult } from '../../shared/constants/sprites';
+    import { CHALLENGE_QUESTION_COUNT, DEFAULT_SPRITE_QUIZ_SETTINGS, HARDCORE_INITIAL_STATE, HARDCORE_MAX_LIVES, HARDCORE_LIFE_REWARD_THRESHOLD } from '../../shared/constants';
+    import type { SpriteQuizSettings, PokemonOption, ToastState, HardcoreModeState, SpriteChallengeQuestion } from '../../shared/types';
 
     /** Callback to return to hub */
     export let onBackToHub: () => void;
@@ -35,25 +29,24 @@
     /** Current language ID */
     export let languageId: number = 9;
     /** Quiz settings */
-    export let settings: QuizSettings = DEFAULT_QUIZ_SETTINGS;
+    export let settings: SpriteQuizSettings = DEFAULT_SPRITE_QUIZ_SETTINGS;
 
     // Quiz state
     let currentQuestion = 1;
     let totalQuestions = settings.gameMode === 'infinite' ? 999 : CHALLENGE_QUESTION_COUNT;
-    let description = '';
+    let spriteUrl = '';
     let pokemonOptions: PokemonOption[] = [];
     let loading = true;
     let score = 0;
     let timeRemaining = settings.timeLimit;
-    let currentDescriptionIndex = 0;
-    let allDescriptions: string[] = [];
     let wrongAnsweredIds: Set<number> = new Set();
     let disabledCards = false;
     let errorCountThisQuestion = 0;
     let selectedLanguageId = languageId;
+    let currentRotation = 0;
 
     // Challenge mode state
-    let challengeQuestions: ChallengeQuestion[] = [];
+    let challengeQuestions: SpriteChallengeQuestion[] = [];
     let showChallengeReview = false;
 
     // Hardcore mode state
@@ -61,10 +54,7 @@
     let correctPokemonName: string = '';
     let allPokemonList: Array<{ id: number; name: string }> = [];
     let autocompleteRef: any;
-<<<<<<< HEAD
-=======
     let hardcoreState: HardcoreModeState = { ...HARDCORE_INITIAL_STATE };
->>>>>>> main
 
     // Toast state
     let toastState: ToastState = {
@@ -121,11 +111,7 @@
     }
 
     /**
-<<<<<<< HEAD
-     * @brief Handles hardcore mode answer submission
-=======
      * @brief Handles hardcore mode answer submission with 3-life system
->>>>>>> main
      */
     function handleHardcoreSubmit(): void {
         if (timerInterval) clearInterval(timerInterval);
@@ -136,25 +122,6 @@
 
         if (isCorrect) {
             score += 1;
-<<<<<<< HEAD
-            showSuccessToast(getLabel(languageCode, 'correct'));
-
-            setTimeout(() => {
-                if (currentQuestion < CHALLENGE_QUESTION_COUNT) {
-                    currentQuestion++;
-                    loadQuestion();
-                } else {
-                    endQuiz();
-                }
-            }, 1500);
-        } else {
-            errorCountThisQuestion++;
-            showErrorToast(getLabel(languageCode, 'incorrect'));
-            setTimeout(() => {
-                hardcoreUserInput = '';
-                autocompleteRef?.focus();
-            }, 1500);
-=======
             hardcoreState.consecutiveCorrect++;
 
             // Gain life every HARDCORE_LIFE_REWARD_THRESHOLD consecutive correct (max HARDCORE_MAX_LIVES)
@@ -187,7 +154,6 @@
                     autocompleteRef?.focus();
                 }, 1500);
             }
->>>>>>> main
         }
     }
 
@@ -209,6 +175,38 @@
     }
 
     /**
+     * @brief Apply image effects to sprite
+     */
+    async function applyEffects(baseUrl: string): Promise<string> {
+        let processedUrl = baseUrl;
+
+        // Apply pixelation if enabled
+        if (settings.effects.pixelateEnabled) {
+            try {
+                processedUrl = await pixelateImage(baseUrl, settings.effects.pixelateStrength);
+            } catch (error) {
+                console.error('Pixelation failed, using base sprite:', error);
+            }
+        }
+
+        return processedUrl;
+    }
+
+    /**
+     * @brief Get CSS filters for effects
+     */
+    function getEffectFilters(): string {
+        return getCssFiltersFromSettings(settings.effects);
+    }
+
+    /**
+     * @brief Get random sprite type from selected types
+     */
+    function getRandomSpriteType() {
+        return settings.selectedSpriteTypes[Math.floor(Math.random() * settings.selectedSpriteTypes.length)];
+    }
+
+    /**
      * @brief Loads a new quiz question
      */
     async function loadQuestion(): Promise<void> {
@@ -216,13 +214,13 @@
 
         loading = true;
         pokemonOptions = [];
-        allDescriptions = [];
-        currentDescriptionIndex = 0;
+        spriteUrl = '';
         wrongAnsweredIds.clear();
         disabledCards = false;
         toastState.show = false;
         errorCountThisQuestion = 0;
         hardcoreUserInput = '';
+        currentRotation = 0;
 
         // Get 4 different random pokemon IDs
         const selectedPokemon = new Set<number>();
@@ -244,16 +242,21 @@
             }
         }
 
-        const descriptions = await getPokemonDescription(correctId.toString(), selectedLanguageId.toString(), null);
-        allDescriptions = descriptions || ['No description found'];
-        description = allDescriptions[0];
-
-        // Apply description transformations
-        if (settings.truncateStrength > 0) {
-            description = truncateDescription(description, settings.truncateStrength);
+        // Get sprite URL
+        const spriteType = getRandomSpriteType();
+        const spriteResult: SpriteUrlResult = await getQuizSpriteUrlWithFallback(correctId, spriteType, settings.spriteSource);
+        
+        // Show toast if fallback was used
+        if (spriteResult.usedFallback) {
+            showErrorToast(getLabel(languageCode, 'spriteFallbackUsed'));
         }
-        if (settings.enableScramble) {
-            description = scrambleDescription(description);
+        
+        // Apply effects
+        spriteUrl = await applyEffects(spriteResult.url);
+
+        // Set rotation if enabled
+        if (settings.effects.rotationEnabled) {
+            currentRotation = getRandomRotation();
         }
 
         const correctName = await getPokemonNameLocalized(correctId, selectedLanguageId);
@@ -277,16 +280,6 @@
             setTimeout(() => {
                 autocompleteRef?.focus();
             }, 100);
-        }
-    }
-
-    /**
-     * @brief Changes to next available description
-     */
-    function changeDescription(): void {
-        if (currentDescriptionIndex < allDescriptions.length - 1) {
-            currentDescriptionIndex++;
-            description = allDescriptions[currentDescriptionIndex];
         }
     }
 
@@ -336,7 +329,7 @@
 
             challengeQuestions.push({
                 questionNumber: currentQuestion,
-                description: description,
+                spriteUrl: spriteUrl,
                 correctPokemonName: correctOption?.name || '',
                 correctPokemonId: correctOption?.id || 0,
                 userAnswerId: pokemonId,
@@ -407,27 +400,17 @@
 <main class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 p-8 flex items-center justify-center">
     <div class="max-w-4xl mx-auto w-full">
         {#if showChallengeReview}
-            <ChallengeReviewScreen
+            <SpriteChallengeReviewScreen
                 {languageCode}
                 {challengeQuestions}
                 {onBackToHub}
             />
         {:else}
             <!-- Quiz Header -->
-<<<<<<< HEAD
-            <QuizHeader
-                {languageCode}
-                gameMode={settings.gameMode}
-                {currentQuestion}
-                {totalQuestions}
-                {score}
-                {onBackToHub}
-            />
-=======
             <div class="quiz-header-row">
                 <QuizHeader
                     {languageCode}
-                    quizTitleLabel="description_quiz"
+                    quizTitleLabel="sprites_quiz"
                     gameMode={settings.gameMode}
                     {currentQuestion}
                     {totalQuestions}
@@ -438,7 +421,6 @@
                     <HardcoreLivesDisplay lives={hardcoreState.lives} />
                 {/if}
             </div>
->>>>>>> main
 
             {#if loading}
                 <div class="text-center py-12">
@@ -450,26 +432,16 @@
                     <TimerDisplay {timeRemaining} />
                 {/if}
 
-                <!-- Description Section -->
-                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
-                    <p class="text-2xl text-gray-800 text-center leading-relaxed">
-                        "{description}"
-                    </p>
-
-                    {#if settings.changeDescription && currentDescriptionIndex < allDescriptions.length - 1}
-                        <div class="text-center mt-6">
-                            <button
-                                on:click={changeDescription}
-                                class="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors"
-                            >
-<<<<<<< HEAD
-                                {getLabel(languageCode, 'changeDescriptionBtn')}
-=======
-                                {getLabel(languageCode, 'description_changeDescriptionBtn')}
->>>>>>> main
-                            </button>
-                        </div>
-                    {/if}
+                <!-- Sprite Section -->
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-8 flex justify-center items-center">
+                    <div class="sprite-container" style="transform: rotate({currentRotation}deg);">
+                        <img
+                            src={spriteUrl}
+                            alt="Pokemon sprite"
+                            class="pokemon-sprite"
+                            style="filter: {getEffectFilters()};"
+                        />
+                    </div>
                 </div>
 
                 <!-- Pokemon Cards Grid or Hardcore Input -->
@@ -506,6 +478,7 @@
                                 {pokemon}
                                 showError={wrongAnsweredIds.has(pokemon.id)}
                                 disabled={disabledCards}
+                                showSprite={false}
                                 on:selected={() => handleAnswer(pokemon.isCorrect, pokemon.id)}
                             />
                         {/each}
@@ -521,7 +494,7 @@
         message={toastState.message}
         type={toastState.type}
         autoClose={true}
-        duration={2000}
+        duration={5000}
         onClose={() => { toastState.show = false; }}
     />
 {/if}
@@ -530,5 +503,23 @@
     :global(body) {
         margin: 0;
         padding: 0;
+    }
+
+    .quiz-header-row {
+        @apply flex justify-between items-start mb-8 gap-8;
+    }
+
+    .sprite-container {
+        @apply transition-transform duration-200;
+    }
+
+    .pokemon-sprite {
+        @apply max-w-xs max-h-80 image-rendering-pixelated;
+    }
+
+    :global(.image-rendering-pixelated) {
+        image-rendering: pixelated;
+        image-rendering: -moz-crisp-edges;
+        image-rendering: crisp-edges;
     }
 </style>

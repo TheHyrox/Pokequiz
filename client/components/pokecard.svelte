@@ -14,6 +14,11 @@
     export let showError: boolean = false;
     /** Disable interactions */
     export let disabled: boolean = false;
+<<<<<<< HEAD
+=======
+    /** Show sprite image (defaults to true for backward compatibility) */
+    export let showSprite: boolean = true;
+>>>>>>> main
 
     const dispatch = createEventDispatcher();
     const spriteUrl = getSpriteUrl(pokemon.id, 'home');
@@ -36,11 +41,21 @@
     on:keydown={(e) => e.key === 'Enter' && handleClick()}
 >
     <div class="card-inner">
+<<<<<<< HEAD
         <img
             src={spriteUrl}
             alt={pokemon.name}
             class="pokemon-image"
         />
+=======
+        {#if showSprite}
+            <img
+                src={spriteUrl}
+                alt={pokemon.name}
+                class="pokemon-image"
+            />
+        {/if}
+>>>>>>> main
         <p class="pokemon-name">
             {capitalizeFirst(pokemon.name)}
         </p>

@@ -5,17 +5,29 @@
 
 export const QUIZ_LABELS = {
     en: {
+<<<<<<< HEAD
         descriptionQuiz: 'Description Quiz',
         guessFromDescription: 'Guess the Pokemon from its Pokédex description',
         question: 'Question',
         score: 'Score',
         infiniteModeLabel: 'Mode: Infinite',
         changeDescriptionBtn: 'View another description',
+=======
+        description_quiz: 'Description Quiz',
+        description_guessFromDescription: 'Guess the Pokemon from its Pokédex description',
+        sprites_quiz: 'Sprites Quiz',
+        sprites_guessFromSprite: 'Guess the Pokemon from its sprite',
+        question: 'Question',
+        score: 'Score',
+        infiniteModeLabel: 'Mode: Infinite',
+        description_changeDescriptionBtn: 'View another description',
+>>>>>>> main
         timeUp: "Time's up! Wrong answer.",
         wrongAnswer: 'Wrong answer!',
         keepGoing: 'But keep going.',
         quizEnded: 'Wrong answer! Quiz ended.',
         quizCompleted: 'Quiz completed! Final score:',
+<<<<<<< HEAD
         enterPokemonName: 'Enter Pokémon name'
     },
     fr: {
@@ -25,11 +37,29 @@ export const QUIZ_LABELS = {
         score: 'Score',
         infiniteModeLabel: 'Mode: Infini',
         changeDescriptionBtn: 'Voir une autre description',
+=======
+        enterPokemonName: 'Enter Pokémon name',
+        lifeGained: 'Life gained!',
+        livesRemaining: 'lives remaining',
+        gameOver: 'Game Over! You lost all your lives.',
+        spriteFallbackUsed: 'The loaded sprite differs from the selected rules because it is not possible to obtain the Pokémon\'s sprite according to the defined rules.'
+    },
+    fr: {
+        description_quiz: 'Quiz Description',
+        description_guessFromDescription: 'Devinez le Pokémon à partir de sa description Pokédex',
+        sprites_quiz: 'Quiz Sprites',
+        sprites_guessFromSprite: 'Devinez le Pokémon à partir de son sprite',
+        question: 'Question',
+        score: 'Score',
+        infiniteModeLabel: 'Mode: Infini',
+        description_changeDescriptionBtn: 'Voir une autre description',
+>>>>>>> main
         timeUp: 'Temps écoulé! Mauvaise réponse.',
         wrongAnswer: 'Mauvaise réponse!',
         keepGoing: 'Mais continuez.',
         quizEnded: 'Mauvaise réponse! Quiz terminé.',
         quizCompleted: 'Quiz terminé! Score final:',
+<<<<<<< HEAD
         enterPokemonName: 'Entrez le nom du Pokémon'
     },
     de: {
@@ -39,11 +69,29 @@ export const QUIZ_LABELS = {
         score: 'Punktzahl',
         infiniteModeLabel: 'Modus: Unendlich',
         changeDescriptionBtn: 'Eine andere Beschreibung anzeigen',
+=======
+        enterPokemonName: 'Entrez le nom du Pokémon',
+        lifeGained: 'Vie gagnée!',
+        livesRemaining: 'vies restantes',
+        gameOver: 'Fin de la partie! Vous avez perdu toutes vos vies.',
+        spriteFallbackUsed: 'Le sprite chargé diffère des règles sélectionnées car il n\'est pas possible d\'obtenir le sprite du Pokémon selon les règles définies.'
+    },
+    de: {
+        description_quiz: 'Beschreibungs-Quiz',
+        description_guessFromDescription: 'Erraten Sie das Pokémon anhand seiner Pokédex-Beschreibung',
+        sprites_quiz: 'Sprites-Quiz',
+        sprites_guessFromSprite: 'Erraten Sie das Pokémon anhand seines Sprites',
+        question: 'Frage',
+        score: 'Punktzahl',
+        infiniteModeLabel: 'Modus: Unendlich',
+        description_changeDescriptionBtn: 'Eine andere Beschreibung anzeigen',
+>>>>>>> main
         timeUp: 'Zeit abgelaufen! Falsche Antwort.',
         wrongAnswer: 'Falsche Antwort!',
         keepGoing: 'Aber machen Sie weiter.',
         quizEnded: 'Falsche Antwort! Quiz beendet.',
         quizCompleted: 'Quiz abgeschlossen! Endergebnis:',
+<<<<<<< HEAD
         enterPokemonName: 'Pokémon-Namen eingeben'
     },
     es: {
@@ -53,11 +101,29 @@ export const QUIZ_LABELS = {
         score: 'Puntuación',
         infiniteModeLabel: 'Modo: Infinito',
         changeDescriptionBtn: 'Ver otra descripción',
+=======
+        enterPokemonName: 'Pokémon-Namen eingeben',
+        lifeGained: 'Leben gewonnen!',
+        livesRemaining: 'Leben verbleibend',
+        gameOver: 'Spielende! Sie haben alle Leben verloren.',
+        spriteFallbackUsed: 'Das geladene Sprite unterscheidet sich von den ausgewählten Regeln, da es nicht möglich ist, das Sprite des Pokémon gemäß den definierten Regeln zu erhalten.'
+    },
+    es: {
+        description_quiz: 'Quiz de Descripción',
+        description_guessFromDescription: 'Adivina el Pokémon a partir de su descripción Pokédex',
+        sprites_quiz: 'Quiz de Sprites',
+        sprites_guessFromSprite: 'Adivina el Pokémon a partir de su sprite',
+        question: 'Pregunta',
+        score: 'Puntuación',
+        infiniteModeLabel: 'Modo: Infinito',
+        description_changeDescriptionBtn: 'Ver otra descripción',
+>>>>>>> main
         timeUp: '¡Se acabó el tiempo! Respuesta incorrecta.',
         wrongAnswer: '¡Respuesta incorrecta!',
         keepGoing: 'Pero sigue adelante.',
         quizEnded: '¡Respuesta incorrecta! Quiz terminado.',
         quizCompleted: '¡Quiz completado! Puntuación final:',
+<<<<<<< HEAD
         enterPokemonName: 'Ingresa el nombre del Pokémon'
     },
     it: {
@@ -67,11 +133,29 @@ export const QUIZ_LABELS = {
         score: 'Punteggio',
         infiniteModeLabel: 'Modalità: Infinita',
         changeDescriptionBtn: "Vedi un'altra descrizione",
+=======
+        enterPokemonName: 'Ingresa el nombre del Pokémon',
+        lifeGained: '¡Vida ganada!',
+        livesRemaining: 'vidas restantes',
+        gameOver: '¡Fin del juego! Perdiste todas tus vidas.',
+        spriteFallbackUsed: 'El sprite cargado difiere de las reglas seleccionadas porque no es posible obtener el sprite del Pokémon según las reglas definidas.'
+    },
+    it: {
+        description_quiz: 'Quiz Descrizione',
+        description_guessFromDescription: 'Indovina il Pokémon dalla sua descrizione Pokédex',
+        sprites_quiz: 'Quiz Sprite',
+        sprites_guessFromSprite: 'Indovina il Pokémon dal suo sprite',
+        question: 'Domanda',
+        score: 'Punteggio',
+        infiniteModeLabel: 'Modalità: Infinita',
+        description_changeDescriptionBtn: "Vedi un'altra descrizione",
+>>>>>>> main
         timeUp: 'Tempo scaduto! Risposta sbagliata.',
         wrongAnswer: 'Risposta sbagliata!',
         keepGoing: 'Ma continua.',
         quizEnded: 'Risposta sbagliata! Quiz terminato.',
         quizCompleted: 'Quiz completato! Punteggio finale:',
+<<<<<<< HEAD
         enterPokemonName: 'Inserisci il nome del Pokémon'
     },
     'ja-hrkt': {
@@ -81,11 +165,29 @@ export const QUIZ_LABELS = {
         score: 'すこあ',
         infiniteModeLabel: 'もーど: むげん',
         changeDescriptionBtn: 'べつ の せつめい を ひょうじ',
+=======
+        enterPokemonName: 'Inserisci il nome del Pokémon',
+        lifeGained: 'Vita guadagnata!',
+        livesRemaining: 'vite rimanenti',
+        gameOver: 'Gioco Finito! Hai perso tutte le tue vite.',
+        spriteFallbackUsed: 'Lo sprite caricato differisce dalle regole selezionate perché non è possibile ottenere lo sprite del Pokémon secondo le regole definite.'
+    },
+    'ja-hrkt': {
+        description_quiz: 'せつめい くいず',
+        description_guessFromDescription: 'ぽけもん ずかんの せつめいから ぽけもんを すいそくする',
+        sprites_quiz: 'すぷらいと くいず',
+        sprites_guessFromSprite: 'すぷらいと から ぽけもん を すいそくする',
+        question: 'しつもん',
+        score: 'すこあ',
+        infiniteModeLabel: 'もーど: むげん',
+        description_changeDescriptionBtn: 'べつ の せつめい を ひょうじ',
+>>>>>>> main
         timeUp: 'じかん きれ! ふせいかい。',
         wrongAnswer: 'ふせいかい!',
         keepGoing: 'でも つづけてください。',
         quizEnded: 'ふせいかい! くいず しゅうりょう。',
         quizCompleted: 'くいず かんりょう! さいしゅう すこあ:',
+<<<<<<< HEAD
         enterPokemonName: 'ぽけもん の なまえ を にゅうりょく'
     },
     ja: {
@@ -95,11 +197,29 @@ export const QUIZ_LABELS = {
         score: 'スコア',
         infiniteModeLabel: 'モード: 無限',
         changeDescriptionBtn: '別の説明を表示',
+=======
+        enterPokemonName: 'ぽけもん の なまえ を にゅうりょく',
+        lifeGained: 'いのち を えた!',
+        livesRemaining: 'いのち のこってる',
+        gameOver: 'げーむ おーばー! すべての いのち を うしなった。',
+        spriteFallbackUsed: 'よみこんだ すぷらいと は せんたく した ルール から ことなります。ていぎ された ルール に もとづいて ぽけもん の すぷらいと を える ことが できません。'
+    },
+    ja: {
+        description_quiz: '説明クイズ',
+        description_guessFromDescription: 'ポケモン図鑑の説明からポケモンを推測する',
+        sprites_quiz: 'スプライトクイズ',
+        sprites_guessFromSprite: 'スプライトからポケモンを推測する',
+        question: '質問',
+        score: 'スコア',
+        infiniteModeLabel: 'モード: 無限',
+        description_changeDescriptionBtn: '別の説明を表示',
+>>>>>>> main
         timeUp: '時間切れ! 不正解。',
         wrongAnswer: '不正解!',
         keepGoing: 'でも続けてください。',
         quizEnded: '不正解! クイズ終了。',
         quizCompleted: 'クイズ完了! 最終スコア:',
+<<<<<<< HEAD
         enterPokemonName: 'ポケモンの名前を入力'
     },
     ko: {
@@ -109,11 +229,29 @@ export const QUIZ_LABELS = {
         score: '점수',
         infiniteModeLabel: '모드: 무한',
         changeDescriptionBtn: '다른 설명 보기',
+=======
+        enterPokemonName: 'ポケモンの名前を入力',
+        lifeGained: '命を得た!',
+        livesRemaining: '命が残っている',
+        gameOver: 'ゲームオーバー! すべての命を失った。',
+        spriteFallbackUsed: '読み込まれたスプライトは選択されたルールから異なります。定義されたルールに基づいてポケモンのスプライトを取得することができません。'
+    },
+    ko: {
+        description_quiz: '설명 퀴즈',
+        description_guessFromDescription: '포케덱스 설명에서 포켓몬 추측',
+        sprites_quiz: '스프라이트 퀴즈',
+        sprites_guessFromSprite: '스프라이트에서 포켓몬 추측',
+        question: '질문',
+        score: '점수',
+        infiniteModeLabel: '모드: 무한',
+        description_changeDescriptionBtn: '다른 설명 보기',
+>>>>>>> main
         timeUp: '시간 초과! 오답입니다.',
         wrongAnswer: '오답!',
         keepGoing: '하지만 계속하세요.',
         quizEnded: '오답! 퀴즈 종료.',
         quizCompleted: '퀴즈 완료! 최종 스코어:',
+<<<<<<< HEAD
         enterPokemonName: '포켓몬 이름 입력'
     },
     'zh-hans': {
@@ -123,11 +261,29 @@ export const QUIZ_LABELS = {
         score: '分数',
         infiniteModeLabel: '模式:无限',
         changeDescriptionBtn: '查看另一个描述',
+=======
+        enterPokemonName: '포켓몬 이름 입력',
+        lifeGained: '생명 획득!',
+        livesRemaining: '남은 생명',
+        gameOver: '게임 종료! 모든 생명을 잃었습니다.',
+        spriteFallbackUsed: '로드된 스프라이트는 선택한 규칙과 다릅니다. 정의된 규칙에 따라 포켓몬의 스프라이트를 가져올 수 없습니다.'
+    },
+    'zh-hans': {
+        description_quiz: '描述测验',
+        description_guessFromDescription: '从其图鉴描述中猜测口袋妖怪',
+        sprites_quiz: '精灵测验',
+        sprites_guessFromSprite: '从精灵图中猜出口袋妖怪',
+        question: '问题',
+        score: '分数',
+        infiniteModeLabel: '模式:无限',
+        description_changeDescriptionBtn: '查看另一个描述',
+>>>>>>> main
         timeUp: '时间到了!错误的答案。',
         wrongAnswer: '错误的答案!',
         keepGoing: '但请继续。',
         quizEnded: '错误的答案!测验结束。',
         quizCompleted: '测验完成!最终分数:',
+<<<<<<< HEAD
         enterPokemonName: '输入口袋妖怪名称'
     },
     'zh-hant': {
@@ -137,13 +293,40 @@ export const QUIZ_LABELS = {
         score: '分數',
         infiniteModeLabel: '模式:無限',
         changeDescriptionBtn: '查看另一個描述',
+=======
+        enterPokemonName: '输入口袋妖怪名称',
+        lifeGained: '获得生命!',
+        livesRemaining: '剩余生命',
+        gameOver: '游戏结束! 你失去了所有的生命。',
+        spriteFallbackUsed: '加载的精灵图与所选规则不同,因为无法根据定义的规则获取精灵的精灵图。'
+    },
+    'zh-hant': {
+        description_quiz: '描述測驗',
+        description_guessFromDescription: '從其圖鑑描述中猜測口袋妖怪',
+        sprites_quiz: '精靈測驗',
+        sprites_guessFromSprite: '從精靈圖中猜出寶可夢',
+        question: '問題',
+        score: '分數',
+        infiniteModeLabel: '模式:無限',
+        description_changeDescriptionBtn: '查看另一個描述',
+>>>>>>> main
         timeUp: '時間到了!錯誤的答案。',
         wrongAnswer: '錯誤的答案!',
         keepGoing: '但請繼續。',
         quizEnded: '錯誤的答案!測驗結束。',
         quizCompleted: '測驗完成!最終分數:',
+<<<<<<< HEAD
         enterPokemonName: '輸入口袋妖怪名稱'
     }
 } as const;
+=======
+        enterPokemonName: '輸入口袋妖怪名稱',
+        lifeGained: '獲得生命!',
+        livesRemaining: '剩餘生命',
+        gameOver: '遊戲結束! 你失去了所有的生命。',
+        spriteFallbackUsed: '載入的精靈圖與所選規則不同,因為無法根據定義的規則獲取精靈的精靈圖。'
+    }
+} 
+>>>>>>> main
 
 export type QuizLabelKey = keyof typeof QUIZ_LABELS.en;

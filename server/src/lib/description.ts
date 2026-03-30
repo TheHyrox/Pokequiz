@@ -33,7 +33,11 @@ export async function getPokemonDescription(
 
     try {
         const response = await fetch(url);
+<<<<<<< HEAD
         const data = await response.json();
+=======
+        const data = await response.json() as { flavor_text_entries: Array<{ language: { url: string }; version: { url: string }; flavor_text: string }>; names: { name: string; language: { url: string } }[] };
+>>>>>>> main
 
         for (const entry of data.flavor_text_entries) {
             const entryLangId = parseInt(
