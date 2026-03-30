@@ -17,6 +17,8 @@
     import { createEventDispatcher } from 'svelte';
     import { normalizeText } from '../src/lib/utils/textUtils';
     import { getSpriteUrl } from '../../shared/constants/sprites';
+    import { getGenerationForPokemon } from '../src/lib/utils/pokemonUtils';
+    import { ALL_GENERATIONS } from '../../shared/constants';
 
     export type { PokemonOption };
 
@@ -30,6 +32,8 @@
     export let disabled: boolean = false;
     /** Whether to auto-focus on mount */
     export let autofocus: boolean = false;
+    /** Selected generation numbers for filtering (empty or all = no filter) */
+    export let selectedGenerations: number[] = [];
 
     let inputElement: HTMLInputElement;
     let showSuggestions = false;
@@ -37,6 +41,22 @@
 
     const dispatch = createEventDispatcher();
     const MAX_SUGGESTIONS = 15;
+
+    /**
+     * @brief Checks if a Pokemon should be included in suggestions
+     * @param pokemon - Pokemon to check
+     * @returns True if Pokemon is in selected generations (or no filter applied)
+     */
+    function isPokemonInSelectedGenerations(pokemon: PokemonOption): boolean {
+        // If no generations selected or all generations selected, include all Pokemon
+        if (selectedGenerations.length === 0 || selectedGenerations.length === ALL_GENERATIONS.length) {
+            return true;
+        }
+
+        // Check if Pokemon's generation is in selected generations
+        const pokemonGen = getGenerationForPokemon(pokemon.id);
+        return pokemonGen !== null && selectedGenerations.includes(pokemonGen);
+    }
 
     /**
      * @brief Programmatically focus the input
@@ -50,7 +70,9 @@
      */
     function filterPokemon(): void {
         if (!value.trim()) {
-            filteredList = pokemonList.slice(0, MAX_SUGGESTIONS);
+            filteredList = pokemonList
+                .filter(isPokemonInSelectedGenerations)
+                .slice(0, MAX_SUGGESTIONS);
             showSuggestions = true;
             return;
         }
@@ -58,6 +80,7 @@
         const searchTerm = normalizeText(value);
         filteredList = pokemonList
             .filter(p => normalizeText(p.name).startsWith(searchTerm))
+            .filter(isPokemonInSelectedGenerations)
             .slice(0, MAX_SUGGESTIONS);
 
         showSuggestions = filteredList.length > 0;
