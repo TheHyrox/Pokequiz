@@ -211,15 +211,10 @@
 
         const descriptions = await getPokemonDescription(correctId.toString(), selectedLanguageId.toString(), null);
         allDescriptions = descriptions || ['No description found'];
+        
+        // Apply transformations to ALL descriptions
+        allDescriptions = allDescriptions.map(desc => applyDescriptionTransformations(desc));
         description = allDescriptions[0];
-
-        // Apply description transformations
-        if (settings.truncateStrength > 0) {
-            description = truncateDescription(description, settings.truncateStrength);
-        }
-        if (settings.enableScramble) {
-            description = scrambleDescription(description);
-        }
 
         const correctName = await getPokemonNameLocalized(correctId, selectedLanguageId);
         correctPokemonName = correctName || '';
@@ -243,6 +238,24 @@
                 autocompleteRef?.focus();
             }, 100);
         }
+    }
+
+    /**
+     * @brief Applies description transformations (truncate and scramble)
+     * @param desc - Description to transform
+     * @returns Transformed description
+     */
+    function applyDescriptionTransformations(desc: string): string {
+        let transformed = desc;
+
+        if (settings.truncateStrength > 0) {
+            transformed = truncateDescription(transformed, settings.truncateStrength);
+        }
+        if (settings.enableScramble) {
+            transformed = scrambleDescription(transformed);
+        }
+
+        return transformed;
     }
 
     /**
