@@ -113,6 +113,9 @@
      * @brief Handles hardcore mode answer submission with 3-life system
      */
     function handleHardcoreSubmit(): void {
+        // Prevent multiple submissions during transition
+        if (disabledCards) return;
+        
         if (timerInterval) clearInterval(timerInterval);
 
         const userInputNormalized = normalizeText(hardcoreUserInput);
@@ -120,6 +123,8 @@
         const isCorrect = userInputNormalized === correctNameNormalized;
 
         if (isCorrect) {
+            disabledCards = true;
+            
             score += 1;
             hardcoreState.consecutiveCorrect++;
 
