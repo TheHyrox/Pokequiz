@@ -18,7 +18,7 @@
     import { createToastHandlers } from './lib/toastUtils';
     import { normalizeText } from './lib/utils/textUtils';
     import { CHALLENGE_QUESTION_COUNT, DEFAULT_QUIZ_SETTINGS, HARDCORE_INITIAL_STATE, HARDCORE_MAX_LIVES, HARDCORE_LIFE_REWARD_THRESHOLD } from '../../shared/constants';
-    import type { QuizSettings, PokemonOption, ChallengeQuestion, ToastState, HardcoreModeState } from '../../shared/types';
+    import type { DescriptionQuizSettings, PokemonOption, ChallengeQuestion, ToastState, HardcoreModeState } from '../../shared/types';
 
     /** Callback to return to hub */
     export let onBackToHub: () => void;
@@ -27,7 +27,7 @@
     /** Current language ID */
     export let languageId: number = 9;
     /** Quiz settings */
-    export let settings: QuizSettings = DEFAULT_QUIZ_SETTINGS;
+    export let settings: DescriptionQuizSettings = DEFAULT_QUIZ_SETTINGS;
 
     // Quiz state
     let currentQuestion = 1;
@@ -211,15 +211,10 @@
 
         const descriptions = await getPokemonDescription(correctId.toString(), selectedLanguageId.toString(), null);
         allDescriptions = descriptions || ['No description found'];
+        
+        // Apply transformations to ALL descriptions
+        allDescriptions = allDescriptions.map(desc => applyDescriptionTransformations(desc));
         description = allDescriptions[0];
-
-        // Apply description transformations
-        if (settings.truncateStrength > 0) {
-            description = truncateDescription(description, settings.truncateStrength);
-        }
-        if (settings.enableScramble) {
-            description = scrambleDescription(description);
-        }
 
         const correctName = await getPokemonNameLocalized(correctId, selectedLanguageId);
         correctPokemonName = correctName || '';
@@ -243,6 +238,24 @@
                 autocompleteRef?.focus();
             }, 100);
         }
+    }
+
+    /**
+     * @brief Applies description transformations (truncate and scramble)
+     * @param desc - Description to transform
+     * @returns Transformed description
+     */
+    function applyDescriptionTransformations(desc: string): string {
+        let transformed = desc;
+
+        if (settings.truncateStrength > 0) {
+            transformed = truncateDescription(transformed, settings.truncateStrength);
+        }
+        if (settings.enableScramble) {
+            transformed = scrambleDescription(transformed);
+        }
+
+        return transformed;
     }
 
     /**
@@ -482,4 +495,9 @@
         margin: 0;
         padding: 0;
     }
+
+    .quiz-header-row {
+        @apply flex justify-between items-start mb-8 gap-8;
+    }
+
 </style>

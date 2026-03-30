@@ -4,13 +4,13 @@
      * @description Hub for navigating between games and settings
      */
     import { onMount } from 'svelte';
-    import QuizSettings from '../components/QuizSettings.svelte';
+    import DescriptionQuizSettings from '../components/DescriptionQuizSettings.svelte';
     import SpriteQuizSettings from '../components/SpriteQuizSettings.svelte';
     import DescriptionQuiz from './QuizDescription.svelte';
     import SpritesQuiz from './QuizSprites.svelte';
     import LanguageSelector from '../components/LanguageSelector.svelte';
     import { getLabel, LANGUAGE_ID_TO_CODE } from './lib/translations';
-    import type { QuizSettings as QuizSettingsType, SpriteQuizSettings as SpriteQuizSettingsType } from '../../shared/types';
+    import type { DescriptionQuizSettings as QuizSettingsType, SpriteQuizSettings as SpriteQuizSettingsType } from '../../shared/types';
 
     interface Game {
         id: string;
@@ -137,7 +137,7 @@
             <div class="flex items-center justify-center flex-1">
                 <div class="w-full">
                     {#if selectedGame?.id === 'description-quiz'}
-                        <QuizSettings
+                        <DescriptionQuizSettings
                             onStartQuiz={handleStartDescriptionQuiz}
                             languageCode={currentLanguageCode}
                         />
