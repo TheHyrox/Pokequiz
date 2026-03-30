@@ -7,10 +7,7 @@ import { COMMON_LABELS } from './labels/common';
 import { QUIZ_LABELS } from './labels/quiz';
 import { SETTINGS_LABELS } from './labels/settings';
 import { CHALLENGE_LABELS } from './labels/challenge';
-<<<<<<< HEAD
-=======
 import { SPRITES_LABELS } from './labels/sprites';
->>>>>>> main
 import type { LabelKey, LanguageCode } from './types';
 
 // Re-export from shared constants
@@ -32,12 +29,8 @@ const LABELS: Record<LanguageCode, Record<string, string>> = SUPPORTED_LANGUAGES
             ...COMMON_LABELS[lang],
             ...QUIZ_LABELS[lang],
             ...SETTINGS_LABELS[lang],
-<<<<<<< HEAD
-            ...CHALLENGE_LABELS[lang]
-=======
             ...CHALLENGE_LABELS[lang],
             ...SPRITES_LABELS[lang]
->>>>>>> main
         };
         return acc;
     },
