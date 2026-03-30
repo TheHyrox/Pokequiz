@@ -4,7 +4,8 @@
      * @description Configure image effects (blur, pixelate, silhouette, rotation)
      */
     import { getLabel } from '../../src/lib/translations';
-    import type { SpriteEffectSettings } from '../../../shared/types';
+    import { getBlurLimits, getPixelateLimits, getRecommendedBlur, getRecommendedPixelate, clampValue } from '../../src/lib/utils/spriteEffectLimits';
+    import type { SpriteEffectSettings, SpriteType, SpriteSource } from '../../../shared/types';
 
     /** Current effect settings */
     export let effects: SpriteEffectSettings = {
@@ -17,6 +18,54 @@
     };
     /** Language code for labels */
     export let languageCode: string = 'en';
+    /** Current sprite source for effect limits */
+    export let spriteSource: SpriteSource = 'home';
+    /** Selected sprite types for effect limits */
+    export let selectedSpriteTypes: SpriteType[] = ['front'];
+
+    /**
+     * @brief Track silhouette state separately to avoid circular dependency
+     */
+    let silhouetteEnabled = false;
+    $: silhouetteEnabled = effects.silhouetteEnabled;
+
+    /**
+     * @brief Reactive blur limits based on current settings
+     */
+    let blurLimits: ReturnType<typeof getBlurLimits>;
+    $: blurLimits = getBlurLimits(selectedSpriteTypes, spriteSource, silhouetteEnabled);
+
+    /**
+     * @brief Reactive pixelate limits based on current settings
+     */
+    let pixelateLimits: ReturnType<typeof getPixelateLimits>;
+    $: pixelateLimits = getPixelateLimits(selectedSpriteTypes, spriteSource, silhouetteEnabled);
+
+    /**
+     * @brief Reactive recommended blur value based on active effects
+     */
+    let recommendedBlur: number;
+    $: recommendedBlur = getRecommendedBlur(selectedSpriteTypes, spriteSource, effects.blurEnabled, effects.pixelateEnabled, effects.silhouetteEnabled);
+
+    /**
+     * @brief Reactive recommended pixelate value based on active effects
+     */
+    let recommendedPixelate: number;
+    $: recommendedPixelate = getRecommendedPixelate(selectedSpriteTypes, spriteSource, effects.blurEnabled, effects.pixelateEnabled, effects.silhouetteEnabled);
+
+    /**
+     * @brief Handle blur strength change
+     */
+    function handleBlurChange() {
+        effects.blurStrength = clampValue(effects.blurStrength, blurLimits.min, blurLimits.max);
+    }
+
+    /**
+     * @brief Handle pixelate strength change
+     */
+    function handlePixelateChange() {
+        effects.pixelateStrength = clampValue(effects.pixelateStrength, pixelateLimits.min, pixelateLimits.max);
+    }
 </script>
 
 <div class="sprite-effects-selector">
@@ -35,14 +84,20 @@
             </label>
             {#if effects.blurEnabled}
                 <div class="slider-container">
-                    <label class="slider-label">
-                        {getLabel(languageCode, 'sprites_blurStrength')}: {effects.blurStrength}px
-                    </label>
+                    <div class="slider-header">
+                        <label class="slider-label">
+                            {getLabel(languageCode, 'sprites_blurStrength')}: {effects.blurStrength}px
+                        </label>
+                        <span class="recommended-tag">
+                            {getLabel(languageCode, 'sprites_recommended')}: {recommendedBlur}px
+                        </span>
+                    </div>
                     <input
                         type="range"
-                        min="1"
-                        max="10"
+                        min={blurLimits.min}
+                        max={blurLimits.max}
                         bind:value={effects.blurStrength}
+                        on:change={handleBlurChange}
                         class="slider"
                     />
                 </div>
@@ -60,14 +115,20 @@
             </label>
             {#if effects.pixelateEnabled}
                 <div class="slider-container">
-                    <label class="slider-label">
-                        {getLabel(languageCode, 'sprites_pixelateStrength')}: {effects.pixelateStrength}
-                    </label>
+                    <div class="slider-header">
+                        <label class="slider-label">
+                            {getLabel(languageCode, 'sprites_pixelateStrength')}: {effects.pixelateStrength}
+                        </label>
+                        <span class="recommended-tag">
+                            {getLabel(languageCode, 'sprites_recommended')}: {recommendedPixelate}
+                        </span>
+                    </div>
                     <input
                         type="range"
-                        min="2"
-                        max="20"
+                        min={pixelateLimits.min}
+                        max={pixelateLimits.max}
                         bind:value={effects.pixelateStrength}
+                        on:change={handlePixelateChange}
                         class="slider"
                     />
                 </div>
@@ -135,8 +196,16 @@
         @apply ml-7 space-y-2;
     }
 
+    .slider-header {
+        @apply flex justify-between items-center;
+    }
+
     .slider-label {
         @apply block text-sm text-gray-600;
+    }
+
+    .recommended-tag {
+        @apply text-xs text-blue-600 font-semibold;
     }
 
     .slider {

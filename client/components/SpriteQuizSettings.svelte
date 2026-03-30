@@ -105,7 +105,7 @@
 
             <!-- Sprite Type Selector -->
             <div class="settings-section">
-                <SpriteTypeSelector {languageCode} bind:selectedSpriteTypes />
+                <SpriteTypeSelector {languageCode} bind:selectedSpriteTypes {spriteSource} />
             </div>
 
             <!-- Sprite Source Selector -->
@@ -115,7 +115,7 @@
 
             <!-- Sprite Effects Selector -->
             <div class="settings-section">
-                <SpriteEffectsSelector {languageCode} bind:effects />
+                <SpriteEffectsSelector {languageCode} bind:effects {spriteSource} {selectedSpriteTypes} />
             </div>
         </div>
     </div>
