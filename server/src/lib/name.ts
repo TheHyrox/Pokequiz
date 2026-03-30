@@ -25,7 +25,7 @@ export async function getPokemonNameLocalized(pokemon: number, languageId: numbe
 
     try {
         const response = await fetch(url);
-        const data = await response.json();
+        const data = await response.json() as { names: { name: string; language: { url: string } }[] };
 
         const nameLocalized = data.names.find((name: { language: { url: string } }) => {
             const langId = name.language.url.split('/').filter((part: string) => part).pop();
@@ -52,7 +52,7 @@ export async function getPokemonNames(pokemon: number): Promise<NameLocalized[] 
 
     try {
         const response = await fetch(url);
-        const data = await response.json();
+        const data = await response.json() as { names: { name: string; language: { url: string } }[] };
 
         const nameLocalized: NameLocalized[] = [];
 
