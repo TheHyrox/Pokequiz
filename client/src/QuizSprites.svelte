@@ -459,6 +459,7 @@
                                     bind:value={hardcoreUserInput}
                                     disabled={disabledCards}
                                     autofocus={true}
+                                    selectedGenerations={settings.selectedGenerations}
                                     on:submit={handleHardcoreSubmit}
                                 />
                             </div>
