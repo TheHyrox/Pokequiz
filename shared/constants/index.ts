@@ -3,11 +3,7 @@
  * @description Single source of truth for languages, generations, and configuration
  */
 
-<<<<<<< HEAD
-import type { Language, GenerationRange } from '../types';
-=======
 import type { Language, GenerationRange, SpriteEffectSettings, SpriteQuizSettings, HardcoreModeState } from '../types';
->>>>>>> main
 
 /**
  * @brief Supported languages with PokeAPI IDs
@@ -127,8 +123,6 @@ export const DEFAULT_QUIZ_SETTINGS = {
     truncateStrength: 0,
     enableScramble: false
 };
-<<<<<<< HEAD
-=======
 
 // ============================================================
 // SPRITES QUIZ CONSTANTS
@@ -180,4 +174,3 @@ export const HARDCORE_MAX_LIVES = 3;
  * @brief Consecutive correct answers needed to gain a life
  */
 export const HARDCORE_LIFE_REWARD_THRESHOLD = 10;
->>>>>>> main

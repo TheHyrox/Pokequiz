@@ -116,8 +116,6 @@ export interface GenerationRange {
     /** Last Pokemon ID in generation */
     max: number;
 }
-<<<<<<< HEAD
-=======
 
 // ============================================================
 // SPRITES QUIZ TYPES
@@ -208,4 +206,3 @@ export interface SpriteChallengeQuestion {
     /** Whether the user answered correctly */
     isCorrect: boolean;
 }
->>>>>>> main

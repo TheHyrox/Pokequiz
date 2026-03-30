@@ -13,20 +13,12 @@
     import QuizHeader from '../components/quiz/QuizHeader.svelte';
     import TimerDisplay from '../components/quiz/TimerDisplay.svelte';
     import ChallengeReviewScreen from '../components/quiz/ChallengeReviewScreen.svelte';
-<<<<<<< HEAD
-    import { getLabel } from './lib/translations';
-    import { createToastHandlers } from './lib/toastUtils';
-    import { normalizeText } from './lib/utils/textUtils';
-    import { CHALLENGE_QUESTION_COUNT, DEFAULT_QUIZ_SETTINGS } from '../../shared/constants';
-    import type { QuizSettings, PokemonOption, ChallengeQuestion, ToastState } from '../../shared/types';
-=======
     import HardcoreLivesDisplay from '../components/quiz/HardcoreLivesDisplay.svelte';
     import { getLabel } from './lib/translations';
     import { createToastHandlers } from './lib/toastUtils';
     import { normalizeText } from './lib/utils/textUtils';
     import { CHALLENGE_QUESTION_COUNT, DEFAULT_QUIZ_SETTINGS, HARDCORE_INITIAL_STATE, HARDCORE_MAX_LIVES, HARDCORE_LIFE_REWARD_THRESHOLD } from '../../shared/constants';
     import type { QuizSettings, PokemonOption, ChallengeQuestion, ToastState, HardcoreModeState } from '../../shared/types';
->>>>>>> main
 
     /** Callback to return to hub */
     export let onBackToHub: () => void;
@@ -61,10 +53,7 @@
     let correctPokemonName: string = '';
     let allPokemonList: Array<{ id: number; name: string }> = [];
     let autocompleteRef: any;
-<<<<<<< HEAD
-=======
     let hardcoreState: HardcoreModeState = { ...HARDCORE_INITIAL_STATE };
->>>>>>> main
 
     // Toast state
     let toastState: ToastState = {
@@ -121,11 +110,7 @@
     }
 
     /**
-<<<<<<< HEAD
-     * @brief Handles hardcore mode answer submission
-=======
      * @brief Handles hardcore mode answer submission with 3-life system
->>>>>>> main
      */
     function handleHardcoreSubmit(): void {
         if (timerInterval) clearInterval(timerInterval);
@@ -136,25 +121,6 @@
 
         if (isCorrect) {
             score += 1;
-<<<<<<< HEAD
-            showSuccessToast(getLabel(languageCode, 'correct'));
-
-            setTimeout(() => {
-                if (currentQuestion < CHALLENGE_QUESTION_COUNT) {
-                    currentQuestion++;
-                    loadQuestion();
-                } else {
-                    endQuiz();
-                }
-            }, 1500);
-        } else {
-            errorCountThisQuestion++;
-            showErrorToast(getLabel(languageCode, 'incorrect'));
-            setTimeout(() => {
-                hardcoreUserInput = '';
-                autocompleteRef?.focus();
-            }, 1500);
-=======
             hardcoreState.consecutiveCorrect++;
 
             // Gain life every HARDCORE_LIFE_REWARD_THRESHOLD consecutive correct (max HARDCORE_MAX_LIVES)
@@ -187,7 +153,6 @@
                     autocompleteRef?.focus();
                 }, 1500);
             }
->>>>>>> main
         }
     }
 
@@ -414,16 +379,6 @@
             />
         {:else}
             <!-- Quiz Header -->
-<<<<<<< HEAD
-            <QuizHeader
-                {languageCode}
-                gameMode={settings.gameMode}
-                {currentQuestion}
-                {totalQuestions}
-                {score}
-                {onBackToHub}
-            />
-=======
             <div class="quiz-header-row">
                 <QuizHeader
                     {languageCode}
@@ -438,7 +393,6 @@
                     <HardcoreLivesDisplay lives={hardcoreState.lives} />
                 {/if}
             </div>
->>>>>>> main
 
             {#if loading}
                 <div class="text-center py-12">
@@ -462,11 +416,7 @@
                                 on:click={changeDescription}
                                 class="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors"
                             >
-<<<<<<< HEAD
-                                {getLabel(languageCode, 'changeDescriptionBtn')}
-=======
                                 {getLabel(languageCode, 'description_changeDescriptionBtn')}
->>>>>>> main
                             </button>
                         </div>
                     {/if}

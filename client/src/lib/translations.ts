@@ -26,27 +26,12 @@ import { COMMON_LABELS } from './i18n/labels/common';
 import { QUIZ_LABELS } from './i18n/labels/quiz';
 import { SETTINGS_LABELS } from './i18n/labels/settings';
 import { CHALLENGE_LABELS } from './i18n/labels/challenge';
-<<<<<<< HEAD
-=======
 import { SPRITES_LABELS } from './i18n/labels/sprites';
->>>>>>> main
 
 /**
  * @deprecated Use getLabel() function instead
  */
 export const LABELS = {
-<<<<<<< HEAD
-    en: { ...COMMON_LABELS.en, ...QUIZ_LABELS.en, ...SETTINGS_LABELS.en, ...CHALLENGE_LABELS.en },
-    fr: { ...COMMON_LABELS.fr, ...QUIZ_LABELS.fr, ...SETTINGS_LABELS.fr, ...CHALLENGE_LABELS.fr },
-    de: { ...COMMON_LABELS.de, ...QUIZ_LABELS.de, ...SETTINGS_LABELS.de, ...CHALLENGE_LABELS.de },
-    es: { ...COMMON_LABELS.es, ...QUIZ_LABELS.es, ...SETTINGS_LABELS.es, ...CHALLENGE_LABELS.es },
-    it: { ...COMMON_LABELS.it, ...QUIZ_LABELS.it, ...SETTINGS_LABELS.it, ...CHALLENGE_LABELS.it },
-    'ja-hrkt': { ...COMMON_LABELS['ja-hrkt'], ...QUIZ_LABELS['ja-hrkt'], ...SETTINGS_LABELS['ja-hrkt'], ...CHALLENGE_LABELS['ja-hrkt'] },
-    ja: { ...COMMON_LABELS.ja, ...QUIZ_LABELS.ja, ...SETTINGS_LABELS.ja, ...CHALLENGE_LABELS.ja },
-    ko: { ...COMMON_LABELS.ko, ...QUIZ_LABELS.ko, ...SETTINGS_LABELS.ko, ...CHALLENGE_LABELS.ko },
-    'zh-hans': { ...COMMON_LABELS['zh-hans'], ...QUIZ_LABELS['zh-hans'], ...SETTINGS_LABELS['zh-hans'], ...CHALLENGE_LABELS['zh-hans'] },
-    'zh-hant': { ...COMMON_LABELS['zh-hant'], ...QUIZ_LABELS['zh-hant'], ...SETTINGS_LABELS['zh-hant'], ...CHALLENGE_LABELS['zh-hant'] }
-=======
     en: { ...COMMON_LABELS.en, ...QUIZ_LABELS.en, ...SETTINGS_LABELS.en, ...CHALLENGE_LABELS.en, ...SPRITES_LABELS.en },
     fr: { ...COMMON_LABELS.fr, ...QUIZ_LABELS.fr, ...SETTINGS_LABELS.fr, ...CHALLENGE_LABELS.fr, ...SPRITES_LABELS.fr },
     de: { ...COMMON_LABELS.de, ...QUIZ_LABELS.de, ...SETTINGS_LABELS.de, ...CHALLENGE_LABELS.de, ...SPRITES_LABELS.de },
@@ -57,5 +42,4 @@ export const LABELS = {
     ko: { ...COMMON_LABELS.ko, ...QUIZ_LABELS.ko, ...SETTINGS_LABELS.ko, ...CHALLENGE_LABELS.ko, ...SPRITES_LABELS.ko },
     'zh-hans': { ...COMMON_LABELS['zh-hans'], ...QUIZ_LABELS['zh-hans'], ...SETTINGS_LABELS['zh-hans'], ...CHALLENGE_LABELS['zh-hans'], ...SPRITES_LABELS['zh-hans'] },
     'zh-hant': { ...COMMON_LABELS['zh-hant'], ...QUIZ_LABELS['zh-hant'], ...SETTINGS_LABELS['zh-hant'], ...CHALLENGE_LABELS['zh-hant'], ...SPRITES_LABELS['zh-hant'] }
->>>>>>> main
 } as const;

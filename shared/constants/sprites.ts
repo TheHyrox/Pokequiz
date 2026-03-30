@@ -3,11 +3,8 @@
  * @description Centralized sprite URL generation for consistent usage across the app
  */
 
-<<<<<<< HEAD
-=======
 import type { SpriteType, SpriteSource } from '../types';
 
->>>>>>> main
 /**
  * @brief Base URL for PokeAPI sprites on GitHub
  */
@@ -22,13 +19,6 @@ export type SpriteVariant = 'default' | 'home' | 'official' | 'shiny';
  * @brief Sprite URL generator functions by variant
  */
 export const SPRITE_URLS = {
-<<<<<<< HEAD
-    /** Standard small sprite (96x96) */
-    DEFAULT: (id: number): string => `${SPRITE_BASE_URL}/${id}.png`,
-    /** High-quality Home artwork */
-    HOME: (id: number): string => `${SPRITE_BASE_URL}/other/home/${id}.png`,
-    /** Official Ken Sugimori artwork */
-=======
     /** Standard small sprite (96x96) - front view */
     DEFAULT: (id: number): string => `${SPRITE_BASE_URL}/${id}.png`,
     /** Standard small sprite (96x96) - back view */
@@ -36,7 +26,6 @@ export const SPRITE_URLS = {
     /** High-quality Home artwork (front only) */
     HOME: (id: number): string => `${SPRITE_BASE_URL}/other/home/${id}.png`,
     /** Official Ken Sugimori artwork (front only) */
->>>>>>> main
     OFFICIAL: (id: number): string => `${SPRITE_BASE_URL}/other/official-artwork/${id}.png`,
     /** Shiny variant sprite */
     SHINY: (id: number): string => `${SPRITE_BASE_URL}/shiny/${id}.png`
@@ -73,8 +62,6 @@ export function getSpriteUrl(id: number, variant: SpriteVariant = 'default'): st
 export function isValidPokemonId(id: number): boolean {
     return Number.isInteger(id) && id >= 1 && id <= 1025;
 }
-<<<<<<< HEAD
-=======
 
 /**
  * @brief Result of sprite URL resolution with fallback info
@@ -225,4 +212,3 @@ export async function getQuizSpriteUrlWithFallback(
         actualSource: 'default'
     };
 }
->>>>>>> main
