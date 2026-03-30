@@ -494,4 +494,9 @@
         margin: 0;
         padding: 0;
     }
+
+    .quiz-header-row {
+        @apply flex justify-between items-start mb-8 gap-8;
+    }
+
 </style>
