@@ -5,6 +5,7 @@
      */
     import Slider from './Slider.svelte';
     import ToggleOption from './ToggleOption.svelte';
+    import NumberStepper from './NumberStepper.svelte';
     import GameModeSelector from './quiz/GameModeSelector.svelte';
     import GenerationSelector from './quiz/GenerationSelector.svelte';
     import Toast from './Toast.svelte';
@@ -26,6 +27,7 @@
     let selectedGenerations: Set<number> = new Set(ALL_GENERATIONS);
     let truncateStrength: number = 0;
     let enableScramble: boolean = false;
+    let numberOfOptions: number = 4;
 
     // Toast state
     let toastState: ToastState = {
@@ -54,7 +56,8 @@
             changeDescription,
             selectedGenerations: Array.from(selectedGenerations),
             truncateStrength,
-            enableScramble
+            enableScramble,
+            numberOfOptions
         };
         onStartQuiz(finalSettings);
     }
@@ -130,6 +133,18 @@
                     />
                     <span class="toggle-label">{getLabel(languageCode, 'scrambleDescription')}</span>
                 </label>
+            </div>
+
+            <!-- Number of Pokemon Options Section -->
+            <div class="settings-section">
+                <h3 class="settings-section-title">{getLabel(languageCode, 'numberOfPokemonOptions') || 'Number of Options'}</h3>
+                <p class="section-description">{getLabel(languageCode, 'pokemonOptionsDescription') || 'Choose how many Pokemon options to display per question'}</p>
+                <NumberStepper
+                    label={getLabel(languageCode, 'pokemonOptions') || 'Options'}
+                    min={2}
+                    max={24}
+                    bind:value={numberOfOptions}
+                />
             </div>
         </div>
     </div>

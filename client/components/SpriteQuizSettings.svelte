@@ -5,6 +5,7 @@
      */
     import Slider from './Slider.svelte';
     import ToggleOption from './ToggleOption.svelte';
+    import NumberStepper from './NumberStepper.svelte';
     import GameModeSelector from './quiz/GameModeSelector.svelte';
     import GenerationSelector from './quiz/GenerationSelector.svelte';
     import SpriteTypeSelector from './quiz/SpriteTypeSelector.svelte';
@@ -29,6 +30,7 @@
     let selectedSpriteTypes: SpriteType[] = ['front'];
     let spriteSource: SpriteSource = 'home';
     let effects: SpriteEffectSettings = { ...DEFAULT_SPRITE_EFFECTS };
+    let numberOfOptions: number = 4;
 
     // Toast state
     let toastState: ToastState = {
@@ -62,7 +64,8 @@
             selectedGenerations: Array.from(selectedGenerations),
             selectedSpriteTypes,
             spriteSource,
-            effects
+            effects,
+            numberOfOptions
         };
         onStartQuiz(finalSettings);
     }
@@ -116,6 +119,18 @@
             <!-- Sprite Effects Selector -->
             <div class="settings-section">
                 <SpriteEffectsSelector {languageCode} bind:effects {spriteSource} {selectedSpriteTypes} />
+            </div>
+
+            <!-- Number of Pokemon Options Section -->
+            <div class="settings-section">
+                <h3 class="settings-section-title">{getLabel(languageCode, 'numberOfPokemonOptions') || 'Number of Options'}</h3>
+                <p class="section-description">{getLabel(languageCode, 'pokemonOptionsDescription') || 'Choose how many Pokemon options to display per question'}</p>
+                <NumberStepper
+                    label={getLabel(languageCode, 'pokemonOptions') || 'Options'}
+                    min={2}
+                    max={24}
+                    bind:value={numberOfOptions}
+                />
             </div>
         </div>
     </div>

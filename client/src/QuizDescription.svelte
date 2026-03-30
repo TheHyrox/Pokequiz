@@ -189,7 +189,7 @@
         errorCountThisQuestion = 0;
         hardcoreUserInput = '';
 
-        // Get 4 different random pokemon IDs
+        // Get unique random pokemon IDs based on numberOfOptions
         const selectedPokemon = new Set<number>();
         const pokemonIds: number[] = [];
 
@@ -200,8 +200,8 @@
         selectedPokemon.add(correctId);
         pokemonIds.push(correctId);
 
-        // Get 3 more random different pokemon
-        while (pokemonIds.length < 4) {
+        // Get remaining unique random pokemon
+        while (pokemonIds.length < settings.numberOfOptions) {
             const randomId = getRandomPokemonId(settings.selectedGenerations);
             if (!selectedPokemon.has(randomId)) {
                 selectedPokemon.add(randomId);
@@ -464,7 +464,7 @@
                         </div>
                     </div>
                 {:else}
-                    <div class="grid grid-cols-2 gap-6 md:grid-cols-4">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6">
                         {#each pokemonOptions as pokemon (pokemon.name)}
                             <Pokecard
                                 {pokemon}
