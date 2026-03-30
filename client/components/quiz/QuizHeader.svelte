@@ -22,12 +22,15 @@
     /** Callback when back button is clicked */
     export let onBackToHub: () => void;
 
+    /**
+     * @brief Get the quiz title with proper type casting
      */
     function getQuizTitle(): string {
         return getLabel(languageCode, quizTitleLabel as string);
     }
 </script>
 
+<div class="header">
     <div>
         <h1 class="title">Pokequiz - {getQuizTitle()}</h1>
         {#if gameMode === 'infinite'}
