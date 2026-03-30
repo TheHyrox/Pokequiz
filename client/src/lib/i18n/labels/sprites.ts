@@ -11,6 +11,7 @@ export const SPRITES_LABELS = {
         sprites_spriteType: 'Sprite Type',
         sprites_front: 'Front',
         sprites_back: 'Back',
+        sprites_backOnlyDefault: '(Only available with Default source)',
         sprites_spriteSourceHeader: 'Sprite Quality',
         sprites_spriteSourceDescription: 'Choose the sprite style/quality',
         sprites_spriteSource: 'Sprite Source',
@@ -25,6 +26,7 @@ export const SPRITES_LABELS = {
         sprites_pixelateStrength: 'Pixelate Strength',
         sprites_silhouetteEffect: 'Silhouette (Black)',
         sprites_rotationEffect: 'Random Rotation',
+        sprites_recommended: 'Recommended',
         sprites_selectAtLeastOneSpriteType: 'Please select at least one sprite type'
     },
     fr: {
@@ -34,6 +36,7 @@ export const SPRITES_LABELS = {
         sprites_spriteType: 'Type de Sprite',
         sprites_front: 'Avant',
         sprites_back: 'Arrière',
+        sprites_backOnlyDefault: '(Disponible uniquement avec la source Défaut)',
         sprites_spriteSourceHeader: 'Qualité des Sprites',
         sprites_spriteSourceDescription: 'Choisissez le style/la qualité du sprite',
         sprites_spriteSource: 'Source de Sprite',
@@ -47,8 +50,7 @@ export const SPRITES_LABELS = {
         sprites_pixelateEffect: 'Effet de Pixelisation',
         sprites_pixelateStrength: 'Force de Pixelisation',
         sprites_silhouetteEffect: 'Silhouette (Noir)',
-        sprites_rotationEffect: 'Rotation Aléatoire',
-        sprites_selectAtLeastOneSpriteType: 'Veuillez sélectionner au moins un type de sprite'
+        sprites_rotationEffect: 'Rotation Aléatoire',        sprites_recommended: 'Recommandé',        sprites_selectAtLeastOneSpriteType: 'Veuillez sélectionner au moins un type de sprite'
     },
     de: {
         sprites_spriteSettings: 'Sprite-Einstellungen',
@@ -57,6 +59,7 @@ export const SPRITES_LABELS = {
         sprites_spriteType: 'Sprite-Typ',
         sprites_front: 'Vorne',
         sprites_back: 'Rückseite',
+        sprites_backOnlyDefault: '(Nur mit Standardquelle verfügbar)',
         sprites_spriteSourceHeader: 'Sprite-Qualität',
         sprites_spriteSourceDescription: 'Wählen Sie Sprite-Stil/-Qualität',
         sprites_spriteSource: 'Sprite-Quelle',
@@ -70,8 +73,7 @@ export const SPRITES_LABELS = {
         sprites_pixelateEffect: 'Pixelierungseffekt',
         sprites_pixelateStrength: 'Pixelierungsstärke',
         sprites_silhouetteEffect: 'Silhouette (Schwarz)',
-        sprites_rotationEffect: 'Zufällige Rotation',
-        sprites_selectAtLeastOneSpriteType: 'Bitte wählen Sie mindestens einen Sprite-Typ aus'
+        sprites_rotationEffect: 'Zufällige Rotation',        sprites_recommended: 'Empfohlen',        sprites_selectAtLeastOneSpriteType: 'Bitte wählen Sie mindestens einen Sprite-Typ aus'
     },
     es: {
         sprites_spriteSettings: 'Configuración de Sprites',
@@ -80,6 +82,7 @@ export const SPRITES_LABELS = {
         sprites_spriteType: 'Tipo de Sprite',
         sprites_front: 'Frente',
         sprites_back: 'Atrás',
+        sprites_backOnlyDefault: '(Solo disponible con fuente Predeterminada)',
         sprites_spriteSourceHeader: 'Calidad del Sprite',
         sprites_spriteSourceDescription: 'Elige el estilo/calidad del sprite',
         sprites_spriteSource: 'Fuente de Sprite',
@@ -93,8 +96,7 @@ export const SPRITES_LABELS = {
         sprites_pixelateEffect: 'Efecto de Pixelación',
         sprites_pixelateStrength: 'Fuerza de Pixelación',
         sprites_silhouetteEffect: 'Silueta (Negro)',
-        sprites_rotationEffect: 'Rotación Aleatoria',
-        sprites_selectAtLeastOneSpriteType: 'Por favor selecciona al menos un tipo de sprite'
+        sprites_rotationEffect: 'Rotación Aleatoria',        sprites_recommended: 'Recomendado',        sprites_selectAtLeastOneSpriteType: 'Por favor selecciona al menos un tipo de sprite'
     },
     it: {
         sprites_spriteSettings: 'Impostazioni Sprite',
@@ -103,6 +105,7 @@ export const SPRITES_LABELS = {
         sprites_spriteType: 'Tipo Sprite',
         sprites_front: 'Fronte',
         sprites_back: 'Retro',
+        sprites_backOnlyDefault: '(Disponibile solo con fonte Predefinito)',
         sprites_spriteSourceHeader: 'Qualità Sprite',
         sprites_spriteSourceDescription: 'Scegli lo stile/qualità dello sprite',
         sprites_spriteSource: 'Fonte Sprite',
@@ -116,8 +119,7 @@ export const SPRITES_LABELS = {
         sprites_pixelateEffect: 'Effetto Pixelazione',
         sprites_pixelateStrength: 'Forza Pixelazione',
         sprites_silhouetteEffect: 'Silhouetta (Nero)',
-        sprites_rotationEffect: 'Rotazione Casuale',
-        sprites_selectAtLeastOneSpriteType: 'Per favore seleziona almeno un tipo di sprite'
+        sprites_rotationEffect: 'Rotazione Casuale',        sprites_recommended: 'Consigliato',        sprites_selectAtLeastOneSpriteType: 'Per favore seleziona almeno un tipo di sprite'
     },
     'ja-hrkt': {
         sprites_spriteSettings: 'すぷらいと せってい',
@@ -126,6 +128,7 @@ export const SPRITES_LABELS = {
         sprites_spriteType: 'すぷらいと たいぷ',
         sprites_front: 'まえ',
         sprites_back: 'うしろ',
+        sprites_backOnlyDefault: '(ふりそでふと げんいん の みで りようかのう)',
         sprites_spriteSourceHeader: 'すぷらいと くおりてぃ',
         sprites_spriteSourceDescription: 'すぷらいと すたいる をえらぶ',
         sprites_spriteSource: 'すぷらいと げんいん',
@@ -139,8 +142,7 @@ export const SPRITES_LABELS = {
         sprites_pixelateEffect: 'ぴくせる えふぇくと',
         sprites_pixelateStrength: 'ぴくせる きょうど',
         sprites_silhouetteEffect: 'しるえっと (くろ)',
-        sprites_rotationEffect: 'らんだむ かいてん',
-        sprites_selectAtLeastOneSpriteType: 'すぷらいと たいぷ を せんたく してください'
+        sprites_rotationEffect: 'らんだむ かいてん',        sprites_recommended: 'すいせん',        sprites_selectAtLeastOneSpriteType: 'すぷらいと たいぷ を せんたく してください'
     },
     ja: {
         sprites_spriteSettings: 'スプライト設定',
@@ -149,6 +151,7 @@ export const SPRITES_LABELS = {
         sprites_spriteType: 'スプライトタイプ',
         sprites_front: '前',
         sprites_back: '後ろ',
+        sprites_backOnlyDefault: '(デフォルトソースでのみ利用可能)',
         sprites_spriteSourceHeader: 'スプライト品質',
         sprites_spriteSourceDescription: 'スプライトスタイルを選択',
         sprites_spriteSource: 'スプライト源',
@@ -162,8 +165,7 @@ export const SPRITES_LABELS = {
         sprites_pixelateEffect: 'ピクセルエフェクト',
         sprites_pixelateStrength: 'ピクセル化の強さ',
         sprites_silhouetteEffect: 'シルエット (黒)',
-        sprites_rotationEffect: 'ランダム回転',
-        sprites_selectAtLeastOneSpriteType: 'スプライトタイプを少なくとも1つ選択してください'
+        sprites_rotationEffect: 'ランダム回転',        sprites_recommended: '推奨',        sprites_selectAtLeastOneSpriteType: 'スプライトタイプを少なくとも1つ選択してください'
     },
     ko: {
         sprites_spriteSettings: '스프라이트 설정',
@@ -172,6 +174,7 @@ export const SPRITES_LABELS = {
         sprites_spriteType: '스프라이트 유형',
         sprites_front: '앞',
         sprites_back: '뒤',
+        sprites_backOnlyDefault: '(기본값 소스에서만 사용 가능)',
         sprites_spriteSourceHeader: '스프라이트 품질',
         sprites_spriteSourceDescription: '스프라이트 스타일 선택',
         sprites_spriteSource: '스프라이트 소스',
@@ -185,8 +188,7 @@ export const SPRITES_LABELS = {
         sprites_pixelateEffect: '픽셀화 효과',
         sprites_pixelateStrength: '픽셀화 강도',
         sprites_silhouetteEffect: '실루엣 (검정)',
-        sprites_rotationEffect: '무작위 회전',
-        sprites_selectAtLeastOneSpriteType: '스프라이트 유형을 최소 하나 선택하세요'
+        sprites_rotationEffect: '무작위 회전',        sprites_recommended: '권장',        sprites_selectAtLeastOneSpriteType: '스프라이트 유형을 최소 하나 선택하세요'
     },
     'zh-hans': {
         sprites_spriteSettings: '精灵图设置',
@@ -195,6 +197,7 @@ export const SPRITES_LABELS = {
         sprites_spriteType: '精灵图类型',
         sprites_front: '正面',
         sprites_back: '背面',
+        sprites_backOnlyDefault: '(仅在默认源可用)',
         sprites_spriteSourceHeader: '精灵图质量',
         sprites_spriteSourceDescription: '选择精灵图风格',
         sprites_spriteSource: '精灵图来源',
@@ -208,8 +211,7 @@ export const SPRITES_LABELS = {
         sprites_pixelateEffect: '像素化效果',
         sprites_pixelateStrength: '像素化强度',
         sprites_silhouetteEffect: '剪影 (黑色)',
-        sprites_rotationEffect: '随机旋转',
-        sprites_selectAtLeastOneSpriteType: '请至少选择一个精灵图类型'
+        sprites_rotationEffect: '随机旋转',        sprites_recommended: '推荐',        sprites_selectAtLeastOneSpriteType: '请至少选择一个精灵图类型'
     },
     'zh-hant': {
         sprites_spriteSettings: '精靈圖設置',
@@ -218,6 +220,7 @@ export const SPRITES_LABELS = {
         sprites_spriteType: '精靈圖類型',
         sprites_front: '正面',
         sprites_back: '背面',
+        sprites_backOnlyDefault: '(僅在預設來源可用)',
         sprites_spriteSourceHeader: '精靈圖質量',
         sprites_spriteSourceDescription: '選擇精靈圖風格',
         sprites_spriteSource: '精靈圖來源',
@@ -231,8 +234,7 @@ export const SPRITES_LABELS = {
         sprites_pixelateEffect: '像素化效果',
         sprites_pixelateStrength: '像素化強度',
         sprites_silhouetteEffect: '剪影 (黑色)',
-        sprites_rotationEffect: '隨機旋轉',
-        sprites_selectAtLeastOneSpriteType: '請至少選擇一個精靈圖類型'
+        sprites_rotationEffect: '隨機旋轉',        sprites_recommended: '推薦',        sprites_selectAtLeastOneSpriteType: '請至少選擇一個精靈圖類型'
     }
 };
 
