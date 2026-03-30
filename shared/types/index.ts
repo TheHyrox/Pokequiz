@@ -48,7 +48,7 @@ export type GameMode = 'score' | 'infinite' | 'challenge' | 'hardcore';
  * @brief Quiz game settings configuration
  * @description All customizable options for a quiz session
  */
-export interface QuizSettings {
+export interface DescriptionQuizSettings {
     /** Whether time limit is enabled */
     hasTimeLimit: boolean;
     /** Time limit per question in seconds */
