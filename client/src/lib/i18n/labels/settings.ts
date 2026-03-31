@@ -35,7 +35,22 @@ export const SETTINGS_LABELS = {
         numberOfPokemonOptions: 'Number of Options',
         pokemonOptionsDescription: 'Choose how many Pokemon options to display per question',
         pokemonOptions: 'Options',
-        selectAtLeastOneGeneration: 'Please select at least one generation'
+        selectAtLeastOneGeneration: 'Please select at least one generation',
+        pointsCalculation: 'Points Calculation',
+        easyFirstTry: 'First try: 3 points',
+        easySecondTry: 'Second try: 1 point',
+        easyThirdPlus: 'Third+ try: 0 points',
+        normalBase: 'Base: 5 points',
+        normalPenalty: '-1 per wrong try',
+        normalMinimum: 'Minimum: 0 points',
+        challengeConsecutive: '10 consecutive questions',
+        challengeAlwaysProgress: 'Always progress',
+        challengeScoreShown: 'Score shown only at end',
+        hardcoreTimePerQuestion: '30 sec per question',
+        hardcoreUnder2Seconds: 'Used in < 2s: 10 pts',
+        hardcoreUnder5Seconds: 'Used in < 5s: 5 pts',
+        hardcoreUnder15Seconds: 'Used in < 15s: 3 pts',
+        hardcoreLives: '3 lives limit'
     },
     fr: {
         gameSettings: 'Paramètres de Jeu',

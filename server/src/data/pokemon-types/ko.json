@@ -1,0 +1,107 @@
+{
+  "1": {
+    "id": 1,
+    "name": "normal",
+    "localizedName": "노말"
+  },
+  "2": {
+    "id": 2,
+    "name": "fighting",
+    "localizedName": "격투"
+  },
+  "3": {
+    "id": 3,
+    "name": "flying",
+    "localizedName": "비행"
+  },
+  "4": {
+    "id": 4,
+    "name": "poison",
+    "localizedName": "독"
+  },
+  "5": {
+    "id": 5,
+    "name": "ground",
+    "localizedName": "땅"
+  },
+  "6": {
+    "id": 6,
+    "name": "rock",
+    "localizedName": "바위"
+  },
+  "7": {
+    "id": 7,
+    "name": "bug",
+    "localizedName": "벌레"
+  },
+  "8": {
+    "id": 8,
+    "name": "ghost",
+    "localizedName": "고스트"
+  },
+  "9": {
+    "id": 9,
+    "name": "steel",
+    "localizedName": "강철"
+  },
+  "10": {
+    "id": 10,
+    "name": "fire",
+    "localizedName": "불꽃"
+  },
+  "11": {
+    "id": 11,
+    "name": "water",
+    "localizedName": "물"
+  },
+  "12": {
+    "id": 12,
+    "name": "grass",
+    "localizedName": "풀"
+  },
+  "13": {
+    "id": 13,
+    "name": "electric",
+    "localizedName": "전기"
+  },
+  "14": {
+    "id": 14,
+    "name": "psychic",
+    "localizedName": "에스퍼"
+  },
+  "15": {
+    "id": 15,
+    "name": "ice",
+    "localizedName": "얼음"
+  },
+  "16": {
+    "id": 16,
+    "name": "dragon",
+    "localizedName": "드래곤"
+  },
+  "17": {
+    "id": 17,
+    "name": "dark",
+    "localizedName": "악"
+  },
+  "18": {
+    "id": 18,
+    "name": "fairy",
+    "localizedName": "페어리"
+  },
+  "19": {
+    "id": 19,
+    "name": "stellar",
+    "localizedName": " 스텔라"
+  },
+  "10001": {
+    "id": 10001,
+    "name": "unknown",
+    "localizedName": "???"
+  },
+  "10002": {
+    "id": 10002,
+    "name": "shadow",
+    "localizedName": "다크"
+  }
+}

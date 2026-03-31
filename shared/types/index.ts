@@ -212,3 +212,82 @@ export interface SpriteChallengeQuestion {
     /** Whether the user answered correctly */
     isCorrect: boolean;
 }
+
+// ============================================================
+// INFORMATION QUIZ TYPES
+// ============================================================
+
+/**
+ * @brief Available information types for information quiz
+ * @description Types of Pokemon attributes that can be displayed as hints
+ */
+export type InformationType = 'weight' | 'height' | 'abilities' | 'eggGroup' | 'generation' | 'shape' | 'color' | 'types';
+
+/**
+ * @brief Game mode for information quiz
+ * @description Controls hint reveal strategy and scoring
+ */
+export type InformationGameMode = 'easy' | 'normal' | 'challenge' | 'hardcore';
+
+/**
+ * @brief Information quiz game settings configuration
+ * @description All customizable options for an information quiz session
+ */
+export interface InformationQuizSettings {
+    /** Whether time limit is enabled (mandatory in hardcore) */
+    hasTimeLimit: boolean;
+    /** Time limit per question in seconds */
+    timeLimit: number;
+    /** Selected game mode */
+    gameMode: InformationGameMode;
+    /** Array of selected generation numbers (1-9) */
+    selectedGenerations: number[];
+    /** Selected information types to display (minimum 3) */
+    selectedInformations: InformationType[];
+    /** Number of Pokemon options to display */
+    numberOfOptions: number;
+    /** Show sprites on pokemon cards */
+    showSprites: boolean;
+    /** Enable fake information in hints */
+    enableFakeInformation: boolean;
+    /** Percentage of fake information (1-100) */
+    fakeInformationRate: number;
+}
+
+/**
+ * @brief Information hint for a question
+ * @description Single piece of information about a Pokemon
+ */
+export interface InformationHint {
+    /** Type of information */
+    type: InformationType;
+    /** The actual hint value */
+    value: string;
+    /** Whether this hint is fake/misleading */
+    isFake: boolean;
+    /** Order in which hint was revealed */
+    revealOrder: number;
+}
+
+/**
+ * @brief Challenge question for information quiz
+ * @description Stores question data for end-of-quiz review (information version)
+ */
+export interface InformationChallengeQuestion {
+    /** Question number (1-10) */
+    questionNumber: number;
+    /** Hints that were shown */
+    revealedHints: InformationHint[];
+    /** Correct Pokemon name */
+    correctPokemonName: string;
+    /** Correct Pokemon ID */
+    correctPokemonId: number;
+    /** ID of user's selected Pokemon */
+    userAnswerId: number;
+    /** Name of user's selected Pokemon */
+    userAnswerName: string;
+    /** All available options for this question */
+    allOptions: PokemonOption[];
+    /** Whether the user answered correctly */
+    isCorrect: boolean;
+}

@@ -3,7 +3,7 @@
  * @description Single source of truth for languages, generations, and configuration
  */
 
-import type { Language, GenerationRange, SpriteEffectSettings, SpriteQuizSettings, HardcoreModeState } from '../types';
+import type { Language, GenerationRange, SpriteEffectSettings, SpriteQuizSettings, HardcoreModeState, InformationQuizSettings } from '../types';
 
 /**
  * @brief Supported languages with PokeAPI IDs
@@ -153,6 +153,48 @@ export const DEFAULT_SPRITE_QUIZ_SETTINGS: SpriteQuizSettings = {
     spriteSource: 'home',
     effects: { ...DEFAULT_SPRITE_EFFECTS },
     numberOfOptions: 4
+};
+
+// ============================================================
+// INFORMATION QUIZ CONSTANTS
+// ============================================================
+
+/**
+ * @brief All available information types
+ */
+export const ALL_INFORMATION_TYPES: import('../types').InformationType[] = [
+    'weight',
+    'height',
+    'abilities',
+    'eggGroup',
+    'generation',
+    'shape',
+    'color',
+    'types'
+];
+
+/**
+ * @brief Default information values (first 3 selected)
+ */
+export const DEFAULT_INFORMATION_TYPES: import('../types').InformationType[] = [
+    'types',
+    'generation',
+    'abilities'
+];
+
+/**
+ * @brief Default information quiz settings
+ */
+export const DEFAULT_INFORMATION_QUIZ_SETTINGS: import('../types').InformationQuizSettings = {
+    hasTimeLimit: false,
+    timeLimit: 30,
+    gameMode: 'easy',
+    selectedGenerations: [...ALL_GENERATIONS],
+    selectedInformations: [...DEFAULT_INFORMATION_TYPES],
+    numberOfOptions: 10,
+    showSprites: false,
+    enableFakeInformation: false,
+    fakeInformationRate: 5
 };
 
 // ============================================================

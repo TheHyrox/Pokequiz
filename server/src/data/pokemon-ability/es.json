@@ -1,0 +1,1537 @@
+{
+  "1": {
+    "id": 1,
+    "name": "stench",
+    "localizedName": "Hedor"
+  },
+  "2": {
+    "id": 2,
+    "name": "drizzle",
+    "localizedName": "Llovizna"
+  },
+  "3": {
+    "id": 3,
+    "name": "speed-boost",
+    "localizedName": "Impulso"
+  },
+  "4": {
+    "id": 4,
+    "name": "battle-armor",
+    "localizedName": "Armadura Batalla"
+  },
+  "5": {
+    "id": 5,
+    "name": "sturdy",
+    "localizedName": "Robustez"
+  },
+  "6": {
+    "id": 6,
+    "name": "damp",
+    "localizedName": "Humedad"
+  },
+  "7": {
+    "id": 7,
+    "name": "limber",
+    "localizedName": "Flexibilidad"
+  },
+  "8": {
+    "id": 8,
+    "name": "sand-veil",
+    "localizedName": "Velo Arena"
+  },
+  "9": {
+    "id": 9,
+    "name": "static",
+    "localizedName": "Elec. Estática"
+  },
+  "10": {
+    "id": 10,
+    "name": "volt-absorb",
+    "localizedName": "Absorbe Elec"
+  },
+  "11": {
+    "id": 11,
+    "name": "water-absorb",
+    "localizedName": "Absorbe Agua"
+  },
+  "12": {
+    "id": 12,
+    "name": "oblivious",
+    "localizedName": "Despiste"
+  },
+  "13": {
+    "id": 13,
+    "name": "cloud-nine",
+    "localizedName": "Aclimatación"
+  },
+  "14": {
+    "id": 14,
+    "name": "compound-eyes",
+    "localizedName": "Ojo Compuesto"
+  },
+  "15": {
+    "id": 15,
+    "name": "insomnia",
+    "localizedName": "Insomnio"
+  },
+  "16": {
+    "id": 16,
+    "name": "color-change",
+    "localizedName": "Cambio Color"
+  },
+  "17": {
+    "id": 17,
+    "name": "immunity",
+    "localizedName": "Inmunidad"
+  },
+  "18": {
+    "id": 18,
+    "name": "flash-fire",
+    "localizedName": "Absorbe Fuego"
+  },
+  "19": {
+    "id": 19,
+    "name": "shield-dust",
+    "localizedName": "Polvo Escudo"
+  },
+  "20": {
+    "id": 20,
+    "name": "own-tempo",
+    "localizedName": "Ritmo Propio"
+  },
+  "21": {
+    "id": 21,
+    "name": "suction-cups",
+    "localizedName": "Ventosas"
+  },
+  "22": {
+    "id": 22,
+    "name": "intimidate",
+    "localizedName": "Intimidación"
+  },
+  "23": {
+    "id": 23,
+    "name": "shadow-tag",
+    "localizedName": "Sombra Trampa"
+  },
+  "24": {
+    "id": 24,
+    "name": "rough-skin",
+    "localizedName": "Piel Tosca"
+  },
+  "25": {
+    "id": 25,
+    "name": "wonder-guard",
+    "localizedName": "Superguarda"
+  },
+  "26": {
+    "id": 26,
+    "name": "levitate",
+    "localizedName": "Levitación"
+  },
+  "27": {
+    "id": 27,
+    "name": "effect-spore",
+    "localizedName": "Efecto Espora"
+  },
+  "28": {
+    "id": 28,
+    "name": "synchronize",
+    "localizedName": "Sincronía"
+  },
+  "29": {
+    "id": 29,
+    "name": "clear-body",
+    "localizedName": "Cuerpo Puro"
+  },
+  "30": {
+    "id": 30,
+    "name": "natural-cure",
+    "localizedName": "Cura Natural"
+  },
+  "31": {
+    "id": 31,
+    "name": "lightning-rod",
+    "localizedName": "Pararrayos"
+  },
+  "32": {
+    "id": 32,
+    "name": "serene-grace",
+    "localizedName": "Dicha"
+  },
+  "33": {
+    "id": 33,
+    "name": "swift-swim",
+    "localizedName": "Nado Rápido"
+  },
+  "34": {
+    "id": 34,
+    "name": "chlorophyll",
+    "localizedName": "Clorofila"
+  },
+  "35": {
+    "id": 35,
+    "name": "illuminate",
+    "localizedName": "Iluminación"
+  },
+  "36": {
+    "id": 36,
+    "name": "trace",
+    "localizedName": "Rastro"
+  },
+  "37": {
+    "id": 37,
+    "name": "huge-power",
+    "localizedName": "Potencia"
+  },
+  "38": {
+    "id": 38,
+    "name": "poison-point",
+    "localizedName": "Punto Tóxico"
+  },
+  "39": {
+    "id": 39,
+    "name": "inner-focus",
+    "localizedName": "Foco Interno"
+  },
+  "40": {
+    "id": 40,
+    "name": "magma-armor",
+    "localizedName": "Escudo Magma"
+  },
+  "41": {
+    "id": 41,
+    "name": "water-veil",
+    "localizedName": "Velo Agua"
+  },
+  "42": {
+    "id": 42,
+    "name": "magnet-pull",
+    "localizedName": "Imán"
+  },
+  "43": {
+    "id": 43,
+    "name": "soundproof",
+    "localizedName": "Insonorizar"
+  },
+  "44": {
+    "id": 44,
+    "name": "rain-dish",
+    "localizedName": "Cura Lluvia"
+  },
+  "45": {
+    "id": 45,
+    "name": "sand-stream",
+    "localizedName": "Chorro Arena"
+  },
+  "46": {
+    "id": 46,
+    "name": "pressure",
+    "localizedName": "Presión"
+  },
+  "47": {
+    "id": 47,
+    "name": "thick-fat",
+    "localizedName": "Sebo"
+  },
+  "48": {
+    "id": 48,
+    "name": "early-bird",
+    "localizedName": "Madrugar"
+  },
+  "49": {
+    "id": 49,
+    "name": "flame-body",
+    "localizedName": "Cuerpo Llama"
+  },
+  "50": {
+    "id": 50,
+    "name": "run-away",
+    "localizedName": "Fuga"
+  },
+  "51": {
+    "id": 51,
+    "name": "keen-eye",
+    "localizedName": "Vista Lince"
+  },
+  "52": {
+    "id": 52,
+    "name": "hyper-cutter",
+    "localizedName": "Corte Fuerte"
+  },
+  "53": {
+    "id": 53,
+    "name": "pickup",
+    "localizedName": "Recogida"
+  },
+  "54": {
+    "id": 54,
+    "name": "truant",
+    "localizedName": "Ausente"
+  },
+  "55": {
+    "id": 55,
+    "name": "hustle",
+    "localizedName": "Entusiasmo"
+  },
+  "56": {
+    "id": 56,
+    "name": "cute-charm",
+    "localizedName": "Gran Encanto"
+  },
+  "57": {
+    "id": 57,
+    "name": "plus",
+    "localizedName": "Más"
+  },
+  "58": {
+    "id": 58,
+    "name": "minus",
+    "localizedName": "Menos"
+  },
+  "59": {
+    "id": 59,
+    "name": "forecast",
+    "localizedName": "Predicción"
+  },
+  "60": {
+    "id": 60,
+    "name": "sticky-hold",
+    "localizedName": "Viscosidad"
+  },
+  "61": {
+    "id": 61,
+    "name": "shed-skin",
+    "localizedName": "Mudar"
+  },
+  "62": {
+    "id": 62,
+    "name": "guts",
+    "localizedName": "Agallas"
+  },
+  "63": {
+    "id": 63,
+    "name": "marvel-scale",
+    "localizedName": "Escama Especial"
+  },
+  "64": {
+    "id": 64,
+    "name": "liquid-ooze",
+    "localizedName": "Lodo Líquido"
+  },
+  "65": {
+    "id": 65,
+    "name": "overgrow",
+    "localizedName": "Espesura"
+  },
+  "66": {
+    "id": 66,
+    "name": "blaze",
+    "localizedName": "Mar Llamas"
+  },
+  "67": {
+    "id": 67,
+    "name": "torrent",
+    "localizedName": "Torrente"
+  },
+  "68": {
+    "id": 68,
+    "name": "swarm",
+    "localizedName": "Enjambre"
+  },
+  "69": {
+    "id": 69,
+    "name": "rock-head",
+    "localizedName": "Cabeza Roca"
+  },
+  "70": {
+    "id": 70,
+    "name": "drought",
+    "localizedName": "Sequía"
+  },
+  "71": {
+    "id": 71,
+    "name": "arena-trap",
+    "localizedName": "Trampa Arena"
+  },
+  "72": {
+    "id": 72,
+    "name": "vital-spirit",
+    "localizedName": "Espíritu Vital"
+  },
+  "73": {
+    "id": 73,
+    "name": "white-smoke",
+    "localizedName": "Humo Blanco"
+  },
+  "74": {
+    "id": 74,
+    "name": "pure-power",
+    "localizedName": "Energía Pura"
+  },
+  "75": {
+    "id": 75,
+    "name": "shell-armor",
+    "localizedName": "Caparazón"
+  },
+  "76": {
+    "id": 76,
+    "name": "air-lock",
+    "localizedName": "Bucle Aire"
+  },
+  "77": {
+    "id": 77,
+    "name": "tangled-feet",
+    "localizedName": "Tumbos"
+  },
+  "78": {
+    "id": 78,
+    "name": "motor-drive",
+    "localizedName": "Electromotor"
+  },
+  "79": {
+    "id": 79,
+    "name": "rivalry",
+    "localizedName": "Rivalidad"
+  },
+  "80": {
+    "id": 80,
+    "name": "steadfast",
+    "localizedName": "Impasible"
+  },
+  "81": {
+    "id": 81,
+    "name": "snow-cloak",
+    "localizedName": "Manto Níveo"
+  },
+  "82": {
+    "id": 82,
+    "name": "gluttony",
+    "localizedName": "Gula"
+  },
+  "83": {
+    "id": 83,
+    "name": "anger-point",
+    "localizedName": "Irascible"
+  },
+  "84": {
+    "id": 84,
+    "name": "unburden",
+    "localizedName": "Liviano"
+  },
+  "85": {
+    "id": 85,
+    "name": "heatproof",
+    "localizedName": "Ignífugo"
+  },
+  "86": {
+    "id": 86,
+    "name": "simple",
+    "localizedName": "Simple"
+  },
+  "87": {
+    "id": 87,
+    "name": "dry-skin",
+    "localizedName": "Piel Seca"
+  },
+  "88": {
+    "id": 88,
+    "name": "download",
+    "localizedName": "Descarga"
+  },
+  "89": {
+    "id": 89,
+    "name": "iron-fist",
+    "localizedName": "Puño Férreo"
+  },
+  "90": {
+    "id": 90,
+    "name": "poison-heal",
+    "localizedName": "Antídoto"
+  },
+  "91": {
+    "id": 91,
+    "name": "adaptability",
+    "localizedName": "Adaptable"
+  },
+  "92": {
+    "id": 92,
+    "name": "skill-link",
+    "localizedName": "Encadenado"
+  },
+  "93": {
+    "id": 93,
+    "name": "hydration",
+    "localizedName": "Hidratación"
+  },
+  "94": {
+    "id": 94,
+    "name": "solar-power",
+    "localizedName": "Poder Solar"
+  },
+  "95": {
+    "id": 95,
+    "name": "quick-feet",
+    "localizedName": "Pies Rápidos"
+  },
+  "96": {
+    "id": 96,
+    "name": "normalize",
+    "localizedName": "Normalidad"
+  },
+  "97": {
+    "id": 97,
+    "name": "sniper",
+    "localizedName": "Francotirador"
+  },
+  "98": {
+    "id": 98,
+    "name": "magic-guard",
+    "localizedName": "Muro Mágico"
+  },
+  "99": {
+    "id": 99,
+    "name": "no-guard",
+    "localizedName": "Indefenso"
+  },
+  "100": {
+    "id": 100,
+    "name": "stall",
+    "localizedName": "Rezagado"
+  },
+  "101": {
+    "id": 101,
+    "name": "technician",
+    "localizedName": "Experto"
+  },
+  "102": {
+    "id": 102,
+    "name": "leaf-guard",
+    "localizedName": "Defensa Hoja"
+  },
+  "103": {
+    "id": 103,
+    "name": "klutz",
+    "localizedName": "Zoquete"
+  },
+  "104": {
+    "id": 104,
+    "name": "mold-breaker",
+    "localizedName": "Rompemoldes"
+  },
+  "105": {
+    "id": 105,
+    "name": "super-luck",
+    "localizedName": "Afortunado"
+  },
+  "106": {
+    "id": 106,
+    "name": "aftermath",
+    "localizedName": "Detonación"
+  },
+  "107": {
+    "id": 107,
+    "name": "anticipation",
+    "localizedName": "Anticipación"
+  },
+  "108": {
+    "id": 108,
+    "name": "forewarn",
+    "localizedName": "Alerta"
+  },
+  "109": {
+    "id": 109,
+    "name": "unaware",
+    "localizedName": "Ignorante"
+  },
+  "110": {
+    "id": 110,
+    "name": "tinted-lens",
+    "localizedName": "Cromolente"
+  },
+  "111": {
+    "id": 111,
+    "name": "filter",
+    "localizedName": "Filtro"
+  },
+  "112": {
+    "id": 112,
+    "name": "slow-start",
+    "localizedName": "Inicio Lento"
+  },
+  "113": {
+    "id": 113,
+    "name": "scrappy",
+    "localizedName": "Intrépido"
+  },
+  "114": {
+    "id": 114,
+    "name": "storm-drain",
+    "localizedName": "Colector"
+  },
+  "115": {
+    "id": 115,
+    "name": "ice-body",
+    "localizedName": "Gélido"
+  },
+  "116": {
+    "id": 116,
+    "name": "solid-rock",
+    "localizedName": "Roca Sólida"
+  },
+  "117": {
+    "id": 117,
+    "name": "snow-warning",
+    "localizedName": "Nevada"
+  },
+  "118": {
+    "id": 118,
+    "name": "honey-gather",
+    "localizedName": "Recogemiel"
+  },
+  "119": {
+    "id": 119,
+    "name": "frisk",
+    "localizedName": "Cacheo"
+  },
+  "120": {
+    "id": 120,
+    "name": "reckless",
+    "localizedName": "Audaz"
+  },
+  "121": {
+    "id": 121,
+    "name": "multitype",
+    "localizedName": "Multitipo"
+  },
+  "122": {
+    "id": 122,
+    "name": "flower-gift",
+    "localizedName": "Don Floral"
+  },
+  "123": {
+    "id": 123,
+    "name": "bad-dreams",
+    "localizedName": "Mal Sueño"
+  },
+  "124": {
+    "id": 124,
+    "name": "pickpocket",
+    "localizedName": "Hurto"
+  },
+  "125": {
+    "id": 125,
+    "name": "sheer-force",
+    "localizedName": "Potencia Bruta"
+  },
+  "126": {
+    "id": 126,
+    "name": "contrary",
+    "localizedName": "Respondón"
+  },
+  "127": {
+    "id": 127,
+    "name": "unnerve",
+    "localizedName": "Nerviosismo"
+  },
+  "128": {
+    "id": 128,
+    "name": "defiant",
+    "localizedName": "Competitivo"
+  },
+  "129": {
+    "id": 129,
+    "name": "defeatist",
+    "localizedName": "Flaqueza"
+  },
+  "130": {
+    "id": 130,
+    "name": "cursed-body",
+    "localizedName": "Cuerpo Maldito"
+  },
+  "131": {
+    "id": 131,
+    "name": "healer",
+    "localizedName": "Alma Cura"
+  },
+  "132": {
+    "id": 132,
+    "name": "friend-guard",
+    "localizedName": "Compiescolta"
+  },
+  "133": {
+    "id": 133,
+    "name": "weak-armor",
+    "localizedName": "Armadura Frágil"
+  },
+  "134": {
+    "id": 134,
+    "name": "heavy-metal",
+    "localizedName": "Metal Pesado"
+  },
+  "135": {
+    "id": 135,
+    "name": "light-metal",
+    "localizedName": "Metal Liviano"
+  },
+  "136": {
+    "id": 136,
+    "name": "multiscale",
+    "localizedName": "Multiescamas"
+  },
+  "137": {
+    "id": 137,
+    "name": "toxic-boost",
+    "localizedName": "Ímpetu Tóxico"
+  },
+  "138": {
+    "id": 138,
+    "name": "flare-boost",
+    "localizedName": "Ímpetu Ardiente"
+  },
+  "139": {
+    "id": 139,
+    "name": "harvest",
+    "localizedName": "Cosecha"
+  },
+  "140": {
+    "id": 140,
+    "name": "telepathy",
+    "localizedName": "Telepatía"
+  },
+  "141": {
+    "id": 141,
+    "name": "moody",
+    "localizedName": "Veleta"
+  },
+  "142": {
+    "id": 142,
+    "name": "overcoat",
+    "localizedName": "Funda"
+  },
+  "143": {
+    "id": 143,
+    "name": "poison-touch",
+    "localizedName": "Toque Tóxico"
+  },
+  "144": {
+    "id": 144,
+    "name": "regenerator",
+    "localizedName": "Regeneración"
+  },
+  "145": {
+    "id": 145,
+    "name": "big-pecks",
+    "localizedName": "Sacapecho"
+  },
+  "146": {
+    "id": 146,
+    "name": "sand-rush",
+    "localizedName": "Ímpetu Arena"
+  },
+  "147": {
+    "id": 147,
+    "name": "wonder-skin",
+    "localizedName": "Piel Milagro"
+  },
+  "148": {
+    "id": 148,
+    "name": "analytic",
+    "localizedName": "Cálculo Final"
+  },
+  "149": {
+    "id": 149,
+    "name": "illusion",
+    "localizedName": "Ilusión"
+  },
+  "150": {
+    "id": 150,
+    "name": "imposter",
+    "localizedName": "Impostor"
+  },
+  "151": {
+    "id": 151,
+    "name": "infiltrator",
+    "localizedName": "Allanamiento"
+  },
+  "152": {
+    "id": 152,
+    "name": "mummy",
+    "localizedName": "Momia"
+  },
+  "153": {
+    "id": 153,
+    "name": "moxie",
+    "localizedName": "Autoestima"
+  },
+  "154": {
+    "id": 154,
+    "name": "justified",
+    "localizedName": "Justiciero"
+  },
+  "155": {
+    "id": 155,
+    "name": "rattled",
+    "localizedName": "Cobardía"
+  },
+  "156": {
+    "id": 156,
+    "name": "magic-bounce",
+    "localizedName": "Espejo Mágico"
+  },
+  "157": {
+    "id": 157,
+    "name": "sap-sipper",
+    "localizedName": "Herbívoro"
+  },
+  "158": {
+    "id": 158,
+    "name": "prankster",
+    "localizedName": "Bromista"
+  },
+  "159": {
+    "id": 159,
+    "name": "sand-force",
+    "localizedName": "Poder Arena"
+  },
+  "160": {
+    "id": 160,
+    "name": "iron-barbs",
+    "localizedName": "Punta Acero"
+  },
+  "161": {
+    "id": 161,
+    "name": "zen-mode",
+    "localizedName": "Modo Daruma"
+  },
+  "162": {
+    "id": 162,
+    "name": "victory-star",
+    "localizedName": "Tinovictoria"
+  },
+  "163": {
+    "id": 163,
+    "name": "turboblaze",
+    "localizedName": "Turbollama"
+  },
+  "164": {
+    "id": 164,
+    "name": "teravolt",
+    "localizedName": "Terravoltaje"
+  },
+  "165": {
+    "id": 165,
+    "name": "aroma-veil",
+    "localizedName": "Velo Aroma"
+  },
+  "166": {
+    "id": 166,
+    "name": "flower-veil",
+    "localizedName": "Velo Flor"
+  },
+  "167": {
+    "id": 167,
+    "name": "cheek-pouch",
+    "localizedName": "Carrillo"
+  },
+  "168": {
+    "id": 168,
+    "name": "protean",
+    "localizedName": "Mutatipo"
+  },
+  "169": {
+    "id": 169,
+    "name": "fur-coat",
+    "localizedName": "Pelaje Recio"
+  },
+  "170": {
+    "id": 170,
+    "name": "magician",
+    "localizedName": "Prestidigitador"
+  },
+  "171": {
+    "id": 171,
+    "name": "bulletproof",
+    "localizedName": "Antibalas"
+  },
+  "172": {
+    "id": 172,
+    "name": "competitive",
+    "localizedName": "Tenacidad"
+  },
+  "173": {
+    "id": 173,
+    "name": "strong-jaw",
+    "localizedName": "Mandíbula Fuerte"
+  },
+  "174": {
+    "id": 174,
+    "name": "refrigerate",
+    "localizedName": "Piel Helada"
+  },
+  "175": {
+    "id": 175,
+    "name": "sweet-veil",
+    "localizedName": "Velo Dulce"
+  },
+  "176": {
+    "id": 176,
+    "name": "stance-change",
+    "localizedName": "Cambio Táctico"
+  },
+  "177": {
+    "id": 177,
+    "name": "gale-wings",
+    "localizedName": "Alas Vendaval"
+  },
+  "178": {
+    "id": 178,
+    "name": "mega-launcher",
+    "localizedName": "Megadisparador"
+  },
+  "179": {
+    "id": 179,
+    "name": "grass-pelt",
+    "localizedName": "Manto Frondoso"
+  },
+  "180": {
+    "id": 180,
+    "name": "symbiosis",
+    "localizedName": "Simbiosis"
+  },
+  "181": {
+    "id": 181,
+    "name": "tough-claws",
+    "localizedName": "Garra Dura"
+  },
+  "182": {
+    "id": 182,
+    "name": "pixilate",
+    "localizedName": "Piel Feérica"
+  },
+  "183": {
+    "id": 183,
+    "name": "gooey",
+    "localizedName": "Baba"
+  },
+  "184": {
+    "id": 184,
+    "name": "aerilate",
+    "localizedName": "Piel Celeste"
+  },
+  "185": {
+    "id": 185,
+    "name": "parental-bond",
+    "localizedName": "Amor Filial"
+  },
+  "186": {
+    "id": 186,
+    "name": "dark-aura",
+    "localizedName": "Aura Oscura"
+  },
+  "187": {
+    "id": 187,
+    "name": "fairy-aura",
+    "localizedName": "Aura Feérica"
+  },
+  "188": {
+    "id": 188,
+    "name": "aura-break",
+    "localizedName": "Rompeaura"
+  },
+  "189": {
+    "id": 189,
+    "name": "primordial-sea",
+    "localizedName": "Mar del Albor"
+  },
+  "190": {
+    "id": 190,
+    "name": "desolate-land",
+    "localizedName": "Tierra del Ocaso"
+  },
+  "191": {
+    "id": 191,
+    "name": "delta-stream",
+    "localizedName": "Ráfaga Delta"
+  },
+  "192": {
+    "id": 192,
+    "name": "stamina",
+    "localizedName": "Firmeza"
+  },
+  "193": {
+    "id": 193,
+    "name": "wimp-out",
+    "localizedName": "Huida"
+  },
+  "194": {
+    "id": 194,
+    "name": "emergency-exit",
+    "localizedName": "Retirada"
+  },
+  "195": {
+    "id": 195,
+    "name": "water-compaction",
+    "localizedName": "Hidrorrefuerzo"
+  },
+  "196": {
+    "id": 196,
+    "name": "merciless",
+    "localizedName": "Ensañamiento"
+  },
+  "197": {
+    "id": 197,
+    "name": "shields-down",
+    "localizedName": "Escudo Limitado"
+  },
+  "198": {
+    "id": 198,
+    "name": "stakeout",
+    "localizedName": "Vigilante"
+  },
+  "199": {
+    "id": 199,
+    "name": "water-bubble",
+    "localizedName": "Pompa"
+  },
+  "200": {
+    "id": 200,
+    "name": "steelworker",
+    "localizedName": "Acero Templado"
+  },
+  "201": {
+    "id": 201,
+    "name": "berserk",
+    "localizedName": "Cólera"
+  },
+  "202": {
+    "id": 202,
+    "name": "slush-rush",
+    "localizedName": "Quitanieves"
+  },
+  "203": {
+    "id": 203,
+    "name": "long-reach",
+    "localizedName": "Remoto"
+  },
+  "204": {
+    "id": 204,
+    "name": "liquid-voice",
+    "localizedName": "Voz Fluida"
+  },
+  "205": {
+    "id": 205,
+    "name": "triage",
+    "localizedName": "Primer Auxilio"
+  },
+  "206": {
+    "id": 206,
+    "name": "galvanize",
+    "localizedName": "Piel Eléctrica"
+  },
+  "207": {
+    "id": 207,
+    "name": "surge-surfer",
+    "localizedName": "Cola Surf"
+  },
+  "208": {
+    "id": 208,
+    "name": "schooling",
+    "localizedName": "Banco"
+  },
+  "209": {
+    "id": 209,
+    "name": "disguise",
+    "localizedName": "Disfraz"
+  },
+  "210": {
+    "id": 210,
+    "name": "battle-bond",
+    "localizedName": "Fuerte Afecto"
+  },
+  "211": {
+    "id": 211,
+    "name": "power-construct",
+    "localizedName": "Agrupamiento"
+  },
+  "212": {
+    "id": 212,
+    "name": "corrosion",
+    "localizedName": "Corrosión"
+  },
+  "213": {
+    "id": 213,
+    "name": "comatose",
+    "localizedName": "Letargo Perenne"
+  },
+  "214": {
+    "id": 214,
+    "name": "queenly-majesty",
+    "localizedName": "Regia Presencia"
+  },
+  "215": {
+    "id": 215,
+    "name": "innards-out",
+    "localizedName": "Revés"
+  },
+  "216": {
+    "id": 216,
+    "name": "dancer",
+    "localizedName": "Pareja de Baile"
+  },
+  "217": {
+    "id": 217,
+    "name": "battery",
+    "localizedName": "Batería"
+  },
+  "218": {
+    "id": 218,
+    "name": "fluffy",
+    "localizedName": "Peluche"
+  },
+  "219": {
+    "id": 219,
+    "name": "dazzling",
+    "localizedName": "Cuerpo Vívido"
+  },
+  "220": {
+    "id": 220,
+    "name": "soul-heart",
+    "localizedName": "Coránima"
+  },
+  "221": {
+    "id": 221,
+    "name": "tangling-hair",
+    "localizedName": "Rizos Rebeldes"
+  },
+  "222": {
+    "id": 222,
+    "name": "receiver",
+    "localizedName": "Receptor"
+  },
+  "223": {
+    "id": 223,
+    "name": "power-of-alchemy",
+    "localizedName": "Reacción Química"
+  },
+  "224": {
+    "id": 224,
+    "name": "beast-boost",
+    "localizedName": "Ultraimpulso"
+  },
+  "225": {
+    "id": 225,
+    "name": "rks-system",
+    "localizedName": "Sistema Alfa"
+  },
+  "226": {
+    "id": 226,
+    "name": "electric-surge",
+    "localizedName": "Electrogénesis"
+  },
+  "227": {
+    "id": 227,
+    "name": "psychic-surge",
+    "localizedName": "Psicogénesis"
+  },
+  "228": {
+    "id": 228,
+    "name": "misty-surge",
+    "localizedName": "Nebulogénesis"
+  },
+  "229": {
+    "id": 229,
+    "name": "grassy-surge",
+    "localizedName": "Herbogénesis"
+  },
+  "230": {
+    "id": 230,
+    "name": "full-metal-body",
+    "localizedName": "Guardia Metálica"
+  },
+  "231": {
+    "id": 231,
+    "name": "shadow-shield",
+    "localizedName": "Guardia Espectro"
+  },
+  "232": {
+    "id": 232,
+    "name": "prism-armor",
+    "localizedName": "Armadura Prisma"
+  },
+  "233": {
+    "id": 233,
+    "name": "neuroforce",
+    "localizedName": "Fuerza Cerebral"
+  },
+  "234": {
+    "id": 234,
+    "name": "intrepid-sword",
+    "localizedName": "Espada Indómita"
+  },
+  "235": {
+    "id": 235,
+    "name": "dauntless-shield",
+    "localizedName": "Escudo Recio"
+  },
+  "236": {
+    "id": 236,
+    "name": "libero",
+    "localizedName": "Líbero"
+  },
+  "237": {
+    "id": 237,
+    "name": "ball-fetch",
+    "localizedName": "Recogebolas"
+  },
+  "238": {
+    "id": 238,
+    "name": "cotton-down",
+    "localizedName": "Pelusa"
+  },
+  "239": {
+    "id": 239,
+    "name": "propeller-tail",
+    "localizedName": "Hélice Caudal"
+  },
+  "240": {
+    "id": 240,
+    "name": "mirror-armor",
+    "localizedName": "Coraza Reflejo"
+  },
+  "241": {
+    "id": 241,
+    "name": "gulp-missile",
+    "localizedName": "Tragamisil"
+  },
+  "242": {
+    "id": 242,
+    "name": "stalwart",
+    "localizedName": "Acérrimo"
+  },
+  "243": {
+    "id": 243,
+    "name": "steam-engine",
+    "localizedName": "Combustible"
+  },
+  "244": {
+    "id": 244,
+    "name": "punk-rock",
+    "localizedName": "Punk Rock"
+  },
+  "245": {
+    "id": 245,
+    "name": "sand-spit",
+    "localizedName": "Expulsarena"
+  },
+  "246": {
+    "id": 246,
+    "name": "ice-scales",
+    "localizedName": "Escama de Hielo"
+  },
+  "247": {
+    "id": 247,
+    "name": "ripen",
+    "localizedName": "Maduración"
+  },
+  "248": {
+    "id": 248,
+    "name": "ice-face",
+    "localizedName": "Cara de Hielo"
+  },
+  "249": {
+    "id": 249,
+    "name": "power-spot",
+    "localizedName": "Fuente Energía"
+  },
+  "250": {
+    "id": 250,
+    "name": "mimicry",
+    "localizedName": "Mimetismo"
+  },
+  "251": {
+    "id": 251,
+    "name": "screen-cleaner",
+    "localizedName": "Antibarrera"
+  },
+  "252": {
+    "id": 252,
+    "name": "steely-spirit",
+    "localizedName": "Alma Acerada"
+  },
+  "253": {
+    "id": 253,
+    "name": "perish-body",
+    "localizedName": "Cuerpo Mortal"
+  },
+  "254": {
+    "id": 254,
+    "name": "wandering-spirit",
+    "localizedName": "Alma Errante"
+  },
+  "255": {
+    "id": 255,
+    "name": "gorilla-tactics",
+    "localizedName": "Monotema"
+  },
+  "256": {
+    "id": 256,
+    "name": "neutralizing-gas",
+    "localizedName": "Gas Reactivo"
+  },
+  "257": {
+    "id": 257,
+    "name": "pastel-veil",
+    "localizedName": "Velo Pastel"
+  },
+  "258": {
+    "id": 258,
+    "name": "hunger-switch",
+    "localizedName": "Mutapetito"
+  },
+  "259": {
+    "id": 259,
+    "name": "quick-draw",
+    "localizedName": "Mano Rápida"
+  },
+  "260": {
+    "id": 260,
+    "name": "unseen-fist",
+    "localizedName": "Puño Invisible"
+  },
+  "261": {
+    "id": 261,
+    "name": "curious-medicine",
+    "localizedName": "Medicina Extraña"
+  },
+  "262": {
+    "id": 262,
+    "name": "transistor",
+    "localizedName": "Transistor"
+  },
+  "263": {
+    "id": 263,
+    "name": "dragons-maw",
+    "localizedName": "Mandíbula Dragón"
+  },
+  "264": {
+    "id": 264,
+    "name": "chilling-neigh",
+    "localizedName": "Relincho Blanco"
+  },
+  "265": {
+    "id": 265,
+    "name": "grim-neigh",
+    "localizedName": "Relincho Negro"
+  },
+  "266": {
+    "id": 266,
+    "name": "as-one-glastrier",
+    "localizedName": "Unidad Ecuestre"
+  },
+  "267": {
+    "id": 267,
+    "name": "as-one-spectrier",
+    "localizedName": "Unidad Ecuestre"
+  },
+  "268": {
+    "id": 268,
+    "name": "lingering-aroma",
+    "localizedName": "Olor Persistente"
+  },
+  "269": {
+    "id": 269,
+    "name": "seed-sower",
+    "localizedName": "Disemillar"
+  },
+  "270": {
+    "id": 270,
+    "name": "thermal-exchange",
+    "localizedName": "Termoscambio"
+  },
+  "271": {
+    "id": 271,
+    "name": "anger-shell",
+    "localizedName": "Coraza Ira"
+  },
+  "272": {
+    "id": 272,
+    "name": "purifying-salt",
+    "localizedName": "Sal Purificadora"
+  },
+  "273": {
+    "id": 273,
+    "name": "well-baked-body",
+    "localizedName": "Cuerpo Horneado"
+  },
+  "274": {
+    "id": 274,
+    "name": "wind-rider",
+    "localizedName": "Surcavientos"
+  },
+  "275": {
+    "id": 275,
+    "name": "guard-dog",
+    "localizedName": "Perro Guardián"
+  },
+  "276": {
+    "id": 276,
+    "name": "rocky-payload",
+    "localizedName": "Transportarrocas"
+  },
+  "277": {
+    "id": 277,
+    "name": "wind-power",
+    "localizedName": "Energía Eólica"
+  },
+  "278": {
+    "id": 278,
+    "name": "zero-to-hero",
+    "localizedName": "Cambio Heroico"
+  },
+  "279": {
+    "id": 279,
+    "name": "commander",
+    "localizedName": "Comandar"
+  },
+  "280": {
+    "id": 280,
+    "name": "electromorphosis",
+    "localizedName": "Dinamo"
+  },
+  "281": {
+    "id": 281,
+    "name": "protosynthesis",
+    "localizedName": "Paleosíntesis"
+  },
+  "282": {
+    "id": 282,
+    "name": "quark-drive",
+    "localizedName": "Carga Cuark"
+  },
+  "283": {
+    "id": 283,
+    "name": "good-as-gold",
+    "localizedName": "Cuerpo Áureo"
+  },
+  "284": {
+    "id": 284,
+    "name": "vessel-of-ruin",
+    "localizedName": "Caldero Debacle"
+  },
+  "285": {
+    "id": 285,
+    "name": "sword-of-ruin",
+    "localizedName": "Espada Debacle"
+  },
+  "286": {
+    "id": 286,
+    "name": "tablets-of-ruin",
+    "localizedName": "Tablilla Debacle"
+  },
+  "287": {
+    "id": 287,
+    "name": "beads-of-ruin",
+    "localizedName": "Abalorio Debacle"
+  },
+  "288": {
+    "id": 288,
+    "name": "orichalcum-pulse",
+    "localizedName": "Latido Oricalco"
+  },
+  "289": {
+    "id": 289,
+    "name": "hadron-engine",
+    "localizedName": "Motor Hadrónico"
+  },
+  "290": {
+    "id": 290,
+    "name": "opportunist",
+    "localizedName": "Oportunista"
+  },
+  "291": {
+    "id": 291,
+    "name": "cud-chew",
+    "localizedName": "Rumia"
+  },
+  "292": {
+    "id": 292,
+    "name": "sharpness",
+    "localizedName": "Cortante"
+  },
+  "293": {
+    "id": 293,
+    "name": "supreme-overlord",
+    "localizedName": "General Supremo"
+  },
+  "294": {
+    "id": 294,
+    "name": "costar",
+    "localizedName": "Unísono"
+  },
+  "295": {
+    "id": 295,
+    "name": "toxic-debris",
+    "localizedName": "Capa Tóxica"
+  },
+  "296": {
+    "id": 296,
+    "name": "armor-tail",
+    "localizedName": "Cola Armadura"
+  },
+  "297": {
+    "id": 297,
+    "name": "earth-eater",
+    "localizedName": "Geofagia"
+  },
+  "298": {
+    "id": 298,
+    "name": "mycelium-might",
+    "localizedName": "Poder Fúngico"
+  },
+  "299": {
+    "id": 299,
+    "name": "minds-eye",
+    "localizedName": "Ojo Mental "
+  },
+  "300": {
+    "id": 300,
+    "name": "supersweet-syrup",
+    "localizedName": "Néctar Dulce"
+  },
+  "301": {
+    "id": 301,
+    "name": "hospitality",
+    "localizedName": "Hospitalidad"
+  },
+  "302": {
+    "id": 302,
+    "name": "toxic-chain",
+    "localizedName": "Cadena Tóxica"
+  },
+  "303": {
+    "id": 303,
+    "name": "embody-aspect",
+    "localizedName": "Evocarrecuerdos"
+  },
+  "304": {
+    "id": 304,
+    "name": "tera-shift",
+    "localizedName": "Teracambio"
+  },
+  "305": {
+    "id": 305,
+    "name": "tera-shell",
+    "localizedName": "Teracaparazón"
+  },
+  "306": {
+    "id": 306,
+    "name": "teraform-zero",
+    "localizedName": "Teraformación 0"
+  },
+  "307": {
+    "id": 307,
+    "name": "poison-puppeteer",
+    "localizedName": "Títere Tóxico"
+  }
+}

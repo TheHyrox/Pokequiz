@@ -1,0 +1,52 @@
+{
+  "1": {
+    "id": 1,
+    "name": "black",
+    "localizedName": "Noir"
+  },
+  "2": {
+    "id": 2,
+    "name": "blue",
+    "localizedName": "Bleu"
+  },
+  "3": {
+    "id": 3,
+    "name": "brown",
+    "localizedName": "Brun"
+  },
+  "4": {
+    "id": 4,
+    "name": "gray",
+    "localizedName": "Gris"
+  },
+  "5": {
+    "id": 5,
+    "name": "green",
+    "localizedName": "Vert"
+  },
+  "6": {
+    "id": 6,
+    "name": "pink",
+    "localizedName": "Rose"
+  },
+  "7": {
+    "id": 7,
+    "name": "purple",
+    "localizedName": "Violet"
+  },
+  "8": {
+    "id": 8,
+    "name": "red",
+    "localizedName": "Rouge"
+  },
+  "9": {
+    "id": 9,
+    "name": "white",
+    "localizedName": "Blanc"
+  },
+  "10": {
+    "id": 10,
+    "name": "yellow",
+    "localizedName": "Jaune"
+  }
+}

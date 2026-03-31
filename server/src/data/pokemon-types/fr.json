@@ -1,0 +1,107 @@
+{
+  "1": {
+    "id": 1,
+    "name": "normal",
+    "localizedName": "Normal"
+  },
+  "2": {
+    "id": 2,
+    "name": "fighting",
+    "localizedName": "Combat"
+  },
+  "3": {
+    "id": 3,
+    "name": "flying",
+    "localizedName": "Vol"
+  },
+  "4": {
+    "id": 4,
+    "name": "poison",
+    "localizedName": "Poison"
+  },
+  "5": {
+    "id": 5,
+    "name": "ground",
+    "localizedName": "Sol"
+  },
+  "6": {
+    "id": 6,
+    "name": "rock",
+    "localizedName": "Roche"
+  },
+  "7": {
+    "id": 7,
+    "name": "bug",
+    "localizedName": "Insecte"
+  },
+  "8": {
+    "id": 8,
+    "name": "ghost",
+    "localizedName": "Spectre"
+  },
+  "9": {
+    "id": 9,
+    "name": "steel",
+    "localizedName": "Acier"
+  },
+  "10": {
+    "id": 10,
+    "name": "fire",
+    "localizedName": "Feu"
+  },
+  "11": {
+    "id": 11,
+    "name": "water",
+    "localizedName": "Eau"
+  },
+  "12": {
+    "id": 12,
+    "name": "grass",
+    "localizedName": "Plante"
+  },
+  "13": {
+    "id": 13,
+    "name": "electric",
+    "localizedName": "Électrik"
+  },
+  "14": {
+    "id": 14,
+    "name": "psychic",
+    "localizedName": "Psy"
+  },
+  "15": {
+    "id": 15,
+    "name": "ice",
+    "localizedName": "Glace"
+  },
+  "16": {
+    "id": 16,
+    "name": "dragon",
+    "localizedName": "Dragon"
+  },
+  "17": {
+    "id": 17,
+    "name": "dark",
+    "localizedName": "Ténèbres"
+  },
+  "18": {
+    "id": 18,
+    "name": "fairy",
+    "localizedName": "Fée"
+  },
+  "19": {
+    "id": 19,
+    "name": "stellar",
+    "localizedName": "Stellaire"
+  },
+  "10001": {
+    "id": 10001,
+    "name": "unknown",
+    "localizedName": "???"
+  },
+  "10002": {
+    "id": 10002,
+    "name": "shadow",
+    "localizedName": "Obscur"
+  }
+}

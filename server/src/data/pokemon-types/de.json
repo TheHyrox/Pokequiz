@@ -1,0 +1,107 @@
+{
+  "1": {
+    "id": 1,
+    "name": "normal",
+    "localizedName": "Normal"
+  },
+  "2": {
+    "id": 2,
+    "name": "fighting",
+    "localizedName": "Kampf"
+  },
+  "3": {
+    "id": 3,
+    "name": "flying",
+    "localizedName": "Flug"
+  },
+  "4": {
+    "id": 4,
+    "name": "poison",
+    "localizedName": "Gift"
+  },
+  "5": {
+    "id": 5,
+    "name": "ground",
+    "localizedName": "Boden"
+  },
+  "6": {
+    "id": 6,
+    "name": "rock",
+    "localizedName": "Gestein"
+  },
+  "7": {
+    "id": 7,
+    "name": "bug",
+    "localizedName": "Käfer"
+  },
+  "8": {
+    "id": 8,
+    "name": "ghost",
+    "localizedName": "Geist"
+  },
+  "9": {
+    "id": 9,
+    "name": "steel",
+    "localizedName": "Stahl"
+  },
+  "10": {
+    "id": 10,
+    "name": "fire",
+    "localizedName": "Feuer"
+  },
+  "11": {
+    "id": 11,
+    "name": "water",
+    "localizedName": "Wasser"
+  },
+  "12": {
+    "id": 12,
+    "name": "grass",
+    "localizedName": "Pflanze"
+  },
+  "13": {
+    "id": 13,
+    "name": "electric",
+    "localizedName": "Elektro"
+  },
+  "14": {
+    "id": 14,
+    "name": "psychic",
+    "localizedName": "Psycho"
+  },
+  "15": {
+    "id": 15,
+    "name": "ice",
+    "localizedName": "Eis"
+  },
+  "16": {
+    "id": 16,
+    "name": "dragon",
+    "localizedName": "Drache"
+  },
+  "17": {
+    "id": 17,
+    "name": "dark",
+    "localizedName": "Unlicht"
+  },
+  "18": {
+    "id": 18,
+    "name": "fairy",
+    "localizedName": "Fee"
+  },
+  "19": {
+    "id": 19,
+    "name": "stellar",
+    "localizedName": "Stellar"
+  },
+  "10001": {
+    "id": 10001,
+    "name": "unknown",
+    "localizedName": "???"
+  },
+  "10002": {
+    "id": 10002,
+    "name": "shadow",
+    "localizedName": "Crypto"
+  }
+}

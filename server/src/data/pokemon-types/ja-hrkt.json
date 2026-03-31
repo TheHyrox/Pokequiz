@@ -1,0 +1,107 @@
+{
+  "1": {
+    "id": 1,
+    "name": "normal",
+    "localizedName": "ノーマル"
+  },
+  "2": {
+    "id": 2,
+    "name": "fighting",
+    "localizedName": "かくとう"
+  },
+  "3": {
+    "id": 3,
+    "name": "flying",
+    "localizedName": "ひこう"
+  },
+  "4": {
+    "id": 4,
+    "name": "poison",
+    "localizedName": "どく"
+  },
+  "5": {
+    "id": 5,
+    "name": "ground",
+    "localizedName": "じめん"
+  },
+  "6": {
+    "id": 6,
+    "name": "rock",
+    "localizedName": "いわ"
+  },
+  "7": {
+    "id": 7,
+    "name": "bug",
+    "localizedName": "むし"
+  },
+  "8": {
+    "id": 8,
+    "name": "ghost",
+    "localizedName": "ゴースト"
+  },
+  "9": {
+    "id": 9,
+    "name": "steel",
+    "localizedName": "はがね"
+  },
+  "10": {
+    "id": 10,
+    "name": "fire",
+    "localizedName": "ほのお"
+  },
+  "11": {
+    "id": 11,
+    "name": "water",
+    "localizedName": "みず"
+  },
+  "12": {
+    "id": 12,
+    "name": "grass",
+    "localizedName": "くさ"
+  },
+  "13": {
+    "id": 13,
+    "name": "electric",
+    "localizedName": "でんき"
+  },
+  "14": {
+    "id": 14,
+    "name": "psychic",
+    "localizedName": "エスパー"
+  },
+  "15": {
+    "id": 15,
+    "name": "ice",
+    "localizedName": "こおり"
+  },
+  "16": {
+    "id": 16,
+    "name": "dragon",
+    "localizedName": "ドラゴン"
+  },
+  "17": {
+    "id": 17,
+    "name": "dark",
+    "localizedName": "あく"
+  },
+  "18": {
+    "id": 18,
+    "name": "fairy",
+    "localizedName": "フェアリー"
+  },
+  "19": {
+    "id": 19,
+    "name": "stellar",
+    "localizedName": "ステラ"
+  },
+  "10001": {
+    "id": 10001,
+    "name": "unknown",
+    "localizedName": "？？？"
+  },
+  "10002": {
+    "id": 10002,
+    "name": "shadow",
+    "localizedName": "ダーク"
+  }
+}

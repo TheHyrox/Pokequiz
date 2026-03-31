@@ -6,12 +6,14 @@
     import { onMount } from 'svelte';
     import DescriptionQuizSettings from '../components/DescriptionQuizSettings.svelte';
     import SpriteQuizSettings from '../components/SpriteQuizSettings.svelte';
+    import InformationQuizSettings from '../components/InformationQuizSettings.svelte';
     import DescriptionQuiz from './QuizDescription.svelte';
     import SpritesQuiz from './QuizSprites.svelte';
+    import QuizInformation from './QuizInformation.svelte';
     import LanguageSelector from '../components/LanguageSelector.svelte';
     import { getLabel, LANGUAGE_ID_TO_CODE } from './lib/translations';
-    import { getCachedDescriptionSettings, getCachedSpriteSettings } from './lib/storage';
-    import type { DescriptionQuizSettings as QuizSettingsType, SpriteQuizSettings as SpriteQuizSettingsType } from '../../shared/types';
+    import { getCachedDescriptionSettings, getCachedSpriteSettings, getCachedInformationSettings } from './lib/storage';
+    import type { DescriptionQuizSettings as QuizSettingsType, SpriteQuizSettings as SpriteQuizSettingsType, InformationQuizSettings as InformationQuizSettingsType } from '../../shared/types';
 
     interface Game {
         id: string;
@@ -28,6 +30,12 @@
             icon: '📝'
         },
         {
+            id: 'information-quiz',
+            name: 'Information Quiz',
+            description: 'Guess the Pokemon from its characteristics',
+            icon: 'ℹ️'
+        },
+        {
             id: 'sprites-quiz',
             name: 'Sprites Quiz',
             description: 'Guess the Pokemon from its sprite',
@@ -39,6 +47,7 @@
     let quizStarted = false;
     let quizSettings: QuizSettingsType | null = null;
     let spriteQuizSettings: SpriteQuizSettingsType | null = null;
+    let informationQuizSettings: InformationQuizSettingsType | null = null;
     let selectedLanguageId: number = typeof window !== 'undefined' && localStorage.getItem('selectedLanguageId') 
         ? parseInt(localStorage.getItem('selectedLanguageId')!) 
         : 9;
@@ -81,6 +90,14 @@
     }
 
     /**
+     * @brief Starts the information quiz with given settings
+     */
+    function handleStartInformationQuiz(settings: InformationQuizSettingsType): void {
+        informationQuizSettings = settings;
+        quizStarted = true;
+    }
+
+    /**
      * @brief Returns to the main hub
      */
     function backToHub(): void {
@@ -88,6 +105,7 @@
         quizStarted = false;
         quizSettings = null;
         spriteQuizSettings = null;
+        informationQuizSettings = null;
         showingSettingsAfterQuiz = false;
     }
 
@@ -126,10 +144,10 @@
                     <button on:click={() => selectGame(game)} class="game-card">
                         <div class="game-icon">{game.icon}</div>
                         <h2 class="game-name">
-                            {getLabel(currentLanguageCode, game.id === 'description-quiz' ? 'description_quiz' : 'sprites_quiz')}
+                            {getLabel(currentLanguageCode, game.id === 'description-quiz' ? 'description_quiz' : game.id === 'information-quiz' ? 'information_quiz' : 'sprites_quiz')}
                         </h2>
                         <p class="game-description">
-                            {getLabel(currentLanguageCode, game.id === 'description-quiz' ? 'description_guessFromDescription' : 'sprites_guessFromSprite')}
+                            {getLabel(currentLanguageCode, game.id === 'description-quiz' ? 'description_guessFromDescription' : game.id === 'information-quiz' ? 'information_guessFromInfo' : 'sprites_guessFromSprite')}
                         </p>
                     </button>
                 {/each}
@@ -158,6 +176,12 @@
                             languageCode={currentLanguageCode}
                             initialSettings={getCachedDescriptionSettings()}
                         />
+                    {:else if selectedGame?.id === 'information-quiz'}
+                        <InformationQuizSettings
+                            onStartQuiz={handleStartInformationQuiz}
+                            languageCode={currentLanguageCode}
+                            initialSettings={getCachedInformationSettings()}
+                        />
                     {:else if selectedGame?.id === 'sprites-quiz'}
                         <SpriteQuizSettings
                             onStartQuiz={handleStartSpritesQuiz}
@@ -172,6 +196,15 @@
         <!-- Description Quiz Game -->
         <DescriptionQuiz
             settings={quizSettings}
+            onBackToHub={backToHub}
+            onBackToSettings={backToSettingsFromQuiz}
+            languageCode={currentLanguageCode}
+            languageId={selectedLanguageId}
+        />
+    {:else if selectedGame?.id === 'information-quiz' && quizStarted && informationQuizSettings}
+        <!-- Information Quiz Game -->
+        <QuizInformation
+            settings={informationQuizSettings}
             onBackToHub={backToHub}
             onBackToSettings={backToSettingsFromQuiz}
             languageCode={currentLanguageCode}

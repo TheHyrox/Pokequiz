@@ -1,0 +1,1382 @@
+{
+  "1": {
+    "id": 1,
+    "name": "stench",
+    "localizedName": "악취"
+  },
+  "2": {
+    "id": 2,
+    "name": "drizzle",
+    "localizedName": "잔비"
+  },
+  "3": {
+    "id": 3,
+    "name": "speed-boost",
+    "localizedName": "가속"
+  },
+  "4": {
+    "id": 4,
+    "name": "battle-armor",
+    "localizedName": "전투무장"
+  },
+  "5": {
+    "id": 5,
+    "name": "sturdy",
+    "localizedName": "옹골참"
+  },
+  "6": {
+    "id": 6,
+    "name": "damp",
+    "localizedName": "습기"
+  },
+  "7": {
+    "id": 7,
+    "name": "limber",
+    "localizedName": "유연"
+  },
+  "8": {
+    "id": 8,
+    "name": "sand-veil",
+    "localizedName": "모래숨기"
+  },
+  "9": {
+    "id": 9,
+    "name": "static",
+    "localizedName": "정전기"
+  },
+  "10": {
+    "id": 10,
+    "name": "volt-absorb",
+    "localizedName": "축전"
+  },
+  "11": {
+    "id": 11,
+    "name": "water-absorb",
+    "localizedName": "저수"
+  },
+  "12": {
+    "id": 12,
+    "name": "oblivious",
+    "localizedName": "둔감"
+  },
+  "13": {
+    "id": 13,
+    "name": "cloud-nine",
+    "localizedName": "날씨부정"
+  },
+  "14": {
+    "id": 14,
+    "name": "compound-eyes",
+    "localizedName": "복안"
+  },
+  "15": {
+    "id": 15,
+    "name": "insomnia",
+    "localizedName": "불면"
+  },
+  "16": {
+    "id": 16,
+    "name": "color-change",
+    "localizedName": "변색"
+  },
+  "17": {
+    "id": 17,
+    "name": "immunity",
+    "localizedName": "면역"
+  },
+  "18": {
+    "id": 18,
+    "name": "flash-fire",
+    "localizedName": "타오르는불꽃"
+  },
+  "19": {
+    "id": 19,
+    "name": "shield-dust",
+    "localizedName": "인분"
+  },
+  "20": {
+    "id": 20,
+    "name": "own-tempo",
+    "localizedName": "마이페이스"
+  },
+  "21": {
+    "id": 21,
+    "name": "suction-cups",
+    "localizedName": "흡반"
+  },
+  "22": {
+    "id": 22,
+    "name": "intimidate",
+    "localizedName": "위협"
+  },
+  "23": {
+    "id": 23,
+    "name": "shadow-tag",
+    "localizedName": "그림자밟기"
+  },
+  "24": {
+    "id": 24,
+    "name": "rough-skin",
+    "localizedName": "까칠한피부"
+  },
+  "25": {
+    "id": 25,
+    "name": "wonder-guard",
+    "localizedName": "불가사의부적"
+  },
+  "26": {
+    "id": 26,
+    "name": "levitate",
+    "localizedName": "부유"
+  },
+  "27": {
+    "id": 27,
+    "name": "effect-spore",
+    "localizedName": "포자"
+  },
+  "28": {
+    "id": 28,
+    "name": "synchronize",
+    "localizedName": "싱크로"
+  },
+  "29": {
+    "id": 29,
+    "name": "clear-body",
+    "localizedName": "클리어바디"
+  },
+  "30": {
+    "id": 30,
+    "name": "natural-cure",
+    "localizedName": "자연회복"
+  },
+  "31": {
+    "id": 31,
+    "name": "lightning-rod",
+    "localizedName": "피뢰침"
+  },
+  "32": {
+    "id": 32,
+    "name": "serene-grace",
+    "localizedName": "하늘의은총"
+  },
+  "33": {
+    "id": 33,
+    "name": "swift-swim",
+    "localizedName": "쓱쓱"
+  },
+  "34": {
+    "id": 34,
+    "name": "chlorophyll",
+    "localizedName": "엽록소"
+  },
+  "35": {
+    "id": 35,
+    "name": "illuminate",
+    "localizedName": "발광"
+  },
+  "36": {
+    "id": 36,
+    "name": "trace",
+    "localizedName": "트레이스"
+  },
+  "37": {
+    "id": 37,
+    "name": "huge-power",
+    "localizedName": "천하장사"
+  },
+  "38": {
+    "id": 38,
+    "name": "poison-point",
+    "localizedName": "독가시"
+  },
+  "39": {
+    "id": 39,
+    "name": "inner-focus",
+    "localizedName": "정신력"
+  },
+  "40": {
+    "id": 40,
+    "name": "magma-armor",
+    "localizedName": "마그마의무장"
+  },
+  "41": {
+    "id": 41,
+    "name": "water-veil",
+    "localizedName": "수의베일"
+  },
+  "42": {
+    "id": 42,
+    "name": "magnet-pull",
+    "localizedName": "자력"
+  },
+  "43": {
+    "id": 43,
+    "name": "soundproof",
+    "localizedName": "방음"
+  },
+  "44": {
+    "id": 44,
+    "name": "rain-dish",
+    "localizedName": "젖은접시"
+  },
+  "45": {
+    "id": 45,
+    "name": "sand-stream",
+    "localizedName": "모래날림"
+  },
+  "46": {
+    "id": 46,
+    "name": "pressure",
+    "localizedName": "프레셔"
+  },
+  "47": {
+    "id": 47,
+    "name": "thick-fat",
+    "localizedName": "두꺼운지방"
+  },
+  "48": {
+    "id": 48,
+    "name": "early-bird",
+    "localizedName": "일찍기상"
+  },
+  "49": {
+    "id": 49,
+    "name": "flame-body",
+    "localizedName": "불꽃몸"
+  },
+  "50": {
+    "id": 50,
+    "name": "run-away",
+    "localizedName": "도주"
+  },
+  "51": {
+    "id": 51,
+    "name": "keen-eye",
+    "localizedName": "날카로운눈"
+  },
+  "52": {
+    "id": 52,
+    "name": "hyper-cutter",
+    "localizedName": "괴력집게"
+  },
+  "53": {
+    "id": 53,
+    "name": "pickup",
+    "localizedName": "픽업"
+  },
+  "54": {
+    "id": 54,
+    "name": "truant",
+    "localizedName": "게으름"
+  },
+  "55": {
+    "id": 55,
+    "name": "hustle",
+    "localizedName": "의욕"
+  },
+  "56": {
+    "id": 56,
+    "name": "cute-charm",
+    "localizedName": "헤롱헤롱바디"
+  },
+  "57": {
+    "id": 57,
+    "name": "plus",
+    "localizedName": "플러스"
+  },
+  "58": {
+    "id": 58,
+    "name": "minus",
+    "localizedName": "마이너스"
+  },
+  "59": {
+    "id": 59,
+    "name": "forecast",
+    "localizedName": "기분파"
+  },
+  "60": {
+    "id": 60,
+    "name": "sticky-hold",
+    "localizedName": "점착"
+  },
+  "61": {
+    "id": 61,
+    "name": "shed-skin",
+    "localizedName": "탈피"
+  },
+  "62": {
+    "id": 62,
+    "name": "guts",
+    "localizedName": "근성"
+  },
+  "63": {
+    "id": 63,
+    "name": "marvel-scale",
+    "localizedName": "이상한비늘"
+  },
+  "64": {
+    "id": 64,
+    "name": "liquid-ooze",
+    "localizedName": "해감액"
+  },
+  "65": {
+    "id": 65,
+    "name": "overgrow",
+    "localizedName": "심록"
+  },
+  "66": {
+    "id": 66,
+    "name": "blaze",
+    "localizedName": "맹화"
+  },
+  "67": {
+    "id": 67,
+    "name": "torrent",
+    "localizedName": "급류"
+  },
+  "68": {
+    "id": 68,
+    "name": "swarm",
+    "localizedName": "벌레의알림"
+  },
+  "69": {
+    "id": 69,
+    "name": "rock-head",
+    "localizedName": "돌머리"
+  },
+  "70": {
+    "id": 70,
+    "name": "drought",
+    "localizedName": "가뭄"
+  },
+  "71": {
+    "id": 71,
+    "name": "arena-trap",
+    "localizedName": "개미지옥"
+  },
+  "72": {
+    "id": 72,
+    "name": "vital-spirit",
+    "localizedName": "의기양양"
+  },
+  "73": {
+    "id": 73,
+    "name": "white-smoke",
+    "localizedName": "하얀연기"
+  },
+  "74": {
+    "id": 74,
+    "name": "pure-power",
+    "localizedName": "순수한힘"
+  },
+  "75": {
+    "id": 75,
+    "name": "shell-armor",
+    "localizedName": "조가비갑옷"
+  },
+  "76": {
+    "id": 76,
+    "name": "air-lock",
+    "localizedName": "에어록"
+  },
+  "77": {
+    "id": 77,
+    "name": "tangled-feet",
+    "localizedName": "갈지자걸음"
+  },
+  "78": {
+    "id": 78,
+    "name": "motor-drive",
+    "localizedName": "전기엔진"
+  },
+  "79": {
+    "id": 79,
+    "name": "rivalry",
+    "localizedName": "투쟁심"
+  },
+  "80": {
+    "id": 80,
+    "name": "steadfast",
+    "localizedName": "불굴의마음"
+  },
+  "81": {
+    "id": 81,
+    "name": "snow-cloak",
+    "localizedName": "눈숨기"
+  },
+  "82": {
+    "id": 82,
+    "name": "gluttony",
+    "localizedName": "먹보"
+  },
+  "83": {
+    "id": 83,
+    "name": "anger-point",
+    "localizedName": "분노의경혈"
+  },
+  "84": {
+    "id": 84,
+    "name": "unburden",
+    "localizedName": "곡예"
+  },
+  "85": {
+    "id": 85,
+    "name": "heatproof",
+    "localizedName": "내열"
+  },
+  "86": {
+    "id": 86,
+    "name": "simple",
+    "localizedName": "단순"
+  },
+  "87": {
+    "id": 87,
+    "name": "dry-skin",
+    "localizedName": "건조피부"
+  },
+  "88": {
+    "id": 88,
+    "name": "download",
+    "localizedName": "다운로드"
+  },
+  "89": {
+    "id": 89,
+    "name": "iron-fist",
+    "localizedName": "철주먹"
+  },
+  "90": {
+    "id": 90,
+    "name": "poison-heal",
+    "localizedName": "포이즌힐"
+  },
+  "91": {
+    "id": 91,
+    "name": "adaptability",
+    "localizedName": "적응력"
+  },
+  "92": {
+    "id": 92,
+    "name": "skill-link",
+    "localizedName": "스킬링크"
+  },
+  "93": {
+    "id": 93,
+    "name": "hydration",
+    "localizedName": "촉촉바디"
+  },
+  "94": {
+    "id": 94,
+    "name": "solar-power",
+    "localizedName": "선파워"
+  },
+  "95": {
+    "id": 95,
+    "name": "quick-feet",
+    "localizedName": "속보"
+  },
+  "96": {
+    "id": 96,
+    "name": "normalize",
+    "localizedName": "노말스킨"
+  },
+  "97": {
+    "id": 97,
+    "name": "sniper",
+    "localizedName": "스나이퍼"
+  },
+  "98": {
+    "id": 98,
+    "name": "magic-guard",
+    "localizedName": "매직가드"
+  },
+  "99": {
+    "id": 99,
+    "name": "no-guard",
+    "localizedName": "노가드"
+  },
+  "100": {
+    "id": 100,
+    "name": "stall",
+    "localizedName": "시간벌기"
+  },
+  "101": {
+    "id": 101,
+    "name": "technician",
+    "localizedName": "테크니션"
+  },
+  "102": {
+    "id": 102,
+    "name": "leaf-guard",
+    "localizedName": "리프가드"
+  },
+  "103": {
+    "id": 103,
+    "name": "klutz",
+    "localizedName": "서투름"
+  },
+  "104": {
+    "id": 104,
+    "name": "mold-breaker",
+    "localizedName": "틀깨기"
+  },
+  "105": {
+    "id": 105,
+    "name": "super-luck",
+    "localizedName": "대운"
+  },
+  "106": {
+    "id": 106,
+    "name": "aftermath",
+    "localizedName": "유폭"
+  },
+  "107": {
+    "id": 107,
+    "name": "anticipation",
+    "localizedName": "위험예지"
+  },
+  "108": {
+    "id": 108,
+    "name": "forewarn",
+    "localizedName": "예지몽"
+  },
+  "109": {
+    "id": 109,
+    "name": "unaware",
+    "localizedName": "천진"
+  },
+  "110": {
+    "id": 110,
+    "name": "tinted-lens",
+    "localizedName": "색안경"
+  },
+  "111": {
+    "id": 111,
+    "name": "filter",
+    "localizedName": "필터"
+  },
+  "112": {
+    "id": 112,
+    "name": "slow-start",
+    "localizedName": "슬로스타트"
+  },
+  "113": {
+    "id": 113,
+    "name": "scrappy",
+    "localizedName": "배짱"
+  },
+  "114": {
+    "id": 114,
+    "name": "storm-drain",
+    "localizedName": "마중물"
+  },
+  "115": {
+    "id": 115,
+    "name": "ice-body",
+    "localizedName": "아이스바디"
+  },
+  "116": {
+    "id": 116,
+    "name": "solid-rock",
+    "localizedName": "하드록"
+  },
+  "117": {
+    "id": 117,
+    "name": "snow-warning",
+    "localizedName": "눈퍼뜨리기"
+  },
+  "118": {
+    "id": 118,
+    "name": "honey-gather",
+    "localizedName": "꿀모으기"
+  },
+  "119": {
+    "id": 119,
+    "name": "frisk",
+    "localizedName": "통찰"
+  },
+  "120": {
+    "id": 120,
+    "name": "reckless",
+    "localizedName": "이판사판"
+  },
+  "121": {
+    "id": 121,
+    "name": "multitype",
+    "localizedName": "멀티타입"
+  },
+  "122": {
+    "id": 122,
+    "name": "flower-gift",
+    "localizedName": "플라워기프트"
+  },
+  "123": {
+    "id": 123,
+    "name": "bad-dreams",
+    "localizedName": "나이트메어"
+  },
+  "124": {
+    "id": 124,
+    "name": "pickpocket",
+    "localizedName": "나쁜손버릇"
+  },
+  "125": {
+    "id": 125,
+    "name": "sheer-force",
+    "localizedName": "우격다짐"
+  },
+  "126": {
+    "id": 126,
+    "name": "contrary",
+    "localizedName": "심술꾸러기"
+  },
+  "127": {
+    "id": 127,
+    "name": "unnerve",
+    "localizedName": "긴장감"
+  },
+  "128": {
+    "id": 128,
+    "name": "defiant",
+    "localizedName": "오기"
+  },
+  "129": {
+    "id": 129,
+    "name": "defeatist",
+    "localizedName": "무기력"
+  },
+  "130": {
+    "id": 130,
+    "name": "cursed-body",
+    "localizedName": "저주받은바디"
+  },
+  "131": {
+    "id": 131,
+    "name": "healer",
+    "localizedName": "치유의마음"
+  },
+  "132": {
+    "id": 132,
+    "name": "friend-guard",
+    "localizedName": "프렌드가드"
+  },
+  "133": {
+    "id": 133,
+    "name": "weak-armor",
+    "localizedName": "깨어진갑옷"
+  },
+  "134": {
+    "id": 134,
+    "name": "heavy-metal",
+    "localizedName": "헤비메탈"
+  },
+  "135": {
+    "id": 135,
+    "name": "light-metal",
+    "localizedName": "라이트메탈"
+  },
+  "136": {
+    "id": 136,
+    "name": "multiscale",
+    "localizedName": "멀티스케일"
+  },
+  "137": {
+    "id": 137,
+    "name": "toxic-boost",
+    "localizedName": "독폭주"
+  },
+  "138": {
+    "id": 138,
+    "name": "flare-boost",
+    "localizedName": "열폭주"
+  },
+  "139": {
+    "id": 139,
+    "name": "harvest",
+    "localizedName": "수확"
+  },
+  "140": {
+    "id": 140,
+    "name": "telepathy",
+    "localizedName": "텔레파시"
+  },
+  "141": {
+    "id": 141,
+    "name": "moody",
+    "localizedName": "변덕쟁이"
+  },
+  "142": {
+    "id": 142,
+    "name": "overcoat",
+    "localizedName": "방진"
+  },
+  "143": {
+    "id": 143,
+    "name": "poison-touch",
+    "localizedName": "독수"
+  },
+  "144": {
+    "id": 144,
+    "name": "regenerator",
+    "localizedName": "재생력"
+  },
+  "145": {
+    "id": 145,
+    "name": "big-pecks",
+    "localizedName": "부풀린가슴"
+  },
+  "146": {
+    "id": 146,
+    "name": "sand-rush",
+    "localizedName": "모래헤치기"
+  },
+  "147": {
+    "id": 147,
+    "name": "wonder-skin",
+    "localizedName": "미라클스킨"
+  },
+  "148": {
+    "id": 148,
+    "name": "analytic",
+    "localizedName": "애널라이즈"
+  },
+  "149": {
+    "id": 149,
+    "name": "illusion",
+    "localizedName": "일루전"
+  },
+  "150": {
+    "id": 150,
+    "name": "imposter",
+    "localizedName": "괴짜"
+  },
+  "151": {
+    "id": 151,
+    "name": "infiltrator",
+    "localizedName": "틈새포착"
+  },
+  "152": {
+    "id": 152,
+    "name": "mummy",
+    "localizedName": "미라"
+  },
+  "153": {
+    "id": 153,
+    "name": "moxie",
+    "localizedName": "자기과신"
+  },
+  "154": {
+    "id": 154,
+    "name": "justified",
+    "localizedName": "정의의마음"
+  },
+  "155": {
+    "id": 155,
+    "name": "rattled",
+    "localizedName": "주눅"
+  },
+  "156": {
+    "id": 156,
+    "name": "magic-bounce",
+    "localizedName": "매직미러"
+  },
+  "157": {
+    "id": 157,
+    "name": "sap-sipper",
+    "localizedName": "초식"
+  },
+  "158": {
+    "id": 158,
+    "name": "prankster",
+    "localizedName": "짓궂은마음"
+  },
+  "159": {
+    "id": 159,
+    "name": "sand-force",
+    "localizedName": "모래의힘"
+  },
+  "160": {
+    "id": 160,
+    "name": "iron-barbs",
+    "localizedName": "철가시"
+  },
+  "161": {
+    "id": 161,
+    "name": "zen-mode",
+    "localizedName": "달마모드"
+  },
+  "162": {
+    "id": 162,
+    "name": "victory-star",
+    "localizedName": "승리의별"
+  },
+  "163": {
+    "id": 163,
+    "name": "turboblaze",
+    "localizedName": "터보블레이즈"
+  },
+  "164": {
+    "id": 164,
+    "name": "teravolt",
+    "localizedName": "테라볼티지"
+  },
+  "165": {
+    "id": 165,
+    "name": "aroma-veil",
+    "localizedName": "아로마베일"
+  },
+  "166": {
+    "id": 166,
+    "name": "flower-veil",
+    "localizedName": "플라워베일"
+  },
+  "167": {
+    "id": 167,
+    "name": "cheek-pouch",
+    "localizedName": "볼주머니"
+  },
+  "168": {
+    "id": 168,
+    "name": "protean",
+    "localizedName": "변환자재"
+  },
+  "169": {
+    "id": 169,
+    "name": "fur-coat",
+    "localizedName": "퍼코트"
+  },
+  "170": {
+    "id": 170,
+    "name": "magician",
+    "localizedName": "매지션"
+  },
+  "171": {
+    "id": 171,
+    "name": "bulletproof",
+    "localizedName": "방탄"
+  },
+  "172": {
+    "id": 172,
+    "name": "competitive",
+    "localizedName": "승기"
+  },
+  "173": {
+    "id": 173,
+    "name": "strong-jaw",
+    "localizedName": "옹골찬턱"
+  },
+  "174": {
+    "id": 174,
+    "name": "refrigerate",
+    "localizedName": "프리즈스킨"
+  },
+  "175": {
+    "id": 175,
+    "name": "sweet-veil",
+    "localizedName": "스위트베일"
+  },
+  "176": {
+    "id": 176,
+    "name": "stance-change",
+    "localizedName": "배틀스위치"
+  },
+  "177": {
+    "id": 177,
+    "name": "gale-wings",
+    "localizedName": "질풍날개"
+  },
+  "178": {
+    "id": 178,
+    "name": "mega-launcher",
+    "localizedName": "메가런처"
+  },
+  "179": {
+    "id": 179,
+    "name": "grass-pelt",
+    "localizedName": "풀모피"
+  },
+  "180": {
+    "id": 180,
+    "name": "symbiosis",
+    "localizedName": "공생"
+  },
+  "181": {
+    "id": 181,
+    "name": "tough-claws",
+    "localizedName": "단단한발톱"
+  },
+  "182": {
+    "id": 182,
+    "name": "pixilate",
+    "localizedName": "페어리스킨"
+  },
+  "183": {
+    "id": 183,
+    "name": "gooey",
+    "localizedName": "미끈미끈"
+  },
+  "184": {
+    "id": 184,
+    "name": "aerilate",
+    "localizedName": "스카이스킨"
+  },
+  "185": {
+    "id": 185,
+    "name": "parental-bond",
+    "localizedName": "부자유친"
+  },
+  "186": {
+    "id": 186,
+    "name": "dark-aura",
+    "localizedName": "다크오라"
+  },
+  "187": {
+    "id": 187,
+    "name": "fairy-aura",
+    "localizedName": "페어리오라"
+  },
+  "188": {
+    "id": 188,
+    "name": "aura-break",
+    "localizedName": "오라브레이크"
+  },
+  "189": {
+    "id": 189,
+    "name": "primordial-sea",
+    "localizedName": "시작의바다"
+  },
+  "190": {
+    "id": 190,
+    "name": "desolate-land",
+    "localizedName": "끝의대지"
+  },
+  "191": {
+    "id": 191,
+    "name": "delta-stream",
+    "localizedName": "델타스트림"
+  },
+  "192": {
+    "id": 192,
+    "name": "stamina",
+    "localizedName": "지구력"
+  },
+  "193": {
+    "id": 193,
+    "name": "wimp-out",
+    "localizedName": "도망태세"
+  },
+  "194": {
+    "id": 194,
+    "name": "emergency-exit",
+    "localizedName": "위기회피"
+  },
+  "195": {
+    "id": 195,
+    "name": "water-compaction",
+    "localizedName": "꾸덕꾸덕굳기"
+  },
+  "196": {
+    "id": 196,
+    "name": "merciless",
+    "localizedName": "무도한행동"
+  },
+  "197": {
+    "id": 197,
+    "name": "shields-down",
+    "localizedName": "리밋실드"
+  },
+  "198": {
+    "id": 198,
+    "name": "stakeout",
+    "localizedName": "잠복"
+  },
+  "199": {
+    "id": 199,
+    "name": "water-bubble",
+    "localizedName": "수포"
+  },
+  "200": {
+    "id": 200,
+    "name": "steelworker",
+    "localizedName": "강철술사"
+  },
+  "201": {
+    "id": 201,
+    "name": "berserk",
+    "localizedName": "발끈"
+  },
+  "202": {
+    "id": 202,
+    "name": "slush-rush",
+    "localizedName": "눈치우기"
+  },
+  "203": {
+    "id": 203,
+    "name": "long-reach",
+    "localizedName": "원격"
+  },
+  "204": {
+    "id": 204,
+    "name": "liquid-voice",
+    "localizedName": "촉촉보이스"
+  },
+  "205": {
+    "id": 205,
+    "name": "triage",
+    "localizedName": "힐링시프트"
+  },
+  "206": {
+    "id": 206,
+    "name": "galvanize",
+    "localizedName": "일렉트릭스킨"
+  },
+  "207": {
+    "id": 207,
+    "name": "surge-surfer",
+    "localizedName": "서핑테일"
+  },
+  "208": {
+    "id": 208,
+    "name": "schooling",
+    "localizedName": "어군"
+  },
+  "209": {
+    "id": 209,
+    "name": "disguise",
+    "localizedName": "탈"
+  },
+  "210": {
+    "id": 210,
+    "name": "battle-bond",
+    "localizedName": "유대변화"
+  },
+  "211": {
+    "id": 211,
+    "name": "power-construct",
+    "localizedName": "스웜체인지"
+  },
+  "212": {
+    "id": 212,
+    "name": "corrosion",
+    "localizedName": "부식"
+  },
+  "213": {
+    "id": 213,
+    "name": "comatose",
+    "localizedName": "절대안깸"
+  },
+  "214": {
+    "id": 214,
+    "name": "queenly-majesty",
+    "localizedName": "여왕의위엄"
+  },
+  "215": {
+    "id": 215,
+    "name": "innards-out",
+    "localizedName": "내용물분출"
+  },
+  "216": {
+    "id": 216,
+    "name": "dancer",
+    "localizedName": "무희"
+  },
+  "217": {
+    "id": 217,
+    "name": "battery",
+    "localizedName": "배터리"
+  },
+  "218": {
+    "id": 218,
+    "name": "fluffy",
+    "localizedName": "복슬복슬"
+  },
+  "219": {
+    "id": 219,
+    "name": "dazzling",
+    "localizedName": "비비드바디"
+  },
+  "220": {
+    "id": 220,
+    "name": "soul-heart",
+    "localizedName": "소울하트"
+  },
+  "221": {
+    "id": 221,
+    "name": "tangling-hair",
+    "localizedName": "컬리헤어"
+  },
+  "222": {
+    "id": 222,
+    "name": "receiver",
+    "localizedName": "리시버"
+  },
+  "223": {
+    "id": 223,
+    "name": "power-of-alchemy",
+    "localizedName": "과학의힘"
+  },
+  "224": {
+    "id": 224,
+    "name": "beast-boost",
+    "localizedName": "비스트부스트"
+  },
+  "225": {
+    "id": 225,
+    "name": "rks-system",
+    "localizedName": "AR시스템"
+  },
+  "226": {
+    "id": 226,
+    "name": "electric-surge",
+    "localizedName": "일렉트릭메이커"
+  },
+  "227": {
+    "id": 227,
+    "name": "psychic-surge",
+    "localizedName": "사이코메이커"
+  },
+  "228": {
+    "id": 228,
+    "name": "misty-surge",
+    "localizedName": "미스트메이커"
+  },
+  "229": {
+    "id": 229,
+    "name": "grassy-surge",
+    "localizedName": "그래스메이커"
+  },
+  "230": {
+    "id": 230,
+    "name": "full-metal-body",
+    "localizedName": "메탈프로텍트"
+  },
+  "231": {
+    "id": 231,
+    "name": "shadow-shield",
+    "localizedName": "스펙터가드"
+  },
+  "232": {
+    "id": 232,
+    "name": "prism-armor",
+    "localizedName": "프리즘아머"
+  },
+  "233": {
+    "id": 233,
+    "name": "neuroforce",
+    "localizedName": "브레인포스"
+  },
+  "234": {
+    "id": 234,
+    "name": "intrepid-sword",
+    "localizedName": "불요의검"
+  },
+  "235": {
+    "id": 235,
+    "name": "dauntless-shield",
+    "localizedName": "불굴의방패"
+  },
+  "236": {
+    "id": 236,
+    "name": "libero",
+    "localizedName": "리베로"
+  },
+  "237": {
+    "id": 237,
+    "name": "ball-fetch",
+    "localizedName": "볼줍기"
+  },
+  "238": {
+    "id": 238,
+    "name": "cotton-down",
+    "localizedName": "솜털"
+  },
+  "239": {
+    "id": 239,
+    "name": "propeller-tail",
+    "localizedName": "스크루지느러미"
+  },
+  "240": {
+    "id": 240,
+    "name": "mirror-armor",
+    "localizedName": "미러아머"
+  },
+  "241": {
+    "id": 241,
+    "name": "gulp-missile",
+    "localizedName": "그대로꿀꺽미사일"
+  },
+  "242": {
+    "id": 242,
+    "name": "stalwart",
+    "localizedName": "굳건한신념"
+  },
+  "243": {
+    "id": 243,
+    "name": "steam-engine",
+    "localizedName": "증기기관"
+  },
+  "244": {
+    "id": 244,
+    "name": "punk-rock",
+    "localizedName": "펑크록"
+  },
+  "245": {
+    "id": 245,
+    "name": "sand-spit",
+    "localizedName": "모래뿜기"
+  },
+  "246": {
+    "id": 246,
+    "name": "ice-scales",
+    "localizedName": "얼음인분"
+  },
+  "247": {
+    "id": 247,
+    "name": "ripen",
+    "localizedName": "숙성"
+  },
+  "248": {
+    "id": 248,
+    "name": "ice-face",
+    "localizedName": "아이스페이스"
+  },
+  "249": {
+    "id": 249,
+    "name": "power-spot",
+    "localizedName": "파워스폿"
+  },
+  "250": {
+    "id": 250,
+    "name": "mimicry",
+    "localizedName": "의태"
+  },
+  "251": {
+    "id": 251,
+    "name": "screen-cleaner",
+    "localizedName": "배리어프리"
+  },
+  "252": {
+    "id": 252,
+    "name": "steely-spirit",
+    "localizedName": "강철정신"
+  },
+  "253": {
+    "id": 253,
+    "name": "perish-body",
+    "localizedName": "멸망의바디"
+  },
+  "254": {
+    "id": 254,
+    "name": "wandering-spirit",
+    "localizedName": "떠도는영혼"
+  },
+  "255": {
+    "id": 255,
+    "name": "gorilla-tactics",
+    "localizedName": "무아지경"
+  },
+  "256": {
+    "id": 256,
+    "name": "neutralizing-gas",
+    "localizedName": "화학변화가스"
+  },
+  "257": {
+    "id": 257,
+    "name": "pastel-veil",
+    "localizedName": "파스텔베일"
+  },
+  "258": {
+    "id": 258,
+    "name": "hunger-switch",
+    "localizedName": "꼬르륵스위치"
+  },
+  "259": {
+    "id": 259,
+    "name": "quick-draw",
+    "localizedName": "퀵드로"
+  },
+  "260": {
+    "id": 260,
+    "name": "unseen-fist",
+    "localizedName": "보이지않는주먹"
+  },
+  "261": {
+    "id": 261,
+    "name": "curious-medicine",
+    "localizedName": "기묘한약"
+  },
+  "262": {
+    "id": 262,
+    "name": "transistor",
+    "localizedName": "트랜지스터"
+  },
+  "263": {
+    "id": 263,
+    "name": "dragons-maw",
+    "localizedName": "용의턱"
+  },
+  "264": {
+    "id": 264,
+    "name": "chilling-neigh",
+    "localizedName": "백의울음"
+  },
+  "265": {
+    "id": 265,
+    "name": "grim-neigh",
+    "localizedName": "흑의울음"
+  },
+  "266": {
+    "id": 266,
+    "name": "as-one-glastrier",
+    "localizedName": "혼연일체"
+  },
+  "267": {
+    "id": 267,
+    "name": "as-one-spectrier",
+    "localizedName": "혼연일체"
+  },
+  "299": {
+    "id": 299,
+    "name": "minds-eye",
+    "localizedName": "심안"
+  },
+  "300": {
+    "id": 300,
+    "name": "supersweet-syrup",
+    "localizedName": "감미로운꿀"
+  },
+  "301": {
+    "id": 301,
+    "name": "hospitality",
+    "localizedName": "대접"
+  },
+  "302": {
+    "id": 302,
+    "name": "toxic-chain",
+    "localizedName": "독사슬"
+  },
+  "303": {
+    "id": 303,
+    "name": "embody-aspect",
+    "localizedName": "초상투영"
+  },
+  "304": {
+    "id": 304,
+    "name": "tera-shift",
+    "localizedName": "테라체인지"
+  },
+  "305": {
+    "id": 305,
+    "name": "tera-shell",
+    "localizedName": "테라셸"
+  },
+  "306": {
+    "id": 306,
+    "name": "teraform-zero",
+    "localizedName": "제로포밍"
+  },
+  "307": {
+    "id": 307,
+    "name": "poison-puppeteer",
+    "localizedName": "독조종"
+  }
+}
