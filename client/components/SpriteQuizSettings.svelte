@@ -34,18 +34,6 @@
     let effects: SpriteEffectSettings = initialSettings?.effects ?? { ...DEFAULT_SPRITE_EFFECTS };
     let numberOfOptions: number = initialSettings?.numberOfOptions ?? 4;
 
-    // Reactively update state when initialSettings changes (when returning from quiz)
-    $: if (initialSettings) {
-        timeLimit = initialSettings.timeLimit ?? 15;
-        hasTimeLimit = initialSettings.hasTimeLimit ?? false;
-        gameMode = initialSettings.gameMode ?? 'score';
-        selectedGenerations = new Set(initialSettings.selectedGenerations ?? ALL_GENERATIONS);
-        selectedSpriteTypes = initialSettings.selectedSpriteTypes ?? ['front'];
-        spriteSource = initialSettings.spriteSource ?? 'home';
-        effects = initialSettings.effects ?? { ...DEFAULT_SPRITE_EFFECTS };
-        numberOfOptions = initialSettings.numberOfOptions ?? 4;
-    }
-
     // Toast state
     let toastState: ToastState = {
         message: '',
