@@ -1,0 +1,38 @@
+{
+  "1": {
+    "id": 1,
+    "name": "caverna"
+  },
+  "2": {
+    "id": 2,
+    "name": "bosque"
+  },
+  "3": {
+    "id": 3,
+    "name": "pradera"
+  },
+  "4": {
+    "id": 4,
+    "name": "montaña"
+  },
+  "5": {
+    "id": 5,
+    "name": "raro"
+  },
+  "6": {
+    "id": 6,
+    "name": "campo"
+  },
+  "7": {
+    "id": 7,
+    "name": "mar"
+  },
+  "8": {
+    "id": 8,
+    "name": "ciudad"
+  },
+  "9": {
+    "id": 9,
+    "name": "agua salada"
+  }
+}

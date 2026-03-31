@@ -1,0 +1,3594 @@
+{
+  "1": {
+    "id": "1",
+    "genus": "Pokémon Semilla"
+  },
+  "2": {
+    "id": "2",
+    "genus": "Pokémon Semilla"
+  },
+  "3": {
+    "id": "3",
+    "genus": "Pokémon Semilla"
+  },
+  "4": {
+    "id": "4",
+    "genus": "Pokémon Lagartija"
+  },
+  "5": {
+    "id": "5",
+    "genus": "Pokémon Llama"
+  },
+  "6": {
+    "id": "6",
+    "genus": "Pokémon Llama"
+  },
+  "7": {
+    "id": "7",
+    "genus": "Pokémon Tortuguita"
+  },
+  "8": {
+    "id": "8",
+    "genus": "Pokémon Tortuga"
+  },
+  "9": {
+    "id": "9",
+    "genus": "Pokémon Armazón"
+  },
+  "10": {
+    "id": "10",
+    "genus": "Pokémon Gusano"
+  },
+  "11": {
+    "id": "11",
+    "genus": "Pokémon Capullo"
+  },
+  "12": {
+    "id": "12",
+    "genus": "Pokémon Mariposa"
+  },
+  "13": {
+    "id": "13",
+    "genus": "Pokémon Oruga"
+  },
+  "14": {
+    "id": "14",
+    "genus": "Pokémon Capullo"
+  },
+  "15": {
+    "id": "15",
+    "genus": "Pokémon Abeja Veneno"
+  },
+  "16": {
+    "id": "16",
+    "genus": "Pokémon Pajarito"
+  },
+  "17": {
+    "id": "17",
+    "genus": "Pokémon Pájaro"
+  },
+  "18": {
+    "id": "18",
+    "genus": "Pokémon Pájaro"
+  },
+  "19": {
+    "id": "19",
+    "genus": "Pokémon Ratón"
+  },
+  "20": {
+    "id": "20",
+    "genus": "Pokémon Ratón"
+  },
+  "21": {
+    "id": "21",
+    "genus": "Pokémon Pajarito"
+  },
+  "22": {
+    "id": "22",
+    "genus": "Pokémon Pico"
+  },
+  "23": {
+    "id": "23",
+    "genus": "Pokémon Serpiente"
+  },
+  "24": {
+    "id": "24",
+    "genus": "Pokémon Cobra"
+  },
+  "25": {
+    "id": "25",
+    "genus": "Pokémon Ratón"
+  },
+  "26": {
+    "id": "26",
+    "genus": "Pokémon Ratón"
+  },
+  "27": {
+    "id": "27",
+    "genus": "Pokémon Ratón"
+  },
+  "28": {
+    "id": "28",
+    "genus": "Pokémon Ratón"
+  },
+  "29": {
+    "id": "29",
+    "genus": "Pokémon Pin Veneno"
+  },
+  "30": {
+    "id": "30",
+    "genus": "Pokémon Pin Veneno"
+  },
+  "31": {
+    "id": "31",
+    "genus": "Pokémon Taladro"
+  },
+  "32": {
+    "id": "32",
+    "genus": "Pokémon Pin Veneno"
+  },
+  "33": {
+    "id": "33",
+    "genus": "Pokémon Pin Veneno"
+  },
+  "34": {
+    "id": "34",
+    "genus": "Pokémon Taladro"
+  },
+  "35": {
+    "id": "35",
+    "genus": "Pokémon Hada"
+  },
+  "36": {
+    "id": "36",
+    "genus": "Pokémon Hada"
+  },
+  "37": {
+    "id": "37",
+    "genus": "Pokémon Zorro"
+  },
+  "38": {
+    "id": "38",
+    "genus": "Pokémon Zorro"
+  },
+  "39": {
+    "id": "39",
+    "genus": "Pokémon Globo"
+  },
+  "40": {
+    "id": "40",
+    "genus": "Pokémon Globo"
+  },
+  "41": {
+    "id": "41",
+    "genus": "Pokémon Murciélago"
+  },
+  "42": {
+    "id": "42",
+    "genus": "Pokémon Murciélago"
+  },
+  "43": {
+    "id": "43",
+    "genus": "Pokémon Hierbajo"
+  },
+  "44": {
+    "id": "44",
+    "genus": "Pokémon Hierbajo"
+  },
+  "45": {
+    "id": "45",
+    "genus": "Pokémon Flor"
+  },
+  "46": {
+    "id": "46",
+    "genus": "Pokémon Hongo"
+  },
+  "47": {
+    "id": "47",
+    "genus": "Pokémon Hongo"
+  },
+  "48": {
+    "id": "48",
+    "genus": "Pokémon Insecto"
+  },
+  "49": {
+    "id": "49",
+    "genus": "Pokémon Polilla Ven."
+  },
+  "50": {
+    "id": "50",
+    "genus": "Pokémon Topo"
+  },
+  "51": {
+    "id": "51",
+    "genus": "Pokémon Topo"
+  },
+  "52": {
+    "id": "52",
+    "genus": "Pokémon Gato Araña"
+  },
+  "53": {
+    "id": "53",
+    "genus": "Pokémon Gato Fino"
+  },
+  "54": {
+    "id": "54",
+    "genus": "Pokémon Pato"
+  },
+  "55": {
+    "id": "55",
+    "genus": "Pokémon Pato"
+  },
+  "56": {
+    "id": "56",
+    "genus": "Pokémon Mono Cerdo"
+  },
+  "57": {
+    "id": "57",
+    "genus": "Pokémon Mono Cerdo"
+  },
+  "58": {
+    "id": "58",
+    "genus": "Pokémon Perrito"
+  },
+  "59": {
+    "id": "59",
+    "genus": "Pokémon Leyenda"
+  },
+  "60": {
+    "id": "60",
+    "genus": "Pokémon Renacuajo"
+  },
+  "61": {
+    "id": "61",
+    "genus": "Pokémon Renacuajo"
+  },
+  "62": {
+    "id": "62",
+    "genus": "Pokémon Renacuajo"
+  },
+  "63": {
+    "id": "63",
+    "genus": "Pokémon Psi"
+  },
+  "64": {
+    "id": "64",
+    "genus": "Pokémon Psi"
+  },
+  "65": {
+    "id": "65",
+    "genus": "Pokémon Psi"
+  },
+  "66": {
+    "id": "66",
+    "genus": "Pokémon Superpoder"
+  },
+  "67": {
+    "id": "67",
+    "genus": "Pokémon Superpoder"
+  },
+  "68": {
+    "id": "68",
+    "genus": "Pokémon Superpoder"
+  },
+  "69": {
+    "id": "69",
+    "genus": "Pokémon Flor"
+  },
+  "70": {
+    "id": "70",
+    "genus": "Pokémon Matamoscas"
+  },
+  "71": {
+    "id": "71",
+    "genus": "Pokémon Matamoscas"
+  },
+  "72": {
+    "id": "72",
+    "genus": "Pokémon Medusa"
+  },
+  "73": {
+    "id": "73",
+    "genus": "Pokémon Medusa"
+  },
+  "74": {
+    "id": "74",
+    "genus": "Pokémon Roca"
+  },
+  "75": {
+    "id": "75",
+    "genus": "Pokémon Roca"
+  },
+  "76": {
+    "id": "76",
+    "genus": "Pokémon Megatón"
+  },
+  "77": {
+    "id": "77",
+    "genus": "Pokémon Caballo Fuego"
+  },
+  "78": {
+    "id": "78",
+    "genus": "Pokémon Caballo Fuego"
+  },
+  "79": {
+    "id": "79",
+    "genus": "Pokémon Atontado"
+  },
+  "80": {
+    "id": "80",
+    "genus": "Pokémon Ermitaño"
+  },
+  "81": {
+    "id": "81",
+    "genus": "Pokémon Imán"
+  },
+  "82": {
+    "id": "82",
+    "genus": "Pokémon Imán"
+  },
+  "83": {
+    "id": "83",
+    "genus": "Pokémon Pato Salvaje"
+  },
+  "84": {
+    "id": "84",
+    "genus": "Pokémon Ave Gemela"
+  },
+  "85": {
+    "id": "85",
+    "genus": "Pokémon Ave Triple"
+  },
+  "86": {
+    "id": "86",
+    "genus": "Pokémon León Marino"
+  },
+  "87": {
+    "id": "87",
+    "genus": "Pokémon León Marino"
+  },
+  "88": {
+    "id": "88",
+    "genus": "Pokémon Lodo"
+  },
+  "89": {
+    "id": "89",
+    "genus": "Pokémon Lodo"
+  },
+  "90": {
+    "id": "90",
+    "genus": "Pokémon Bivalvo"
+  },
+  "91": {
+    "id": "91",
+    "genus": "Pokémon Bivalvo"
+  },
+  "92": {
+    "id": "92",
+    "genus": "Pokémon Gas"
+  },
+  "93": {
+    "id": "93",
+    "genus": "Pokémon Gas"
+  },
+  "94": {
+    "id": "94",
+    "genus": "Pokémon Sombra"
+  },
+  "95": {
+    "id": "95",
+    "genus": "Pokémon Serpiente Roca"
+  },
+  "96": {
+    "id": "96",
+    "genus": "Pokémon Hipnosis"
+  },
+  "97": {
+    "id": "97",
+    "genus": "Pokémon Hipnosis"
+  },
+  "98": {
+    "id": "98",
+    "genus": "Pokémon Cangrejo"
+  },
+  "99": {
+    "id": "99",
+    "genus": "Pokémon Tenaza"
+  },
+  "100": {
+    "id": "100",
+    "genus": "Pokémon Bola"
+  },
+  "101": {
+    "id": "101",
+    "genus": "Pokémon Bola"
+  },
+  "102": {
+    "id": "102",
+    "genus": "Pokémon Huevo"
+  },
+  "103": {
+    "id": "103",
+    "genus": "Pokémon Coco"
+  },
+  "104": {
+    "id": "104",
+    "genus": "Pokémon Solitario"
+  },
+  "105": {
+    "id": "105",
+    "genus": "Pokémon Apilahueso"
+  },
+  "106": {
+    "id": "106",
+    "genus": "Pokémon Patada"
+  },
+  "107": {
+    "id": "107",
+    "genus": "Pokémon Puñetazo"
+  },
+  "108": {
+    "id": "108",
+    "genus": "Pokémon Lametazo"
+  },
+  "109": {
+    "id": "109",
+    "genus": "Pokémon Gas Venenoso"
+  },
+  "110": {
+    "id": "110",
+    "genus": "Pokémon Gas Venenoso"
+  },
+  "111": {
+    "id": "111",
+    "genus": "Pokémon Clavos"
+  },
+  "112": {
+    "id": "112",
+    "genus": "Pokémon Taladro"
+  },
+  "113": {
+    "id": "113",
+    "genus": "Pokémon Huevo"
+  },
+  "114": {
+    "id": "114",
+    "genus": "Pokémon Enredadera"
+  },
+  "115": {
+    "id": "115",
+    "genus": "Pokémon Maternal"
+  },
+  "116": {
+    "id": "116",
+    "genus": "Pokémon Dragón"
+  },
+  "117": {
+    "id": "117",
+    "genus": "Pokémon Dragón"
+  },
+  "118": {
+    "id": "118",
+    "genus": "Pokémon Pez Color"
+  },
+  "119": {
+    "id": "119",
+    "genus": "Pokémon Pez Color"
+  },
+  "120": {
+    "id": "120",
+    "genus": "Pokémon Estrella"
+  },
+  "121": {
+    "id": "121",
+    "genus": "Pokémon Misterioso"
+  },
+  "122": {
+    "id": "122",
+    "genus": "Pokémon Barrera"
+  },
+  "123": {
+    "id": "123",
+    "genus": "Pokémon Mantis"
+  },
+  "124": {
+    "id": "124",
+    "genus": "Pokémon Forma Humana"
+  },
+  "125": {
+    "id": "125",
+    "genus": "Pokémon Eléctrico"
+  },
+  "126": {
+    "id": "126",
+    "genus": "Pokémon Escupefuego"
+  },
+  "127": {
+    "id": "127",
+    "genus": "Pokémon Escarabajo"
+  },
+  "128": {
+    "id": "128",
+    "genus": "Pokémon Toro Bravo"
+  },
+  "129": {
+    "id": "129",
+    "genus": "Pokémon Pez"
+  },
+  "130": {
+    "id": "130",
+    "genus": "Pokémon Atrocidad"
+  },
+  "131": {
+    "id": "131",
+    "genus": "Pokémon Transporte"
+  },
+  "132": {
+    "id": "132",
+    "genus": "Pokémon Transformación"
+  },
+  "133": {
+    "id": "133",
+    "genus": "Pokémon Evolución"
+  },
+  "134": {
+    "id": "134",
+    "genus": "Pokémon Burbuja"
+  },
+  "135": {
+    "id": "135",
+    "genus": "Pokémon Relámpago"
+  },
+  "136": {
+    "id": "136",
+    "genus": "Pokémon Llama"
+  },
+  "137": {
+    "id": "137",
+    "genus": "Pokémon Virtual"
+  },
+  "138": {
+    "id": "138",
+    "genus": "Pokémon Espiral"
+  },
+  "139": {
+    "id": "139",
+    "genus": "Pokémon Espiral"
+  },
+  "140": {
+    "id": "140",
+    "genus": "Pokémon Armazón"
+  },
+  "141": {
+    "id": "141",
+    "genus": "Pokémon Armazón"
+  },
+  "142": {
+    "id": "142",
+    "genus": "Pokémon Fósil"
+  },
+  "143": {
+    "id": "143",
+    "genus": "Pokémon Dormir"
+  },
+  "144": {
+    "id": "144",
+    "genus": "Pokémon Congelar"
+  },
+  "145": {
+    "id": "145",
+    "genus": "Pokémon Eléctrico"
+  },
+  "146": {
+    "id": "146",
+    "genus": "Pokémon Llama"
+  },
+  "147": {
+    "id": "147",
+    "genus": "Pokémon Dragón"
+  },
+  "148": {
+    "id": "148",
+    "genus": "Pokémon Dragón"
+  },
+  "149": {
+    "id": "149",
+    "genus": "Pokémon Dragón"
+  },
+  "150": {
+    "id": "150",
+    "genus": "Pokémon Genético"
+  },
+  "151": {
+    "id": "151",
+    "genus": "Pokémon Nueva Especie"
+  },
+  "152": {
+    "id": "152",
+    "genus": "Pokémon Hoja"
+  },
+  "153": {
+    "id": "153",
+    "genus": "Pokémon Hoja"
+  },
+  "154": {
+    "id": "154",
+    "genus": "Pokémon Hierba"
+  },
+  "155": {
+    "id": "155",
+    "genus": "Pokémon Ratón Fuego"
+  },
+  "156": {
+    "id": "156",
+    "genus": "Pokémon Volcán"
+  },
+  "157": {
+    "id": "157",
+    "genus": "Pokémon Volcán"
+  },
+  "158": {
+    "id": "158",
+    "genus": "Pokémon Fauces"
+  },
+  "159": {
+    "id": "159",
+    "genus": "Pokémon Fauces"
+  },
+  "160": {
+    "id": "160",
+    "genus": "Pokémon Fauces"
+  },
+  "161": {
+    "id": "161",
+    "genus": "Pokémon Explorador"
+  },
+  "162": {
+    "id": "162",
+    "genus": "Pokémon Alargado"
+  },
+  "163": {
+    "id": "163",
+    "genus": "Pokémon Búho"
+  },
+  "164": {
+    "id": "164",
+    "genus": "Pokémon Búho"
+  },
+  "165": {
+    "id": "165",
+    "genus": "Pokémon 5 Estrellas"
+  },
+  "166": {
+    "id": "166",
+    "genus": "Pokémon 5 Estrellas"
+  },
+  "167": {
+    "id": "167",
+    "genus": "Pokémon Escupesoga"
+  },
+  "168": {
+    "id": "168",
+    "genus": "Pokémon Pata Larga"
+  },
+  "169": {
+    "id": "169",
+    "genus": "Pokémon Murciélago"
+  },
+  "170": {
+    "id": "170",
+    "genus": "Pokémon Rape"
+  },
+  "171": {
+    "id": "171",
+    "genus": "Pokémon Luz"
+  },
+  "172": {
+    "id": "172",
+    "genus": "Pokémon Ratoncito"
+  },
+  "173": {
+    "id": "173",
+    "genus": "Pokémon Estrella"
+  },
+  "174": {
+    "id": "174",
+    "genus": "Pokémon Globo"
+  },
+  "175": {
+    "id": "175",
+    "genus": "Pokémon Bolaclavos"
+  },
+  "176": {
+    "id": "176",
+    "genus": "Pokémon Felicidad"
+  },
+  "177": {
+    "id": "177",
+    "genus": "Pokémon Pajarito"
+  },
+  "178": {
+    "id": "178",
+    "genus": "Pokémon Místico"
+  },
+  "179": {
+    "id": "179",
+    "genus": "Pokémon Lana"
+  },
+  "180": {
+    "id": "180",
+    "genus": "Pokémon Lana"
+  },
+  "181": {
+    "id": "181",
+    "genus": "Pokémon Luz"
+  },
+  "182": {
+    "id": "182",
+    "genus": "Pokémon Flor"
+  },
+  "183": {
+    "id": "183",
+    "genus": "Pokémon Ratón Agua"
+  },
+  "184": {
+    "id": "184",
+    "genus": "Pokémon Conejo Agua"
+  },
+  "185": {
+    "id": "185",
+    "genus": "Pokémon Imitación"
+  },
+  "186": {
+    "id": "186",
+    "genus": "Pokémon Rana"
+  },
+  "187": {
+    "id": "187",
+    "genus": "Pokémon Algadón"
+  },
+  "188": {
+    "id": "188",
+    "genus": "Pokémon Algadón"
+  },
+  "189": {
+    "id": "189",
+    "genus": "Pokémon Algadón"
+  },
+  "190": {
+    "id": "190",
+    "genus": "Pokémon Cola Larga"
+  },
+  "191": {
+    "id": "191",
+    "genus": "Pokémon Semilla"
+  },
+  "192": {
+    "id": "192",
+    "genus": "Pokémon Sol"
+  },
+  "193": {
+    "id": "193",
+    "genus": "Pokémon Ala Clara"
+  },
+  "194": {
+    "id": "194",
+    "genus": "Pokémon Pez Agua"
+  },
+  "195": {
+    "id": "195",
+    "genus": "Pokémon Pez Agua"
+  },
+  "196": {
+    "id": "196",
+    "genus": "Pokémon Sol"
+  },
+  "197": {
+    "id": "197",
+    "genus": "Pokémon Luz Lunar"
+  },
+  "198": {
+    "id": "198",
+    "genus": "Pokémon Oscuridad"
+  },
+  "199": {
+    "id": "199",
+    "genus": "Pokémon Regio"
+  },
+  "200": {
+    "id": "200",
+    "genus": "Pokémon Chirrido"
+  },
+  "201": {
+    "id": "201",
+    "genus": "Pokémon Símbolo"
+  },
+  "202": {
+    "id": "202",
+    "genus": "Pokémon Paciente"
+  },
+  "203": {
+    "id": "203",
+    "genus": "Pokémon Gran Cuello"
+  },
+  "204": {
+    "id": "204",
+    "genus": "Pokémon Larva"
+  },
+  "205": {
+    "id": "205",
+    "genus": "Pokémon Larva"
+  },
+  "206": {
+    "id": "206",
+    "genus": "Pokémon Serpiente Tierra"
+  },
+  "207": {
+    "id": "207",
+    "genus": "Pokémon Escorpiala"
+  },
+  "208": {
+    "id": "208",
+    "genus": "Pokémon Serpiente Férrea"
+  },
+  "209": {
+    "id": "209",
+    "genus": "Pokémon Hada"
+  },
+  "210": {
+    "id": "210",
+    "genus": "Pokémon Hada"
+  },
+  "211": {
+    "id": "211",
+    "genus": "Pokémon Globo"
+  },
+  "212": {
+    "id": "212",
+    "genus": "Pokémon Tenaza"
+  },
+  "213": {
+    "id": "213",
+    "genus": "Pokémon Moho"
+  },
+  "214": {
+    "id": "214",
+    "genus": "Pokémon Cuerno"
+  },
+  "215": {
+    "id": "215",
+    "genus": "Pokémon Garra Filo"
+  },
+  "216": {
+    "id": "216",
+    "genus": "Pokémon Osito"
+  },
+  "217": {
+    "id": "217",
+    "genus": "Pokémon Hibernante"
+  },
+  "218": {
+    "id": "218",
+    "genus": "Pokémon Lava"
+  },
+  "219": {
+    "id": "219",
+    "genus": "Pokémon Lava"
+  },
+  "220": {
+    "id": "220",
+    "genus": "Pokémon Cerdo"
+  },
+  "221": {
+    "id": "221",
+    "genus": "Pokémon Puerco"
+  },
+  "222": {
+    "id": "222",
+    "genus": "Pokémon Coral"
+  },
+  "223": {
+    "id": "223",
+    "genus": "Pokémon Reactor"
+  },
+  "224": {
+    "id": "224",
+    "genus": "Pokémon Reactor"
+  },
+  "225": {
+    "id": "225",
+    "genus": "Pokémon Reparto"
+  },
+  "226": {
+    "id": "226",
+    "genus": "Pokémon Milano"
+  },
+  "227": {
+    "id": "227",
+    "genus": "Pokémon Coraza Ave"
+  },
+  "228": {
+    "id": "228",
+    "genus": "Pokémon Siniestro"
+  },
+  "229": {
+    "id": "229",
+    "genus": "Pokémon Siniestro"
+  },
+  "230": {
+    "id": "230",
+    "genus": "Pokémon Dragón"
+  },
+  "231": {
+    "id": "231",
+    "genus": "Pokémon Narizotas"
+  },
+  "232": {
+    "id": "232",
+    "genus": "Pokémon Coraza"
+  },
+  "233": {
+    "id": "233",
+    "genus": "Pokémon Virtual"
+  },
+  "234": {
+    "id": "234",
+    "genus": "Pokémon Gran Cuerno"
+  },
+  "235": {
+    "id": "235",
+    "genus": "Pokémon Pintor"
+  },
+  "236": {
+    "id": "236",
+    "genus": "Pokémon Peleón"
+  },
+  "237": {
+    "id": "237",
+    "genus": "Pokémon Boca Abajo"
+  },
+  "238": {
+    "id": "238",
+    "genus": "Pokémon Beso"
+  },
+  "239": {
+    "id": "239",
+    "genus": "Pokémon Eléctrico"
+  },
+  "240": {
+    "id": "240",
+    "genus": "Pokémon Ascuas"
+  },
+  "241": {
+    "id": "241",
+    "genus": "Pokémon Lechera"
+  },
+  "242": {
+    "id": "242",
+    "genus": "Pokémon Felicidad"
+  },
+  "243": {
+    "id": "243",
+    "genus": "Pokémon Trueno"
+  },
+  "244": {
+    "id": "244",
+    "genus": "Pokémon Volcán"
+  },
+  "245": {
+    "id": "245",
+    "genus": "Pokémon Aurora"
+  },
+  "246": {
+    "id": "246",
+    "genus": "Pokémon Piel Roca"
+  },
+  "247": {
+    "id": "247",
+    "genus": "Pokémon Caparazón"
+  },
+  "248": {
+    "id": "248",
+    "genus": "Pokémon Coraza"
+  },
+  "249": {
+    "id": "249",
+    "genus": "Pokémon Buceo"
+  },
+  "250": {
+    "id": "250",
+    "genus": "Pokémon Arcoíris"
+  },
+  "251": {
+    "id": "251",
+    "genus": "Pokémon Viajetiempo"
+  },
+  "252": {
+    "id": "252",
+    "genus": "Pokémon Geco Bosque"
+  },
+  "253": {
+    "id": "253",
+    "genus": "Pokémon Geco Bosque"
+  },
+  "254": {
+    "id": "254",
+    "genus": "Pokémon Monte"
+  },
+  "255": {
+    "id": "255",
+    "genus": "Pokémon Polluelo"
+  },
+  "256": {
+    "id": "256",
+    "genus": "Pokémon Ave Corral"
+  },
+  "257": {
+    "id": "257",
+    "genus": "Pokémon Llameante"
+  },
+  "258": {
+    "id": "258",
+    "genus": "Pokémon Pez Lodo"
+  },
+  "259": {
+    "id": "259",
+    "genus": "Pokémon Pez Lodo"
+  },
+  "260": {
+    "id": "260",
+    "genus": "Pokémon Pez Lodo"
+  },
+  "261": {
+    "id": "261",
+    "genus": "Pokémon Mordisco"
+  },
+  "262": {
+    "id": "262",
+    "genus": "Pokémon Mordisco"
+  },
+  "263": {
+    "id": "263",
+    "genus": "Pokémon Mapachito"
+  },
+  "264": {
+    "id": "264",
+    "genus": "Pokémon Lanzado"
+  },
+  "265": {
+    "id": "265",
+    "genus": "Pokémon Gusano"
+  },
+  "266": {
+    "id": "266",
+    "genus": "Pokémon Capullo"
+  },
+  "267": {
+    "id": "267",
+    "genus": "Pokémon Mariposa"
+  },
+  "268": {
+    "id": "268",
+    "genus": "Pokémon Capullo"
+  },
+  "269": {
+    "id": "269",
+    "genus": "Pokémon Polilla Ven."
+  },
+  "270": {
+    "id": "270",
+    "genus": "Pokémon Lenteja Agua"
+  },
+  "271": {
+    "id": "271",
+    "genus": "Pokémon Alegre"
+  },
+  "272": {
+    "id": "272",
+    "genus": "Pokémon Optimista"
+  },
+  "273": {
+    "id": "273",
+    "genus": "Pokémon Bellota"
+  },
+  "274": {
+    "id": "274",
+    "genus": "Pokémon Astuto"
+  },
+  "275": {
+    "id": "275",
+    "genus": "Pokémon Malvado"
+  },
+  "276": {
+    "id": "276",
+    "genus": "Pokémon Pequebuche"
+  },
+  "277": {
+    "id": "277",
+    "genus": "Pokémon Buche"
+  },
+  "278": {
+    "id": "278",
+    "genus": "Pokémon Gaviota"
+  },
+  "279": {
+    "id": "279",
+    "genus": "Pokémon Ave Agua"
+  },
+  "280": {
+    "id": "280",
+    "genus": "Pokémon Sensible"
+  },
+  "281": {
+    "id": "281",
+    "genus": "Pokémon Sensorio"
+  },
+  "282": {
+    "id": "282",
+    "genus": "Pokémon Envolvente"
+  },
+  "283": {
+    "id": "283",
+    "genus": "Pokémon Zapatero"
+  },
+  "284": {
+    "id": "284",
+    "genus": "Pokémon Globocular"
+  },
+  "285": {
+    "id": "285",
+    "genus": "Pokémon Hongo"
+  },
+  "286": {
+    "id": "286",
+    "genus": "Pokémon Hongo"
+  },
+  "287": {
+    "id": "287",
+    "genus": "Pokémon Gandul"
+  },
+  "288": {
+    "id": "288",
+    "genus": "Pokémon Mono Feroz"
+  },
+  "289": {
+    "id": "289",
+    "genus": "Pokémon Holgazán"
+  },
+  "290": {
+    "id": "290",
+    "genus": "Pokémon Aprendiz"
+  },
+  "291": {
+    "id": "291",
+    "genus": "Pokémon Ninja"
+  },
+  "292": {
+    "id": "292",
+    "genus": "Pokémon Muda"
+  },
+  "293": {
+    "id": "293",
+    "genus": "Pokémon Susurro"
+  },
+  "294": {
+    "id": "294",
+    "genus": "Pokémon Chillón"
+  },
+  "295": {
+    "id": "295",
+    "genus": "Pokémon Escandaloso"
+  },
+  "296": {
+    "id": "296",
+    "genus": "Pokémon Valiente"
+  },
+  "297": {
+    "id": "297",
+    "genus": "Pokémon Empuje"
+  },
+  "298": {
+    "id": "298",
+    "genus": "Pokémon A Topos"
+  },
+  "299": {
+    "id": "299",
+    "genus": "Pokémon Brújula"
+  },
+  "300": {
+    "id": "300",
+    "genus": "Pokémon Gatito"
+  },
+  "301": {
+    "id": "301",
+    "genus": "Pokémon Cursi"
+  },
+  "302": {
+    "id": "302",
+    "genus": "Pokémon Oscuridad"
+  },
+  "303": {
+    "id": "303",
+    "genus": "Pokémon Tramposo"
+  },
+  "304": {
+    "id": "304",
+    "genus": "Pokémon Coraza Férrea"
+  },
+  "305": {
+    "id": "305",
+    "genus": "Pokémon Coraza Férrea"
+  },
+  "306": {
+    "id": "306",
+    "genus": "Pokémon Coraza Férrea"
+  },
+  "307": {
+    "id": "307",
+    "genus": "Pokémon Meditador"
+  },
+  "308": {
+    "id": "308",
+    "genus": "Pokémon Meditador"
+  },
+  "309": {
+    "id": "309",
+    "genus": "Pokémon Calambre"
+  },
+  "310": {
+    "id": "310",
+    "genus": "Pokémon Descarga"
+  },
+  "311": {
+    "id": "311",
+    "genus": "Pokémon Ánimo"
+  },
+  "312": {
+    "id": "312",
+    "genus": "Pokémon Ánimo"
+  },
+  "313": {
+    "id": "313",
+    "genus": "Pokémon Luciérnaga"
+  },
+  "314": {
+    "id": "314",
+    "genus": "Pokémon Luciérnaga"
+  },
+  "315": {
+    "id": "315",
+    "genus": "Pokémon Espina"
+  },
+  "316": {
+    "id": "316",
+    "genus": "Pokémon Estómago"
+  },
+  "317": {
+    "id": "317",
+    "genus": "Pokémon Bolsa Veneno"
+  },
+  "318": {
+    "id": "318",
+    "genus": "Pokémon Feroz"
+  },
+  "319": {
+    "id": "319",
+    "genus": "Pokémon Voraz"
+  },
+  "320": {
+    "id": "320",
+    "genus": "Pokémon Ballenabola"
+  },
+  "321": {
+    "id": "321",
+    "genus": "Pokémon Ballenaflot"
+  },
+  "322": {
+    "id": "322",
+    "genus": "Pokémon Torpe"
+  },
+  "323": {
+    "id": "323",
+    "genus": "Pokémon Erupción"
+  },
+  "324": {
+    "id": "324",
+    "genus": "Pokémon Carbón"
+  },
+  "325": {
+    "id": "325",
+    "genus": "Pokémon Saltarín"
+  },
+  "326": {
+    "id": "326",
+    "genus": "Pokémon Manipulador"
+  },
+  "327": {
+    "id": "327",
+    "genus": "Pokémon Panda Topos"
+  },
+  "328": {
+    "id": "328",
+    "genus": "Pokémon Hormiga León"
+  },
+  "329": {
+    "id": "329",
+    "genus": "Pokémon Vibrante"
+  },
+  "330": {
+    "id": "330",
+    "genus": "Pokémon Místico"
+  },
+  "331": {
+    "id": "331",
+    "genus": "Pokémon Cactus"
+  },
+  "332": {
+    "id": "332",
+    "genus": "Pokémon Espantajo"
+  },
+  "333": {
+    "id": "333",
+    "genus": "Pokémon Ave Algodón"
+  },
+  "334": {
+    "id": "334",
+    "genus": "Pokémon Cantor"
+  },
+  "335": {
+    "id": "335",
+    "genus": "Pokémon Gato Hurón"
+  },
+  "336": {
+    "id": "336",
+    "genus": "Pokémon Colmillos"
+  },
+  "337": {
+    "id": "337",
+    "genus": "Pokémon Meteorito"
+  },
+  "338": {
+    "id": "338",
+    "genus": "Pokémon Meteorito"
+  },
+  "339": {
+    "id": "339",
+    "genus": "Pokémon Bigotudo"
+  },
+  "340": {
+    "id": "340",
+    "genus": "Pokémon Bigotudo"
+  },
+  "341": {
+    "id": "341",
+    "genus": "Pokémon Rufián"
+  },
+  "342": {
+    "id": "342",
+    "genus": "Pokémon Granuja"
+  },
+  "343": {
+    "id": "343",
+    "genus": "Pokémon Muñeca Barro"
+  },
+  "344": {
+    "id": "344",
+    "genus": "Pokémon Muñeca Barro"
+  },
+  "345": {
+    "id": "345",
+    "genus": "Pokémon Lirio de Mar"
+  },
+  "346": {
+    "id": "346",
+    "genus": "Pokémon Percebe"
+  },
+  "347": {
+    "id": "347",
+    "genus": "Pokémon Camarón"
+  },
+  "348": {
+    "id": "348",
+    "genus": "Pokémon Armadura"
+  },
+  "349": {
+    "id": "349",
+    "genus": "Pokémon Pez"
+  },
+  "350": {
+    "id": "350",
+    "genus": "Pokémon Tierno"
+  },
+  "351": {
+    "id": "351",
+    "genus": "Pokémon Clima"
+  },
+  "352": {
+    "id": "352",
+    "genus": "Pokémon Camaleónico"
+  },
+  "353": {
+    "id": "353",
+    "genus": "Pokémon Títere"
+  },
+  "354": {
+    "id": "354",
+    "genus": "Pokémon Marioneta"
+  },
+  "355": {
+    "id": "355",
+    "genus": "Pokémon Réquiem"
+  },
+  "356": {
+    "id": "356",
+    "genus": "Pokémon Atrayente"
+  },
+  "357": {
+    "id": "357",
+    "genus": "Pokémon Fruto"
+  },
+  "358": {
+    "id": "358",
+    "genus": "Pokémon Sonido Aire"
+  },
+  "359": {
+    "id": "359",
+    "genus": "Pokémon Catástrofe"
+  },
+  "360": {
+    "id": "360",
+    "genus": "Pokémon Radiante"
+  },
+  "361": {
+    "id": "361",
+    "genus": "Pokémon Gorro Nieve"
+  },
+  "362": {
+    "id": "362",
+    "genus": "Pokémon Cara"
+  },
+  "363": {
+    "id": "363",
+    "genus": "Pokémon Aplauso"
+  },
+  "364": {
+    "id": "364",
+    "genus": "Pokémon Rodabola"
+  },
+  "365": {
+    "id": "365",
+    "genus": "Pokémon Rompehielo"
+  },
+  "366": {
+    "id": "366",
+    "genus": "Pokémon Bivalvo"
+  },
+  "367": {
+    "id": "367",
+    "genus": "Pokémon Abisal"
+  },
+  "368": {
+    "id": "368",
+    "genus": "Pokémon Mar del Sur"
+  },
+  "369": {
+    "id": "369",
+    "genus": "Pokémon Longevo"
+  },
+  "370": {
+    "id": "370",
+    "genus": "Pokémon Cita"
+  },
+  "371": {
+    "id": "371",
+    "genus": "Pokémon Cabeza Roca"
+  },
+  "372": {
+    "id": "372",
+    "genus": "Pokémon Resistencia"
+  },
+  "373": {
+    "id": "373",
+    "genus": "Pokémon Dragón"
+  },
+  "374": {
+    "id": "374",
+    "genus": "Pokémon Bola Hierro"
+  },
+  "375": {
+    "id": "375",
+    "genus": "Pokémon Garra Hierro"
+  },
+  "376": {
+    "id": "376",
+    "genus": "Pokémon Pata Hierro"
+  },
+  "377": {
+    "id": "377",
+    "genus": "Pokémon Pico Roca"
+  },
+  "378": {
+    "id": "378",
+    "genus": "Pokémon Iceberg"
+  },
+  "379": {
+    "id": "379",
+    "genus": "Pokémon Hierro"
+  },
+  "380": {
+    "id": "380",
+    "genus": "Pokémon Eón"
+  },
+  "381": {
+    "id": "381",
+    "genus": "Pokémon Eón"
+  },
+  "382": {
+    "id": "382",
+    "genus": "Pokémon Cuenca Mar"
+  },
+  "383": {
+    "id": "383",
+    "genus": "Pokémon Continente"
+  },
+  "384": {
+    "id": "384",
+    "genus": "Pokémon Cielo"
+  },
+  "385": {
+    "id": "385",
+    "genus": "Pokémon Deseo"
+  },
+  "386": {
+    "id": "386",
+    "genus": "Pokémon ADN"
+  },
+  "387": {
+    "id": "387",
+    "genus": "Pokémon Hojita"
+  },
+  "388": {
+    "id": "388",
+    "genus": "Pokémon Arboleda"
+  },
+  "389": {
+    "id": "389",
+    "genus": "Pokémon Continente"
+  },
+  "390": {
+    "id": "390",
+    "genus": "Pokémon Chimpancé"
+  },
+  "391": {
+    "id": "391",
+    "genus": "Pokémon Juguetón"
+  },
+  "392": {
+    "id": "392",
+    "genus": "Pokémon Llama"
+  },
+  "393": {
+    "id": "393",
+    "genus": "Pokémon Pingüino"
+  },
+  "394": {
+    "id": "394",
+    "genus": "Pokémon Pingüino"
+  },
+  "395": {
+    "id": "395",
+    "genus": "Pokémon Emperador"
+  },
+  "396": {
+    "id": "396",
+    "genus": "Pokémon Estornino"
+  },
+  "397": {
+    "id": "397",
+    "genus": "Pokémon Estornino"
+  },
+  "398": {
+    "id": "398",
+    "genus": "Pokémon Depredador"
+  },
+  "399": {
+    "id": "399",
+    "genus": "Pokémon Gran Ratón"
+  },
+  "400": {
+    "id": "400",
+    "genus": "Pokémon Castor"
+  },
+  "401": {
+    "id": "401",
+    "genus": "Pokémon Grillo"
+  },
+  "402": {
+    "id": "402",
+    "genus": "Pokémon Grillo"
+  },
+  "403": {
+    "id": "403",
+    "genus": "Pokémon Flash"
+  },
+  "404": {
+    "id": "404",
+    "genus": "Pokémon Chispa"
+  },
+  "405": {
+    "id": "405",
+    "genus": "Pokémon Chispa Ojos"
+  },
+  "406": {
+    "id": "406",
+    "genus": "Pokémon Brote"
+  },
+  "407": {
+    "id": "407",
+    "genus": "Pokémon Ramillete"
+  },
+  "408": {
+    "id": "408",
+    "genus": "Pokémon Cabezazo"
+  },
+  "409": {
+    "id": "409",
+    "genus": "Pokémon Cabezazo"
+  },
+  "410": {
+    "id": "410",
+    "genus": "Pokémon Escudo"
+  },
+  "411": {
+    "id": "411",
+    "genus": "Pokémon Escudo"
+  },
+  "412": {
+    "id": "412",
+    "genus": "Pokémon Larva"
+  },
+  "413": {
+    "id": "413",
+    "genus": "Pokémon Larva"
+  },
+  "414": {
+    "id": "414",
+    "genus": "Pokémon Polilla"
+  },
+  "415": {
+    "id": "415",
+    "genus": "Pokémon Abejita"
+  },
+  "416": {
+    "id": "416",
+    "genus": "Pokémon Colmena"
+  },
+  "417": {
+    "id": "417",
+    "genus": "Pokémon Ardillalec"
+  },
+  "418": {
+    "id": "418",
+    "genus": "Pokémon Nutria Mar."
+  },
+  "419": {
+    "id": "419",
+    "genus": "Pokémon Nutria Mar."
+  },
+  "420": {
+    "id": "420",
+    "genus": "Pokémon Cereza"
+  },
+  "421": {
+    "id": "421",
+    "genus": "Pokémon Floración"
+  },
+  "422": {
+    "id": "422",
+    "genus": "Pokémon Babosa Marina"
+  },
+  "423": {
+    "id": "423",
+    "genus": "Pokémon Babosa Marina"
+  },
+  "424": {
+    "id": "424",
+    "genus": "Pokémon Cola Larga"
+  },
+  "425": {
+    "id": "425",
+    "genus": "Pokémon Globo"
+  },
+  "426": {
+    "id": "426",
+    "genus": "Pokémon Dirigible"
+  },
+  "427": {
+    "id": "427",
+    "genus": "Pokémon Conejo"
+  },
+  "428": {
+    "id": "428",
+    "genus": "Pokémon Conejo"
+  },
+  "429": {
+    "id": "429",
+    "genus": "Pokémon Mágico"
+  },
+  "430": {
+    "id": "430",
+    "genus": "Pokémon Gran Jefe"
+  },
+  "431": {
+    "id": "431",
+    "genus": "Pokémon Gastuto"
+  },
+  "432": {
+    "id": "432",
+    "genus": "Pokémon Tigre Gato"
+  },
+  "433": {
+    "id": "433",
+    "genus": "Pokémon Campana"
+  },
+  "434": {
+    "id": "434",
+    "genus": "Pokémon Mofeta"
+  },
+  "435": {
+    "id": "435",
+    "genus": "Pokémon Mofeta"
+  },
+  "436": {
+    "id": "436",
+    "genus": "Pokémon Bronce"
+  },
+  "437": {
+    "id": "437",
+    "genus": "Pokémon Campana Bronce"
+  },
+  "438": {
+    "id": "438",
+    "genus": "Pokémon Bonsái"
+  },
+  "439": {
+    "id": "439",
+    "genus": "Pokémon Mimo"
+  },
+  "440": {
+    "id": "440",
+    "genus": "Pokémon Casita"
+  },
+  "441": {
+    "id": "441",
+    "genus": "Pokémon Corchea"
+  },
+  "442": {
+    "id": "442",
+    "genus": "Pokémon Prohibido"
+  },
+  "443": {
+    "id": "443",
+    "genus": "Pokémon Terrascualo"
+  },
+  "444": {
+    "id": "444",
+    "genus": "Pokémon Cueva"
+  },
+  "445": {
+    "id": "445",
+    "genus": "Pokémon Mach"
+  },
+  "446": {
+    "id": "446",
+    "genus": "Pokémon Comilón"
+  },
+  "447": {
+    "id": "447",
+    "genus": "Pokémon Emanación"
+  },
+  "448": {
+    "id": "448",
+    "genus": "Pokémon Aura"
+  },
+  "449": {
+    "id": "449",
+    "genus": "Pokémon Hipo"
+  },
+  "450": {
+    "id": "450",
+    "genus": "Pokémon Peso Pesado"
+  },
+  "451": {
+    "id": "451",
+    "genus": "Pokémon Escorpión"
+  },
+  "452": {
+    "id": "452",
+    "genus": "Pokémon Escorpiogro"
+  },
+  "453": {
+    "id": "453",
+    "genus": "Pokémon Boca Tóxica"
+  },
+  "454": {
+    "id": "454",
+    "genus": "Pokémon Boca Tóxica"
+  },
+  "455": {
+    "id": "455",
+    "genus": "Pokémon Caza Bichos"
+  },
+  "456": {
+    "id": "456",
+    "genus": "Pokémon Pez Ala"
+  },
+  "457": {
+    "id": "457",
+    "genus": "Pokémon Neón"
+  },
+  "458": {
+    "id": "458",
+    "genus": "Pokémon Milano"
+  },
+  "459": {
+    "id": "459",
+    "genus": "Pokémon Árbol Nieve"
+  },
+  "460": {
+    "id": "460",
+    "genus": "Pokémon Árbol Nieve"
+  },
+  "461": {
+    "id": "461",
+    "genus": "Pokémon Garra Filo"
+  },
+  "462": {
+    "id": "462",
+    "genus": "Pokémon Magnético"
+  },
+  "463": {
+    "id": "463",
+    "genus": "Pokémon Lametazo"
+  },
+  "464": {
+    "id": "464",
+    "genus": "Pokémon Taladro"
+  },
+  "465": {
+    "id": "465",
+    "genus": "Pokémon Enredadera"
+  },
+  "466": {
+    "id": "466",
+    "genus": "Pokémon Rayo"
+  },
+  "467": {
+    "id": "467",
+    "genus": "Pokémon Explosión"
+  },
+  "468": {
+    "id": "468",
+    "genus": "Pokémon Festejo"
+  },
+  "469": {
+    "id": "469",
+    "genus": "Pokémon Libélula"
+  },
+  "470": {
+    "id": "470",
+    "genus": "Pokémon Verdor"
+  },
+  "471": {
+    "id": "471",
+    "genus": "Pokémon Nieve Fresca"
+  },
+  "472": {
+    "id": "472",
+    "genus": "Pokémon Colmicorpio"
+  },
+  "473": {
+    "id": "473",
+    "genus": "Pokémon Doscolmillos"
+  },
+  "474": {
+    "id": "474",
+    "genus": "Pokémon Virtual"
+  },
+  "475": {
+    "id": "475",
+    "genus": "Pokémon Cuchilla"
+  },
+  "476": {
+    "id": "476",
+    "genus": "Pokémon Brújula"
+  },
+  "477": {
+    "id": "477",
+    "genus": "Pokémon Grilletes"
+  },
+  "478": {
+    "id": "478",
+    "genus": "Pokémon Tierra Fría"
+  },
+  "479": {
+    "id": "479",
+    "genus": "Pokémon Plasma"
+  },
+  "480": {
+    "id": "480",
+    "genus": "Pokémon Sabiduría"
+  },
+  "481": {
+    "id": "481",
+    "genus": "Pokémon Sensorio"
+  },
+  "482": {
+    "id": "482",
+    "genus": "Pokémon Voluntad"
+  },
+  "483": {
+    "id": "483",
+    "genus": "Pokémon Temporal"
+  },
+  "484": {
+    "id": "484",
+    "genus": "Pokémon Espacial"
+  },
+  "485": {
+    "id": "485",
+    "genus": "Pokémon Domo Lava"
+  },
+  "486": {
+    "id": "486",
+    "genus": "Pokémon Colosal"
+  },
+  "487": {
+    "id": "487",
+    "genus": "Pokémon Renegado"
+  },
+  "488": {
+    "id": "488",
+    "genus": "Pokémon Lunar"
+  },
+  "489": {
+    "id": "489",
+    "genus": "Pokémon Marino"
+  },
+  "490": {
+    "id": "490",
+    "genus": "Pokémon Náutico"
+  },
+  "491": {
+    "id": "491",
+    "genus": "Pokémon Oscuridad"
+  },
+  "492": {
+    "id": "492",
+    "genus": "Pokémon Gratitud"
+  },
+  "493": {
+    "id": "493",
+    "genus": "Pokémon Alfa"
+  },
+  "494": {
+    "id": "494",
+    "genus": "Pokémon Victoria"
+  },
+  "495": {
+    "id": "495",
+    "genus": "Pokémon Serp. Hierba"
+  },
+  "496": {
+    "id": "496",
+    "genus": "Pokémon Serp. Hierba"
+  },
+  "497": {
+    "id": "497",
+    "genus": "Pokémon Realeza"
+  },
+  "498": {
+    "id": "498",
+    "genus": "Pokémon Cerdo Fuego"
+  },
+  "499": {
+    "id": "499",
+    "genus": "Pokémon Cerdo Fuego"
+  },
+  "500": {
+    "id": "500",
+    "genus": "Pokémon Cerdo Ígneo"
+  },
+  "501": {
+    "id": "501",
+    "genus": "Pokémon Nutria"
+  },
+  "502": {
+    "id": "502",
+    "genus": "Pokémon Superación"
+  },
+  "503": {
+    "id": "503",
+    "genus": "Pokémon Majestuoso"
+  },
+  "504": {
+    "id": "504",
+    "genus": "Pokémon Explorador"
+  },
+  "505": {
+    "id": "505",
+    "genus": "Pokémon Alerta"
+  },
+  "506": {
+    "id": "506",
+    "genus": "Pokémon Perrito"
+  },
+  "507": {
+    "id": "507",
+    "genus": "Pokémon Leal"
+  },
+  "508": {
+    "id": "508",
+    "genus": "Pokémon Magnánimo"
+  },
+  "509": {
+    "id": "509",
+    "genus": "Pokémon Malicioso"
+  },
+  "510": {
+    "id": "510",
+    "genus": "Pokémon Calculador"
+  },
+  "511": {
+    "id": "511",
+    "genus": "Pokémon Mono Hierba"
+  },
+  "512": {
+    "id": "512",
+    "genus": "Pokémon Mono Pincho"
+  },
+  "513": {
+    "id": "513",
+    "genus": "Pokémon Ardiente"
+  },
+  "514": {
+    "id": "514",
+    "genus": "Pokémon Lumbre"
+  },
+  "515": {
+    "id": "515",
+    "genus": "Pokémon Salpicadura"
+  },
+  "516": {
+    "id": "516",
+    "genus": "Pokémon Drenaje"
+  },
+  "517": {
+    "id": "517",
+    "genus": "Pokémon Comesueños"
+  },
+  "518": {
+    "id": "518",
+    "genus": "Pokémon Duermevela"
+  },
+  "519": {
+    "id": "519",
+    "genus": "Pokémon Pichón"
+  },
+  "520": {
+    "id": "520",
+    "genus": "Pokémon Torcaz"
+  },
+  "521": {
+    "id": "521",
+    "genus": "Pokémon Altanero"
+  },
+  "522": {
+    "id": "522",
+    "genus": "Pokémon Electrizado"
+  },
+  "523": {
+    "id": "523",
+    "genus": "Pokémon Rayo"
+  },
+  "524": {
+    "id": "524",
+    "genus": "Pokémon Manto"
+  },
+  "525": {
+    "id": "525",
+    "genus": "Pokémon Mineral"
+  },
+  "526": {
+    "id": "526",
+    "genus": "Pokémon Presurizado"
+  },
+  "527": {
+    "id": "527",
+    "genus": "Pokémon Murciélago"
+  },
+  "528": {
+    "id": "528",
+    "genus": "Pokémon Galante"
+  },
+  "529": {
+    "id": "529",
+    "genus": "Pokémon Topo"
+  },
+  "530": {
+    "id": "530",
+    "genus": "Pokémon Subterráneo"
+  },
+  "531": {
+    "id": "531",
+    "genus": "Pokémon Escucha"
+  },
+  "532": {
+    "id": "532",
+    "genus": "Pokémon Musculoso"
+  },
+  "533": {
+    "id": "533",
+    "genus": "Pokémon Musculoso"
+  },
+  "534": {
+    "id": "534",
+    "genus": "Pokémon Musculoso"
+  },
+  "535": {
+    "id": "535",
+    "genus": "Pokémon Renacuajo"
+  },
+  "536": {
+    "id": "536",
+    "genus": "Pokémon Vibrante"
+  },
+  "537": {
+    "id": "537",
+    "genus": "Pokémon Vibrante"
+  },
+  "538": {
+    "id": "538",
+    "genus": "Pokémon Judo"
+  },
+  "539": {
+    "id": "539",
+    "genus": "Pokémon Kárate"
+  },
+  "540": {
+    "id": "540",
+    "genus": "Pokémon Sastre"
+  },
+  "541": {
+    "id": "541",
+    "genus": "Pokémon Arropado"
+  },
+  "542": {
+    "id": "542",
+    "genus": "Pokémon Cuidador"
+  },
+  "543": {
+    "id": "543",
+    "genus": "Pokémon Ciempiés"
+  },
+  "544": {
+    "id": "544",
+    "genus": "Pokémon Pupaciempiés"
+  },
+  "545": {
+    "id": "545",
+    "genus": "Pokémon Megaciempiés"
+  },
+  "546": {
+    "id": "546",
+    "genus": "Pokémon Bolalgodón"
+  },
+  "547": {
+    "id": "547",
+    "genus": "Pokémon Vuelalviento"
+  },
+  "548": {
+    "id": "548",
+    "genus": "Pokémon Bulbo"
+  },
+  "549": {
+    "id": "549",
+    "genus": "Pokémon Adornofloral"
+  },
+  "550": {
+    "id": "550",
+    "genus": "Pokémon Violento"
+  },
+  "551": {
+    "id": "551",
+    "genus": "Pokémon Desierdrilo"
+  },
+  "552": {
+    "id": "552",
+    "genus": "Pokémon Desierdrilo"
+  },
+  "553": {
+    "id": "553",
+    "genus": "Pokémon Amenazador"
+  },
+  "554": {
+    "id": "554",
+    "genus": "Pokémon Daruma"
+  },
+  "555": {
+    "id": "555",
+    "genus": "Pokémon Candente"
+  },
+  "556": {
+    "id": "556",
+    "genus": "Pokémon Cactus"
+  },
+  "557": {
+    "id": "557",
+    "genus": "Pokémon Casapiedra"
+  },
+  "558": {
+    "id": "558",
+    "genus": "Pokémon Casarroca"
+  },
+  "559": {
+    "id": "559",
+    "genus": "Pokémon Mudapiel"
+  },
+  "560": {
+    "id": "560",
+    "genus": "Pokémon Gamberro"
+  },
+  "561": {
+    "id": "561",
+    "genus": "Pokémon Pseudopájaro"
+  },
+  "562": {
+    "id": "562",
+    "genus": "Pokémon Espíritu"
+  },
+  "563": {
+    "id": "563",
+    "genus": "Pokémon Sepultura"
+  },
+  "564": {
+    "id": "564",
+    "genus": "Pokémon Pretortuga"
+  },
+  "565": {
+    "id": "565",
+    "genus": "Pokémon Pretortuga"
+  },
+  "566": {
+    "id": "566",
+    "genus": "Pokémon Protopájaro"
+  },
+  "567": {
+    "id": "567",
+    "genus": "Pokémon Protopájaro"
+  },
+  "568": {
+    "id": "568",
+    "genus": "Pokémon Bolsa Basura"
+  },
+  "569": {
+    "id": "569",
+    "genus": "Pokémon Vertedero"
+  },
+  "570": {
+    "id": "570",
+    "genus": "Pokémon Zorro Pillo"
+  },
+  "571": {
+    "id": "571",
+    "genus": "Pokémon Disfrazorro"
+  },
+  "572": {
+    "id": "572",
+    "genus": "Pokémon Chinchilla"
+  },
+  "573": {
+    "id": "573",
+    "genus": "Pokémon Estola"
+  },
+  "574": {
+    "id": "574",
+    "genus": "Pokémon Inquisitivo"
+  },
+  "575": {
+    "id": "575",
+    "genus": "Pokémon Manipulador"
+  },
+  "576": {
+    "id": "576",
+    "genus": "Pokémon Astro"
+  },
+  "577": {
+    "id": "577",
+    "genus": "Pokémon Célula"
+  },
+  "578": {
+    "id": "578",
+    "genus": "Pokémon Mitosis"
+  },
+  "579": {
+    "id": "579",
+    "genus": "Pokémon Ampliación"
+  },
+  "580": {
+    "id": "580",
+    "genus": "Pokémon Ave Agua"
+  },
+  "581": {
+    "id": "581",
+    "genus": "Pokémon Cisne"
+  },
+  "582": {
+    "id": "582",
+    "genus": "Pokémon Nieve Fresca"
+  },
+  "583": {
+    "id": "583",
+    "genus": "Pokémon Nieve Helada"
+  },
+  "584": {
+    "id": "584",
+    "genus": "Pokémon Nieve Gélida"
+  },
+  "585": {
+    "id": "585",
+    "genus": "Pokémon Estacional"
+  },
+  "586": {
+    "id": "586",
+    "genus": "Pokémon Estacional"
+  },
+  "587": {
+    "id": "587",
+    "genus": "Pokémon Vuelardilla"
+  },
+  "588": {
+    "id": "588",
+    "genus": "Pokémon Bocado"
+  },
+  "589": {
+    "id": "589",
+    "genus": "Pokémon Soldado"
+  },
+  "590": {
+    "id": "590",
+    "genus": "Pokémon Hongo"
+  },
+  "591": {
+    "id": "591",
+    "genus": "Pokémon Hongo"
+  },
+  "592": {
+    "id": "592",
+    "genus": "Pokémon Ingrávido"
+  },
+  "593": {
+    "id": "593",
+    "genus": "Pokémon Ingrávido"
+  },
+  "594": {
+    "id": "594",
+    "genus": "Pokémon Socorrista"
+  },
+  "595": {
+    "id": "595",
+    "genus": "Pokémon Lapa"
+  },
+  "596": {
+    "id": "596",
+    "genus": "Pokémon Electroaraña"
+  },
+  "597": {
+    "id": "597",
+    "genus": "Pokémon Fruto Espina"
+  },
+  "598": {
+    "id": "598",
+    "genus": "Pokémon Bola Espina"
+  },
+  "599": {
+    "id": "599",
+    "genus": "Pokémon Engranaje"
+  },
+  "600": {
+    "id": "600",
+    "genus": "Pokémon Engranaje"
+  },
+  "601": {
+    "id": "601",
+    "genus": "Pokémon Engranaje"
+  },
+  "602": {
+    "id": "602",
+    "genus": "Pokémon Electropez"
+  },
+  "603": {
+    "id": "603",
+    "genus": "Pokémon Electropez"
+  },
+  "604": {
+    "id": "604",
+    "genus": "Pokémon Electropez"
+  },
+  "605": {
+    "id": "605",
+    "genus": "Pokémon Cerebro"
+  },
+  "606": {
+    "id": "606",
+    "genus": "Pokémon Cerebro"
+  },
+  "607": {
+    "id": "607",
+    "genus": "Pokémon Vela"
+  },
+  "608": {
+    "id": "608",
+    "genus": "Pokémon Farolillo"
+  },
+  "609": {
+    "id": "609",
+    "genus": "Pokémon Señuelo"
+  },
+  "610": {
+    "id": "610",
+    "genus": "Pokémon Colmillo"
+  },
+  "611": {
+    "id": "611",
+    "genus": "Pokémon Boca Hacha"
+  },
+  "612": {
+    "id": "612",
+    "genus": "Pokémon Boca Hacha"
+  },
+  "613": {
+    "id": "613",
+    "genus": "Pokémon Congelación"
+  },
+  "614": {
+    "id": "614",
+    "genus": "Pokémon Glaciación"
+  },
+  "615": {
+    "id": "615",
+    "genus": "Pokémon Cristal"
+  },
+  "616": {
+    "id": "616",
+    "genus": "Pokémon Caracol"
+  },
+  "617": {
+    "id": "617",
+    "genus": "Pokémon Sincaparazón"
+  },
+  "618": {
+    "id": "618",
+    "genus": "Pokémon Trampa"
+  },
+  "619": {
+    "id": "619",
+    "genus": "Pokémon Arte Marcial"
+  },
+  "620": {
+    "id": "620",
+    "genus": "Pokémon Arte Marcial"
+  },
+  "621": {
+    "id": "621",
+    "genus": "Pokémon Cueva"
+  },
+  "622": {
+    "id": "622",
+    "genus": "Pokémon Autómata"
+  },
+  "623": {
+    "id": "623",
+    "genus": "Pokémon Autómata"
+  },
+  "624": {
+    "id": "624",
+    "genus": "Pokémon Tajo"
+  },
+  "625": {
+    "id": "625",
+    "genus": "Pokémon Filo"
+  },
+  "626": {
+    "id": "626",
+    "genus": "Pokémon Torocabezazo"
+  },
+  "627": {
+    "id": "627",
+    "genus": "Pokémon Aguilucho"
+  },
+  "628": {
+    "id": "628",
+    "genus": "Pokémon Aguerrido"
+  },
+  "629": {
+    "id": "629",
+    "genus": "Pokémon Pañal"
+  },
+  "630": {
+    "id": "630",
+    "genus": "Pokémon Buitre Hueso"
+  },
+  "631": {
+    "id": "631",
+    "genus": "Pokémon Hormiguero"
+  },
+  "632": {
+    "id": "632",
+    "genus": "Pokémon Hormigacero"
+  },
+  "633": {
+    "id": "633",
+    "genus": "Pokémon Tosco"
+  },
+  "634": {
+    "id": "634",
+    "genus": "Pokémon Violento"
+  },
+  "635": {
+    "id": "635",
+    "genus": "Pokémon Voraz"
+  },
+  "636": {
+    "id": "636",
+    "genus": "Pokémon Antorcha"
+  },
+  "637": {
+    "id": "637",
+    "genus": "Pokémon Sol"
+  },
+  "638": {
+    "id": "638",
+    "genus": "Pokémon Tesón Acero"
+  },
+  "639": {
+    "id": "639",
+    "genus": "Pokémon Gruta"
+  },
+  "640": {
+    "id": "640",
+    "genus": "Pokémon Prado"
+  },
+  "641": {
+    "id": "641",
+    "genus": "Pokémon Torbellino"
+  },
+  "642": {
+    "id": "642",
+    "genus": "Pokémon Centella"
+  },
+  "643": {
+    "id": "643",
+    "genus": "Pokémon Blanco Veraz"
+  },
+  "644": {
+    "id": "644",
+    "genus": "Pokémon Negro Puro"
+  },
+  "645": {
+    "id": "645",
+    "genus": "Pokémon Fertilidad"
+  },
+  "646": {
+    "id": "646",
+    "genus": "Pokémon Frontera"
+  },
+  "647": {
+    "id": "647",
+    "genus": "Pokémon Potro"
+  },
+  "648": {
+    "id": "648",
+    "genus": "Pokémon Melodía"
+  },
+  "649": {
+    "id": "649",
+    "genus": "Pokémon Paleozoico"
+  },
+  "650": {
+    "id": "650",
+    "genus": "Pokémon Erizo"
+  },
+  "651": {
+    "id": "651",
+    "genus": "Pokémon Corazaespín"
+  },
+  "652": {
+    "id": "652",
+    "genus": "Pokémon Corazaespín"
+  },
+  "653": {
+    "id": "653",
+    "genus": "Pokémon Zorro"
+  },
+  "654": {
+    "id": "654",
+    "genus": "Pokémon Zorro"
+  },
+  "655": {
+    "id": "655",
+    "genus": "Pokémon Zorro"
+  },
+  "656": {
+    "id": "656",
+    "genus": "Pokémon Burburrana"
+  },
+  "657": {
+    "id": "657",
+    "genus": "Pokémon Burburrana"
+  },
+  "658": {
+    "id": "658",
+    "genus": "Pokémon Ninja"
+  },
+  "659": {
+    "id": "659",
+    "genus": "Pokémon Excavador"
+  },
+  "660": {
+    "id": "660",
+    "genus": "Pokémon Excavador"
+  },
+  "661": {
+    "id": "661",
+    "genus": "Pokémon Petirrojo"
+  },
+  "662": {
+    "id": "662",
+    "genus": "Pokémon Lumbre"
+  },
+  "663": {
+    "id": "663",
+    "genus": "Pokémon Flamígero"
+  },
+  "664": {
+    "id": "664",
+    "genus": "Pokémon Tiraescamas"
+  },
+  "665": {
+    "id": "665",
+    "genus": "Pokémon Tiraescamas"
+  },
+  "666": {
+    "id": "666",
+    "genus": "Pokémon Escamaposa"
+  },
+  "667": {
+    "id": "667",
+    "genus": "Pokémon Leoncito"
+  },
+  "668": {
+    "id": "668",
+    "genus": "Pokémon Regio"
+  },
+  "669": {
+    "id": "669",
+    "genus": "Pokémon Monoflor"
+  },
+  "670": {
+    "id": "670",
+    "genus": "Pokémon Monoflor"
+  },
+  "671": {
+    "id": "671",
+    "genus": "Pokémon Jardín"
+  },
+  "672": {
+    "id": "672",
+    "genus": "Pokémon Montura"
+  },
+  "673": {
+    "id": "673",
+    "genus": "Pokémon Montura"
+  },
+  "674": {
+    "id": "674",
+    "genus": "Pokémon Juguetón"
+  },
+  "675": {
+    "id": "675",
+    "genus": "Pokémon Rostro Fiero"
+  },
+  "676": {
+    "id": "676",
+    "genus": "Pokémon Caniche"
+  },
+  "677": {
+    "id": "677",
+    "genus": "Pokémon Moderación"
+  },
+  "678": {
+    "id": "678",
+    "genus": "Pokémon Autocontrol"
+  },
+  "679": {
+    "id": "679",
+    "genus": "Pokémon Tizona"
+  },
+  "680": {
+    "id": "680",
+    "genus": "Pokémon Tizona"
+  },
+  "681": {
+    "id": "681",
+    "genus": "Pokémon Espada Real"
+  },
+  "682": {
+    "id": "682",
+    "genus": "Pokémon Aroma"
+  },
+  "683": {
+    "id": "683",
+    "genus": "Pokémon Fragancia"
+  },
+  "684": {
+    "id": "684",
+    "genus": "Pokémon Chuchería"
+  },
+  "685": {
+    "id": "685",
+    "genus": "Pokémon Nata"
+  },
+  "686": {
+    "id": "686",
+    "genus": "Pokémon Rotación"
+  },
+  "687": {
+    "id": "687",
+    "genus": "Pokémon Revolución"
+  },
+  "688": {
+    "id": "688",
+    "genus": "Pokémon Dos Manos"
+  },
+  "689": {
+    "id": "689",
+    "genus": "Pokémon Combinación"
+  },
+  "690": {
+    "id": "690",
+    "genus": "Pokémon Pseudoalga"
+  },
+  "691": {
+    "id": "691",
+    "genus": "Pokémon Pseudoalga"
+  },
+  "692": {
+    "id": "692",
+    "genus": "Pokémon Proyectagua"
+  },
+  "693": {
+    "id": "693",
+    "genus": "Pokémon Lanzachorro"
+  },
+  "694": {
+    "id": "694",
+    "genus": "Pokémon Generador"
+  },
+  "695": {
+    "id": "695",
+    "genus": "Pokémon Generador"
+  },
+  "696": {
+    "id": "696",
+    "genus": "Pokémon Heredero"
+  },
+  "697": {
+    "id": "697",
+    "genus": "Pokémon Tirano"
+  },
+  "698": {
+    "id": "698",
+    "genus": "Pokémon Tundra"
+  },
+  "699": {
+    "id": "699",
+    "genus": "Pokémon Tundra"
+  },
+  "700": {
+    "id": "700",
+    "genus": "Pokémon Vínculo"
+  },
+  "701": {
+    "id": "701",
+    "genus": "Pokémon Lucha Libre"
+  },
+  "702": {
+    "id": "702",
+    "genus": "Pokémon Antenas"
+  },
+  "703": {
+    "id": "703",
+    "genus": "Pokémon Joya"
+  },
+  "704": {
+    "id": "704",
+    "genus": "Pokémon Molusco"
+  },
+  "705": {
+    "id": "705",
+    "genus": "Pokémon Molusco"
+  },
+  "706": {
+    "id": "706",
+    "genus": "Pokémon Dragón"
+  },
+  "707": {
+    "id": "707",
+    "genus": "Pokémon Llavero"
+  },
+  "708": {
+    "id": "708",
+    "genus": "Pokémon Tocón"
+  },
+  "709": {
+    "id": "709",
+    "genus": "Pokémon Árbol Viejo"
+  },
+  "710": {
+    "id": "710",
+    "genus": "Pokémon Calabaza"
+  },
+  "711": {
+    "id": "711",
+    "genus": "Pokémon Calabaza"
+  },
+  "712": {
+    "id": "712",
+    "genus": "Pokémon Témpano"
+  },
+  "713": {
+    "id": "713",
+    "genus": "Pokémon Iceberg"
+  },
+  "714": {
+    "id": "714",
+    "genus": "Pokémon Onda Sónica"
+  },
+  "715": {
+    "id": "715",
+    "genus": "Pokémon Onda Sónica"
+  },
+  "716": {
+    "id": "716",
+    "genus": "Pokémon Creación"
+  },
+  "717": {
+    "id": "717",
+    "genus": "Pokémon Destrucción"
+  },
+  "718": {
+    "id": "718",
+    "genus": "Pokémon Equilibrio"
+  },
+  "719": {
+    "id": "719",
+    "genus": "Pokémon Joya"
+  },
+  "720": {
+    "id": "720",
+    "genus": "Pokémon Travesura"
+  },
+  "721": {
+    "id": "721",
+    "genus": "Pokémon Vapor"
+  },
+  "722": {
+    "id": "722",
+    "genus": "Pokémon Pluma Hoja"
+  },
+  "723": {
+    "id": "723",
+    "genus": "Pokémon Pluma Filo"
+  },
+  "724": {
+    "id": "724",
+    "genus": "Pokémon Pluma Flecha"
+  },
+  "725": {
+    "id": "725",
+    "genus": "Pokémon Gato Fuego"
+  },
+  "726": {
+    "id": "726",
+    "genus": "Pokémon Gato Fuego"
+  },
+  "727": {
+    "id": "727",
+    "genus": "Pokémon Rudo"
+  },
+  "728": {
+    "id": "728",
+    "genus": "Pokémon León Marino"
+  },
+  "729": {
+    "id": "729",
+    "genus": "Pokémon Fama"
+  },
+  "730": {
+    "id": "730",
+    "genus": "Pokémon Solista"
+  },
+  "731": {
+    "id": "731",
+    "genus": "Pokémon Carpintero"
+  },
+  "732": {
+    "id": "732",
+    "genus": "Pokémon Trompeta"
+  },
+  "733": {
+    "id": "733",
+    "genus": "Pokémon Cañón"
+  },
+  "734": {
+    "id": "734",
+    "genus": "Pokémon Patrulla"
+  },
+  "735": {
+    "id": "735",
+    "genus": "Pokémon Vigilante"
+  },
+  "736": {
+    "id": "736",
+    "genus": "Pokémon Pupa"
+  },
+  "737": {
+    "id": "737",
+    "genus": "Pokémon Batería"
+  },
+  "738": {
+    "id": "738",
+    "genus": "Pokémon Escarabajo"
+  },
+  "739": {
+    "id": "739",
+    "genus": "Pokémon Púgil"
+  },
+  "740": {
+    "id": "740",
+    "genus": "Pokémon Cangrejopelo"
+  },
+  "741": {
+    "id": "741",
+    "genus": "Pokémon Danza"
+  },
+  "742": {
+    "id": "742",
+    "genus": "Pokémon Mosca Abeja"
+  },
+  "743": {
+    "id": "743",
+    "genus": "Pokémon Mosca Abeja"
+  },
+  "744": {
+    "id": "744",
+    "genus": "Pokémon Perrito"
+  },
+  "745": {
+    "id": "745",
+    "genus": "Pokémon Lobo"
+  },
+  "746": {
+    "id": "746",
+    "genus": "Pokémon Pececillo"
+  },
+  "747": {
+    "id": "747",
+    "genus": "Pokémon Estrellatroz"
+  },
+  "748": {
+    "id": "748",
+    "genus": "Pokémon Estrellatroz"
+  },
+  "749": {
+    "id": "749",
+    "genus": "Pokémon Asno"
+  },
+  "750": {
+    "id": "750",
+    "genus": "Pokémon Caballo Tiro"
+  },
+  "751": {
+    "id": "751",
+    "genus": "Pokémon Pompa"
+  },
+  "752": {
+    "id": "752",
+    "genus": "Pokémon Pompa"
+  },
+  "753": {
+    "id": "753",
+    "genus": "Pokémon Filo Hoja"
+  },
+  "754": {
+    "id": "754",
+    "genus": "Pokémon Filo Flor"
+  },
+  "755": {
+    "id": "755",
+    "genus": "Pokémon Luminiscente"
+  },
+  "756": {
+    "id": "756",
+    "genus": "Pokémon Luminiscente"
+  },
+  "757": {
+    "id": "757",
+    "genus": "Pokémon Lagartoxina"
+  },
+  "758": {
+    "id": "758",
+    "genus": "Pokémon Lagartoxina"
+  },
+  "759": {
+    "id": "759",
+    "genus": "Pokémon Rabieta"
+  },
+  "760": {
+    "id": "760",
+    "genus": "Pokémon Brazo Fuerte"
+  },
+  "761": {
+    "id": "761",
+    "genus": "Pokémon Fruto"
+  },
+  "762": {
+    "id": "762",
+    "genus": "Pokémon Fruto"
+  },
+  "763": {
+    "id": "763",
+    "genus": "Pokémon Fruto"
+  },
+  "764": {
+    "id": "764",
+    "genus": "Pokémon Recogeflores"
+  },
+  "765": {
+    "id": "765",
+    "genus": "Pokémon Sabio"
+  },
+  "766": {
+    "id": "766",
+    "genus": "Pokémon Cooperación"
+  },
+  "767": {
+    "id": "767",
+    "genus": "Pokémon Huidizo"
+  },
+  "768": {
+    "id": "768",
+    "genus": "Pokémon Blindaje"
+  },
+  "769": {
+    "id": "769",
+    "genus": "Pokémon Montearena"
+  },
+  "770": {
+    "id": "770",
+    "genus": "Pokémon Castiarena"
+  },
+  "771": {
+    "id": "771",
+    "genus": "Pokémon Pepino Mar"
+  },
+  "772": {
+    "id": "772",
+    "genus": "Pokémon Multigénico"
+  },
+  "773": {
+    "id": "773",
+    "genus": "Pokémon Multigénico"
+  },
+  "774": {
+    "id": "774",
+    "genus": "Pokémon Meteoro"
+  },
+  "775": {
+    "id": "775",
+    "genus": "Pokémon Duermevela"
+  },
+  "776": {
+    "id": "776",
+    "genus": "Pokémon Tortugabomba"
+  },
+  "777": {
+    "id": "777",
+    "genus": "Pokémon Bolita"
+  },
+  "778": {
+    "id": "778",
+    "genus": "Pokémon Disfraz"
+  },
+  "779": {
+    "id": "779",
+    "genus": "Pokémon Rechinante"
+  },
+  "780": {
+    "id": "780",
+    "genus": "Pokémon Sosiego"
+  },
+  "781": {
+    "id": "781",
+    "genus": "Pokémon Alga Ancla"
+  },
+  "782": {
+    "id": "782",
+    "genus": "Pokémon Escamas"
+  },
+  "783": {
+    "id": "783",
+    "genus": "Pokémon Escamas"
+  },
+  "784": {
+    "id": "784",
+    "genus": "Pokémon Escamas"
+  },
+  "785": {
+    "id": "785",
+    "genus": "Pokémon Dios Nativo"
+  },
+  "786": {
+    "id": "786",
+    "genus": "Pokémon Dios Nativo"
+  },
+  "787": {
+    "id": "787",
+    "genus": "Pokémon Dios Nativo"
+  },
+  "788": {
+    "id": "788",
+    "genus": "Pokémon Dios Nativo"
+  },
+  "789": {
+    "id": "789",
+    "genus": "Pokémon Nebulosa"
+  },
+  "790": {
+    "id": "790",
+    "genus": "Pokémon Protostrella"
+  },
+  "791": {
+    "id": "791",
+    "genus": "Pokémon Corona Solar"
+  },
+  "792": {
+    "id": "792",
+    "genus": "Pokémon Corona Lunar"
+  },
+  "793": {
+    "id": "793",
+    "genus": "Pokémon Parásito"
+  },
+  "794": {
+    "id": "794",
+    "genus": "Pokémon Hinchado"
+  },
+  "795": {
+    "id": "795",
+    "genus": "Pokémon Elegancia"
+  },
+  "796": {
+    "id": "796",
+    "genus": "Pokémon Luminaria"
+  },
+  "797": {
+    "id": "797",
+    "genus": "Pokémon Lanzamiento"
+  },
+  "798": {
+    "id": "798",
+    "genus": "Pokémon Desenvaine"
+  },
+  "799": {
+    "id": "799",
+    "genus": "Pokémon Tragaldabas"
+  },
+  "800": {
+    "id": "800",
+    "genus": "Pokémon Prisma"
+  },
+  "801": {
+    "id": "801",
+    "genus": "Pokémon Artificial"
+  },
+  "802": {
+    "id": "802",
+    "genus": "Pokémon Morasombra"
+  },
+  "803": {
+    "id": "803",
+    "genus": "Pokémon Pin Veneno"
+  },
+  "804": {
+    "id": "804",
+    "genus": "Pokémon Pin Veneno"
+  },
+  "805": {
+    "id": "805",
+    "genus": "Pokémon Muro"
+  },
+  "806": {
+    "id": "806",
+    "genus": "Pokémon Pirotecnia"
+  },
+  "807": {
+    "id": "807",
+    "genus": "Pokémon Fulgor"
+  },
+  "808": {
+    "id": "808",
+    "genus": "Pokémon Tuerca"
+  },
+  "809": {
+    "id": "809",
+    "genus": "Pokémon Tuerca"
+  },
+  "810": {
+    "id": "810",
+    "genus": "Pokémon Chimpancé"
+  },
+  "811": {
+    "id": "811",
+    "genus": "Pokémon Ritmo"
+  },
+  "812": {
+    "id": "812",
+    "genus": "Pokémon Percusión"
+  },
+  "813": {
+    "id": "813",
+    "genus": "Pokémon Conejo"
+  },
+  "814": {
+    "id": "814",
+    "genus": "Pokémon Conejo"
+  },
+  "815": {
+    "id": "815",
+    "genus": "Pokémon Delantero"
+  },
+  "816": {
+    "id": "816",
+    "genus": "Pokémon Acuartija"
+  },
+  "817": {
+    "id": "817",
+    "genus": "Pokémon Acuartija"
+  },
+  "818": {
+    "id": "818",
+    "genus": "Pokémon Agente"
+  },
+  "819": {
+    "id": "819",
+    "genus": "Pokémon Abazón"
+  },
+  "820": {
+    "id": "820",
+    "genus": "Pokémon Avaricia"
+  },
+  "821": {
+    "id": "821",
+    "genus": "Pokémon Pajarito"
+  },
+  "822": {
+    "id": "822",
+    "genus": "Pokémon Cuervo"
+  },
+  "823": {
+    "id": "823",
+    "genus": "Pokémon Cuervo"
+  },
+  "824": {
+    "id": "824",
+    "genus": "Pokémon Pupa"
+  },
+  "825": {
+    "id": "825",
+    "genus": "Pokémon Radomo"
+  },
+  "826": {
+    "id": "826",
+    "genus": "Pokémon Siete Puntos"
+  },
+  "827": {
+    "id": "827",
+    "genus": "Pokémon Zorro"
+  },
+  "828": {
+    "id": "828",
+    "genus": "Pokémon Zorro"
+  },
+  "829": {
+    "id": "829",
+    "genus": "Pokémon Adornofloral"
+  },
+  "830": {
+    "id": "830",
+    "genus": "Pokémon Adornalgodón"
+  },
+  "831": {
+    "id": "831",
+    "genus": "Pokémon Oveja"
+  },
+  "832": {
+    "id": "832",
+    "genus": "Pokémon Oveja"
+  },
+  "833": {
+    "id": "833",
+    "genus": "Pokémon Mordedura"
+  },
+  "834": {
+    "id": "834",
+    "genus": "Pokémon Mordisco"
+  },
+  "835": {
+    "id": "835",
+    "genus": "Pokémon Perrito"
+  },
+  "836": {
+    "id": "836",
+    "genus": "Pokémon Perro"
+  },
+  "837": {
+    "id": "837",
+    "genus": "Pokémon Carbón"
+  },
+  "838": {
+    "id": "838",
+    "genus": "Pokémon Carbón"
+  },
+  "839": {
+    "id": "839",
+    "genus": "Pokémon Carbón"
+  },
+  "840": {
+    "id": "840",
+    "genus": "Pokémon Manzanido"
+  },
+  "841": {
+    "id": "841",
+    "genus": "Pokémon Manzanala"
+  },
+  "842": {
+    "id": "842",
+    "genus": "Pokémon Manzanéctar"
+  },
+  "843": {
+    "id": "843",
+    "genus": "Pokémon Serp. Arena"
+  },
+  "844": {
+    "id": "844",
+    "genus": "Pokémon Serp. Arena"
+  },
+  "845": {
+    "id": "845",
+    "genus": "Pokémon Tragón"
+  },
+  "846": {
+    "id": "846",
+    "genus": "Pokémon Arremetida"
+  },
+  "847": {
+    "id": "847",
+    "genus": "Pokémon Ensarta"
+  },
+  "848": {
+    "id": "848",
+    "genus": "Pokémon Retoño"
+  },
+  "849": {
+    "id": "849",
+    "genus": "Pokémon Punki"
+  },
+  "850": {
+    "id": "850",
+    "genus": "Pokémon Radiador"
+  },
+  "851": {
+    "id": "851",
+    "genus": "Pokémon Radiador"
+  },
+  "852": {
+    "id": "852",
+    "genus": "Pokémon Malcriado"
+  },
+  "853": {
+    "id": "853",
+    "genus": "Pokémon Jiu-Jitsu"
+  },
+  "854": {
+    "id": "854",
+    "genus": "Pokémon Té"
+  },
+  "855": {
+    "id": "855",
+    "genus": "Pokémon Té"
+  },
+  "856": {
+    "id": "856",
+    "genus": "Pokémon Calma"
+  },
+  "857": {
+    "id": "857",
+    "genus": "Pokémon Serenidad"
+  },
+  "858": {
+    "id": "858",
+    "genus": "Pokémon Silencio"
+  },
+  "859": {
+    "id": "859",
+    "genus": "Pokémon Astuto"
+  },
+  "860": {
+    "id": "860",
+    "genus": "Pokémon Malicioso"
+  },
+  "861": {
+    "id": "861",
+    "genus": "Pokémon Voluminoso"
+  },
+  "862": {
+    "id": "862",
+    "genus": "Pokémon Bloqueador"
+  },
+  "863": {
+    "id": "863",
+    "genus": "Pokémon Vikingo"
+  },
+  "864": {
+    "id": "864",
+    "genus": "Pokémon Coral"
+  },
+  "865": {
+    "id": "865",
+    "genus": "Pokémon Pato Salvaje"
+  },
+  "866": {
+    "id": "866",
+    "genus": "Pokémon Cómico"
+  },
+  "867": {
+    "id": "867",
+    "genus": "Pokémon Resquemor"
+  },
+  "868": {
+    "id": "868",
+    "genus": "Pokémon Nata"
+  },
+  "869": {
+    "id": "869",
+    "genus": "Pokémon Nata"
+  },
+  "870": {
+    "id": "870",
+    "genus": "Pokémon Formación"
+  },
+  "871": {
+    "id": "871",
+    "genus": "Pokémon Erizo de Mar"
+  },
+  "872": {
+    "id": "872",
+    "genus": "Pokémon Gusano"
+  },
+  "873": {
+    "id": "873",
+    "genus": "Pokémon Polillahielo"
+  },
+  "874": {
+    "id": "874",
+    "genus": "Pokémon Megalito"
+  },
+  "875": {
+    "id": "875",
+    "genus": "Pokémon Pingüino"
+  },
+  "876": {
+    "id": "876",
+    "genus": "Pokémon Sensorio"
+  },
+  "877": {
+    "id": "877",
+    "genus": "Pokémon Dos Caras"
+  },
+  "878": {
+    "id": "878",
+    "genus": "Pokémon Broncefante"
+  },
+  "879": {
+    "id": "879",
+    "genus": "Pokémon Broncefante"
+  },
+  "880": {
+    "id": "880",
+    "genus": "Pokémon Fósil"
+  },
+  "881": {
+    "id": "881",
+    "genus": "Pokémon Fósil"
+  },
+  "882": {
+    "id": "882",
+    "genus": "Pokémon Fósil"
+  },
+  "883": {
+    "id": "883",
+    "genus": "Pokémon Fósil"
+  },
+  "884": {
+    "id": "884",
+    "genus": "Pokémon Aleación"
+  },
+  "885": {
+    "id": "885",
+    "genus": "Pokémon Resentido"
+  },
+  "886": {
+    "id": "886",
+    "genus": "Pokémon Cuidador"
+  },
+  "887": {
+    "id": "887",
+    "genus": "Pokémon Furtivo"
+  },
+  "888": {
+    "id": "888",
+    "genus": "Pokémon Guerrero"
+  },
+  "889": {
+    "id": "889",
+    "genus": "Pokémon Guerrero"
+  },
+  "890": {
+    "id": "890",
+    "genus": "Pokémon Gigantesco"
+  },
+  "891": {
+    "id": "891",
+    "genus": "Pokémon Kung-fu"
+  },
+  "892": {
+    "id": "892",
+    "genus": "Pokémon Kung-fu"
+  },
+  "893": {
+    "id": "893",
+    "genus": "Pokémon Simiestro"
+  },
+  "894": {
+    "id": "894",
+    "genus": "Pokémon Electrón"
+  },
+  "895": {
+    "id": "895",
+    "genus": "Pokémon Dragosfera"
+  },
+  "896": {
+    "id": "896",
+    "genus": "Pokémon Corcel Feroz"
+  },
+  "897": {
+    "id": "897",
+    "genus": "Pokémon Corcel Veloz"
+  },
+  "898": {
+    "id": "898",
+    "genus": "Pokémon Rey"
+  }
+}

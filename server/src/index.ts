@@ -4,6 +4,15 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { getAllPokemonNames } from './lib/pokemonCache.js';
 import { getLocalizedName, getLocalizedData } from './lib/localizedData.js';
+import { 
+    getAllPokemon, 
+    getPokemonById, 
+    searchPokemonByName,
+    getPokemonDescription,
+    getAllPokemonDescriptions,
+    getPokemonHabitat,
+    getEnrichedPokemon
+} from './lib/pokemonData.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -62,6 +71,116 @@ app.get('/api/localized-data/:dataType/:language', (req, res) => {
         const { dataType, language } = req.params;
         const data = getLocalizedData(dataType, language);
         res.json(data);
+    } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+        res.status(400).json({ error: errorMessage });
+    }
+});
+
+/**
+ * @brief Get all Pokemon with basic attributes
+ */
+app.get('/api/pokemon/all', (req, res) => {
+    try {
+        const allPokemon = getAllPokemon();
+        res.json(allPokemon);
+    } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+        res.status(400).json({ error: errorMessage });
+    }
+});
+
+/**
+ * @brief Get Pokemon by ID with basic attributes
+ * @param id Pokemon ID
+ */
+app.get('/api/pokemon/:id', (req, res) => {
+    try {
+        const { id } = req.params;
+        const pokemon = getPokemonById(id);
+        
+        if (!pokemon) {
+            return res.status(404).json({ error: 'Pokemon not found' });
+        }
+
+        res.json(pokemon);
+    } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+        res.status(400).json({ error: errorMessage });
+    }
+});
+
+/**
+ * @brief Search Pokemon by name
+ * @param name Pokemon name
+ */
+app.get('/api/pokemon/search/:name', (req, res) => {
+    try {
+        const { name } = req.params;
+        const pokemon = searchPokemonByName(name);
+        
+        if (!pokemon) {
+            return res.status(404).json({ error: 'Pokemon not found' });
+        }
+
+        res.json(pokemon);
+    } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+        res.status(400).json({ error: errorMessage });
+    }
+});
+
+/**
+ * @brief Get Pokemon descriptions for a language
+ * @param language Language code
+ */
+app.get('/api/pokemon/descriptions/:language', (req, res) => {
+    try {
+        const { language } = req.params;
+        const descriptions = getAllPokemonDescriptions(language);
+        res.json(descriptions);
+    } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+        res.status(400).json({ error: errorMessage });
+    }
+});
+
+/**
+ * @brief Get Pokemon description by ID and language
+ * @param id Pokemon ID
+ * @param language Language code
+ */
+app.get('/api/pokemon/:id/description/:language', (req, res) => {
+    try {
+        const { id, language } = req.params;
+        const description = getPokemonDescription(id, language);
+        
+        if (!description) {
+            return res.status(404).json({ error: 'Description not found' });
+        }
+
+        res.json(description);
+    } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+        res.status(400).json({ error: errorMessage });
+    }
+});
+
+/**
+ * @brief Get enriched Pokemon data (with description and habitat)
+ * @param id Pokemon ID
+ * @param language Language code
+ */
+app.get('/api/pokemon/:id/enriched/:language', (req, res) => {
+    try {
+        const { id, language } = req.params;
+        const enriched = getEnrichedPokemon(id, language);
+        
+        if (!enriched) {
+            return res.status(404).json({ error: 'Pokemon not found' });
+        }
+
+        res.json(enriched);
     } catch (error) {
         const errorMessage = error instanceof Error ? error.message : 'Unknown error';
         res.status(400).json({ error: errorMessage });
