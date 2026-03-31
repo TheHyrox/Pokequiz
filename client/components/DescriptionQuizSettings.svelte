@@ -31,18 +31,6 @@
     let enableScramble: boolean = initialSettings?.enableScramble ?? false;
     let numberOfOptions: number = initialSettings?.numberOfOptions ?? 4;
 
-    // Reactively update state when initialSettings changes (when returning from quiz)
-    $: if (initialSettings) {
-        timeLimit = initialSettings.timeLimit ?? 15;
-        hasTimeLimit = initialSettings.hasTimeLimit ?? false;
-        gameMode = initialSettings.gameMode ?? 'score';
-        changeDescription = initialSettings.changeDescription ?? false;
-        selectedGenerations = new Set(initialSettings.selectedGenerations ?? ALL_GENERATIONS);
-        truncateStrength = initialSettings.truncateStrength ?? 0;
-        enableScramble = initialSettings.enableScramble ?? false;
-        numberOfOptions = initialSettings.numberOfOptions ?? 4;
-    }
-
     // Toast state
     let toastState: ToastState = {
         message: '',
