@@ -37,7 +37,7 @@
                 </h3>
 
                 <img
-                    src={question.spriteUrl}
+                    src={question.isCorrect ? question.originalSpriteUrl : question.spriteUrl}
                     alt="Pokemon sprite"
                     class="sprite-preview"
                 />
