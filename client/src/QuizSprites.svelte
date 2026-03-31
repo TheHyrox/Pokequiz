@@ -39,6 +39,7 @@
     let currentQuestion = 1;
     let totalQuestions = settings.gameMode === 'infinite' ? 999 : CHALLENGE_QUESTION_COUNT;
     let spriteUrl = '';
+    let originalSpriteUrl = '';
     let pokemonOptions: PokemonOption[] = [];
     let loading = true;
     let score = 0;
@@ -262,6 +263,9 @@
             showErrorToast(getLabel(languageCode, 'spriteFallbackUsed'));
         }
         
+        // Store original URL before applying effects
+        originalSpriteUrl = spriteResult.url;
+        
         // Apply effects
         spriteUrl = await applyEffects(spriteResult.url);
 
@@ -383,6 +387,7 @@
             challengeQuestions.push({
                 questionNumber: currentQuestion,
                 spriteUrl: spriteUrl,
+                originalSpriteUrl: originalSpriteUrl,
                 correctPokemonName: correctOption?.name || '',
                 correctPokemonId: correctOption?.id || 0,
                 userAnswerId: pokemonId,

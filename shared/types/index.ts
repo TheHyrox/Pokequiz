@@ -195,8 +195,10 @@ export interface HardcoreModeState {
 export interface SpriteChallengeQuestion {
     /** Question number (1-10) */
     questionNumber: number;
-    /** The sprite URL shown to the user */
+    /** The sprite URL shown to the user (may be pixelated/processed) */
     spriteUrl: string;
+    /** The original unprocessed sprite URL */
+    originalSpriteUrl: string;
     /** Correct Pokemon name */
     correctPokemonName: string;
     /** Correct Pokemon ID */
