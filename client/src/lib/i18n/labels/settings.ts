@@ -29,6 +29,7 @@ export const SETTINGS_LABELS = {
         descriptionEffectsDescription: 'Add difficulty by hiding or scrambling parts of the description',
         truncateDescription: 'Truncate Description',
         truncateStrength: 'Truncate Strength',
+        truncateStrengthHelp: '0 = no truncation, 1: 1/2 of words truncated, 2: 1/3 of words truncated, 3: 1/4 of words truncated',
         scrambleDescription: 'Scramble Description',
         scrambleDescriptionInfo: 'Words are randomly reordered using different algorithms',
         selectAtLeastOneGeneration: 'Please select at least one generation'
@@ -58,6 +59,7 @@ export const SETTINGS_LABELS = {
         descriptionEffectsDescription: 'Augmentez la difficulté en masquant ou en brouillant des parties de la description',
         truncateDescription: 'Tronquer la Description',
         truncateStrength: 'Force de Troncature',
+        truncateStrengthHelp: '0 = aucune troncature, 1 : 1/2 des mots tronqués, 2 : 1/3 des mots tronqués, 3 : 1/4 des mots tronqués',
         scrambleDescription: 'Brouiller la Description',
         scrambleDescriptionInfo: "Les mots sont réorganisés de manière aléatoire à l'aide de différents algorithmes",
         selectAtLeastOneGeneration: 'Veuillez sélectionner au moins une génération'
@@ -87,6 +89,7 @@ export const SETTINGS_LABELS = {
         descriptionEffectsDescription: 'Erhöhen Sie die Schwierigkeit, indem Sie Teile der Beschreibung verbergen oder verwirren',
         truncateDescription: 'Beschreibung Kürzen',
         truncateStrength: 'Kürzungsstärke',
+        truncateStrengthHelp: '0 = keine Kürzung, 1: 1/2 der Wörter gekürzt, 2: 1/3 der Wörter gekürzt, 3: 1/4 der Wörter gekürzt',
         scrambleDescription: 'Beschreibung Verwirren',
         scrambleDescriptionInfo: 'Wörter werden mit verschiedenen Algorithmen zufällig neu angeordnet',
         selectAtLeastOneGeneration: 'Bitte wählen Sie mindestens eine Generation aus'
@@ -116,6 +119,7 @@ export const SETTINGS_LABELS = {
         descriptionEffectsDescription: 'Aumenta la dificultad ocultando o revolviendo partes de la descripción',
         truncateDescription: 'Truncar Descripción',
         truncateStrength: 'Fuerza de Truncado',
+        truncateStrengthHelp: '0 = sin truncado, 1: 1/2 de las palabras truncadas, 2: 1/3 de las palabras truncadas, 3: 1/4 de las palabras truncadas',
         scrambleDescription: 'Revolver Descripción',
         scrambleDescriptionInfo: 'Las palabras se reordenan aleatoriamente usando diferentes algoritmos',
         selectAtLeastOneGeneration: 'Por favor selecciona al menos una generación'
@@ -145,6 +149,7 @@ export const SETTINGS_LABELS = {
         descriptionEffectsDescription: 'Aumenta la difficoltà nascondendo o mescolando parti della descrizione',
         truncateDescription: 'Tronca Descrizione',
         truncateStrength: 'Forza di Tronco',
+        truncateStrengthHelp: '0 = nessuna troncatura, 1: 1/2 delle parole troncate, 2: 1/3 delle parole troncate, 3: 1/4 delle parole troncate',
         scrambleDescription: 'Mescola Descrizione',
         scrambleDescriptionInfo: 'Le parole vengono riordinate casualmente utilizzando diversi algoritmi',
         selectAtLeastOneGeneration: 'Per favore seleziona almeno una generazione'
@@ -174,6 +179,7 @@ export const SETTINGS_LABELS = {
         descriptionEffectsDescription: 'せつめい の いちぶ を かくしたり こんらん させたり して こんなんど を ふや す',
         truncateDescription: 'せつめい を たんしゅく する',
         truncateStrength: 'たんしゅく の きょうど',
+        truncateStrengthHelp: '0 = たんしゅく なし, 1: 1/2 の ことば が たんしゅく, 2: 1/3 の ことば が たんしゅく, 3: 1/4 の ことば が たんしゅく',
         scrambleDescription: 'せつめい を こんらん させる',
         scrambleDescriptionInfo: 'ことば は さまざま な あるごりずむ を つかって ランダム に さい はんていあい される',
         selectAtLeastOneGeneration: 'すくなくとも ひとつ の しゅつげん を えらんで ください'
@@ -203,6 +209,7 @@ export const SETTINGS_LABELS = {
         descriptionEffectsDescription: '説明の一部を隠したりスクランブルしたりして難易度を上げる',
         truncateDescription: '説明を切り詰める',
         truncateStrength: '切り詰めの強さ',
+        truncateStrengthHelp: '0 = 切り詰めなし, 1: 1/2の単語が切り詰め, 2: 1/3の単語が切り詰め, 3: 1/4の単語が切り詰め',
         scrambleDescription: '説明をスクランブル',
         scrambleDescriptionInfo: '単語は様々なアルゴリズムを使用してランダムに並べ替えられます',
         selectAtLeastOneGeneration: '少なくとも1つの世代を選択してください'
@@ -232,6 +239,7 @@ export const SETTINGS_LABELS = {
         descriptionEffectsDescription: '설명의 일부를 숨기거나 섞어서 난이도를 높입니다',
         truncateDescription: '설명 자르기',
         truncateStrength: '자르기 강도',
+        truncateStrengthHelp: '0 = 자르기 없음, 1: 단어의 1/2 자르기, 2: 단어의 1/3 자르기, 3: 단어의 1/4 자르기',
         scrambleDescription: '설명 섞기',
         scrambleDescriptionInfo: '단어는 다양한 알고리즘을 사용하여 무작위로 재정렬됩니다',
         selectAtLeastOneGeneration: '최소한 하나의 세대를 선택하세요'
@@ -261,6 +269,7 @@ export const SETTINGS_LABELS = {
         descriptionEffectsDescription: '通过隐藏或打乱部分描述来增加难度',
         truncateDescription: '截断描述',
         truncateStrength: '截断强度',
+        truncateStrengthHelp: '0 = 无截断, 1: 截断1/2的单词, 2: 截断1/3的单词, 3: 截断1/4的单词',
         scrambleDescription: '打乱描述',
         scrambleDescriptionInfo: '使用不同的算法随机重新排序单词',
         selectAtLeastOneGeneration: '请选择至少一个世代'
@@ -290,6 +299,7 @@ export const SETTINGS_LABELS = {
         descriptionEffectsDescription: '通過隱藏或打亂部分描述來增加難度',
         truncateDescription: '截斷描述',
         truncateStrength: '截斷強度',
+        truncateStrengthHelp: '0 = 無截斷, 1: 截斷1/2的單詞, 2: 截斷1/3的單詞, 3: 截斷1/4的單詞',
         scrambleDescription: '打亂描述',
         scrambleDescriptionInfo: '使用不同的算法隨機重新排序單詞',
         selectAtLeastOneGeneration: '請選擇至少一個世代'

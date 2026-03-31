@@ -110,7 +110,7 @@
                 <!-- Truncate Description -->
                 <h3 class="settings-section-title">{getLabel(languageCode, 'truncateDescription')}</h3>
                 <p class="strength-value">
-                    {truncateStrength === 0 ? '0' : `${truncateStrength}/3`} word is truncated
+                    {getLabel(languageCode, 'truncateStrengthHelp')}
                 </p>
                 <Slider
                     label={getLabel(languageCode, 'truncateStrength')}
