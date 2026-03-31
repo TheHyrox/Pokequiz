@@ -13,17 +13,21 @@
     import TimerDisplay from '../components/quiz/TimerDisplay.svelte';
     import SpriteChallengeReviewScreen from '../components/quiz/SpriteChallengeReviewScreen.svelte';
     import HardcoreLivesDisplay from '../components/quiz/HardcoreLivesDisplay.svelte';
+    import QuizEndModal from '../components/quiz/QuizEndModal.svelte';
     import { getLabel } from './lib/translations';
     import { createToastHandlers } from './lib/toastUtils';
     import { normalizeText } from './lib/utils/textUtils';
     import { pixelateImage, getCssFiltersFromSettings, getRandomRotation } from './lib/utils/imageEffects';
-    import { getQuizSpriteUrl, getQuizSpriteUrlWithFallback } from '../../shared/constants/sprites';
+    import { saveSpriteSettings } from './lib/storage';
+    import { getQuizSpriteUrlWithFallback } from '../../shared/constants/sprites';
     import type { SpriteUrlResult } from '../../shared/constants/sprites';
     import { CHALLENGE_QUESTION_COUNT, DEFAULT_SPRITE_QUIZ_SETTINGS, HARDCORE_INITIAL_STATE, HARDCORE_MAX_LIVES, HARDCORE_LIFE_REWARD_THRESHOLD } from '../../shared/constants';
     import type { SpriteQuizSettings, PokemonOption, ToastState, HardcoreModeState, SpriteChallengeQuestion } from '../../shared/types';
 
     /** Callback to return to hub */
     export let onBackToHub: () => void;
+    /** Callback to return to settings */
+    export let onBackToSettings: (() => void) | null = null;
     /** Current language code */
     export let languageCode: string = 'en';
     /** Current language ID */
@@ -55,6 +59,11 @@
     let allPokemonList: Array<{ id: number; name: string }> = [];
     let autocompleteRef: any;
     let hardcoreState: HardcoreModeState = { ...HARDCORE_INITIAL_STATE };
+
+    // End modal state
+    let showEndModal = false;
+    let lastCorrectAnswer: PokemonOption = { id: 0, name: '', isCorrect: true };
+    let isWin = false;
 
     // Toast state
     let toastState: ToastState = {
@@ -114,6 +123,9 @@
      * @brief Handles hardcore mode answer submission with 3-life system
      */
     function handleHardcoreSubmit(): void {
+        // Prevent multiple submissions during transition
+        if (disabledCards) return;
+        
         if (timerInterval) clearInterval(timerInterval);
 
         const userInputNormalized = normalizeText(hardcoreUserInput);
@@ -121,6 +133,8 @@
         const isCorrect = userInputNormalized === correctNameNormalized;
 
         if (isCorrect) {
+            disabledCards = true;
+            
             score += 1;
             hardcoreState.consecutiveCorrect++;
 
@@ -143,10 +157,7 @@
 
             if (hardcoreState.lives <= 0) {
                 disabledCards = true;
-                showErrorToast(getLabel(languageCode, 'gameOver'));
-                setTimeout(() => {
-                    onBackToHub();
-                }, 2000);
+                handleGameEnd();
             } else {
                 showErrorToast(`${getLabel(languageCode, 'incorrect')} - ${hardcoreState.lives} ${getLabel(languageCode, 'livesRemaining')}`);
                 setTimeout(() => {
@@ -273,6 +284,10 @@
         }
 
         pokemonOptions = options.sort(() => Math.random() - 0.5);
+        
+        // Store the correct answer for end modal
+        lastCorrectAnswer = pokemonOptions.find(p => p.isCorrect) || { id: correctId, name: correctPokemonName, isCorrect: true };
+        
         loading = false;
         startTimer();
 
@@ -311,10 +326,48 @@
      */
     function endQuiz(): void {
         if (timerInterval) clearInterval(timerInterval);
-        showSuccessToast(`${getLabel(languageCode, 'quizCompleted')} ${score}`);
-        setTimeout(() => {
+        isWin = true;
+        showEndModal = true;
+    }
+
+    /**
+     * @brief Handles end game (loss)
+     */
+    function handleGameEnd(): void {
+        if (timerInterval) clearInterval(timerInterval);
+        isWin = false;
+        showEndModal = true;
+    }
+
+    /**
+     * @brief Handles end modal home button
+     */
+    function handleEndModalHome(): void {
+        onBackToHub();
+    }
+
+    /**
+     * @brief Handles end modal retry button
+     */
+    function handleEndModalRetry(): void {
+        // Reset quiz state
+        currentQuestion = 1;
+        score = 0;
+        hardcoreState = { ...HARDCORE_INITIAL_STATE };
+        challengeQuestions = [];
+        showEndModal = false;
+        loadQuestion();
+    }
+
+    /**
+     * @brief Handles end modal settings button
+     */
+    function handleEndModalChangeSettings(): void {
+        if (onBackToSettings) {
+            onBackToSettings();
+        } else {
             onBackToHub();
-        }, 2000);
+        }
     }
 
     /**
@@ -378,15 +431,15 @@
 
             if (settings.gameMode === 'infinite') {
                 disabledCards = true;
-                showErrorToast(getLabel(languageCode, 'quizEnded'));
-                setTimeout(() => {
-                    onBackToHub();
-                }, 2000);
+                handleGameEnd();
             } else {
                 showErrorToast(`${getLabel(languageCode, 'wrongAnswer')} ${getLabel(languageCode, 'keepGoing')}`);
             }
         }
     }
+
+    // Save settings to local storage
+    saveSpriteSettings(settings);
 
     loadQuestion();
 
@@ -399,7 +452,19 @@
 
 <main class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 p-8 flex items-center justify-center">
     <div class="max-w-4xl mx-auto w-full">
-        {#if showChallengeReview}
+        {#if showEndModal}
+            <QuizEndModal
+                {isWin}
+                {score}
+                {totalQuestions}
+                correctAnswer={lastCorrectAnswer}
+                {languageCode}
+                gameMode={settings.gameMode}
+                on:home={handleEndModalHome}
+                on:changeSettings={handleEndModalChangeSettings}
+                on:retry={handleEndModalRetry}
+            />
+        {:else if showChallengeReview}
             <SpriteChallengeReviewScreen
                 {languageCode}
                 {challengeQuestions}
