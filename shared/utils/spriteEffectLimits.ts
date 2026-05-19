@@ -3,7 +3,7 @@
  * @description Dynamic limits for blur and pixelate based on sprite source, type, and effects
  */
 
-import type { SpriteSource, SpriteType } from '../../../../shared/types';
+import type { SpriteSource, SpriteType } from '../types';
 
 /**
  * @brief Effect strength limits with multiple recommendation levels

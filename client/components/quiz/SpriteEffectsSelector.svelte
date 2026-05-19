@@ -4,7 +4,7 @@
      * @description Configure image effects (blur, pixelate, silhouette, rotation)
      */
     import { getLabel } from '../../src/lib/translations';
-    import { getBlurLimits, getPixelateLimits, getRecommendedBlur, getRecommendedPixelate, clampValue } from '../../src/lib/utils/spriteEffectLimits';
+    import { getBlurLimits, getPixelateLimits, getRecommendedBlur, getRecommendedPixelate, clampValue } from '../../../shared/utils/spriteEffectLimits.js';
     import type { SpriteEffectSettings, SpriteType, SpriteSource } from '../../../shared/types';
 
     /** Current effect settings */

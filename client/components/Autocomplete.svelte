@@ -15,9 +15,9 @@
      * @description Provides filtered dropdown suggestions as user types
      */
     import { createEventDispatcher } from 'svelte';
-    import { normalizeText } from '../src/lib/utils/textUtils';
+    import { normalizeText } from '../../shared/utils/textUtils.js';
     import { getSpriteUrl } from '../../shared/constants/sprites';
-    import { getGenerationForPokemon } from '../src/lib/utils/pokemonUtils';
+    import { getGenerationForPokemon } from '../../shared/utils/pokemonUtils.js';
     import { ALL_GENERATIONS } from '../../shared/constants';
 
     export type { PokemonOption };

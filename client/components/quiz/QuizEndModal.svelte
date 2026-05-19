@@ -4,7 +4,7 @@
      * @description Modal displayed at end of quiz with score, correct answer, and action buttons
      */
     import { createEventDispatcher } from 'svelte';
-    import { capitalizeFirst } from '../../src/lib/utils/textUtils';
+    import { capitalizeFirst } from '../../../shared/utils/textUtils.js';
     import { getSpriteUrl } from '../../../shared/constants/sprites';
     import { getLabel } from '../../src/lib/translations';
     import Confetti from './Confetti.svelte';

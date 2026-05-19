@@ -4,7 +4,8 @@
      * @description Main quiz gameplay for guessing Pokemon from characteristics
      */
     import { onMount } from 'svelte';
-    import { getPokemonNameLocalized } from '../../server/src/lib/name';
+    import { getPokemonNameLocalized, preloadPokemonNames } from './lib/pokemonNamesClient';
+    import { getPokemonInformationData } from './lib/pokemonInformationClient';
     import { getRandomPokemonId } from '../../shared/utils/pokemonUtils';
     import Pokecard from '../components/pokecard.svelte';
     import Toast from '../components/Toast.svelte';
@@ -267,49 +268,60 @@
         let hintIndex = 0;
 
         try {
-            const pokemonData = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`).then(r => r.json());
-            const speciesData = await fetch(pokemonData.species.url).then(r => r.json());
-
+            let enrichedData = await getPokemonInformationData(pokemonId, languageId);
+            if (!enrichedData) {
+                const pokemonData = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`).then(r => r.json());
+                const speciesData = await fetch(pokemonData.species.url).then(r => r.json());
+                enrichedData = { pokemon: pokemonData, species: speciesData };
+            }
             for (const infoType of settings.selectedInformations) {
                 let value = '';
                 let isFake = settings.enableFakeInformation && Math.random() * 100 < settings.fakeInformationRate;
 
                 switch (infoType) {
                     case 'weight':
-                        value = `${pokemonData.weight / 10} kg`;
+                        value = enrichedData.weight ? `${enrichedData.weight / 10} kg` : 'Unknown';
                         break;
                     case 'height':
-                        value = `${pokemonData.height / 10} m`;
+                        value = enrichedData.height ? `${enrichedData.height / 10} m` : 'Unknown';
                         break;
                     case 'abilities':
-                        value = (await Promise.all(
-                            pokemonData.abilities.map((a: any) =>
-                                getLocalizedName('ability', a.ability.name, languageCode)
-                            )
-                        )).join(', ');
+                        if (enrichedData.abilities) {
+                            if (enrichedData.abilities[0]?.name && typeof enrichedData.abilities[0].name === 'string') {
+                                value = enrichedData.abilities.map((a: any) => a.name).join(', ');
+                            } else if (enrichedData.pokemon?.abilities) {
+                                value = enrichedData.pokemon.abilities.map((a: any) => {
+                                    const name = a.ability.name;
+                                    return name.charAt(0).toUpperCase() + name.slice(1).replace(/-/g, ' ');
+                                }).join(', ');
+                            }
+                        }
                         break;
                     case 'eggGroup':
-                        value = (await Promise.all(
-                            speciesData.egg_groups.map((g: any) =>
-                                getLocalizedName('egg-group', g.name, languageCode)
-                            )
-                        )).join(', ');
+                        if (enrichedData.eggGroups) {
+                            value = enrichedData.eggGroups.join(', ');
+                        }
                         break;
                     case 'generation':
-                        value = romanToArabic(speciesData.generation.name);
+                        value = enrichedData.generationId ? romanToArabic(`generation-${enrichedData.generationId}`) : 'Unknown';
                         break;
                     case 'shape':
-                        value = await getLocalizedName('pokemon-shape', speciesData.shape.name, languageCode);
+                        value = enrichedData.shape || 'Unknown';
                         break;
                     case 'color':
-                        value = await getLocalizedName('pokemon-color', speciesData.color.name, languageCode);
+                        value = enrichedData.color || 'Unknown';
                         break;
                     case 'types':
-                        value = (await Promise.all(
-                            pokemonData.types.map((t: any) =>
-                                getLocalizedName('type', t.type.name, languageCode)
-                            )
-                        )).join(', ');
+                        if (enrichedData.types) {
+                            if (enrichedData.types[0]?.name && typeof enrichedData.types[0].name === 'string') {
+                                value = enrichedData.types.map((t: any) => t.name).join(', ');
+                            } else if (enrichedData.pokemon?.types) {
+                                value = enrichedData.pokemon.types.map((t: any) => {
+                                    const name = t.type.name;
+                                    return name.charAt(0).toUpperCase() + name.slice(1);
+                                }).join(', ');
+                            }
+                        }
                         break;
                 }
 
@@ -591,6 +603,8 @@
     saveInformationSettings(settings);
 
     onMount(async () => {
+        // Preload all pokemon names to avoid repeated fetch requests during quiz
+        await preloadPokemonNames(languageId);
         await loadQuestion();
     });
 

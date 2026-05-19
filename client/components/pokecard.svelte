@@ -4,7 +4,7 @@
      * @description Clickable card displaying a Pokemon with sprite and name
      */
     import { createEventDispatcher } from 'svelte';
-    import { capitalizeFirst } from '../src/lib/utils/textUtils';
+    import { capitalizeFirst } from '../../shared/utils/textUtils.js';
     import { getSpriteUrl } from '../../shared/constants/sprites';
     import type { PokemonOption } from '../../shared/types';
 

@@ -211,6 +211,204 @@ export function getEnrichedPokemon(
 }
 
 /**
+ * @brief Get all Pokemon abilities for a language
+ */
+function getAllPokemonAbilities(language: string): { [id: string]: any } {
+    const cacheKey = `pokemon-abilities:${language}`;
+
+    if (!dataCache[cacheKey]) {
+        const filePath = path.join(DATA_DIR, 'pokemon-ability', `${language}.json`);
+        if (!fs.existsSync(filePath)) {
+            return {};
+        }
+
+        try {
+            const fileContent = fs.readFileSync(filePath, 'utf-8');
+            dataCache[cacheKey] = JSON.parse(fileContent);
+        } catch (error) {
+            console.error(`Failed to load pokemon-ability/${language}.json:`, error);
+            return {};
+        }
+    }
+
+    return dataCache[cacheKey];
+}
+
+/**
+ * @brief Get all Pokemon types for a language
+ */
+function getAllPokemonTypes(language: string): { [id: string]: any } {
+    const cacheKey = `pokemon-types:${language}`;
+
+    if (!dataCache[cacheKey]) {
+        const filePath = path.join(DATA_DIR, 'pokemon-types', `${language}.json`);
+        if (!fs.existsSync(filePath)) {
+            return {};
+        }
+
+        try {
+            const fileContent = fs.readFileSync(filePath, 'utf-8');
+            dataCache[cacheKey] = JSON.parse(fileContent);
+        } catch (error) {
+            console.error(`Failed to load pokemon-types/${language}.json:`, error);
+            return {};
+        }
+    }
+
+    return dataCache[cacheKey];
+}
+
+/**
+ * @brief Get all Pokemon egg groups for a language
+ */
+function getAllPokemonEggGroups(language: string): { [id: string]: any } {
+    const cacheKey = `pokemon-egg-groups:${language}`;
+
+    if (!dataCache[cacheKey]) {
+        const filePath = path.join(DATA_DIR, 'pokemon-egg-group', `${language}.json`);
+        if (!fs.existsSync(filePath)) {
+            return {};
+        }
+
+        try {
+            const fileContent = fs.readFileSync(filePath, 'utf-8');
+            dataCache[cacheKey] = JSON.parse(fileContent);
+        } catch (error) {
+            console.error(`Failed to load pokemon-egg-group/${language}.json:`, error);
+            return {};
+        }
+    }
+
+    return dataCache[cacheKey];
+}
+
+/**
+ * @brief Get all Pokemon colors for a language
+ */
+function getAllPokemonColors(language: string): { [id: string]: any } {
+    const cacheKey = `pokemon-colors:${language}`;
+
+    if (!dataCache[cacheKey]) {
+        const filePath = path.join(DATA_DIR, 'pokemon-colors', `${language}.json`);
+        if (!fs.existsSync(filePath)) {
+            return {};
+        }
+
+        try {
+            const fileContent = fs.readFileSync(filePath, 'utf-8');
+            dataCache[cacheKey] = JSON.parse(fileContent);
+        } catch (error) {
+            console.error(`Failed to load pokemon-colors/${language}.json:`, error);
+            return {};
+        }
+    }
+
+    return dataCache[cacheKey];
+}
+
+/**
+ * @brief Get all Pokemon shapes for a language
+ */
+function getAllPokemonShapes(language: string): { [id: string]: any } {
+    const cacheKey = `pokemon-shapes:${language}`;
+
+    if (!dataCache[cacheKey]) {
+        const filePath = path.join(DATA_DIR, 'pokemon-shapes', `${language}.json`);
+        if (!fs.existsSync(filePath)) {
+            return {};
+        }
+
+        try {
+            const fileContent = fs.readFileSync(filePath, 'utf-8');
+            dataCache[cacheKey] = JSON.parse(fileContent);
+        } catch (error) {
+            console.error(`Failed to load pokemon-shapes/${language}.json:`, error);
+            return {};
+        }
+    }
+
+    return dataCache[cacheKey];
+}
+
+/**
+ * @brief Get fully localized enriched Pokemon data for Information Quiz
+ * @param pokemonId Pokemon ID or name
+ * @param language Language code (en, fr, de, es, it, ja, ja-hrkt, ko, zh-hans, zh-hant)
+ * @returns Enriched Pokemon data with all localized attributes
+ */
+export function getLocalizedEnrichedPokemon(
+    pokemonId: number | string,
+    language: string
+): any {
+    const pokemon = getPokemonById(pokemonId);
+    if (!pokemon) return null;
+
+    const abilitiesData = Object.values(getAllPokemonAbilities(language)) as any[];
+    const typesData = Object.values(getAllPokemonTypes(language)) as any[];
+    const eggGroupsData = Object.values(getAllPokemonEggGroups(language)) as any[];
+    const colorsData = Object.values(getAllPokemonColors(language)) as any[];
+    const shapesData = Object.values(getAllPokemonShapes(language)) as any[];
+
+    const abilityMap: { [key: string]: string } = {};
+    const typeMap: { [key: string]: string } = {};
+    
+    abilitiesData.forEach(ability => {
+        abilityMap[ability.id] = ability.localizedName || ability.name;
+    });
+    typesData.forEach(type => {
+        typeMap[type.id] = type.localizedName || type.name;
+    });
+
+    const eggGroupNameMap: { [key: string]: string } = {};
+    const colorNameMap: { [key: string]: string } = {};
+    const shapeNameMap: { [key: string]: string } = {};
+
+    eggGroupsData.forEach(eggGroup => {
+        eggGroupNameMap[eggGroup.name] = eggGroup.localizedName || eggGroup.name;
+    });
+    colorsData.forEach(color => {
+        colorNameMap[color.name] = color.localizedName || color.name;
+    });
+    shapesData.forEach(shape => {
+        shapeNameMap[shape.name] = shape.localizedName || shape.name;
+    });
+
+    const localizedAbilities = pokemon.abilities.map((ability: any) => ({
+        ...ability,
+        name: abilityMap[ability.id] || ability.id
+    }));
+
+    const localizedTypes = pokemon.types.map((type: any) => ({
+        ...type,
+        name: typeMap[type.id] || type.id
+    }));
+
+    const localizedEggGroups = pokemon.eggGroups.map((eggGroupName: string) => 
+        eggGroupNameMap[eggGroupName] || eggGroupName
+    );
+
+    const localizedColor = pokemon.color 
+        ? colorNameMap[pokemon.color] || pokemon.color
+        : null;
+
+    const localizedShape = pokemon.shape 
+        ? shapeNameMap[pokemon.shape] || pokemon.shape
+        : null;
+
+    const habitat = pokemon.habitatId ? getPokemonHabitat(pokemon.habitatId, language) : null;
+
+    return {
+        ...pokemon,
+        abilities: localizedAbilities,
+        types: localizedTypes,
+        eggGroups: localizedEggGroups,
+        color: localizedColor,
+        shape: localizedShape,
+        habitat
+    };
+}
+
+/**
  * @brief Get Pokemon genus by ID and language
  */
 export function getPokemonGenus(

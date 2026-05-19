@@ -4,7 +4,8 @@
  */
 
 import { generationToId } from '../../../shared/utils/pokemonUtils.js';
-import { POKEMON_NAME_PLACEHOLDERS } from '../../../shared/constants/index.js';
+import { truncateDescription, scrambleDescription } from '../../../shared/utils/descriptionUtils.js';
+import { POKEMON_NAME_PLACEHOLDERS, LANGUAGE_ID_TO_CODE } from '../../../shared/constants/index.js';
 
 /**
  * @brief Fetches Pokemon descriptions from PokeAPI
@@ -21,8 +22,6 @@ export async function getPokemonDescription(
     languageId: string,
     generation: string | null
 ): Promise<string[] | undefined> {
-    const url = `https://pokeapi.co/api/v2/pokemon-species/${pokemon}/`;
-
     let generationId: number[] | null = null;
     let descriptions: string[] = [];
     const langId = parseInt(languageId);
@@ -31,7 +30,33 @@ export async function getPokemonDescription(
         generationId = await generationToId(generation);
     }
 
+    const langCode = LANGUAGE_ID_TO_CODE[langId];
+    if (langCode) {
+        try {
+            const { getServerDataDir } = await import('./utils/' + 'utils.js');
+            const fs = await import('fs');
+            const path = await import('path');
+
+            const filePath = path.join(getServerDataDir(), 'pokemon-descriptions', `${langCode}.json`);
+            if (fs.existsSync(filePath)) {
+                const content = fs.readFileSync(filePath, 'utf-8');
+                const allDescriptions: { [key: string]: { descriptions: Array<{ text: string; version: string }> } } = JSON.parse(content);
+                const pokemonData = allDescriptions[pokemon];
+
+                if (pokemonData && Array.isArray(pokemonData.descriptions)) {
+                    descriptions = pokemonData.descriptions.map((d: any) => d.text.replace(/\n/g, ' '));
+                    if (descriptions.length > 0) {
+                        return descriptions;
+                    }
+                }
+            }
+        } catch (e) {
+            console.error('Error reading local descriptions:', e);
+        }
+    }
+
     try {
+        const url = `https://pokeapi.co/api/v2/pokemon-species/${pokemon}/`;
         const response = await fetch(url);
         const data = await response.json() as { flavor_text_entries: Array<{ language: { url: string }; version: { url: string }; flavor_text: string }>; names: { name: string; language: { url: string } }[] };
 
@@ -55,7 +80,7 @@ export async function getPokemonDescription(
 
         return await noSpoilerDescription(descriptions, languageId, data);
     } catch (e) {
-        console.error('Error fetching Pokemon description:', e);
+        console.error('Error fetching Pokemon description from PokeAPI:', e);
         return undefined;
     }
 }
@@ -101,84 +126,12 @@ function removeDuplicateDescriptions(descriptions: string[]): string[] {
 
 /**
  * @brief Truncates description by masking words
- * @param description - Original description text
- * @param strength - Truncation strength (1-3), higher = more words masked
- * @returns Description with some words replaced by blocks
- * @example
- * truncateDescription("Pikachu is a yellow mouse", 1)
- * // returns "██████ is a ██████ mouse"
+ * @description Exported from shared utility module
  */
-export function truncateDescription(description: string, strength: number): string {
-    const words = description.split(' ');
-
-    const maskedWords = words.map((word, index) => {
-        let shouldMask = false;
-
-        if (strength === 1 && index % 2 === 0) {
-            shouldMask = true;
-        } else if (strength === 2 && index % 3 === 0) {
-            shouldMask = true;
-        } else if (strength === 3 && index % 4 === 0) {
-            shouldMask = true;
-        }
-
-        if (shouldMask) {
-            return '█'.repeat(Math.max(word.length, 1));
-        }
-        return word;
-    });
-
-    return maskedWords.join(' ');
-}
+export { truncateDescription } from '../../../shared/utils/descriptionUtils.js';
 
 /**
  * @brief Scrambles word order in description
- * @param description - Original description text
- * @returns Description with words reordered using random algorithm
- * @description Uses one of 5 scrambling algorithms:
- * - Alphabetical order
- * - Shortest to longest
- * - Longest to shortest
- * - Most vowels first
- * - Complete random shuffle
+ * @description Exported from shared utility module
  */
-export function scrambleDescription(description: string): string {
-    const words = description.split(' ');
-    const algorithm = Math.floor(Math.random() * 5);
-
-    let scrambledWords = [...words];
-
-    switch (algorithm) {
-        case 0: // Alphabetical order
-            scrambledWords.sort((a, b) =>
-                a.toLowerCase().localeCompare(b.toLowerCase())
-            );
-            break;
-
-        case 1: // Shortest to longest
-            scrambledWords.sort((a, b) => a.length - b.length);
-            break;
-
-        case 2: // Longest to shortest
-            scrambledWords.sort((a, b) => b.length - a.length);
-            break;
-
-        case 3: // Most vowels first
-            scrambledWords.sort((a, b) => {
-                const vowelPattern = /[aeiouàâäæëéèêïîôöœùûüœAEIOUÀÂÄÆËÉÈÊÏÎÔÖŒÙÛÜŒ]/gi;
-                const vowelsA = (a.match(vowelPattern) || []).length;
-                const vowelsB = (b.match(vowelPattern) || []).length;
-                return vowelsB - vowelsA;
-            });
-            break;
-
-        case 4: // Fisher-Yates shuffle
-            for (let i = scrambledWords.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [scrambledWords[i], scrambledWords[j]] = [scrambledWords[j], scrambledWords[i]];
-            }
-            break;
-    }
-
-    return scrambledWords.join(' ');
-}
+export { scrambleDescription } from '../../../shared/utils/descriptionUtils.js';

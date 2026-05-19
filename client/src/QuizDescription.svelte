@@ -4,8 +4,8 @@
      * @description Main quiz gameplay with multiple game modes
      */
     import { onMount } from 'svelte';
-    import { getPokemonDescription, truncateDescription, scrambleDescription } from '../../server/src/lib/description';
-    import { getPokemonNameLocalized } from '../../server/src/lib/name';
+    import { getPokemonDescription, truncateDescription, scrambleDescription } from './lib/pokemonDescriptionClient';
+    import { getPokemonNameLocalized, preloadPokemonNames } from './lib/pokemonNamesClient';
     import { getRandomPokemonId } from '../../shared/utils/pokemonUtils';
     import Pokecard from '../components/pokecard.svelte';
     import Toast from '../components/Toast.svelte';
@@ -17,7 +17,7 @@
     import QuizEndModal from '../components/quiz/QuizEndModal.svelte';
     import { getLabel } from './lib/translations';
     import { createToastHandlers } from './lib/toastUtils';
-    import { normalizeText } from './lib/utils/textUtils';
+    import { normalizeText } from '../../shared/utils/textUtils.js';
     import { saveDescriptionSettings } from './lib/storage';
     import { CHALLENGE_QUESTION_COUNT, DEFAULT_QUIZ_SETTINGS, HARDCORE_INITIAL_STATE, HARDCORE_MAX_LIVES, HARDCORE_LIFE_REWARD_THRESHOLD } from '../../shared/constants';
     import type { DescriptionQuizSettings, PokemonOption, ChallengeQuestion, ToastState, HardcoreModeState } from '../../shared/types';
@@ -419,6 +419,8 @@
     loadQuestion();
 
     onMount(async () => {
+        // Preload all pokemon names to avoid repeated fetch requests during quiz
+        await preloadPokemonNames(languageId);
         if (settings.gameMode === 'hardcore') {
             await loadAllPokemonNames();
         }

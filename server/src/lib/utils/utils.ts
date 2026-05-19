@@ -10,19 +10,19 @@ import { generationToId, getRandomInt, getRandomPokemonId } from '../../../../sh
 
 export { generationToId, getRandomInt, getRandomPokemonId };
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DATA_DIR_CANDIDATES = [
-    path.resolve(process.cwd(), 'server', 'src', 'data'),
-    path.resolve(process.cwd(), 'server', 'dist', 'server', 'src', 'data'),
-    path.join(__dirname, '../../data'),
-    path.join(__dirname, '../../../data')
-];
-
 /**
  * @brief Resolves the server data directory in both source and compiled runtimes
  * @returns First existing data directory, or the preferred source path if none exist
  */
 export function getServerDataDir(): string {
+    const __dirname = path.dirname(fileURLToPath(import.meta.url));
+    const DATA_DIR_CANDIDATES = [
+        path.resolve(process.cwd(), 'server', 'src', 'data'),
+        path.resolve(process.cwd(), 'server', 'dist', 'server', 'src', 'data'),
+        path.join(__dirname, '../../data'),
+        path.join(__dirname, '../../../data')
+    ];
+
     for (const candidate of DATA_DIR_CANDIDATES) {
         if (fs.existsSync(candidate)) {
             return candidate;
