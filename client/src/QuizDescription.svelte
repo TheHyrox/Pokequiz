@@ -521,14 +521,16 @@
                         </div>
                     </div>
                 {:else}
-                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6">
+                    <div class="pokemon-grid">
                         {#each pokemonOptions as pokemon (pokemon.name)}
-                            <Pokecard
-                                {pokemon}
-                                showError={wrongAnsweredIds.has(pokemon.id)}
-                                disabled={disabledCards}
-                                on:selected={() => handleAnswer(pokemon.isCorrect, pokemon.id)}
-                            />
+                            <div class="pokemon-grid-item">
+                                <Pokecard
+                                    {pokemon}
+                                    showError={wrongAnsweredIds.has(pokemon.id)}
+                                    disabled={disabledCards}
+                                    on:selected={() => handleAnswer(pokemon.isCorrect, pokemon.id)}
+                                />
+                            </div>
                         {/each}
                     </div>
                 {/if}
@@ -555,6 +557,36 @@
 
     .quiz-header-row {
         @apply flex justify-between items-start mb-8 gap-8;
+    }
+
+    .pokemon-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .pokemon-grid-item {
+        flex: 1 1 100%;
+        max-width: 20rem;
+    }
+
+    @media (min-width: 768px) {
+        .pokemon-grid {
+            gap: 1.5rem;
+        }
+    }
+
+    @media (min-width: 640px) {
+        .pokemon-grid-item {
+            flex-basis: calc(50% - 0.5rem);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .pokemon-grid-item {
+            flex-basis: calc(25% - 1.125rem);
+        }
     }
 
 </style>
