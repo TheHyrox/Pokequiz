@@ -5,7 +5,7 @@
      */
     import { onMount } from 'svelte';
     import { getPokemonDescription, truncateDescription, scrambleDescription } from './lib/pokemonDescriptionClient';
-    import { getPokemonNameLocalized } from './lib/pokemonNamesClient';
+    import { getPokemonNameLocalized, preloadPokemonNames } from './lib/pokemonNamesClient';
     import { getRandomPokemonId } from '../../shared/utils/pokemonUtils';
     import Pokecard from '../components/pokecard.svelte';
     import Toast from '../components/Toast.svelte';
@@ -419,6 +419,8 @@
     loadQuestion();
 
     onMount(async () => {
+        // Preload all pokemon names to avoid repeated fetch requests during quiz
+        await preloadPokemonNames(languageId);
         if (settings.gameMode === 'hardcore') {
             await loadAllPokemonNames();
         }

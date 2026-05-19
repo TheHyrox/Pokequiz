@@ -4,7 +4,7 @@
      * @description Main quiz gameplay for guessing Pokemon from characteristics
      */
     import { onMount } from 'svelte';
-    import { getPokemonNameLocalized } from './lib/pokemonNamesClient';
+    import { getPokemonNameLocalized, preloadPokemonNames } from './lib/pokemonNamesClient';
     import { getPokemonInformationData } from './lib/pokemonInformationClient';
     import { getRandomPokemonId } from '../../shared/utils/pokemonUtils';
     import Pokecard from '../components/pokecard.svelte';
@@ -603,6 +603,8 @@
     saveInformationSettings(settings);
 
     onMount(async () => {
+        // Preload all pokemon names to avoid repeated fetch requests during quiz
+        await preloadPokemonNames(languageId);
         await loadQuestion();
     });
 

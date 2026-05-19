@@ -4,7 +4,7 @@
      * @description Main quiz gameplay with multiple game modes for sprite guessing
      */
     import { onMount } from 'svelte';
-    import { getPokemonNameLocalized } from './lib/pokemonNamesClient';
+    import { getPokemonNameLocalized, preloadPokemonNames } from './lib/pokemonNamesClient';
     import { getRandomPokemonId } from '../../shared/utils/pokemonUtils';
     import Pokecard from '../components/pokecard.svelte';
     import Toast from '../components/Toast.svelte';
@@ -449,6 +449,8 @@
     loadQuestion();
 
     onMount(async () => {
+        // Preload all pokemon names to avoid repeated fetch requests
+        await preloadPokemonNames(languageId);
         if (settings.gameMode === 'hardcore') {
             await loadAllPokemonNames();
         }
