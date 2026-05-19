@@ -12,7 +12,8 @@ import {
     searchPokemonByName,
     getAllPokemonDescriptions,
     getPokemonHabitat,
-    getEnrichedPokemon
+    getEnrichedPokemon,
+    getLocalizedEnrichedPokemon
 } from './lib/pokemonData.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -200,6 +201,35 @@ app.get('/api/pokemon/:id/enriched/:language', (req, res) => {
         }
         
         const enriched = getEnrichedPokemon(id, languageCode);
+        
+        if (!enriched) {
+            return res.status(404).json({ error: 'Pokemon not found' });
+        }
+
+        res.json(enriched);
+    } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+        res.status(400).json({ error: errorMessage });
+    }
+});
+
+/**
+ * @brief Get fully localized Pokemon data for Information Quiz
+ * @param id Pokemon ID
+ * @param language Language code or language ID
+ */
+app.get('/api/pokemon/:id/information/:language', (req, res) => {
+    try {
+        const { id, language } = req.params;
+        
+        // Convert language ID to code if a numeric ID is provided
+        let languageCode = language;
+        const languageId = parseInt(language, 10);
+        if (!isNaN(languageId) && LANGUAGE_ID_TO_CODE[languageId]) {
+            languageCode = LANGUAGE_ID_TO_CODE[languageId];
+        }
+        
+        const enriched = getLocalizedEnrichedPokemon(id, languageCode);
         
         if (!enriched) {
             return res.status(404).json({ error: 'Pokemon not found' });
