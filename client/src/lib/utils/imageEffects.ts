@@ -57,16 +57,14 @@ export function getCssFiltersFromSettings(effects: SpriteEffectSettings): string
 /**
  * @brief Available rotation angles in degrees
  */
-const ROTATION_ANGLES = [0, 90, 180, 270] as const;
-
 /**
  * @brief Get a random rotation angle
- * @returns Rotation angle in degrees (0, 90, 180, or 270)
+ * @returns Rotation angle in degrees (integer between 0 and 359 inclusive)
  * @example
- * getRandomRotation() // returns 90
+ * getRandomRotation() // returns 237
  */
 export function getRandomRotation(): number {
-    return ROTATION_ANGLES[Math.floor(Math.random() * ROTATION_ANGLES.length)];
+    return Math.floor(Math.random() * 360);
 }
 
 /**
