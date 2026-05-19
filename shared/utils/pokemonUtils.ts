@@ -58,3 +58,20 @@ export function generationToId(generation: string): number[] | null {
 
     return generationVersionIds[generation] ?? null;
 }
+
+/**
+ * @brief Gets the generation number for a Pokemon ID
+ * @param pokemonId - Pokemon National Pokedex ID
+ * @returns Generation number (1-9) or null if invalid
+ * @example
+ * getGenerationForPokemon(25) // returns 1 (Pikachu)
+ * getGenerationForPokemon(152) // returns 2 (Chikorita)
+ */
+export function getGenerationForPokemon(pokemonId: number): number | null {
+    for (const [gen, range] of Object.entries(GENERATION_RANGES)) {
+        if (pokemonId >= range.min && pokemonId <= range.max) {
+            return parseInt(gen);
+        }
+    }
+    return null;
+}

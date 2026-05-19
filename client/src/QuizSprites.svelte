@@ -4,7 +4,7 @@
      * @description Main quiz gameplay with multiple game modes for sprite guessing
      */
     import { onMount } from 'svelte';
-    import { getPokemonNameLocalized } from '../../server/src/lib/name';
+    import { getPokemonNameLocalized } from './lib/pokemonNamesClient';
     import { getRandomPokemonId } from '../../shared/utils/pokemonUtils';
     import Pokecard from '../components/pokecard.svelte';
     import Toast from '../components/Toast.svelte';
@@ -16,7 +16,7 @@
     import QuizEndModal from '../components/quiz/QuizEndModal.svelte';
     import { getLabel } from './lib/translations';
     import { createToastHandlers } from './lib/toastUtils';
-    import { normalizeText } from './lib/utils/textUtils';
+    import { normalizeText } from '../../shared/utils/textUtils.js';
     import { pixelateImage, getCssFiltersFromSettings, getRandomRotation } from './lib/utils/imageEffects';
     import { saveSpriteSettings } from './lib/storage';
     import { getQuizSpriteUrlWithFallback } from '../../shared/constants/sprites';

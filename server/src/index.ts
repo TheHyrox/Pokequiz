@@ -2,13 +2,14 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { LANGUAGE_ID_TO_CODE } from '../../shared/constants/index.js';
 import { getAllPokemonNames } from './lib/pokemonCache.js';
 import { getLocalizedName, getLocalizedData } from './lib/localizedData.js';
+import { getPokemonDescription as getApiPokemonDescription } from './lib/description.js';
 import { 
     getAllPokemon, 
     getPokemonById, 
     searchPokemonByName,
-    getPokemonDescription,
     getAllPokemonDescriptions,
     getPokemonHabitat,
     getEnrichedPokemon
@@ -152,18 +153,30 @@ app.get('/api/pokemon/descriptions/:language', (req, res) => {
 /**
  * @brief Get Pokemon description by ID and language
  * @param id Pokemon ID
- * @param language Language code
+ * @param language Language code (e.g., 'fr', 'en') or language ID (e.g., 5, 9)
  */
-app.get('/api/pokemon/:id/description/:language', (req, res) => {
+app.get('/api/pokemon/:id/description/:language', async (req, res) => {
     try {
         const { id, language } = req.params;
-        const description = getPokemonDescription(id, language);
         
-        if (!description) {
+        // Convert language code to ID if needed
+        let languageId = language;
+        if (isNaN(parseInt(language, 10))) {
+            // It's a language code, find the ID
+            const langCodeUpper = language.toUpperCase();
+            const found = Object.entries(LANGUAGE_ID_TO_CODE).find(
+                ([_, code]) => code.toUpperCase() === langCodeUpper
+            );
+            languageId = found ? found[0] : language; // Use language ID if found, otherwise try the code
+        }
+        
+        const descriptions = await getApiPokemonDescription(id, languageId, null);
+        
+        if (!descriptions || descriptions.length === 0) {
             return res.status(404).json({ error: 'Description not found' });
         }
 
-        res.json(description);
+        res.json({ descriptions });
     } catch (error) {
         const errorMessage = error instanceof Error ? error.message : 'Unknown error';
         res.status(400).json({ error: errorMessage });
@@ -173,12 +186,20 @@ app.get('/api/pokemon/:id/description/:language', (req, res) => {
 /**
  * @brief Get enriched Pokemon data (with description and habitat)
  * @param id Pokemon ID
- * @param language Language code
+ * @param language Language code (e.g., 'fr', 'en') or language ID (e.g., 5, 9)
  */
 app.get('/api/pokemon/:id/enriched/:language', (req, res) => {
     try {
         const { id, language } = req.params;
-        const enriched = getEnrichedPokemon(id, language);
+        
+        // Convert language ID to code if a numeric ID is provided
+        let languageCode = language;
+        const languageId = parseInt(language, 10);
+        if (!isNaN(languageId) && LANGUAGE_ID_TO_CODE[languageId]) {
+            languageCode = LANGUAGE_ID_TO_CODE[languageId];
+        }
+        
+        const enriched = getEnrichedPokemon(id, languageCode);
         
         if (!enriched) {
             return res.status(404).json({ error: 'Pokemon not found' });

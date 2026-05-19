@@ -4,7 +4,7 @@
      * @description Main quiz gameplay for guessing Pokemon from characteristics
      */
     import { onMount } from 'svelte';
-    import { getPokemonNameLocalized } from '../../server/src/lib/name';
+    import { getPokemonNameLocalized } from './lib/pokemonNamesClient';
     import { getRandomPokemonId } from '../../shared/utils/pokemonUtils';
     import Pokecard from '../components/pokecard.svelte';
     import Toast from '../components/Toast.svelte';
