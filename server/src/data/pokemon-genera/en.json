@@ -1,0 +1,4102 @@
+{
+  "1": {
+    "id": "1",
+    "genus": "Seed Pokémon"
+  },
+  "2": {
+    "id": "2",
+    "genus": "Seed Pokémon"
+  },
+  "3": {
+    "id": "3",
+    "genus": "Seed Pokémon"
+  },
+  "4": {
+    "id": "4",
+    "genus": "Lizard Pokémon"
+  },
+  "5": {
+    "id": "5",
+    "genus": "Flame Pokémon"
+  },
+  "6": {
+    "id": "6",
+    "genus": "Flame Pokémon"
+  },
+  "7": {
+    "id": "7",
+    "genus": "Tiny Turtle Pokémon"
+  },
+  "8": {
+    "id": "8",
+    "genus": "Turtle Pokémon"
+  },
+  "9": {
+    "id": "9",
+    "genus": "Shellfish Pokémon"
+  },
+  "10": {
+    "id": "10",
+    "genus": "Worm Pokémon"
+  },
+  "11": {
+    "id": "11",
+    "genus": "Cocoon Pokémon"
+  },
+  "12": {
+    "id": "12",
+    "genus": "Butterfly Pokémon"
+  },
+  "13": {
+    "id": "13",
+    "genus": "Hairy Bug Pokémon"
+  },
+  "14": {
+    "id": "14",
+    "genus": "Cocoon Pokémon"
+  },
+  "15": {
+    "id": "15",
+    "genus": "Poison Bee Pokémon"
+  },
+  "16": {
+    "id": "16",
+    "genus": "Tiny Bird Pokémon"
+  },
+  "17": {
+    "id": "17",
+    "genus": "Bird Pokémon"
+  },
+  "18": {
+    "id": "18",
+    "genus": "Bird Pokémon"
+  },
+  "19": {
+    "id": "19",
+    "genus": "Mouse Pokémon"
+  },
+  "20": {
+    "id": "20",
+    "genus": "Mouse Pokémon"
+  },
+  "21": {
+    "id": "21",
+    "genus": "Tiny Bird Pokémon"
+  },
+  "22": {
+    "id": "22",
+    "genus": "Beak Pokémon"
+  },
+  "23": {
+    "id": "23",
+    "genus": "Snake Pokémon"
+  },
+  "24": {
+    "id": "24",
+    "genus": "Cobra Pokémon"
+  },
+  "25": {
+    "id": "25",
+    "genus": "Mouse Pokémon"
+  },
+  "26": {
+    "id": "26",
+    "genus": "Mouse Pokémon"
+  },
+  "27": {
+    "id": "27",
+    "genus": "Mouse Pokémon"
+  },
+  "28": {
+    "id": "28",
+    "genus": "Mouse Pokémon"
+  },
+  "29": {
+    "id": "29",
+    "genus": "Poison Pin Pokémon"
+  },
+  "30": {
+    "id": "30",
+    "genus": "Poison Pin Pokémon"
+  },
+  "31": {
+    "id": "31",
+    "genus": "Drill Pokémon"
+  },
+  "32": {
+    "id": "32",
+    "genus": "Poison Pin Pokémon"
+  },
+  "33": {
+    "id": "33",
+    "genus": "Poison Pin Pokémon"
+  },
+  "34": {
+    "id": "34",
+    "genus": "Drill Pokémon"
+  },
+  "35": {
+    "id": "35",
+    "genus": "Fairy Pokémon"
+  },
+  "36": {
+    "id": "36",
+    "genus": "Fairy Pokémon"
+  },
+  "37": {
+    "id": "37",
+    "genus": "Fox Pokémon"
+  },
+  "38": {
+    "id": "38",
+    "genus": "Fox Pokémon"
+  },
+  "39": {
+    "id": "39",
+    "genus": "Balloon Pokémon"
+  },
+  "40": {
+    "id": "40",
+    "genus": "Balloon Pokémon"
+  },
+  "41": {
+    "id": "41",
+    "genus": "Bat Pokémon"
+  },
+  "42": {
+    "id": "42",
+    "genus": "Bat Pokémon"
+  },
+  "43": {
+    "id": "43",
+    "genus": "Weed Pokémon"
+  },
+  "44": {
+    "id": "44",
+    "genus": "Weed Pokémon"
+  },
+  "45": {
+    "id": "45",
+    "genus": "Flower Pokémon"
+  },
+  "46": {
+    "id": "46",
+    "genus": "Mushroom Pokémon"
+  },
+  "47": {
+    "id": "47",
+    "genus": "Mushroom Pokémon"
+  },
+  "48": {
+    "id": "48",
+    "genus": "Insect Pokémon"
+  },
+  "49": {
+    "id": "49",
+    "genus": "Poison Moth Pokémon"
+  },
+  "50": {
+    "id": "50",
+    "genus": "Mole Pokémon"
+  },
+  "51": {
+    "id": "51",
+    "genus": "Mole Pokémon"
+  },
+  "52": {
+    "id": "52",
+    "genus": "Scratch Cat Pokémon"
+  },
+  "53": {
+    "id": "53",
+    "genus": "Classy Cat Pokémon"
+  },
+  "54": {
+    "id": "54",
+    "genus": "Duck Pokémon"
+  },
+  "55": {
+    "id": "55",
+    "genus": "Duck Pokémon"
+  },
+  "56": {
+    "id": "56",
+    "genus": "Pig Monkey Pokémon"
+  },
+  "57": {
+    "id": "57",
+    "genus": "Pig Monkey Pokémon"
+  },
+  "58": {
+    "id": "58",
+    "genus": "Puppy Pokémon"
+  },
+  "59": {
+    "id": "59",
+    "genus": "Legendary Pokémon"
+  },
+  "60": {
+    "id": "60",
+    "genus": "Tadpole Pokémon"
+  },
+  "61": {
+    "id": "61",
+    "genus": "Tadpole Pokémon"
+  },
+  "62": {
+    "id": "62",
+    "genus": "Tadpole Pokémon"
+  },
+  "63": {
+    "id": "63",
+    "genus": "Psi Pokémon"
+  },
+  "64": {
+    "id": "64",
+    "genus": "Psi Pokémon"
+  },
+  "65": {
+    "id": "65",
+    "genus": "Psi Pokémon"
+  },
+  "66": {
+    "id": "66",
+    "genus": "Superpower Pokémon"
+  },
+  "67": {
+    "id": "67",
+    "genus": "Superpower Pokémon"
+  },
+  "68": {
+    "id": "68",
+    "genus": "Superpower Pokémon"
+  },
+  "69": {
+    "id": "69",
+    "genus": "Flower Pokémon"
+  },
+  "70": {
+    "id": "70",
+    "genus": "Flycatcher Pokémon"
+  },
+  "71": {
+    "id": "71",
+    "genus": "Flycatcher Pokémon"
+  },
+  "72": {
+    "id": "72",
+    "genus": "Jellyfish Pokémon"
+  },
+  "73": {
+    "id": "73",
+    "genus": "Jellyfish Pokémon"
+  },
+  "74": {
+    "id": "74",
+    "genus": "Rock Pokémon"
+  },
+  "75": {
+    "id": "75",
+    "genus": "Rock Pokémon"
+  },
+  "76": {
+    "id": "76",
+    "genus": "Megaton Pokémon"
+  },
+  "77": {
+    "id": "77",
+    "genus": "Fire Horse Pokémon"
+  },
+  "78": {
+    "id": "78",
+    "genus": "Fire Horse Pokémon"
+  },
+  "79": {
+    "id": "79",
+    "genus": "Dopey Pokémon"
+  },
+  "80": {
+    "id": "80",
+    "genus": "Hermit Crab Pokémon"
+  },
+  "81": {
+    "id": "81",
+    "genus": "Magnet Pokémon"
+  },
+  "82": {
+    "id": "82",
+    "genus": "Magnet Pokémon"
+  },
+  "83": {
+    "id": "83",
+    "genus": "Wild Duck Pokémon"
+  },
+  "84": {
+    "id": "84",
+    "genus": "Twin Bird Pokémon"
+  },
+  "85": {
+    "id": "85",
+    "genus": "Triple Bird Pokémon"
+  },
+  "86": {
+    "id": "86",
+    "genus": "Sea Lion Pokémon"
+  },
+  "87": {
+    "id": "87",
+    "genus": "Sea Lion Pokémon"
+  },
+  "88": {
+    "id": "88",
+    "genus": "Sludge Pokémon"
+  },
+  "89": {
+    "id": "89",
+    "genus": "Sludge Pokémon"
+  },
+  "90": {
+    "id": "90",
+    "genus": "Bivalve Pokémon"
+  },
+  "91": {
+    "id": "91",
+    "genus": "Bivalve Pokémon"
+  },
+  "92": {
+    "id": "92",
+    "genus": "Gas Pokémon"
+  },
+  "93": {
+    "id": "93",
+    "genus": "Gas Pokémon"
+  },
+  "94": {
+    "id": "94",
+    "genus": "Shadow Pokémon"
+  },
+  "95": {
+    "id": "95",
+    "genus": "Rock Snake Pokémon"
+  },
+  "96": {
+    "id": "96",
+    "genus": "Hypnosis Pokémon"
+  },
+  "97": {
+    "id": "97",
+    "genus": "Hypnosis Pokémon"
+  },
+  "98": {
+    "id": "98",
+    "genus": "River Crab Pokémon"
+  },
+  "99": {
+    "id": "99",
+    "genus": "Pincer Pokémon"
+  },
+  "100": {
+    "id": "100",
+    "genus": "Ball Pokémon"
+  },
+  "101": {
+    "id": "101",
+    "genus": "Ball Pokémon"
+  },
+  "102": {
+    "id": "102",
+    "genus": "Egg Pokémon"
+  },
+  "103": {
+    "id": "103",
+    "genus": "Coconut Pokémon"
+  },
+  "104": {
+    "id": "104",
+    "genus": "Lonely Pokémon"
+  },
+  "105": {
+    "id": "105",
+    "genus": "Bone Keeper Pokémon"
+  },
+  "106": {
+    "id": "106",
+    "genus": "Kicking Pokémon"
+  },
+  "107": {
+    "id": "107",
+    "genus": "Punching Pokémon"
+  },
+  "108": {
+    "id": "108",
+    "genus": "Licking Pokémon"
+  },
+  "109": {
+    "id": "109",
+    "genus": "Poison Gas Pokémon"
+  },
+  "110": {
+    "id": "110",
+    "genus": "Poison Gas Pokémon"
+  },
+  "111": {
+    "id": "111",
+    "genus": "Spikes Pokémon"
+  },
+  "112": {
+    "id": "112",
+    "genus": "Drill Pokémon"
+  },
+  "113": {
+    "id": "113",
+    "genus": "Egg Pokémon"
+  },
+  "114": {
+    "id": "114",
+    "genus": "Vine Pokémon"
+  },
+  "115": {
+    "id": "115",
+    "genus": "Parent Pokémon"
+  },
+  "116": {
+    "id": "116",
+    "genus": "Dragon Pokémon"
+  },
+  "117": {
+    "id": "117",
+    "genus": "Dragon Pokémon"
+  },
+  "118": {
+    "id": "118",
+    "genus": "Goldfish Pokémon"
+  },
+  "119": {
+    "id": "119",
+    "genus": "Goldfish Pokémon"
+  },
+  "120": {
+    "id": "120",
+    "genus": "Star Shape Pokémon"
+  },
+  "121": {
+    "id": "121",
+    "genus": "Mysterious Pokémon"
+  },
+  "122": {
+    "id": "122",
+    "genus": "Barrier Pokémon"
+  },
+  "123": {
+    "id": "123",
+    "genus": "Mantis Pokémon"
+  },
+  "124": {
+    "id": "124",
+    "genus": "Human Shape Pokémon"
+  },
+  "125": {
+    "id": "125",
+    "genus": "Electric Pokémon"
+  },
+  "126": {
+    "id": "126",
+    "genus": "Spitfire Pokémon"
+  },
+  "127": {
+    "id": "127",
+    "genus": "Stag Beetle Pokémon"
+  },
+  "128": {
+    "id": "128",
+    "genus": "Wild Bull Pokémon"
+  },
+  "129": {
+    "id": "129",
+    "genus": "Fish Pokémon"
+  },
+  "130": {
+    "id": "130",
+    "genus": "Atrocious Pokémon"
+  },
+  "131": {
+    "id": "131",
+    "genus": "Transport Pokémon"
+  },
+  "132": {
+    "id": "132",
+    "genus": "Transform Pokémon"
+  },
+  "133": {
+    "id": "133",
+    "genus": "Evolution Pokémon"
+  },
+  "134": {
+    "id": "134",
+    "genus": "Bubble Jet Pokémon"
+  },
+  "135": {
+    "id": "135",
+    "genus": "Lightning Pokémon"
+  },
+  "136": {
+    "id": "136",
+    "genus": "Flame Pokémon"
+  },
+  "137": {
+    "id": "137",
+    "genus": "Virtual Pokémon"
+  },
+  "138": {
+    "id": "138",
+    "genus": "Spiral Pokémon"
+  },
+  "139": {
+    "id": "139",
+    "genus": "Spiral Pokémon"
+  },
+  "140": {
+    "id": "140",
+    "genus": "Shellfish Pokémon"
+  },
+  "141": {
+    "id": "141",
+    "genus": "Shellfish Pokémon"
+  },
+  "142": {
+    "id": "142",
+    "genus": "Fossil Pokémon"
+  },
+  "143": {
+    "id": "143",
+    "genus": "Sleeping Pokémon"
+  },
+  "144": {
+    "id": "144",
+    "genus": "Freeze Pokémon"
+  },
+  "145": {
+    "id": "145",
+    "genus": "Electric Pokémon"
+  },
+  "146": {
+    "id": "146",
+    "genus": "Flame Pokémon"
+  },
+  "147": {
+    "id": "147",
+    "genus": "Dragon Pokémon"
+  },
+  "148": {
+    "id": "148",
+    "genus": "Dragon Pokémon"
+  },
+  "149": {
+    "id": "149",
+    "genus": "Dragon Pokémon"
+  },
+  "150": {
+    "id": "150",
+    "genus": "Genetic Pokémon"
+  },
+  "151": {
+    "id": "151",
+    "genus": "New Species Pokémon"
+  },
+  "152": {
+    "id": "152",
+    "genus": "Leaf Pokémon"
+  },
+  "153": {
+    "id": "153",
+    "genus": "Leaf Pokémon"
+  },
+  "154": {
+    "id": "154",
+    "genus": "Herb Pokémon"
+  },
+  "155": {
+    "id": "155",
+    "genus": "Fire Mouse Pokémon"
+  },
+  "156": {
+    "id": "156",
+    "genus": "Volcano Pokémon"
+  },
+  "157": {
+    "id": "157",
+    "genus": "Volcano Pokémon"
+  },
+  "158": {
+    "id": "158",
+    "genus": "Big Jaw Pokémon"
+  },
+  "159": {
+    "id": "159",
+    "genus": "Big Jaw Pokémon"
+  },
+  "160": {
+    "id": "160",
+    "genus": "Big Jaw Pokémon"
+  },
+  "161": {
+    "id": "161",
+    "genus": "Scout Pokémon"
+  },
+  "162": {
+    "id": "162",
+    "genus": "Long Body Pokémon"
+  },
+  "163": {
+    "id": "163",
+    "genus": "Owl Pokémon"
+  },
+  "164": {
+    "id": "164",
+    "genus": "Owl Pokémon"
+  },
+  "165": {
+    "id": "165",
+    "genus": "Five Star Pokémon"
+  },
+  "166": {
+    "id": "166",
+    "genus": "Five Star Pokémon"
+  },
+  "167": {
+    "id": "167",
+    "genus": "String Spit Pokémon"
+  },
+  "168": {
+    "id": "168",
+    "genus": "Long Leg Pokémon"
+  },
+  "169": {
+    "id": "169",
+    "genus": "Bat Pokémon"
+  },
+  "170": {
+    "id": "170",
+    "genus": "Angler Pokémon"
+  },
+  "171": {
+    "id": "171",
+    "genus": "Light Pokémon"
+  },
+  "172": {
+    "id": "172",
+    "genus": "Tiny Mouse Pokémon"
+  },
+  "173": {
+    "id": "173",
+    "genus": "Star Shape Pokémon"
+  },
+  "174": {
+    "id": "174",
+    "genus": "Balloon Pokémon"
+  },
+  "175": {
+    "id": "175",
+    "genus": "Spike Ball Pokémon"
+  },
+  "176": {
+    "id": "176",
+    "genus": "Happiness Pokémon"
+  },
+  "177": {
+    "id": "177",
+    "genus": "Tiny Bird Pokémon"
+  },
+  "178": {
+    "id": "178",
+    "genus": "Mystic Pokémon"
+  },
+  "179": {
+    "id": "179",
+    "genus": "Wool Pokémon"
+  },
+  "180": {
+    "id": "180",
+    "genus": "Wool Pokémon"
+  },
+  "181": {
+    "id": "181",
+    "genus": "Light Pokémon"
+  },
+  "182": {
+    "id": "182",
+    "genus": "Flower Pokémon"
+  },
+  "183": {
+    "id": "183",
+    "genus": "Aqua Mouse Pokémon"
+  },
+  "184": {
+    "id": "184",
+    "genus": "Aqua Rabbit Pokémon"
+  },
+  "185": {
+    "id": "185",
+    "genus": "Imitation Pokémon"
+  },
+  "186": {
+    "id": "186",
+    "genus": "Frog Pokémon"
+  },
+  "187": {
+    "id": "187",
+    "genus": "Cottonweed Pokémon"
+  },
+  "188": {
+    "id": "188",
+    "genus": "Cottonweed Pokémon"
+  },
+  "189": {
+    "id": "189",
+    "genus": "Cottonweed Pokémon"
+  },
+  "190": {
+    "id": "190",
+    "genus": "Long Tail Pokémon"
+  },
+  "191": {
+    "id": "191",
+    "genus": "Seed Pokémon"
+  },
+  "192": {
+    "id": "192",
+    "genus": "Sun Pokémon"
+  },
+  "193": {
+    "id": "193",
+    "genus": "Clear Wing Pokémon"
+  },
+  "194": {
+    "id": "194",
+    "genus": "Water Fish Pokémon"
+  },
+  "195": {
+    "id": "195",
+    "genus": "Water Fish Pokémon"
+  },
+  "196": {
+    "id": "196",
+    "genus": "Sun Pokémon"
+  },
+  "197": {
+    "id": "197",
+    "genus": "Moonlight Pokémon"
+  },
+  "198": {
+    "id": "198",
+    "genus": "Darkness Pokémon"
+  },
+  "199": {
+    "id": "199",
+    "genus": "Royal Pokémon"
+  },
+  "200": {
+    "id": "200",
+    "genus": "Screech Pokémon"
+  },
+  "201": {
+    "id": "201",
+    "genus": "Symbol Pokémon"
+  },
+  "202": {
+    "id": "202",
+    "genus": "Patient Pokémon"
+  },
+  "203": {
+    "id": "203",
+    "genus": "Long Neck Pokémon"
+  },
+  "204": {
+    "id": "204",
+    "genus": "Bagworm Pokémon"
+  },
+  "205": {
+    "id": "205",
+    "genus": "Bagworm Pokémon"
+  },
+  "206": {
+    "id": "206",
+    "genus": "Land Snake Pokémon"
+  },
+  "207": {
+    "id": "207",
+    "genus": "Fly Scorpion Pokémon"
+  },
+  "208": {
+    "id": "208",
+    "genus": "Iron Snake Pokémon"
+  },
+  "209": {
+    "id": "209",
+    "genus": "Fairy Pokémon"
+  },
+  "210": {
+    "id": "210",
+    "genus": "Fairy Pokémon"
+  },
+  "211": {
+    "id": "211",
+    "genus": "Balloon Pokémon"
+  },
+  "212": {
+    "id": "212",
+    "genus": "Pincer Pokémon"
+  },
+  "213": {
+    "id": "213",
+    "genus": "Mold Pokémon"
+  },
+  "214": {
+    "id": "214",
+    "genus": "Single Horn Pokémon"
+  },
+  "215": {
+    "id": "215",
+    "genus": "Sharp Claw Pokémon"
+  },
+  "216": {
+    "id": "216",
+    "genus": "Little Bear Pokémon"
+  },
+  "217": {
+    "id": "217",
+    "genus": "Hibernator Pokémon"
+  },
+  "218": {
+    "id": "218",
+    "genus": "Lava Pokémon"
+  },
+  "219": {
+    "id": "219",
+    "genus": "Lava Pokémon"
+  },
+  "220": {
+    "id": "220",
+    "genus": "Pig Pokémon"
+  },
+  "221": {
+    "id": "221",
+    "genus": "Swine Pokémon"
+  },
+  "222": {
+    "id": "222",
+    "genus": "Coral Pokémon"
+  },
+  "223": {
+    "id": "223",
+    "genus": "Jet Pokémon"
+  },
+  "224": {
+    "id": "224",
+    "genus": "Jet Pokémon"
+  },
+  "225": {
+    "id": "225",
+    "genus": "Delivery Pokémon"
+  },
+  "226": {
+    "id": "226",
+    "genus": "Kite Pokémon"
+  },
+  "227": {
+    "id": "227",
+    "genus": "Armor Bird Pokémon"
+  },
+  "228": {
+    "id": "228",
+    "genus": "Dark Pokémon"
+  },
+  "229": {
+    "id": "229",
+    "genus": "Dark Pokémon"
+  },
+  "230": {
+    "id": "230",
+    "genus": "Dragon Pokémon"
+  },
+  "231": {
+    "id": "231",
+    "genus": "Long Nose Pokémon"
+  },
+  "232": {
+    "id": "232",
+    "genus": "Armor Pokémon"
+  },
+  "233": {
+    "id": "233",
+    "genus": "Virtual Pokémon"
+  },
+  "234": {
+    "id": "234",
+    "genus": "Big Horn Pokémon"
+  },
+  "235": {
+    "id": "235",
+    "genus": "Painter Pokémon"
+  },
+  "236": {
+    "id": "236",
+    "genus": "Scuffle Pokémon"
+  },
+  "237": {
+    "id": "237",
+    "genus": "Handstand Pokémon"
+  },
+  "238": {
+    "id": "238",
+    "genus": "Kiss Pokémon"
+  },
+  "239": {
+    "id": "239",
+    "genus": "Electric Pokémon"
+  },
+  "240": {
+    "id": "240",
+    "genus": "Live Coal Pokémon"
+  },
+  "241": {
+    "id": "241",
+    "genus": "Milk Cow Pokémon"
+  },
+  "242": {
+    "id": "242",
+    "genus": "Happiness Pokémon"
+  },
+  "243": {
+    "id": "243",
+    "genus": "Thunder Pokémon"
+  },
+  "244": {
+    "id": "244",
+    "genus": "Volcano Pokémon"
+  },
+  "245": {
+    "id": "245",
+    "genus": "Aurora Pokémon"
+  },
+  "246": {
+    "id": "246",
+    "genus": "Rock Skin Pokémon"
+  },
+  "247": {
+    "id": "247",
+    "genus": "Hard Shell Pokémon"
+  },
+  "248": {
+    "id": "248",
+    "genus": "Armor Pokémon"
+  },
+  "249": {
+    "id": "249",
+    "genus": "Diving Pokémon"
+  },
+  "250": {
+    "id": "250",
+    "genus": "Rainbow Pokémon"
+  },
+  "251": {
+    "id": "251",
+    "genus": "Time Travel Pokémon"
+  },
+  "252": {
+    "id": "252",
+    "genus": "Wood Gecko Pokémon"
+  },
+  "253": {
+    "id": "253",
+    "genus": "Wood Gecko Pokémon"
+  },
+  "254": {
+    "id": "254",
+    "genus": "Forest Pokémon"
+  },
+  "255": {
+    "id": "255",
+    "genus": "Chick Pokémon"
+  },
+  "256": {
+    "id": "256",
+    "genus": "Young Fowl Pokémon"
+  },
+  "257": {
+    "id": "257",
+    "genus": "Blaze Pokémon"
+  },
+  "258": {
+    "id": "258",
+    "genus": "Mud Fish Pokémon"
+  },
+  "259": {
+    "id": "259",
+    "genus": "Mud Fish Pokémon"
+  },
+  "260": {
+    "id": "260",
+    "genus": "Mud Fish Pokémon"
+  },
+  "261": {
+    "id": "261",
+    "genus": "Bite Pokémon"
+  },
+  "262": {
+    "id": "262",
+    "genus": "Bite Pokémon"
+  },
+  "263": {
+    "id": "263",
+    "genus": "Tiny Raccoon Pokémon"
+  },
+  "264": {
+    "id": "264",
+    "genus": "Rushing Pokémon"
+  },
+  "265": {
+    "id": "265",
+    "genus": "Worm Pokémon"
+  },
+  "266": {
+    "id": "266",
+    "genus": "Cocoon Pokémon"
+  },
+  "267": {
+    "id": "267",
+    "genus": "Butterfly Pokémon"
+  },
+  "268": {
+    "id": "268",
+    "genus": "Cocoon Pokémon"
+  },
+  "269": {
+    "id": "269",
+    "genus": "Poison Moth Pokémon"
+  },
+  "270": {
+    "id": "270",
+    "genus": "Water Weed Pokémon"
+  },
+  "271": {
+    "id": "271",
+    "genus": "Jolly Pokémon"
+  },
+  "272": {
+    "id": "272",
+    "genus": "Carefree Pokémon"
+  },
+  "273": {
+    "id": "273",
+    "genus": "Acorn Pokémon"
+  },
+  "274": {
+    "id": "274",
+    "genus": "Wily Pokémon"
+  },
+  "275": {
+    "id": "275",
+    "genus": "Wicked Pokémon"
+  },
+  "276": {
+    "id": "276",
+    "genus": "Tiny Swallow Pokémon"
+  },
+  "277": {
+    "id": "277",
+    "genus": "Swallow Pokémon"
+  },
+  "278": {
+    "id": "278",
+    "genus": "Seagull Pokémon"
+  },
+  "279": {
+    "id": "279",
+    "genus": "Water Bird Pokémon"
+  },
+  "280": {
+    "id": "280",
+    "genus": "Feeling Pokémon"
+  },
+  "281": {
+    "id": "281",
+    "genus": "Emotion Pokémon"
+  },
+  "282": {
+    "id": "282",
+    "genus": "Embrace Pokémon"
+  },
+  "283": {
+    "id": "283",
+    "genus": "Pond Skater Pokémon"
+  },
+  "284": {
+    "id": "284",
+    "genus": "Eyeball Pokémon"
+  },
+  "285": {
+    "id": "285",
+    "genus": "Mushroom Pokémon"
+  },
+  "286": {
+    "id": "286",
+    "genus": "Mushroom Pokémon"
+  },
+  "287": {
+    "id": "287",
+    "genus": "Slacker Pokémon"
+  },
+  "288": {
+    "id": "288",
+    "genus": "Wild Monkey Pokémon"
+  },
+  "289": {
+    "id": "289",
+    "genus": "Lazy Pokémon"
+  },
+  "290": {
+    "id": "290",
+    "genus": "Trainee Pokémon"
+  },
+  "291": {
+    "id": "291",
+    "genus": "Ninja Pokémon"
+  },
+  "292": {
+    "id": "292",
+    "genus": "Shed Pokémon"
+  },
+  "293": {
+    "id": "293",
+    "genus": "Whisper Pokémon"
+  },
+  "294": {
+    "id": "294",
+    "genus": "Big Voice Pokémon"
+  },
+  "295": {
+    "id": "295",
+    "genus": "Loud Noise Pokémon"
+  },
+  "296": {
+    "id": "296",
+    "genus": "Guts Pokémon"
+  },
+  "297": {
+    "id": "297",
+    "genus": "Arm Thrust Pokémon"
+  },
+  "298": {
+    "id": "298",
+    "genus": "Polka Dot Pokémon"
+  },
+  "299": {
+    "id": "299",
+    "genus": "Compass Pokémon"
+  },
+  "300": {
+    "id": "300",
+    "genus": "Kitten Pokémon"
+  },
+  "301": {
+    "id": "301",
+    "genus": "Prim Pokémon"
+  },
+  "302": {
+    "id": "302",
+    "genus": "Darkness Pokémon"
+  },
+  "303": {
+    "id": "303",
+    "genus": "Deceiver Pokémon"
+  },
+  "304": {
+    "id": "304",
+    "genus": "Iron Armor Pokémon"
+  },
+  "305": {
+    "id": "305",
+    "genus": "Iron Armor Pokémon"
+  },
+  "306": {
+    "id": "306",
+    "genus": "Iron Armor Pokémon"
+  },
+  "307": {
+    "id": "307",
+    "genus": "Meditate Pokémon"
+  },
+  "308": {
+    "id": "308",
+    "genus": "Meditate Pokémon"
+  },
+  "309": {
+    "id": "309",
+    "genus": "Lightning Pokémon"
+  },
+  "310": {
+    "id": "310",
+    "genus": "Discharge Pokémon"
+  },
+  "311": {
+    "id": "311",
+    "genus": "Cheering Pokémon"
+  },
+  "312": {
+    "id": "312",
+    "genus": "Cheering Pokémon"
+  },
+  "313": {
+    "id": "313",
+    "genus": "Firefly Pokémon"
+  },
+  "314": {
+    "id": "314",
+    "genus": "Firefly Pokémon"
+  },
+  "315": {
+    "id": "315",
+    "genus": "Thorn Pokémon"
+  },
+  "316": {
+    "id": "316",
+    "genus": "Stomach Pokémon"
+  },
+  "317": {
+    "id": "317",
+    "genus": "Poison Bag Pokémon"
+  },
+  "318": {
+    "id": "318",
+    "genus": "Savage Pokémon"
+  },
+  "319": {
+    "id": "319",
+    "genus": "Brutal Pokémon"
+  },
+  "320": {
+    "id": "320",
+    "genus": "Ball Whale Pokémon"
+  },
+  "321": {
+    "id": "321",
+    "genus": "Float Whale Pokémon"
+  },
+  "322": {
+    "id": "322",
+    "genus": "Numb Pokémon"
+  },
+  "323": {
+    "id": "323",
+    "genus": "Eruption Pokémon"
+  },
+  "324": {
+    "id": "324",
+    "genus": "Coal Pokémon"
+  },
+  "325": {
+    "id": "325",
+    "genus": "Bounce Pokémon"
+  },
+  "326": {
+    "id": "326",
+    "genus": "Manipulate Pokémon"
+  },
+  "327": {
+    "id": "327",
+    "genus": "Spot Panda Pokémon"
+  },
+  "328": {
+    "id": "328",
+    "genus": "Ant Pit Pokémon"
+  },
+  "329": {
+    "id": "329",
+    "genus": "Vibration Pokémon"
+  },
+  "330": {
+    "id": "330",
+    "genus": "Mystic Pokémon"
+  },
+  "331": {
+    "id": "331",
+    "genus": "Cactus Pokémon"
+  },
+  "332": {
+    "id": "332",
+    "genus": "Scarecrow Pokémon"
+  },
+  "333": {
+    "id": "333",
+    "genus": "Cotton Bird Pokémon"
+  },
+  "334": {
+    "id": "334",
+    "genus": "Humming Pokémon"
+  },
+  "335": {
+    "id": "335",
+    "genus": "Cat Ferret Pokémon"
+  },
+  "336": {
+    "id": "336",
+    "genus": "Fang Snake Pokémon"
+  },
+  "337": {
+    "id": "337",
+    "genus": "Meteorite Pokémon"
+  },
+  "338": {
+    "id": "338",
+    "genus": "Meteorite Pokémon"
+  },
+  "339": {
+    "id": "339",
+    "genus": "Whiskers Pokémon"
+  },
+  "340": {
+    "id": "340",
+    "genus": "Whiskers Pokémon"
+  },
+  "341": {
+    "id": "341",
+    "genus": "Ruffian Pokémon"
+  },
+  "342": {
+    "id": "342",
+    "genus": "Rogue Pokémon"
+  },
+  "343": {
+    "id": "343",
+    "genus": "Clay Doll Pokémon"
+  },
+  "344": {
+    "id": "344",
+    "genus": "Clay Doll Pokémon"
+  },
+  "345": {
+    "id": "345",
+    "genus": "Sea Lily Pokémon"
+  },
+  "346": {
+    "id": "346",
+    "genus": "Barnacle Pokémon"
+  },
+  "347": {
+    "id": "347",
+    "genus": "Old Shrimp Pokémon"
+  },
+  "348": {
+    "id": "348",
+    "genus": "Plate Pokémon"
+  },
+  "349": {
+    "id": "349",
+    "genus": "Fish Pokémon"
+  },
+  "350": {
+    "id": "350",
+    "genus": "Tender Pokémon"
+  },
+  "351": {
+    "id": "351",
+    "genus": "Weather Pokémon"
+  },
+  "352": {
+    "id": "352",
+    "genus": "Color Swap Pokémon"
+  },
+  "353": {
+    "id": "353",
+    "genus": "Puppet Pokémon"
+  },
+  "354": {
+    "id": "354",
+    "genus": "Marionette Pokémon"
+  },
+  "355": {
+    "id": "355",
+    "genus": "Requiem Pokémon"
+  },
+  "356": {
+    "id": "356",
+    "genus": "Beckon Pokémon"
+  },
+  "357": {
+    "id": "357",
+    "genus": "Fruit Pokémon"
+  },
+  "358": {
+    "id": "358",
+    "genus": "Wind Chime Pokémon"
+  },
+  "359": {
+    "id": "359",
+    "genus": "Disaster Pokémon"
+  },
+  "360": {
+    "id": "360",
+    "genus": "Bright Pokémon"
+  },
+  "361": {
+    "id": "361",
+    "genus": "Snow Hat Pokémon"
+  },
+  "362": {
+    "id": "362",
+    "genus": "Face Pokémon"
+  },
+  "363": {
+    "id": "363",
+    "genus": "Clap Pokémon"
+  },
+  "364": {
+    "id": "364",
+    "genus": "Ball Roll Pokémon"
+  },
+  "365": {
+    "id": "365",
+    "genus": "Ice Break Pokémon"
+  },
+  "366": {
+    "id": "366",
+    "genus": "Bivalve Pokémon"
+  },
+  "367": {
+    "id": "367",
+    "genus": "Deep Sea Pokémon"
+  },
+  "368": {
+    "id": "368",
+    "genus": "South Sea Pokémon"
+  },
+  "369": {
+    "id": "369",
+    "genus": "Longevity Pokémon"
+  },
+  "370": {
+    "id": "370",
+    "genus": "Rendezvous Pokémon"
+  },
+  "371": {
+    "id": "371",
+    "genus": "Rock Head Pokémon"
+  },
+  "372": {
+    "id": "372",
+    "genus": "Endurance Pokémon"
+  },
+  "373": {
+    "id": "373",
+    "genus": "Dragon Pokémon"
+  },
+  "374": {
+    "id": "374",
+    "genus": "Iron Ball Pokémon"
+  },
+  "375": {
+    "id": "375",
+    "genus": "Iron Claw Pokémon"
+  },
+  "376": {
+    "id": "376",
+    "genus": "Iron Leg Pokémon"
+  },
+  "377": {
+    "id": "377",
+    "genus": "Rock Peak Pokémon"
+  },
+  "378": {
+    "id": "378",
+    "genus": "Iceberg Pokémon"
+  },
+  "379": {
+    "id": "379",
+    "genus": "Iron Pokémon"
+  },
+  "380": {
+    "id": "380",
+    "genus": "Eon Pokémon"
+  },
+  "381": {
+    "id": "381",
+    "genus": "Eon Pokémon"
+  },
+  "382": {
+    "id": "382",
+    "genus": "Sea Basin Pokémon"
+  },
+  "383": {
+    "id": "383",
+    "genus": "Continent Pokémon"
+  },
+  "384": {
+    "id": "384",
+    "genus": "Sky High Pokémon"
+  },
+  "385": {
+    "id": "385",
+    "genus": "Wish Pokémon"
+  },
+  "386": {
+    "id": "386",
+    "genus": "DNA Pokémon"
+  },
+  "387": {
+    "id": "387",
+    "genus": "Tiny Leaf Pokémon"
+  },
+  "388": {
+    "id": "388",
+    "genus": "Grove Pokémon"
+  },
+  "389": {
+    "id": "389",
+    "genus": "Continent Pokémon"
+  },
+  "390": {
+    "id": "390",
+    "genus": "Chimp Pokémon"
+  },
+  "391": {
+    "id": "391",
+    "genus": "Playful Pokémon"
+  },
+  "392": {
+    "id": "392",
+    "genus": "Flame Pokémon"
+  },
+  "393": {
+    "id": "393",
+    "genus": "Penguin Pokémon"
+  },
+  "394": {
+    "id": "394",
+    "genus": "Penguin Pokémon"
+  },
+  "395": {
+    "id": "395",
+    "genus": "Emperor Pokémon"
+  },
+  "396": {
+    "id": "396",
+    "genus": "Starling Pokémon"
+  },
+  "397": {
+    "id": "397",
+    "genus": "Starling Pokémon"
+  },
+  "398": {
+    "id": "398",
+    "genus": "Predator Pokémon"
+  },
+  "399": {
+    "id": "399",
+    "genus": "Plump Mouse Pokémon"
+  },
+  "400": {
+    "id": "400",
+    "genus": "Beaver Pokémon"
+  },
+  "401": {
+    "id": "401",
+    "genus": "Cricket Pokémon"
+  },
+  "402": {
+    "id": "402",
+    "genus": "Cricket Pokémon"
+  },
+  "403": {
+    "id": "403",
+    "genus": "Flash Pokémon"
+  },
+  "404": {
+    "id": "404",
+    "genus": "Spark Pokémon"
+  },
+  "405": {
+    "id": "405",
+    "genus": "Gleam Eyes Pokémon"
+  },
+  "406": {
+    "id": "406",
+    "genus": "Bud Pokémon"
+  },
+  "407": {
+    "id": "407",
+    "genus": "Bouquet Pokémon"
+  },
+  "408": {
+    "id": "408",
+    "genus": "Head Butt Pokémon"
+  },
+  "409": {
+    "id": "409",
+    "genus": "Head Butt Pokémon"
+  },
+  "410": {
+    "id": "410",
+    "genus": "Shield Pokémon"
+  },
+  "411": {
+    "id": "411",
+    "genus": "Shield Pokémon"
+  },
+  "412": {
+    "id": "412",
+    "genus": "Bagworm Pokémon"
+  },
+  "413": {
+    "id": "413",
+    "genus": "Bagworm Pokémon"
+  },
+  "414": {
+    "id": "414",
+    "genus": "Moth Pokémon"
+  },
+  "415": {
+    "id": "415",
+    "genus": "Tiny Bee Pokémon"
+  },
+  "416": {
+    "id": "416",
+    "genus": "Beehive Pokémon"
+  },
+  "417": {
+    "id": "417",
+    "genus": "EleSquirrel Pokémon"
+  },
+  "418": {
+    "id": "418",
+    "genus": "Sea Weasel Pokémon"
+  },
+  "419": {
+    "id": "419",
+    "genus": "Sea Weasel Pokémon"
+  },
+  "420": {
+    "id": "420",
+    "genus": "Cherry Pokémon"
+  },
+  "421": {
+    "id": "421",
+    "genus": "Blossom Pokémon"
+  },
+  "422": {
+    "id": "422",
+    "genus": "Sea Slug Pokémon"
+  },
+  "423": {
+    "id": "423",
+    "genus": "Sea Slug Pokémon"
+  },
+  "424": {
+    "id": "424",
+    "genus": "Long Tail Pokémon"
+  },
+  "425": {
+    "id": "425",
+    "genus": "Balloon Pokémon"
+  },
+  "426": {
+    "id": "426",
+    "genus": "Blimp Pokémon"
+  },
+  "427": {
+    "id": "427",
+    "genus": "Rabbit Pokémon"
+  },
+  "428": {
+    "id": "428",
+    "genus": "Rabbit Pokémon"
+  },
+  "429": {
+    "id": "429",
+    "genus": "Magical Pokémon"
+  },
+  "430": {
+    "id": "430",
+    "genus": "Big Boss Pokémon"
+  },
+  "431": {
+    "id": "431",
+    "genus": "Catty Pokémon"
+  },
+  "432": {
+    "id": "432",
+    "genus": "Tiger Cat Pokémon"
+  },
+  "433": {
+    "id": "433",
+    "genus": "Bell Pokémon"
+  },
+  "434": {
+    "id": "434",
+    "genus": "Skunk Pokémon"
+  },
+  "435": {
+    "id": "435",
+    "genus": "Skunk Pokémon"
+  },
+  "436": {
+    "id": "436",
+    "genus": "Bronze Pokémon"
+  },
+  "437": {
+    "id": "437",
+    "genus": "Bronze Bell Pokémon"
+  },
+  "438": {
+    "id": "438",
+    "genus": "Bonsai Pokémon"
+  },
+  "439": {
+    "id": "439",
+    "genus": "Mime Pokémon"
+  },
+  "440": {
+    "id": "440",
+    "genus": "Playhouse Pokémon"
+  },
+  "441": {
+    "id": "441",
+    "genus": "Music Note Pokémon"
+  },
+  "442": {
+    "id": "442",
+    "genus": "Forbidden Pokémon"
+  },
+  "443": {
+    "id": "443",
+    "genus": "Land Shark Pokémon"
+  },
+  "444": {
+    "id": "444",
+    "genus": "Cave Pokémon"
+  },
+  "445": {
+    "id": "445",
+    "genus": "Mach Pokémon"
+  },
+  "446": {
+    "id": "446",
+    "genus": "Big Eater Pokémon"
+  },
+  "447": {
+    "id": "447",
+    "genus": "Emanation Pokémon"
+  },
+  "448": {
+    "id": "448",
+    "genus": "Aura Pokémon"
+  },
+  "449": {
+    "id": "449",
+    "genus": "Hippo Pokémon"
+  },
+  "450": {
+    "id": "450",
+    "genus": "Heavyweight Pokémon"
+  },
+  "451": {
+    "id": "451",
+    "genus": "Scorpion Pokémon"
+  },
+  "452": {
+    "id": "452",
+    "genus": "Ogre Scorpion Pokémon"
+  },
+  "453": {
+    "id": "453",
+    "genus": "Toxic Mouth Pokémon"
+  },
+  "454": {
+    "id": "454",
+    "genus": "Toxic Mouth Pokémon"
+  },
+  "455": {
+    "id": "455",
+    "genus": "Bug Catcher Pokémon"
+  },
+  "456": {
+    "id": "456",
+    "genus": "Wing Fish Pokémon"
+  },
+  "457": {
+    "id": "457",
+    "genus": "Neon Pokémon"
+  },
+  "458": {
+    "id": "458",
+    "genus": "Kite Pokémon"
+  },
+  "459": {
+    "id": "459",
+    "genus": "Frost Tree Pokémon"
+  },
+  "460": {
+    "id": "460",
+    "genus": "Frost Tree Pokémon"
+  },
+  "461": {
+    "id": "461",
+    "genus": "Sharp Claw Pokémon"
+  },
+  "462": {
+    "id": "462",
+    "genus": "Magnet Area Pokémon"
+  },
+  "463": {
+    "id": "463",
+    "genus": "Licking Pokémon"
+  },
+  "464": {
+    "id": "464",
+    "genus": "Drill Pokémon"
+  },
+  "465": {
+    "id": "465",
+    "genus": "Vine Pokémon"
+  },
+  "466": {
+    "id": "466",
+    "genus": "Thunderbolt Pokémon"
+  },
+  "467": {
+    "id": "467",
+    "genus": "Blast Pokémon"
+  },
+  "468": {
+    "id": "468",
+    "genus": "Jubilee Pokémon"
+  },
+  "469": {
+    "id": "469",
+    "genus": "Ogre Darner Pokémon"
+  },
+  "470": {
+    "id": "470",
+    "genus": "Verdant Pokémon"
+  },
+  "471": {
+    "id": "471",
+    "genus": "Fresh Snow Pokémon"
+  },
+  "472": {
+    "id": "472",
+    "genus": "Fang Scorpion Pokémon"
+  },
+  "473": {
+    "id": "473",
+    "genus": "Twin Tusk Pokémon"
+  },
+  "474": {
+    "id": "474",
+    "genus": "Virtual Pokémon"
+  },
+  "475": {
+    "id": "475",
+    "genus": "Blade Pokémon"
+  },
+  "476": {
+    "id": "476",
+    "genus": "Compass Pokémon"
+  },
+  "477": {
+    "id": "477",
+    "genus": "Gripper Pokémon"
+  },
+  "478": {
+    "id": "478",
+    "genus": "Snow Land Pokémon"
+  },
+  "479": {
+    "id": "479",
+    "genus": "Plasma Pokémon"
+  },
+  "480": {
+    "id": "480",
+    "genus": "Knowledge Pokémon"
+  },
+  "481": {
+    "id": "481",
+    "genus": "Emotion Pokémon"
+  },
+  "482": {
+    "id": "482",
+    "genus": "Willpower Pokémon"
+  },
+  "483": {
+    "id": "483",
+    "genus": "Temporal Pokémon"
+  },
+  "484": {
+    "id": "484",
+    "genus": "Spatial Pokémon"
+  },
+  "485": {
+    "id": "485",
+    "genus": "Lava Dome Pokémon"
+  },
+  "486": {
+    "id": "486",
+    "genus": "Colossal Pokémon"
+  },
+  "487": {
+    "id": "487",
+    "genus": "Renegade Pokémon"
+  },
+  "488": {
+    "id": "488",
+    "genus": "Lunar Pokémon"
+  },
+  "489": {
+    "id": "489",
+    "genus": "Sea Drifter Pokémon"
+  },
+  "490": {
+    "id": "490",
+    "genus": "Seafaring Pokémon"
+  },
+  "491": {
+    "id": "491",
+    "genus": "Pitch-Black Pokémon"
+  },
+  "492": {
+    "id": "492",
+    "genus": "Gratitude Pokémon"
+  },
+  "493": {
+    "id": "493",
+    "genus": "Alpha Pokémon"
+  },
+  "494": {
+    "id": "494",
+    "genus": "Victory Pokémon"
+  },
+  "495": {
+    "id": "495",
+    "genus": "Grass Snake Pokémon"
+  },
+  "496": {
+    "id": "496",
+    "genus": "Grass Snake Pokémon"
+  },
+  "497": {
+    "id": "497",
+    "genus": "Regal Pokémon"
+  },
+  "498": {
+    "id": "498",
+    "genus": "Fire Pig Pokémon"
+  },
+  "499": {
+    "id": "499",
+    "genus": "Fire Pig Pokémon"
+  },
+  "500": {
+    "id": "500",
+    "genus": "Mega Fire Pig Pokémon"
+  },
+  "501": {
+    "id": "501",
+    "genus": "Sea Otter Pokémon"
+  },
+  "502": {
+    "id": "502",
+    "genus": "Discipline Pokémon"
+  },
+  "503": {
+    "id": "503",
+    "genus": "Formidable Pokémon"
+  },
+  "504": {
+    "id": "504",
+    "genus": "Scout Pokémon"
+  },
+  "505": {
+    "id": "505",
+    "genus": "Lookout Pokémon"
+  },
+  "506": {
+    "id": "506",
+    "genus": "Puppy Pokémon"
+  },
+  "507": {
+    "id": "507",
+    "genus": "Loyal Dog Pokémon"
+  },
+  "508": {
+    "id": "508",
+    "genus": "Big-Hearted Pokémon"
+  },
+  "509": {
+    "id": "509",
+    "genus": "Devious Pokémon"
+  },
+  "510": {
+    "id": "510",
+    "genus": "Cruel Pokémon"
+  },
+  "511": {
+    "id": "511",
+    "genus": "Grass Monkey Pokémon"
+  },
+  "512": {
+    "id": "512",
+    "genus": "Thorn Monkey Pokémon"
+  },
+  "513": {
+    "id": "513",
+    "genus": "High Temp Pokémon"
+  },
+  "514": {
+    "id": "514",
+    "genus": "Ember Pokémon"
+  },
+  "515": {
+    "id": "515",
+    "genus": "Spray Pokémon"
+  },
+  "516": {
+    "id": "516",
+    "genus": "Geyser Pokémon"
+  },
+  "517": {
+    "id": "517",
+    "genus": "Dream Eater Pokémon"
+  },
+  "518": {
+    "id": "518",
+    "genus": "Drowsing Pokémon"
+  },
+  "519": {
+    "id": "519",
+    "genus": "Tiny Pigeon Pokémon"
+  },
+  "520": {
+    "id": "520",
+    "genus": "Wild Pigeon Pokémon"
+  },
+  "521": {
+    "id": "521",
+    "genus": "Proud Pokémon"
+  },
+  "522": {
+    "id": "522",
+    "genus": "Electrified Pokémon"
+  },
+  "523": {
+    "id": "523",
+    "genus": "Thunderbolt Pokémon"
+  },
+  "524": {
+    "id": "524",
+    "genus": "Mantle Pokémon"
+  },
+  "525": {
+    "id": "525",
+    "genus": "Ore Pokémon"
+  },
+  "526": {
+    "id": "526",
+    "genus": "Compressed Pokémon"
+  },
+  "527": {
+    "id": "527",
+    "genus": "Bat Pokémon"
+  },
+  "528": {
+    "id": "528",
+    "genus": "Courting Pokémon"
+  },
+  "529": {
+    "id": "529",
+    "genus": "Mole Pokémon"
+  },
+  "530": {
+    "id": "530",
+    "genus": "Subterrene Pokémon"
+  },
+  "531": {
+    "id": "531",
+    "genus": "Hearing Pokémon"
+  },
+  "532": {
+    "id": "532",
+    "genus": "Muscular Pokémon"
+  },
+  "533": {
+    "id": "533",
+    "genus": "Muscular Pokémon"
+  },
+  "534": {
+    "id": "534",
+    "genus": "Muscular Pokémon"
+  },
+  "535": {
+    "id": "535",
+    "genus": "Tadpole Pokémon"
+  },
+  "536": {
+    "id": "536",
+    "genus": "Vibration Pokémon"
+  },
+  "537": {
+    "id": "537",
+    "genus": "Vibration Pokémon"
+  },
+  "538": {
+    "id": "538",
+    "genus": "Judo Pokémon"
+  },
+  "539": {
+    "id": "539",
+    "genus": "Karate Pokémon"
+  },
+  "540": {
+    "id": "540",
+    "genus": "Sewing Pokémon"
+  },
+  "541": {
+    "id": "541",
+    "genus": "Leaf-Wrapped Pokémon"
+  },
+  "542": {
+    "id": "542",
+    "genus": "Nurturing Pokémon"
+  },
+  "543": {
+    "id": "543",
+    "genus": "Centipede Pokémon"
+  },
+  "544": {
+    "id": "544",
+    "genus": "Curlipede Pokémon"
+  },
+  "545": {
+    "id": "545",
+    "genus": "Megapede Pokémon"
+  },
+  "546": {
+    "id": "546",
+    "genus": "Cotton Puff Pokémon"
+  },
+  "547": {
+    "id": "547",
+    "genus": "Windveiled Pokémon"
+  },
+  "548": {
+    "id": "548",
+    "genus": "Bulb Pokémon"
+  },
+  "549": {
+    "id": "549",
+    "genus": "Flowering Pokémon"
+  },
+  "550": {
+    "id": "550",
+    "genus": "Hostile Pokémon"
+  },
+  "551": {
+    "id": "551",
+    "genus": "Desert Croc Pokémon"
+  },
+  "552": {
+    "id": "552",
+    "genus": "Desert Croc Pokémon"
+  },
+  "553": {
+    "id": "553",
+    "genus": "Intimidation Pokémon"
+  },
+  "554": {
+    "id": "554",
+    "genus": "Zen Charm Pokémon"
+  },
+  "555": {
+    "id": "555",
+    "genus": "Blazing Pokémon"
+  },
+  "556": {
+    "id": "556",
+    "genus": "Cactus Pokémon"
+  },
+  "557": {
+    "id": "557",
+    "genus": "Rock Inn Pokémon"
+  },
+  "558": {
+    "id": "558",
+    "genus": "Stone Home Pokémon"
+  },
+  "559": {
+    "id": "559",
+    "genus": "Shedding Pokémon"
+  },
+  "560": {
+    "id": "560",
+    "genus": "Hoodlum Pokémon"
+  },
+  "561": {
+    "id": "561",
+    "genus": "Avianoid Pokémon"
+  },
+  "562": {
+    "id": "562",
+    "genus": "Spirit Pokémon"
+  },
+  "563": {
+    "id": "563",
+    "genus": "Coffin Pokémon"
+  },
+  "564": {
+    "id": "564",
+    "genus": "Prototurtle Pokémon"
+  },
+  "565": {
+    "id": "565",
+    "genus": "Prototurtle Pokémon"
+  },
+  "566": {
+    "id": "566",
+    "genus": "First Bird Pokémon"
+  },
+  "567": {
+    "id": "567",
+    "genus": "First Bird Pokémon"
+  },
+  "568": {
+    "id": "568",
+    "genus": "Trash Bag Pokémon"
+  },
+  "569": {
+    "id": "569",
+    "genus": "Trash Heap Pokémon"
+  },
+  "570": {
+    "id": "570",
+    "genus": "Tricky Fox Pokémon"
+  },
+  "571": {
+    "id": "571",
+    "genus": "Illusion Fox Pokémon"
+  },
+  "572": {
+    "id": "572",
+    "genus": "Chinchilla Pokémon"
+  },
+  "573": {
+    "id": "573",
+    "genus": "Scarf Pokémon"
+  },
+  "574": {
+    "id": "574",
+    "genus": "Fixation Pokémon"
+  },
+  "575": {
+    "id": "575",
+    "genus": "Manipulate Pokémon"
+  },
+  "576": {
+    "id": "576",
+    "genus": "Astral Body Pokémon"
+  },
+  "577": {
+    "id": "577",
+    "genus": "Cell Pokémon"
+  },
+  "578": {
+    "id": "578",
+    "genus": "Mitosis Pokémon"
+  },
+  "579": {
+    "id": "579",
+    "genus": "Multiplying Pokémon"
+  },
+  "580": {
+    "id": "580",
+    "genus": "Water Bird Pokémon"
+  },
+  "581": {
+    "id": "581",
+    "genus": "White Bird Pokémon"
+  },
+  "582": {
+    "id": "582",
+    "genus": "Fresh Snow Pokémon"
+  },
+  "583": {
+    "id": "583",
+    "genus": "Icy Snow Pokémon"
+  },
+  "584": {
+    "id": "584",
+    "genus": "Snowstorm Pokémon"
+  },
+  "585": {
+    "id": "585",
+    "genus": "Season Pokémon"
+  },
+  "586": {
+    "id": "586",
+    "genus": "Season Pokémon"
+  },
+  "587": {
+    "id": "587",
+    "genus": "Sky Squirrel Pokémon"
+  },
+  "588": {
+    "id": "588",
+    "genus": "Clamping Pokémon"
+  },
+  "589": {
+    "id": "589",
+    "genus": "Cavalry Pokémon"
+  },
+  "590": {
+    "id": "590",
+    "genus": "Mushroom Pokémon"
+  },
+  "591": {
+    "id": "591",
+    "genus": "Mushroom Pokémon"
+  },
+  "592": {
+    "id": "592",
+    "genus": "Floating Pokémon"
+  },
+  "593": {
+    "id": "593",
+    "genus": "Floating Pokémon"
+  },
+  "594": {
+    "id": "594",
+    "genus": "Caring Pokémon"
+  },
+  "595": {
+    "id": "595",
+    "genus": "Attaching Pokémon"
+  },
+  "596": {
+    "id": "596",
+    "genus": "EleSpider Pokémon"
+  },
+  "597": {
+    "id": "597",
+    "genus": "Thorn Seed Pokémon"
+  },
+  "598": {
+    "id": "598",
+    "genus": "Thorn Pod Pokémon"
+  },
+  "599": {
+    "id": "599",
+    "genus": "Gear Pokémon"
+  },
+  "600": {
+    "id": "600",
+    "genus": "Gear Pokémon"
+  },
+  "601": {
+    "id": "601",
+    "genus": "Gear Pokémon"
+  },
+  "602": {
+    "id": "602",
+    "genus": "EleFish Pokémon"
+  },
+  "603": {
+    "id": "603",
+    "genus": "EleFish Pokémon"
+  },
+  "604": {
+    "id": "604",
+    "genus": "EleFish Pokémon"
+  },
+  "605": {
+    "id": "605",
+    "genus": "Cerebral Pokémon"
+  },
+  "606": {
+    "id": "606",
+    "genus": "Cerebral Pokémon"
+  },
+  "607": {
+    "id": "607",
+    "genus": "Candle Pokémon"
+  },
+  "608": {
+    "id": "608",
+    "genus": "Lamp Pokémon"
+  },
+  "609": {
+    "id": "609",
+    "genus": "Luring Pokémon"
+  },
+  "610": {
+    "id": "610",
+    "genus": "Tusk Pokémon"
+  },
+  "611": {
+    "id": "611",
+    "genus": "Axe Jaw Pokémon"
+  },
+  "612": {
+    "id": "612",
+    "genus": "Axe Jaw Pokémon"
+  },
+  "613": {
+    "id": "613",
+    "genus": "Chill Pokémon"
+  },
+  "614": {
+    "id": "614",
+    "genus": "Freezing Pokémon"
+  },
+  "615": {
+    "id": "615",
+    "genus": "Crystallizing Pokémon"
+  },
+  "616": {
+    "id": "616",
+    "genus": "Snail Pokémon"
+  },
+  "617": {
+    "id": "617",
+    "genus": "Shell Out Pokémon"
+  },
+  "618": {
+    "id": "618",
+    "genus": "Trap Pokémon"
+  },
+  "619": {
+    "id": "619",
+    "genus": "Martial Arts Pokémon"
+  },
+  "620": {
+    "id": "620",
+    "genus": "Martial Arts Pokémon"
+  },
+  "621": {
+    "id": "621",
+    "genus": "Cave Pokémon"
+  },
+  "622": {
+    "id": "622",
+    "genus": "Automaton Pokémon"
+  },
+  "623": {
+    "id": "623",
+    "genus": "Automaton Pokémon"
+  },
+  "624": {
+    "id": "624",
+    "genus": "Sharp Blade Pokémon"
+  },
+  "625": {
+    "id": "625",
+    "genus": "Sword Blade Pokémon"
+  },
+  "626": {
+    "id": "626",
+    "genus": "Bash Buffalo Pokémon"
+  },
+  "627": {
+    "id": "627",
+    "genus": "Eaglet Pokémon"
+  },
+  "628": {
+    "id": "628",
+    "genus": "Valiant Pokémon"
+  },
+  "629": {
+    "id": "629",
+    "genus": "Diapered Pokémon"
+  },
+  "630": {
+    "id": "630",
+    "genus": "Bone Vulture Pokémon"
+  },
+  "631": {
+    "id": "631",
+    "genus": "Anteater Pokémon"
+  },
+  "632": {
+    "id": "632",
+    "genus": "Iron Ant Pokémon"
+  },
+  "633": {
+    "id": "633",
+    "genus": "Irate Pokémon"
+  },
+  "634": {
+    "id": "634",
+    "genus": "Hostile Pokémon"
+  },
+  "635": {
+    "id": "635",
+    "genus": "Brutal Pokémon"
+  },
+  "636": {
+    "id": "636",
+    "genus": "Torch Pokémon"
+  },
+  "637": {
+    "id": "637",
+    "genus": "Sun Pokémon"
+  },
+  "638": {
+    "id": "638",
+    "genus": "Iron Will Pokémon"
+  },
+  "639": {
+    "id": "639",
+    "genus": "Cavern Pokémon"
+  },
+  "640": {
+    "id": "640",
+    "genus": "Grassland Pokémon"
+  },
+  "641": {
+    "id": "641",
+    "genus": "Cyclone Pokémon"
+  },
+  "642": {
+    "id": "642",
+    "genus": "Bolt Strike Pokémon"
+  },
+  "643": {
+    "id": "643",
+    "genus": "Vast White Pokémon"
+  },
+  "644": {
+    "id": "644",
+    "genus": "Deep Black Pokémon"
+  },
+  "645": {
+    "id": "645",
+    "genus": "Abundance Pokémon"
+  },
+  "646": {
+    "id": "646",
+    "genus": "Boundary Pokémon"
+  },
+  "647": {
+    "id": "647",
+    "genus": "Colt Pokémon"
+  },
+  "648": {
+    "id": "648",
+    "genus": "Melody Pokémon"
+  },
+  "649": {
+    "id": "649",
+    "genus": "Paleozoic Pokémon"
+  },
+  "650": {
+    "id": "650",
+    "genus": "Spiny Nut Pokémon"
+  },
+  "651": {
+    "id": "651",
+    "genus": "Spiny Armor Pokémon"
+  },
+  "652": {
+    "id": "652",
+    "genus": "Spiny Armor Pokémon"
+  },
+  "653": {
+    "id": "653",
+    "genus": "Fox Pokémon"
+  },
+  "654": {
+    "id": "654",
+    "genus": "Fox Pokémon"
+  },
+  "655": {
+    "id": "655",
+    "genus": "Fox Pokémon"
+  },
+  "656": {
+    "id": "656",
+    "genus": "Bubble Frog Pokémon"
+  },
+  "657": {
+    "id": "657",
+    "genus": "Bubble Frog Pokémon"
+  },
+  "658": {
+    "id": "658",
+    "genus": "Ninja Pokémon"
+  },
+  "659": {
+    "id": "659",
+    "genus": "Digging Pokémon"
+  },
+  "660": {
+    "id": "660",
+    "genus": "Digging Pokémon"
+  },
+  "661": {
+    "id": "661",
+    "genus": "Tiny Robin Pokémon"
+  },
+  "662": {
+    "id": "662",
+    "genus": "Ember Pokémon"
+  },
+  "663": {
+    "id": "663",
+    "genus": "Scorching Pokémon"
+  },
+  "664": {
+    "id": "664",
+    "genus": "Scatterdust Pokémon"
+  },
+  "665": {
+    "id": "665",
+    "genus": "Scatterdust Pokémon"
+  },
+  "666": {
+    "id": "666",
+    "genus": "Scale Pokémon"
+  },
+  "667": {
+    "id": "667",
+    "genus": "Lion Cub Pokémon"
+  },
+  "668": {
+    "id": "668",
+    "genus": "Royal Pokémon"
+  },
+  "669": {
+    "id": "669",
+    "genus": "Single Bloom Pokémon"
+  },
+  "670": {
+    "id": "670",
+    "genus": "Single Bloom Pokémon"
+  },
+  "671": {
+    "id": "671",
+    "genus": "Garden Pokémon"
+  },
+  "672": {
+    "id": "672",
+    "genus": "Mount Pokémon"
+  },
+  "673": {
+    "id": "673",
+    "genus": "Mount Pokémon"
+  },
+  "674": {
+    "id": "674",
+    "genus": "Playful Pokémon"
+  },
+  "675": {
+    "id": "675",
+    "genus": "Daunting Pokémon"
+  },
+  "676": {
+    "id": "676",
+    "genus": "Poodle Pokémon"
+  },
+  "677": {
+    "id": "677",
+    "genus": "Restraint Pokémon"
+  },
+  "678": {
+    "id": "678",
+    "genus": "Constraint Pokémon"
+  },
+  "679": {
+    "id": "679",
+    "genus": "Sword Pokémon"
+  },
+  "680": {
+    "id": "680",
+    "genus": "Sword Pokémon"
+  },
+  "681": {
+    "id": "681",
+    "genus": "Royal Sword Pokémon"
+  },
+  "682": {
+    "id": "682",
+    "genus": "Perfume Pokémon"
+  },
+  "683": {
+    "id": "683",
+    "genus": "Fragrance Pokémon"
+  },
+  "684": {
+    "id": "684",
+    "genus": "Cotton Candy Pokémon"
+  },
+  "685": {
+    "id": "685",
+    "genus": "Meringue Pokémon"
+  },
+  "686": {
+    "id": "686",
+    "genus": "Revolving Pokémon"
+  },
+  "687": {
+    "id": "687",
+    "genus": "Overturning Pokémon"
+  },
+  "688": {
+    "id": "688",
+    "genus": "Two-Handed Pokémon"
+  },
+  "689": {
+    "id": "689",
+    "genus": "Collective Pokémon"
+  },
+  "690": {
+    "id": "690",
+    "genus": "Mock Kelp Pokémon"
+  },
+  "691": {
+    "id": "691",
+    "genus": "Mock Kelp Pokémon"
+  },
+  "692": {
+    "id": "692",
+    "genus": "Water Gun Pokémon"
+  },
+  "693": {
+    "id": "693",
+    "genus": "Howitzer Pokémon"
+  },
+  "694": {
+    "id": "694",
+    "genus": "Generator Pokémon"
+  },
+  "695": {
+    "id": "695",
+    "genus": "Generator Pokémon"
+  },
+  "696": {
+    "id": "696",
+    "genus": "Royal Heir Pokémon"
+  },
+  "697": {
+    "id": "697",
+    "genus": "Despot Pokémon"
+  },
+  "698": {
+    "id": "698",
+    "genus": "Tundra Pokémon"
+  },
+  "699": {
+    "id": "699",
+    "genus": "Tundra Pokémon"
+  },
+  "700": {
+    "id": "700",
+    "genus": "Intertwining Pokémon"
+  },
+  "701": {
+    "id": "701",
+    "genus": "Wrestling Pokémon"
+  },
+  "702": {
+    "id": "702",
+    "genus": "Antenna Pokémon"
+  },
+  "703": {
+    "id": "703",
+    "genus": "Jewel Pokémon"
+  },
+  "704": {
+    "id": "704",
+    "genus": "Soft Tissue Pokémon"
+  },
+  "705": {
+    "id": "705",
+    "genus": "Soft Tissue Pokémon"
+  },
+  "706": {
+    "id": "706",
+    "genus": "Dragon Pokémon"
+  },
+  "707": {
+    "id": "707",
+    "genus": "Key Ring Pokémon"
+  },
+  "708": {
+    "id": "708",
+    "genus": "Stump Pokémon"
+  },
+  "709": {
+    "id": "709",
+    "genus": "Elder Tree Pokémon"
+  },
+  "710": {
+    "id": "710",
+    "genus": "Pumpkin Pokémon"
+  },
+  "711": {
+    "id": "711",
+    "genus": "Pumpkin Pokémon"
+  },
+  "712": {
+    "id": "712",
+    "genus": "Ice Chunk Pokémon"
+  },
+  "713": {
+    "id": "713",
+    "genus": "Iceberg Pokémon"
+  },
+  "714": {
+    "id": "714",
+    "genus": "Sound Wave Pokémon"
+  },
+  "715": {
+    "id": "715",
+    "genus": "Sound Wave Pokémon"
+  },
+  "716": {
+    "id": "716",
+    "genus": "Life Pokémon"
+  },
+  "717": {
+    "id": "717",
+    "genus": "Destruction Pokémon"
+  },
+  "718": {
+    "id": "718",
+    "genus": "Order Pokémon"
+  },
+  "719": {
+    "id": "719",
+    "genus": "Jewel Pokémon"
+  },
+  "720": {
+    "id": "720",
+    "genus": "Mischief Pokémon"
+  },
+  "721": {
+    "id": "721",
+    "genus": "Steam Pokémon"
+  },
+  "722": {
+    "id": "722",
+    "genus": "Grass Quill Pokémon"
+  },
+  "723": {
+    "id": "723",
+    "genus": "Blade Quill Pokémon"
+  },
+  "724": {
+    "id": "724",
+    "genus": "Arrow Quill Pokémon"
+  },
+  "725": {
+    "id": "725",
+    "genus": "Fire Cat Pokémon"
+  },
+  "726": {
+    "id": "726",
+    "genus": "Fire Cat Pokémon"
+  },
+  "727": {
+    "id": "727",
+    "genus": "Heel Pokémon"
+  },
+  "728": {
+    "id": "728",
+    "genus": "Sea Lion Pokémon"
+  },
+  "729": {
+    "id": "729",
+    "genus": "Pop Star Pokémon"
+  },
+  "730": {
+    "id": "730",
+    "genus": "Soloist Pokémon"
+  },
+  "731": {
+    "id": "731",
+    "genus": "Woodpecker Pokémon"
+  },
+  "732": {
+    "id": "732",
+    "genus": "Bugle Beak Pokémon"
+  },
+  "733": {
+    "id": "733",
+    "genus": "Cannon Pokémon"
+  },
+  "734": {
+    "id": "734",
+    "genus": "Loitering Pokémon"
+  },
+  "735": {
+    "id": "735",
+    "genus": "Stakeout Pokémon"
+  },
+  "736": {
+    "id": "736",
+    "genus": "Larva Pokémon"
+  },
+  "737": {
+    "id": "737",
+    "genus": "Battery Pokémon"
+  },
+  "738": {
+    "id": "738",
+    "genus": "Stag Beetle Pokémon"
+  },
+  "739": {
+    "id": "739",
+    "genus": "Boxing Pokémon"
+  },
+  "740": {
+    "id": "740",
+    "genus": "Woolly Crab Pokémon"
+  },
+  "741": {
+    "id": "741",
+    "genus": "Dancing Pokémon"
+  },
+  "742": {
+    "id": "742",
+    "genus": "Bee Fly Pokémon"
+  },
+  "743": {
+    "id": "743",
+    "genus": "Bee Fly Pokémon"
+  },
+  "744": {
+    "id": "744",
+    "genus": "Puppy Pokémon"
+  },
+  "745": {
+    "id": "745",
+    "genus": "Wolf Pokémon"
+  },
+  "746": {
+    "id": "746",
+    "genus": "Small Fry Pokémon"
+  },
+  "747": {
+    "id": "747",
+    "genus": "Brutal Star Pokémon"
+  },
+  "748": {
+    "id": "748",
+    "genus": "Brutal Star Pokémon"
+  },
+  "749": {
+    "id": "749",
+    "genus": "Donkey Pokémon"
+  },
+  "750": {
+    "id": "750",
+    "genus": "Draft Horse Pokémon"
+  },
+  "751": {
+    "id": "751",
+    "genus": "Water Bubble Pokémon"
+  },
+  "752": {
+    "id": "752",
+    "genus": "Water Bubble Pokémon"
+  },
+  "753": {
+    "id": "753",
+    "genus": "Sickle Grass Pokémon"
+  },
+  "754": {
+    "id": "754",
+    "genus": "Bloom Sickle Pokémon"
+  },
+  "755": {
+    "id": "755",
+    "genus": "Illuminating Pokémon"
+  },
+  "756": {
+    "id": "756",
+    "genus": "Illuminating Pokémon"
+  },
+  "757": {
+    "id": "757",
+    "genus": "Toxic Lizard Pokémon"
+  },
+  "758": {
+    "id": "758",
+    "genus": "Toxic Lizard Pokémon"
+  },
+  "759": {
+    "id": "759",
+    "genus": "Flailing Pokémon"
+  },
+  "760": {
+    "id": "760",
+    "genus": "Strong Arm Pokémon"
+  },
+  "761": {
+    "id": "761",
+    "genus": "Fruit Pokémon"
+  },
+  "762": {
+    "id": "762",
+    "genus": "Fruit Pokémon"
+  },
+  "763": {
+    "id": "763",
+    "genus": "Fruit Pokémon"
+  },
+  "764": {
+    "id": "764",
+    "genus": "Posy Picker Pokémon"
+  },
+  "765": {
+    "id": "765",
+    "genus": "Sage Pokémon"
+  },
+  "766": {
+    "id": "766",
+    "genus": "Teamwork Pokémon"
+  },
+  "767": {
+    "id": "767",
+    "genus": "Turn Tail Pokémon"
+  },
+  "768": {
+    "id": "768",
+    "genus": "Hard Scale Pokémon"
+  },
+  "769": {
+    "id": "769",
+    "genus": "Sand Heap Pokémon"
+  },
+  "770": {
+    "id": "770",
+    "genus": "Sand Castle Pokémon"
+  },
+  "771": {
+    "id": "771",
+    "genus": "Sea Cucumber Pokémon"
+  },
+  "772": {
+    "id": "772",
+    "genus": "Synthetic Pokémon"
+  },
+  "773": {
+    "id": "773",
+    "genus": "Synthetic Pokémon"
+  },
+  "774": {
+    "id": "774",
+    "genus": "Meteor Pokémon"
+  },
+  "775": {
+    "id": "775",
+    "genus": "Drowsing Pokémon"
+  },
+  "776": {
+    "id": "776",
+    "genus": "Blast Turtle Pokémon"
+  },
+  "777": {
+    "id": "777",
+    "genus": "Roly-Poly Pokémon"
+  },
+  "778": {
+    "id": "778",
+    "genus": "Disguise Pokémon"
+  },
+  "779": {
+    "id": "779",
+    "genus": "Gnash Teeth Pokémon"
+  },
+  "780": {
+    "id": "780",
+    "genus": "Placid Pokémon"
+  },
+  "781": {
+    "id": "781",
+    "genus": "Sea Creeper Pokémon"
+  },
+  "782": {
+    "id": "782",
+    "genus": "Scaly Pokémon"
+  },
+  "783": {
+    "id": "783",
+    "genus": "Scaly Pokémon"
+  },
+  "784": {
+    "id": "784",
+    "genus": "Scaly Pokémon"
+  },
+  "785": {
+    "id": "785",
+    "genus": "Land Spirit Pokémon"
+  },
+  "786": {
+    "id": "786",
+    "genus": "Land Spirit Pokémon"
+  },
+  "787": {
+    "id": "787",
+    "genus": "Land Spirit Pokémon"
+  },
+  "788": {
+    "id": "788",
+    "genus": "Land Spirit Pokémon"
+  },
+  "789": {
+    "id": "789",
+    "genus": "Nebula Pokémon"
+  },
+  "790": {
+    "id": "790",
+    "genus": "Protostar Pokémon"
+  },
+  "791": {
+    "id": "791",
+    "genus": "Sunne Pokémon"
+  },
+  "792": {
+    "id": "792",
+    "genus": "Moone Pokémon"
+  },
+  "793": {
+    "id": "793",
+    "genus": "Parasite Pokémon"
+  },
+  "794": {
+    "id": "794",
+    "genus": "Swollen Pokémon"
+  },
+  "795": {
+    "id": "795",
+    "genus": "Lissome Pokémon"
+  },
+  "796": {
+    "id": "796",
+    "genus": "Glowing Pokémon"
+  },
+  "797": {
+    "id": "797",
+    "genus": "Launch Pokémon"
+  },
+  "798": {
+    "id": "798",
+    "genus": "Drawn Sword Pokémon"
+  },
+  "799": {
+    "id": "799",
+    "genus": "Junkivore Pokémon"
+  },
+  "800": {
+    "id": "800",
+    "genus": "Prism Pokémon"
+  },
+  "801": {
+    "id": "801",
+    "genus": "Artificial Pokémon"
+  },
+  "802": {
+    "id": "802",
+    "genus": "Gloomdweller Pokémon"
+  },
+  "803": {
+    "id": "803",
+    "genus": "Poison Pin Pokémon"
+  },
+  "804": {
+    "id": "804",
+    "genus": "Poison Pin Pokémon"
+  },
+  "805": {
+    "id": "805",
+    "genus": "Rampart Pokémon"
+  },
+  "806": {
+    "id": "806",
+    "genus": "Fireworks Pokémon"
+  },
+  "807": {
+    "id": "807",
+    "genus": "Thunderclap Pokémon"
+  },
+  "808": {
+    "id": "808",
+    "genus": "Hex Nut Pokémon"
+  },
+  "809": {
+    "id": "809",
+    "genus": "Hex Nut Pokémon"
+  },
+  "810": {
+    "id": "810",
+    "genus": "Chimp Pokémon"
+  },
+  "811": {
+    "id": "811",
+    "genus": "Beat Pokémon"
+  },
+  "812": {
+    "id": "812",
+    "genus": "Drummer Pokémon"
+  },
+  "813": {
+    "id": "813",
+    "genus": "Rabbit Pokémon"
+  },
+  "814": {
+    "id": "814",
+    "genus": "Rabbit Pokémon"
+  },
+  "815": {
+    "id": "815",
+    "genus": "Striker Pokémon"
+  },
+  "816": {
+    "id": "816",
+    "genus": "Water Lizard Pokémon"
+  },
+  "817": {
+    "id": "817",
+    "genus": "Water Lizard Pokémon"
+  },
+  "818": {
+    "id": "818",
+    "genus": "Secret Agent Pokémon"
+  },
+  "819": {
+    "id": "819",
+    "genus": "Cheeky Pokémon"
+  },
+  "820": {
+    "id": "820",
+    "genus": "Greedy Pokémon"
+  },
+  "821": {
+    "id": "821",
+    "genus": "Tiny Bird Pokémon"
+  },
+  "822": {
+    "id": "822",
+    "genus": "Raven Pokémon"
+  },
+  "823": {
+    "id": "823",
+    "genus": "Raven Pokémon"
+  },
+  "824": {
+    "id": "824",
+    "genus": "Larva Pokémon"
+  },
+  "825": {
+    "id": "825",
+    "genus": "Radome Pokémon"
+  },
+  "826": {
+    "id": "826",
+    "genus": "Seven Spot Pokémon"
+  },
+  "827": {
+    "id": "827",
+    "genus": "Fox Pokémon"
+  },
+  "828": {
+    "id": "828",
+    "genus": "Fox Pokémon"
+  },
+  "829": {
+    "id": "829",
+    "genus": "Flowering Pokémon"
+  },
+  "830": {
+    "id": "830",
+    "genus": "Cotton Bloom Pokémon"
+  },
+  "831": {
+    "id": "831",
+    "genus": "Sheep Pokémon"
+  },
+  "832": {
+    "id": "832",
+    "genus": "Sheep Pokémon"
+  },
+  "833": {
+    "id": "833",
+    "genus": "Snapping Pokémon"
+  },
+  "834": {
+    "id": "834",
+    "genus": "Bite Pokémon"
+  },
+  "835": {
+    "id": "835",
+    "genus": "Puppy Pokémon"
+  },
+  "836": {
+    "id": "836",
+    "genus": "Dog Pokémon"
+  },
+  "837": {
+    "id": "837",
+    "genus": "Coal Pokémon"
+  },
+  "838": {
+    "id": "838",
+    "genus": "Coal Pokémon"
+  },
+  "839": {
+    "id": "839",
+    "genus": "Coal Pokémon"
+  },
+  "840": {
+    "id": "840",
+    "genus": "Apple Core Pokémon"
+  },
+  "841": {
+    "id": "841",
+    "genus": "Apple Wing Pokémon"
+  },
+  "842": {
+    "id": "842",
+    "genus": "Apple Nectar Pokémon"
+  },
+  "843": {
+    "id": "843",
+    "genus": "Sand Snake Pokémon"
+  },
+  "844": {
+    "id": "844",
+    "genus": "Sand Snake Pokémon"
+  },
+  "845": {
+    "id": "845",
+    "genus": "Gulp Pokémon"
+  },
+  "846": {
+    "id": "846",
+    "genus": "Rush Pokémon"
+  },
+  "847": {
+    "id": "847",
+    "genus": "Skewer Pokémon"
+  },
+  "848": {
+    "id": "848",
+    "genus": "Baby Pokémon"
+  },
+  "849": {
+    "id": "849",
+    "genus": "Punk Pokémon"
+  },
+  "850": {
+    "id": "850",
+    "genus": "Radiator Pokémon"
+  },
+  "851": {
+    "id": "851",
+    "genus": "Radiator Pokémon"
+  },
+  "852": {
+    "id": "852",
+    "genus": "Tantrum Pokémon"
+  },
+  "853": {
+    "id": "853",
+    "genus": "Jujitsu Pokémon"
+  },
+  "854": {
+    "id": "854",
+    "genus": "Black Tea Pokémon"
+  },
+  "855": {
+    "id": "855",
+    "genus": "Black Tea Pokémon"
+  },
+  "856": {
+    "id": "856",
+    "genus": "Calm Pokémon"
+  },
+  "857": {
+    "id": "857",
+    "genus": "Serene Pokémon"
+  },
+  "858": {
+    "id": "858",
+    "genus": "Silent Pokémon"
+  },
+  "859": {
+    "id": "859",
+    "genus": "Wily Pokémon"
+  },
+  "860": {
+    "id": "860",
+    "genus": "Devious Pokémon"
+  },
+  "861": {
+    "id": "861",
+    "genus": "Bulk Up Pokémon"
+  },
+  "862": {
+    "id": "862",
+    "genus": "Blocking Pokémon"
+  },
+  "863": {
+    "id": "863",
+    "genus": "Viking Pokémon"
+  },
+  "864": {
+    "id": "864",
+    "genus": "Coral Pokémon"
+  },
+  "865": {
+    "id": "865",
+    "genus": "Wild Duck Pokémon"
+  },
+  "866": {
+    "id": "866",
+    "genus": "Comedian Pokémon"
+  },
+  "867": {
+    "id": "867",
+    "genus": "Grudge Pokémon"
+  },
+  "868": {
+    "id": "868",
+    "genus": "Cream Pokémon"
+  },
+  "869": {
+    "id": "869",
+    "genus": "Cream Pokémon"
+  },
+  "870": {
+    "id": "870",
+    "genus": "Formation Pokémon"
+  },
+  "871": {
+    "id": "871",
+    "genus": "Sea Urchin Pokémon"
+  },
+  "872": {
+    "id": "872",
+    "genus": "Worm Pokémon"
+  },
+  "873": {
+    "id": "873",
+    "genus": "Frost Moth Pokémon"
+  },
+  "874": {
+    "id": "874",
+    "genus": "Big Rock Pokémon"
+  },
+  "875": {
+    "id": "875",
+    "genus": "Penguin Pokémon"
+  },
+  "876": {
+    "id": "876",
+    "genus": "Emotion Pokémon"
+  },
+  "877": {
+    "id": "877",
+    "genus": "Two-Sided Pokémon"
+  },
+  "878": {
+    "id": "878",
+    "genus": "Copperderm Pokémon"
+  },
+  "879": {
+    "id": "879",
+    "genus": "Copperderm Pokémon"
+  },
+  "880": {
+    "id": "880",
+    "genus": "Fossil Pokémon"
+  },
+  "881": {
+    "id": "881",
+    "genus": "Fossil Pokémon"
+  },
+  "882": {
+    "id": "882",
+    "genus": "Fossil Pokémon"
+  },
+  "883": {
+    "id": "883",
+    "genus": "Fossil Pokémon"
+  },
+  "884": {
+    "id": "884",
+    "genus": "Alloy Pokémon"
+  },
+  "885": {
+    "id": "885",
+    "genus": "Lingering Pokémon"
+  },
+  "886": {
+    "id": "886",
+    "genus": "Caretaker Pokémon"
+  },
+  "887": {
+    "id": "887",
+    "genus": "Stealth Pokémon"
+  },
+  "888": {
+    "id": "888",
+    "genus": "Warrior Pokémon"
+  },
+  "889": {
+    "id": "889",
+    "genus": "Warrior Pokémon"
+  },
+  "890": {
+    "id": "890",
+    "genus": "Gigantic Pokémon"
+  },
+  "891": {
+    "id": "891",
+    "genus": "Wushu Pokémon"
+  },
+  "892": {
+    "id": "892",
+    "genus": "Wushu Pokémon"
+  },
+  "893": {
+    "id": "893",
+    "genus": "Rogue Monkey Pokémon"
+  },
+  "894": {
+    "id": "894",
+    "genus": "Electron Pokémon"
+  },
+  "895": {
+    "id": "895",
+    "genus": "Dragon Orb Pokémon"
+  },
+  "896": {
+    "id": "896",
+    "genus": "Wild Horse Pokémon"
+  },
+  "897": {
+    "id": "897",
+    "genus": "Swift Horse Pokémon"
+  },
+  "898": {
+    "id": "898",
+    "genus": "King Pokémon"
+  },
+  "899": {
+    "id": "899",
+    "genus": "Big Horn Pokémon"
+  },
+  "900": {
+    "id": "900",
+    "genus": "Axe Pokémon"
+  },
+  "901": {
+    "id": "901",
+    "genus": "Peat Pokémon"
+  },
+  "902": {
+    "id": "902",
+    "genus": "Big Fish Pokémon"
+  },
+  "903": {
+    "id": "903",
+    "genus": "Free Climb Pokémon"
+  },
+  "904": {
+    "id": "904",
+    "genus": "Pin Cluster Pokémon"
+  },
+  "905": {
+    "id": "905",
+    "genus": "Love-Hate Pokémon"
+  },
+  "906": {
+    "id": "906",
+    "genus": "Grass Cat Pokémon"
+  },
+  "907": {
+    "id": "907",
+    "genus": "Grass Cat Pokémon"
+  },
+  "908": {
+    "id": "908",
+    "genus": "Magician Pokémon"
+  },
+  "909": {
+    "id": "909",
+    "genus": "Fire Croc Pokémon"
+  },
+  "910": {
+    "id": "910",
+    "genus": "Fire Croc Pokémon"
+  },
+  "911": {
+    "id": "911",
+    "genus": "Singer Pokémon"
+  },
+  "912": {
+    "id": "912",
+    "genus": "Duckling Pokémon"
+  },
+  "913": {
+    "id": "913",
+    "genus": "Practicing Pokémon"
+  },
+  "914": {
+    "id": "914",
+    "genus": "Dancer Pokémon"
+  },
+  "915": {
+    "id": "915",
+    "genus": "Hog Pokémon"
+  },
+  "916": {
+    "id": "916",
+    "genus": "Hog Pokémon"
+  },
+  "917": {
+    "id": "917",
+    "genus": "String Ball Pokémon"
+  },
+  "918": {
+    "id": "918",
+    "genus": "Trap Pokémon"
+  },
+  "919": {
+    "id": "919",
+    "genus": "Grasshopper Pokémon"
+  },
+  "920": {
+    "id": "920",
+    "genus": "Grasshopper Pokémon"
+  },
+  "921": {
+    "id": "921",
+    "genus": "Mouse Pokémon"
+  },
+  "922": {
+    "id": "922",
+    "genus": "Mouse Pokémon"
+  },
+  "923": {
+    "id": "923",
+    "genus": "Hands-On Pokémon"
+  },
+  "924": {
+    "id": "924",
+    "genus": "Couple Pokémon"
+  },
+  "925": {
+    "id": "925",
+    "genus": "Family Pokémon"
+  },
+  "926": {
+    "id": "926",
+    "genus": "Puppy Pokémon"
+  },
+  "927": {
+    "id": "927",
+    "genus": "Dog Pokémon"
+  },
+  "928": {
+    "id": "928",
+    "genus": "Olive Pokémon"
+  },
+  "929": {
+    "id": "929",
+    "genus": "Olive Pokémon"
+  },
+  "930": {
+    "id": "930",
+    "genus": "Olive Pokémon"
+  },
+  "931": {
+    "id": "931",
+    "genus": "Parrot Pokémon"
+  },
+  "932": {
+    "id": "932",
+    "genus": "Rock Salt Pokémon"
+  },
+  "933": {
+    "id": "933",
+    "genus": "Rock Salt Pokémon"
+  },
+  "934": {
+    "id": "934",
+    "genus": "Rock Salt Pokémon"
+  },
+  "935": {
+    "id": "935",
+    "genus": "Fire Child Pokémon"
+  },
+  "936": {
+    "id": "936",
+    "genus": "Fire Warrior Pokémon"
+  },
+  "937": {
+    "id": "937",
+    "genus": "Fire Blades Pokémon"
+  },
+  "938": {
+    "id": "938",
+    "genus": "EleTadpole Pokémon"
+  },
+  "939": {
+    "id": "939",
+    "genus": "EleFrog Pokémon"
+  },
+  "940": {
+    "id": "940",
+    "genus": "Storm Petrel Pokémon"
+  },
+  "941": {
+    "id": "941",
+    "genus": "Frigatebird Pokémon"
+  },
+  "942": {
+    "id": "942",
+    "genus": "Rascal Pokémon"
+  },
+  "943": {
+    "id": "943",
+    "genus": "Boss Pokémon"
+  },
+  "944": {
+    "id": "944",
+    "genus": "Toxic Mouse Pokémon"
+  },
+  "945": {
+    "id": "945",
+    "genus": "Toxic Monkey Pokémon"
+  },
+  "946": {
+    "id": "946",
+    "genus": "Tumbleweed Pokémon"
+  },
+  "947": {
+    "id": "947",
+    "genus": "Tumbleweed Pokémon"
+  },
+  "948": {
+    "id": "948",
+    "genus": "Woodear Pokémon"
+  },
+  "949": {
+    "id": "949",
+    "genus": "Woodear Pokémon"
+  },
+  "950": {
+    "id": "950",
+    "genus": "Ambush Pokémon"
+  },
+  "951": {
+    "id": "951",
+    "genus": "Spicy Pepper Pokémon"
+  },
+  "952": {
+    "id": "952",
+    "genus": "Spicy Pepper Pokémon"
+  },
+  "953": {
+    "id": "953",
+    "genus": "Rolling Pokémon"
+  },
+  "954": {
+    "id": "954",
+    "genus": "Rolling Pokémon"
+  },
+  "955": {
+    "id": "955",
+    "genus": "Frill Pokémon"
+  },
+  "956": {
+    "id": "956",
+    "genus": "Ostrich Pokémon"
+  },
+  "957": {
+    "id": "957",
+    "genus": "Metalsmith Pokémon"
+  },
+  "958": {
+    "id": "958",
+    "genus": "Hammer Pokémon"
+  },
+  "959": {
+    "id": "959",
+    "genus": "Hammer Pokémon"
+  },
+  "960": {
+    "id": "960",
+    "genus": "Garden Eel Pokémon"
+  },
+  "961": {
+    "id": "961",
+    "genus": "Garden Eel Pokémon"
+  },
+  "962": {
+    "id": "962",
+    "genus": "Item Drop Pokémon"
+  },
+  "963": {
+    "id": "963",
+    "genus": "Dolphin Pokémon"
+  },
+  "964": {
+    "id": "964",
+    "genus": "Dolphin Pokémon"
+  },
+  "965": {
+    "id": "965",
+    "genus": "Single-Cyl Pokémon"
+  },
+  "966": {
+    "id": "966",
+    "genus": "Multi-Cyl Pokémon"
+  },
+  "967": {
+    "id": "967",
+    "genus": "Mount Pokémon"
+  },
+  "968": {
+    "id": "968",
+    "genus": "Earthworm Pokémon"
+  },
+  "969": {
+    "id": "969",
+    "genus": "Ore Pokémon"
+  },
+  "970": {
+    "id": "970",
+    "genus": "Ore Pokémon"
+  },
+  "971": {
+    "id": "971",
+    "genus": "Ghost Dog Pokémon"
+  },
+  "972": {
+    "id": "972",
+    "genus": "Ghost Dog Pokémon"
+  },
+  "973": {
+    "id": "973",
+    "genus": "Synchronize Pokémon"
+  },
+  "974": {
+    "id": "974",
+    "genus": "Terra Whale Pokémon"
+  },
+  "975": {
+    "id": "975",
+    "genus": "Terra Whale Pokémon"
+  },
+  "976": {
+    "id": "976",
+    "genus": "Jettison Pokémon"
+  },
+  "977": {
+    "id": "977",
+    "genus": "Big Catfish Pokémon"
+  },
+  "978": {
+    "id": "978",
+    "genus": "Mimicry Pokémon"
+  },
+  "979": {
+    "id": "979",
+    "genus": "Rage Monkey Pokémon"
+  },
+  "980": {
+    "id": "980",
+    "genus": "Spiny Fish Pokémon"
+  },
+  "981": {
+    "id": "981",
+    "genus": "Long Neck Pokémon"
+  },
+  "982": {
+    "id": "982",
+    "genus": "Land Snake Pokémon"
+  },
+  "983": {
+    "id": "983",
+    "genus": "Big Blade Pokémon"
+  },
+  "984": {
+    "id": "984",
+    "genus": "Paradox Pokémon"
+  },
+  "985": {
+    "id": "985",
+    "genus": "Paradox Pokémon"
+  },
+  "986": {
+    "id": "986",
+    "genus": "Paradox Pokémon"
+  },
+  "987": {
+    "id": "987",
+    "genus": "Paradox Pokémon"
+  },
+  "988": {
+    "id": "988",
+    "genus": "Paradox Pokémon"
+  },
+  "989": {
+    "id": "989",
+    "genus": "Paradox Pokémon"
+  },
+  "990": {
+    "id": "990",
+    "genus": "Paradox Pokémon"
+  },
+  "991": {
+    "id": "991",
+    "genus": "Paradox Pokémon"
+  },
+  "992": {
+    "id": "992",
+    "genus": "Paradox Pokémon"
+  },
+  "993": {
+    "id": "993",
+    "genus": "Paradox Pokémon"
+  },
+  "994": {
+    "id": "994",
+    "genus": "Paradox Pokémon"
+  },
+  "995": {
+    "id": "995",
+    "genus": "Paradox Pokémon"
+  },
+  "996": {
+    "id": "996",
+    "genus": "Ice Fin Pokémon"
+  },
+  "997": {
+    "id": "997",
+    "genus": "Ice Fin Pokémon"
+  },
+  "998": {
+    "id": "998",
+    "genus": "Ice Dragon Pokémon"
+  },
+  "999": {
+    "id": "999",
+    "genus": "Coin Chest Pokémon"
+  },
+  "1000": {
+    "id": "1000",
+    "genus": "Coin Entity Pokémon"
+  },
+  "1001": {
+    "id": "1001",
+    "genus": "Ruinous Pokémon"
+  },
+  "1002": {
+    "id": "1002",
+    "genus": "Ruinous Pokémon"
+  },
+  "1003": {
+    "id": "1003",
+    "genus": "Ruinous Pokémon"
+  },
+  "1004": {
+    "id": "1004",
+    "genus": "Ruinous Pokémon"
+  },
+  "1005": {
+    "id": "1005",
+    "genus": "Paradox Pokémon"
+  },
+  "1006": {
+    "id": "1006",
+    "genus": "Paradox Pokémon"
+  },
+  "1007": {
+    "id": "1007",
+    "genus": "Paradox Pokémon"
+  },
+  "1008": {
+    "id": "1008",
+    "genus": "Paradox Pokémon"
+  },
+  "1009": {
+    "id": "1009",
+    "genus": "Paradox Pokémon"
+  },
+  "1010": {
+    "id": "1010",
+    "genus": "Paradox Pokémon"
+  },
+  "1011": {
+    "id": "1011",
+    "genus": "Candy Apple Pokémon"
+  },
+  "1012": {
+    "id": "1012",
+    "genus": "Matcha Pokémon"
+  },
+  "1013": {
+    "id": "1013",
+    "genus": "Matcha Pokémon"
+  },
+  "1014": {
+    "id": "1014",
+    "genus": "Retainer Pokémon"
+  },
+  "1015": {
+    "id": "1015",
+    "genus": "Retainer Pokémon"
+  },
+  "1016": {
+    "id": "1016",
+    "genus": "Retainer Pokémon"
+  },
+  "1017": {
+    "id": "1017",
+    "genus": "Mask Pokémon"
+  },
+  "1018": {
+    "id": "1018",
+    "genus": "Alloy Pokémon"
+  },
+  "1019": {
+    "id": "1019",
+    "genus": "Apple Hydra Pokémon"
+  },
+  "1020": {
+    "id": "1020",
+    "genus": "Paradox Pokémon"
+  },
+  "1021": {
+    "id": "1021",
+    "genus": "Paradox Pokémon"
+  },
+  "1022": {
+    "id": "1022",
+    "genus": "Paradox Pokémon"
+  },
+  "1023": {
+    "id": "1023",
+    "genus": "Paradox Pokémon"
+  },
+  "1024": {
+    "id": "1024",
+    "genus": "Tera Pokémon"
+  },
+  "1025": {
+    "id": "1025",
+    "genus": "Subjugation Pokémon"
+  }
+}

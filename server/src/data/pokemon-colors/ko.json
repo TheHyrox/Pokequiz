@@ -1,0 +1,52 @@
+{
+  "1": {
+    "id": 1,
+    "name": "black",
+    "localizedName": "검정"
+  },
+  "2": {
+    "id": 2,
+    "name": "blue",
+    "localizedName": "파랑"
+  },
+  "3": {
+    "id": 3,
+    "name": "brown",
+    "localizedName": "갈색"
+  },
+  "4": {
+    "id": 4,
+    "name": "gray",
+    "localizedName": "회색"
+  },
+  "5": {
+    "id": 5,
+    "name": "green",
+    "localizedName": "초록"
+  },
+  "6": {
+    "id": 6,
+    "name": "pink",
+    "localizedName": "담홍"
+  },
+  "7": {
+    "id": 7,
+    "name": "purple",
+    "localizedName": "보라"
+  },
+  "8": {
+    "id": 8,
+    "name": "red",
+    "localizedName": "빨강"
+  },
+  "9": {
+    "id": 9,
+    "name": "white",
+    "localizedName": "하양"
+  },
+  "10": {
+    "id": 10,
+    "name": "yellow",
+    "localizedName": "노랑"
+  }
+}

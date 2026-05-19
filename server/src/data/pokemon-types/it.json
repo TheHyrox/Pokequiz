@@ -1,0 +1,107 @@
+{
+  "1": {
+    "id": 1,
+    "name": "normal",
+    "localizedName": "Normale"
+  },
+  "2": {
+    "id": 2,
+    "name": "fighting",
+    "localizedName": "Lotta"
+  },
+  "3": {
+    "id": 3,
+    "name": "flying",
+    "localizedName": "Volante"
+  },
+  "4": {
+    "id": 4,
+    "name": "poison",
+    "localizedName": "Veleno"
+  },
+  "5": {
+    "id": 5,
+    "name": "ground",
+    "localizedName": "Terra"
+  },
+  "6": {
+    "id": 6,
+    "name": "rock",
+    "localizedName": "Roccia"
+  },
+  "7": {
+    "id": 7,
+    "name": "bug",
+    "localizedName": "Coleottero"
+  },
+  "8": {
+    "id": 8,
+    "name": "ghost",
+    "localizedName": "Spettro"
+  },
+  "9": {
+    "id": 9,
+    "name": "steel",
+    "localizedName": "Acciaio"
+  },
+  "10": {
+    "id": 10,
+    "name": "fire",
+    "localizedName": "Fuoco"
+  },
+  "11": {
+    "id": 11,
+    "name": "water",
+    "localizedName": "Acqua"
+  },
+  "12": {
+    "id": 12,
+    "name": "grass",
+    "localizedName": "Erba"
+  },
+  "13": {
+    "id": 13,
+    "name": "electric",
+    "localizedName": "Elettro"
+  },
+  "14": {
+    "id": 14,
+    "name": "psychic",
+    "localizedName": "Psico"
+  },
+  "15": {
+    "id": 15,
+    "name": "ice",
+    "localizedName": "Ghiaccio"
+  },
+  "16": {
+    "id": 16,
+    "name": "dragon",
+    "localizedName": "Drago"
+  },
+  "17": {
+    "id": 17,
+    "name": "dark",
+    "localizedName": "Buio"
+  },
+  "18": {
+    "id": 18,
+    "name": "fairy",
+    "localizedName": "Folletto"
+  },
+  "19": {
+    "id": 19,
+    "name": "stellar",
+    "localizedName": "Astrale"
+  },
+  "10001": {
+    "id": 10001,
+    "name": "unknown",
+    "localizedName": "???"
+  },
+  "10002": {
+    "id": 10002,
+    "name": "shadow",
+    "localizedName": "Ombra"
+  }
+}

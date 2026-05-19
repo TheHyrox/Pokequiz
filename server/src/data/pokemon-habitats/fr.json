@@ -1,0 +1,38 @@
+{
+  "1": {
+    "id": 1,
+    "name": "grottes"
+  },
+  "2": {
+    "id": 2,
+    "name": "forêts"
+  },
+  "3": {
+    "id": 3,
+    "name": "champs"
+  },
+  "4": {
+    "id": 4,
+    "name": "montagnes"
+  },
+  "5": {
+    "id": 5,
+    "name": "rares"
+  },
+  "6": {
+    "id": 6,
+    "name": "milieux hostiles"
+  },
+  "7": {
+    "id": 7,
+    "name": "mers"
+  },
+  "8": {
+    "id": 8,
+    "name": "urbains"
+  },
+  "9": {
+    "id": 9,
+    "name": "marécages"
+  }
+}

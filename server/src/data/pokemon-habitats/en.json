@@ -1,0 +1,38 @@
+{
+  "1": {
+    "id": 1,
+    "name": "cave"
+  },
+  "2": {
+    "id": 2,
+    "name": "forest"
+  },
+  "3": {
+    "id": 3,
+    "name": "grassland"
+  },
+  "4": {
+    "id": 4,
+    "name": "mountain"
+  },
+  "5": {
+    "id": 5,
+    "name": "rare"
+  },
+  "6": {
+    "id": 6,
+    "name": "rough terrain"
+  },
+  "7": {
+    "id": 7,
+    "name": "sea"
+  },
+  "8": {
+    "id": 8,
+    "name": "urban"
+  },
+  "9": {
+    "id": 9,
+    "name": "water's edge"
+  }
+}

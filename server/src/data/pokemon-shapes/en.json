@@ -1,0 +1,72 @@
+{
+  "1": {
+    "id": 1,
+    "name": "ball",
+    "localizedName": "Ball"
+  },
+  "2": {
+    "id": 2,
+    "name": "squiggle",
+    "localizedName": "Squiggle"
+  },
+  "3": {
+    "id": 3,
+    "name": "fish",
+    "localizedName": "Fish"
+  },
+  "4": {
+    "id": 4,
+    "name": "arms",
+    "localizedName": "Arms"
+  },
+  "5": {
+    "id": 5,
+    "name": "blob",
+    "localizedName": "Blob"
+  },
+  "6": {
+    "id": 6,
+    "name": "upright",
+    "localizedName": "Upright"
+  },
+  "7": {
+    "id": 7,
+    "name": "legs",
+    "localizedName": "Legs"
+  },
+  "8": {
+    "id": 8,
+    "name": "quadruped",
+    "localizedName": "Quadruped"
+  },
+  "9": {
+    "id": 9,
+    "name": "wings",
+    "localizedName": "Wings"
+  },
+  "10": {
+    "id": 10,
+    "name": "tentacles",
+    "localizedName": "Tentacles"
+  },
+  "11": {
+    "id": 11,
+    "name": "heads",
+    "localizedName": "Heads"
+  },
+  "12": {
+    "id": 12,
+    "name": "humanoid",
+    "localizedName": "Humanoid"
+  },
+  "13": {
+    "id": 13,
+    "name": "bug-wings",
+    "localizedName": "Bug wings"
+  },
+  "14": {
+    "id": 14,
+    "name": "armor",
+    "localizedName": "Armor"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "1": {
+    "id": 1,
+    "name": "ball",
+    "localizedName": "Balle"
+  },
+  "2": {
+    "id": 2,
+    "name": "squiggle",
+    "localizedName": "Sinueux"
+  },
+  "3": {
+    "id": 3,
+    "name": "fish",
+    "localizedName": "Poisson"
+  },
+  "4": {
+    "id": 4,
+    "name": "arms",
+    "localizedName": "Bras"
+  },
+  "5": {
+    "id": 5,
+    "name": "blob",
+    "localizedName": "Goutte"
+  },
+  "6": {
+    "id": 6,
+    "name": "upright",
+    "localizedName": "Droit"
+  },
+  "7": {
+    "id": 7,
+    "name": "legs",
+    "localizedName": "Jambes"
+  },
+  "8": {
+    "id": 8,
+    "name": "quadruped",
+    "localizedName": "Quadrupède"
+  },
+  "9": {
+    "id": 9,
+    "name": "wings",
+    "localizedName": "Ailes"
+  },
+  "10": {
+    "id": 10,
+    "name": "tentacles",
+    "localizedName": "Tentacules"
+  },
+  "11": {
+    "id": 11,
+    "name": "heads",
+    "localizedName": "Têtes"
+  },
+  "12": {
+    "id": 12,
+    "name": "humanoid",
+    "localizedName": "Humanoïde"
+  },
+  "13": {
+    "id": 13,
+    "name": "bug-wings",
+    "localizedName": "Ailes d’insecte"
+  },
+  "14": {
+    "id": 14,
+    "name": "armor",
+    "localizedName": "Armure"
+  }
+}

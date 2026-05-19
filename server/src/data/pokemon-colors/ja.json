@@ -1,0 +1,52 @@
+{
+  "1": {
+    "id": 1,
+    "name": "black",
+    "localizedName": "黒色"
+  },
+  "2": {
+    "id": 2,
+    "name": "blue",
+    "localizedName": "青色"
+  },
+  "3": {
+    "id": 3,
+    "name": "brown",
+    "localizedName": "茶色"
+  },
+  "4": {
+    "id": 4,
+    "name": "gray",
+    "localizedName": "灰色"
+  },
+  "5": {
+    "id": 5,
+    "name": "green",
+    "localizedName": "緑色"
+  },
+  "6": {
+    "id": 6,
+    "name": "pink",
+    "localizedName": "桃色"
+  },
+  "7": {
+    "id": 7,
+    "name": "purple",
+    "localizedName": "紫色"
+  },
+  "8": {
+    "id": 8,
+    "name": "red",
+    "localizedName": "赤色"
+  },
+  "9": {
+    "id": 9,
+    "name": "white",
+    "localizedName": "白色"
+  },
+  "10": {
+    "id": 10,
+    "name": "yellow",
+    "localizedName": "黄色"
+  }
+}
