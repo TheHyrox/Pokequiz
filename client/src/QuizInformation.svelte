@@ -680,13 +680,15 @@
             <!-- Pokemon Cards Grid -->
             <div class="pokemon-grid">
                 {#each pokemonOptions as pokemon (pokemon.id)}
-                    <Pokecard
-                        {pokemon}
-                        showError={wrongAnsweredIds.has(pokemon.id)}
-                        disabled={disabledCards}
-                        showSprite={settings.showSprites}
-                        on:selected={() => handleAnswer(pokemon.isCorrect, pokemon.id)}
-                    />
+                    <div class="pokemon-grid-item">
+                        <Pokecard
+                            {pokemon}
+                            showError={wrongAnsweredIds.has(pokemon.id)}
+                            disabled={disabledCards}
+                            showSprite={settings.showSprites}
+                            on:selected={() => handleAnswer(pokemon.isCorrect, pokemon.id)}
+                        />
+                    </div>
                 {/each}
             </div>
         {/if}
@@ -716,15 +718,33 @@
     }
 
     .pokemon-grid {
-        @apply grid grid-cols-2 gap-4;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
     }
 
-    .pokemon-grid:md {
-        @apply grid-cols-3;
+    .pokemon-grid-item {
+        flex: 1 1 100%;
+        max-width: 20rem;
     }
 
-    .pokemon-grid:lg {
-        @apply grid-cols-4;
+    @media (min-width: 768px) {
+        .pokemon-grid {
+            gap: 1.5rem;
+        }
+    }
+
+    @media (min-width: 640px) {
+        .pokemon-grid-item {
+            flex-basis: calc(50% - 0.5rem);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .pokemon-grid-item {
+            flex-basis: calc(25% - 1.125rem);
+        }
     }
 
     .hints-list {
