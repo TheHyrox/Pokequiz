@@ -153,7 +153,11 @@
      * @brief Convert roman numerals to arabic numbers
      * @example "generation-iv" -> "Generation 4"
      */
-    function romanToArabic(text: string): string {
+    function romanToArabic(text: string | number): string {
+        if (typeof text === 'number') {
+            return `${text}`;
+        }
+
         const romanMap: { [key: string]: number } = {
             'i': 1, 'ii': 2, 'iii': 3, 'iv': 4, 'v': 5,
             'vi': 6, 'vii': 7, 'viii': 8, 'ix': 9
@@ -163,7 +167,7 @@
         if (match) {
             const roman = match[1].toLowerCase();
             const number = romanMap[roman];
-            return number ? `Generation ${number}` : text;
+            return number ? `${number}` : text;
         }
         return text;
     }
@@ -303,7 +307,7 @@
                         }
                         break;
                     case 'generation':
-                        value = enrichedData.generationId ? romanToArabic(`generation-${enrichedData.generationId}`) : 'Unknown';
+                        value = enrichedData.generation ? romanToArabic(enrichedData.generation) : 'Unknown';
                         break;
                     case 'shape':
                         value = enrichedData.shape || 'Unknown';

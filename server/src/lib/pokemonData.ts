@@ -6,6 +6,7 @@
 import fs from 'fs';
 import path from 'path';
 import { getServerDataDir } from './utils/utils.js';
+import { getGenerationForPokemon } from '../../../shared/utils/pokemonUtils.js';
 
 const DATA_DIR = getServerDataDir();
 
@@ -343,6 +344,7 @@ export function getLocalizedEnrichedPokemon(
     const pokemon = getPokemonById(pokemonId);
     if (!pokemon) return null;
 
+    const generationNumber = getGenerationForPokemon(pokemonId as number);
     const abilitiesData = Object.values(getAllPokemonAbilities(language)) as any[];
     const typesData = Object.values(getAllPokemonTypes(language)) as any[];
     const eggGroupsData = Object.values(getAllPokemonEggGroups(language)) as any[];
@@ -399,6 +401,7 @@ export function getLocalizedEnrichedPokemon(
 
     return {
         ...pokemon,
+        generation: generationNumber,
         abilities: localizedAbilities,
         types: localizedTypes,
         eggGroups: localizedEggGroups,
