@@ -38,7 +38,7 @@
 </script>
 
 <div class="sprite-type-selector">
-    <label class="section-label">{getLabel(languageCode, 'sprites_spriteTypesHeader')}</label>
+    <h3 class="section-label">{getLabel(languageCode, 'sprites_spriteTypesHeader')}</h3>
     <p class="section-description">{getLabel(languageCode, 'sprites_spriteTypesDescription')}</p>
     
     <div class="checkbox-group">

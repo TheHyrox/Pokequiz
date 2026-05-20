@@ -108,11 +108,12 @@
 
 <div class="stepper-container">
     {#if label}
-        <label class="stepper-label">{label}</label>
+        <label for="stepper-input" class="stepper-label">{label}</label>
     {/if}
     <div class="stepper-input-group">
         <input
             bind:this={inputElement}
+            id="stepper-input"
             type="text"
             inputmode="numeric"
             bind:value
@@ -128,7 +129,7 @@
                 on:click={increment}
                 disabled={value >= max}
                 class="stepper-btn stepper-btn-up"
-                aria-label="Increment"
+                aria-label={`Increment ${label || 'value'}`}
             >
                 ▲
             </button>
@@ -137,7 +138,7 @@
                 on:click={decrement}
                 disabled={value <= min}
                 class="stepper-btn stepper-btn-down"
-                aria-label="Decrement"
+                aria-label={`Decrement ${label || 'value'}`}
             >
                 ▼
             </button>

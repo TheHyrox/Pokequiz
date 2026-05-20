@@ -14,8 +14,6 @@
     export let isWin: boolean;
     /** Final score achieved */
     export let score: number;
-    /** Total questions in quiz */
-    export let totalQuestions: number;
     /** The correct answer for the current/last question */
     export let correctAnswer: PokemonOption;
     /** Current language code */
@@ -30,6 +28,15 @@
      */
     function handleHome(): void {
         dispatch('home');
+    }
+
+    /**
+     * @brief Handles keyboard events for the modal overlay
+     */
+    function handleKeyDown(event: KeyboardEvent): void {
+        if (event.key === 'Escape' || event.key === 'Enter') {
+            handleHome();
+        }
     }
 
     /**
@@ -53,7 +60,14 @@
     <Confetti />
 {/if}
 
-<div class="modal-overlay" on:click|self={handleHome}>
+<div 
+    class="modal-overlay" 
+    on:click|self={handleHome}
+    on:keydown={handleKeyDown}
+    role="button"
+    tabindex="0"
+    aria-label="Close modal"
+>
     <div class="modal-content" class:win={isWin} class:lose={!isWin}>
         <!-- Header -->
         <div class="modal-header" class:win={isWin} class:lose={!isWin}>
@@ -165,10 +179,6 @@
 
     .score-value {
         @apply text-5xl font-black text-blue-600 mb-1;
-    }
-
-    .score-breakdown {
-        @apply text-lg text-gray-700 font-semibold;
     }
 
     .answer-section {

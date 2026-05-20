@@ -166,8 +166,10 @@
         @apply grid grid-cols-2 gap-4;
     }
 
-    .options-grid:md {
-        @apply grid-cols-4;
+    @screen md {
+        .options-grid {
+            @apply grid-cols-4;
+        }
     }
 
     .option-card {

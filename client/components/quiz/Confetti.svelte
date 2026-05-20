@@ -101,7 +101,7 @@
                 --size: {particle.size}px;
                 --color: {particle.color};
             "
-        />
+        ></div>
     {/each}
 </div>
 
