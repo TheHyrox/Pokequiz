@@ -27,7 +27,7 @@
 </script>
 
 <div class="sprite-source-selector">
-    <label class="section-label">{getLabel(languageCode, 'sprites_spriteSourceHeader')}</label>
+    <h3 class="section-label">{getLabel(languageCode, 'sprites_spriteSourceHeader')}</h3>
     <p class="section-description">{getLabel(languageCode, 'sprites_spriteSourceDescription')}</p>
     
     <div class="radio-group">

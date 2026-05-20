@@ -69,7 +69,7 @@
 </script>
 
 <div class="sprite-effects-selector">
-    <label class="section-label">{getLabel(languageCode, 'sprites_imageEffects')}</label>
+    <h3 class="section-label">{getLabel(languageCode, 'sprites_imageEffects')}</h3>
     <p class="section-description">{getLabel(languageCode, 'sprites_imageEffectsDescription')}</p>
     
     <div class="effects-container">
@@ -85,7 +85,7 @@
             {#if effects.blurEnabled}
                 <div class="slider-container">
                     <div class="slider-header">
-                        <label class="slider-label">
+                        <label for="blur-strength" class="slider-label">
                             {getLabel(languageCode, 'sprites_blurStrength')}: {effects.blurStrength}px
                         </label>
                         <span class="recommended-tag">
@@ -93,6 +93,7 @@
                         </span>
                     </div>
                     <input
+                        id="blur-strength"
                         type="range"
                         min={blurLimits.min}
                         max={blurLimits.max}
@@ -116,7 +117,7 @@
             {#if effects.pixelateEnabled}
                 <div class="slider-container">
                     <div class="slider-header">
-                        <label class="slider-label">
+                        <label for="pixelate-strength" class="slider-label">
                             {getLabel(languageCode, 'sprites_pixelateStrength')}: {effects.pixelateStrength}
                         </label>
                         <span class="recommended-tag">
@@ -124,6 +125,7 @@
                         </span>
                     </div>
                     <input
+                        id="pixelate-strength"
                         type="range"
                         min={pixelateLimits.min}
                         max={pixelateLimits.max}

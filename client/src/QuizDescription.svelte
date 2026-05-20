@@ -25,7 +25,7 @@
     /** Callback to return to hub */
     export let onBackToHub: () => void;
     /** Callback to return to settings */
-    export let onBackToSettings: (() => void) | null = null;
+    export const onBackToSettings: (() => void) | null = null;
     /** Current language code */
     export let languageCode: string = 'en';
     /** Current language ID */

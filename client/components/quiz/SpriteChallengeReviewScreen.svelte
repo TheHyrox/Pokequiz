@@ -122,10 +122,6 @@
         @apply grid grid-cols-2 gap-4;
     }
 
-    .option-grid:md {
-        @apply grid-cols-4;
-    }
-
     .option-card {
         @apply p-4 border-2 rounded-lg text-center transition-all;
     }
