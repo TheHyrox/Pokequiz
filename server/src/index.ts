@@ -12,7 +12,6 @@ import {
     searchPokemonByName,
     getAllPokemonDescriptions,
     getPokemonHabitat,
-    getEnrichedPokemon,
     getLocalizedEnrichedPokemon
 } from './lib/pokemonData.js';
 
@@ -84,12 +83,12 @@ app.get('/api/pokemon/all', (req, res) => {
     }
 });
 
-app.get('/api/pokemon/search/:name', (req, res) => {
+app.get('/api/pokemon/search/:name', async (req, res) => {
     try {
         const { name } = req.params;
         const pokemon = searchPokemonByName(name);
         if (!pokemon) return res.status(404).json({ error: 'Pokemon not found' });
-        const enriched = getLocalizedEnrichedPokemon(pokemon.id, 'en');
+        const enriched = await getLocalizedEnrichedPokemon(pokemon.id, 'en');
         res.json(enriched);
     } catch (error) {
         const errorMessage = error instanceof Error ? error.message : 'Unknown error';
@@ -97,13 +96,13 @@ app.get('/api/pokemon/search/:name', (req, res) => {
     }
 });
 
-app.get('/api/pokemon/search/:name/:lang', (req, res) => {
+app.get('/api/pokemon/search/:name/:lang', async (req, res) => {
     try {
         const { name, lang } = req.params;
         const langCode = getLanguageCode(lang);
         const pokemon = searchPokemonByName(name);
         if (!pokemon) return res.status(404).json({ error: 'Pokemon not found' });
-        const enriched = getLocalizedEnrichedPokemon(pokemon.id, langCode);
+        const enriched = await getLocalizedEnrichedPokemon(pokemon.id, langCode);
         res.json(enriched);
     } catch (error) {
         const errorMessage = error instanceof Error ? error.message : 'Unknown error';
@@ -111,10 +110,10 @@ app.get('/api/pokemon/search/:name/:lang', (req, res) => {
     }
 });
 
-app.get('/api/pokemon/:id', (req, res) => {
+app.get('/api/pokemon/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const enriched = getLocalizedEnrichedPokemon(id, 'en');
+        const enriched = await getLocalizedEnrichedPokemon(id, 'en');
         if (!enriched) return res.status(404).json({ error: 'Pokemon not found' });
         res.json(enriched);
     } catch (error) {
@@ -162,11 +161,11 @@ app.get('/api/pokemon/:id/name/:lang', async (req, res) => {
     }
 });
 
-app.get('/api/pokemon/:id/:lang', (req, res) => {
+app.get('/api/pokemon/:id/:lang', async (req, res) => {
     try {
         const { id, lang } = req.params;
         const langCode = getLanguageCode(lang);
-        const enriched = getLocalizedEnrichedPokemon(id, langCode);
+        const enriched = await getLocalizedEnrichedPokemon(id, langCode);
         if (!enriched) return res.status(404).json({ error: 'Pokemon not found' });
         res.json(enriched);
     } catch (error) {

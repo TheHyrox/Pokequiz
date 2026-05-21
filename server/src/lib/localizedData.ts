@@ -87,7 +87,9 @@ export function getLocalizedData(
         'egg-group': 'pokemon-egg-group',
         'pokemon-color': 'pokemon-colors',
         'pokemon-shape': 'pokemon-shapes',
-        'type': 'pokemon-types'
+        'type': 'pokemon-types',
+        'category': 'pokemon-genera',
+        'habitat': 'pokemon-habitats'
     };
 
     const folder = folderMap[dataType];

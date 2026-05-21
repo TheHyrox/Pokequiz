@@ -125,6 +125,17 @@
     }
 
     /**
+     * @brief Convert string to PascalCase
+     */
+    function toPascalCase(str: string): string {
+        return str
+            .toLowerCase()
+            .split(/[\s-_]+/)
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join('');
+    }
+
+    /**
      * @brief Generate a fake value for a hint using localized data
      */
     async function generateFakeValue(infoType: string, realValue: string): Promise<string> {
@@ -178,10 +189,10 @@
                 return 'Unknown Type';
             }
             case 'category': {
-                const category = await getLocalizedDataItems('category', languageCode);
-                if (category.length > 0) {
-                    const randomCategory = category[Math.floor(Math.random() * category.length)];
-                    return randomCategory.localizedName || randomCategory.name;
+                const categories = await getLocalizedDataItems('category', languageCode);
+                if (categories.length > 0) {
+                    const randomCategory = categories[Math.floor(Math.random() * categories.length)];
+                    return randomCategory.localizedName || randomCategory.name || randomCategory.genus;
                 }
                 return 'Unknown Category';
             }
@@ -189,7 +200,7 @@
                 const habitats = await getLocalizedDataItems('habitat', languageCode);
                 if (habitats.length > 0) {
                     const randomHabitat = habitats[Math.floor(Math.random() * habitats.length)];
-                    return randomHabitat.name;
+                    return toPascalCase(randomHabitat.name);
                 }
                 return 'Unknown Habitat';
             }
@@ -288,18 +299,11 @@
                             }
                         }
                         break;
-                    case 'genera':
-                        if (enrichedData.id) {
-                            try {
-                                const genusData = await fetch(`/api/genera/${enrichedData.id}/${languageCode}`).then(r => r.json());
-                                value = genusData.name || 'Unknown';
-                            } catch {
-                                value = 'Unknown';
-                            }
-                        }
+                    case 'category':
+                        value = enrichedData.category || 'Unknown';
                         break;
                     case 'habitat':
-                        value = enrichedData.habitat?.name || 'Unknown';
+                        value = enrichedData.habitat || 'Unknown';
                         break;
                 }
 
