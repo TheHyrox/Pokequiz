@@ -418,10 +418,10 @@ export function getPokemonGenus(
     pokemonId: number | string,
     language: string
 ): PokemonGenus | null {
-    const cacheKey = `pokemon-genera:${language}`;
+    const cacheKey = `pokemon-category:${language}`;
 
     if (!dataCache[cacheKey]) {
-        const filePath = path.join(DATA_DIR, 'pokemon-genera', `${language}.json`);
+        const filePath = path.join(DATA_DIR, 'pokemon-category', `${language}.json`);
         if (!fs.existsSync(filePath)) {
             return null;
         }
@@ -430,7 +430,7 @@ export function getPokemonGenus(
             const fileContent = fs.readFileSync(filePath, 'utf-8');
             dataCache[cacheKey] = JSON.parse(fileContent);
         } catch (error) {
-            console.error(`Failed to load pokemon-genera/${language}.json:`, error);
+            console.error(`Failed to load pokemon-category/${language}.json:`, error);
             return null;
         }
     }
@@ -440,13 +440,13 @@ export function getPokemonGenus(
 }
 
 /**
- * @brief Get all Pokemon genera for a language
+ * @brief Get all Pokemon categories for a language
  */
-export function getAllPokemonGenera(language: string): { [id: string]: PokemonGenus } {
-    const cacheKey = `pokemon-genera:${language}`;
+export function getAllPokemonCategories(language: string): { [id: string]: PokemonCategory } {
+    const cacheKey = `pokemon-category:${language}`;
 
     if (!dataCache[cacheKey]) {
-        const filePath = path.join(DATA_DIR, 'pokemon-genera', `${language}.json`);
+        const filePath = path.join(DATA_DIR, 'pokemon-category', `${language}.json`);
         if (!fs.existsSync(filePath)) {
             return {};
         }
@@ -455,7 +455,7 @@ export function getAllPokemonGenera(language: string): { [id: string]: PokemonGe
             const fileContent = fs.readFileSync(filePath, 'utf-8');
             dataCache[cacheKey] = JSON.parse(fileContent);
         } catch (error) {
-            console.error(`Failed to load pokemon-genera/${language}.json:`, error);
+            console.error(`Failed to load pokemon-category/${language}.json:`, error);
             return {};
         }
     }
