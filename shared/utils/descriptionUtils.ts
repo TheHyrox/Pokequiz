@@ -13,14 +13,16 @@
  * // returns "██████ is a ██████ mouse"
  */
 export function truncateDescription(description: string, strength: number): string {
+    if (strength === 0) return description;
+
     const words = description.split(' ');
     const maskedWords = words.map((word, index) => {
         let shouldMask = false;
-        if (strength === 1 && index % 2 === 0) {
+        if (strength === 1 && index % 4 === 0) {
             shouldMask = true;
-        } else if (strength === 2 && index % 3 === 0) {
+        } else if (strength === 2 && index % 2 === 0) {
             shouldMask = true;
-        } else if (strength === 3 && index % 4 === 0) {
+        } else if (strength === 3 && index % 4 !== 3) {
             shouldMask = true;
         }
         if (shouldMask) {
