@@ -22,7 +22,7 @@
         icon: string;
     }
 
-    const games: Game[] = [
+    let games: Game[] = [
         {
             id: 'description-quiz',
             name: 'Description Quiz',
@@ -61,8 +61,18 @@
         localStorage.setItem('selectedLanguageId', selectedLanguageId.toString());
     }
 
-    onMount(() => {
-        // Language is already loaded from localStorage at initialization
+    onMount(async () => {
+        try {
+            const response = await fetch('/api/quiz');
+            if (response.ok) {
+                const apiQuizzes = await response.json();
+                console.log('Quizzes from API:', apiQuizzes);
+                // We keep the hardcoded list for now because it has descriptions and icons,
+                // but we could sync them if needed.
+            }
+        } catch (error) {
+            console.error('Failed to fetch quizzes:', error);
+        }
     });
 
     /**

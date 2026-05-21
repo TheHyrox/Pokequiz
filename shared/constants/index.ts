@@ -170,7 +170,9 @@ export const ALL_INFORMATION_TYPES: import('../types').InformationType[] = [
     'generation',
     'shape',
     'color',
-    'types'
+    'types',
+    'category',
+    'habitat'
 ];
 
 /**
