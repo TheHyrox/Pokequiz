@@ -20,7 +20,7 @@ const dataCache: { [key: string]: any } = {};
  */
 export function getLocalizedName(
     dataType: string,
-    resourceName: string,
+    resourceIdentifier: string | number,
     language: string
 ): string | null {
     const folderMap: { [key: string]: string } = {
@@ -28,7 +28,9 @@ export function getLocalizedName(
         'egg-group': 'pokemon-egg-group',
         'pokemon-color': 'pokemon-colors',
         'pokemon-shape': 'pokemon-shapes',
-        'type': 'pokemon-types'
+        'type': 'pokemon-types',
+        'category': 'pokemon-genera',
+        'habitat': 'pokemon-habitats'
     };
 
     const folder = folderMap[dataType];
@@ -55,15 +57,21 @@ export function getLocalizedName(
 
     const data = dataCache[cacheKey];
     
-    // Search through all entries looking for a name match
+   
+    const entryById = data[String(resourceIdentifier)];
+    if (entryById) {
+        return entryById.localizedName || entryById.name || entryById.genus || null;
+    }
+    
+    const searchName = String(resourceIdentifier).toLowerCase();
     for (const [_id, entry] of Object.entries(data)) {
         const entryData = entry as any;
-        if (entryData.name === resourceName) {
+        if (entryData.name && entryData.name.toLowerCase() === searchName) {
             return entryData.localizedName || entryData.name || null;
         }
     }
     
-    console.warn(`Resource not found: ${dataType}/${resourceName}/${language}`);
+    console.warn(`Resource not found: ${dataType}/${resourceIdentifier}/${language}`);
     return null;
 }
 
@@ -79,7 +87,9 @@ export function getLocalizedData(
         'egg-group': 'pokemon-egg-group',
         'pokemon-color': 'pokemon-colors',
         'pokemon-shape': 'pokemon-shapes',
-        'type': 'pokemon-types'
+        'type': 'pokemon-types',
+        'category': 'pokemon-genera',
+        'habitat': 'pokemon-habitats'
     };
 
     const folder = folderMap[dataType];

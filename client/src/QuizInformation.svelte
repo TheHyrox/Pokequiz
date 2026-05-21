@@ -95,84 +95,6 @@
     const localizationCache: { [key: string]: { [key: string]: string } } = {};
 
     /**
-     * @brief Fetch localized name from server or PokeAPI
-     */
-    async function getLocalizedName(endpoint: string, name: string, languageCode: string): Promise<string> {
-        const cacheKey = `${endpoint}-${name}-${languageCode}`;
-        
-        if (localizationCache[cacheKey]) {
-            return localizationCache[cacheKey][languageCode] || name;
-        }
-
-        try {
-            // Try to fetch from server first (local data)
-            const serverResponse = await fetch(`/api/localized/${endpoint}/${name}/${languageCode}`);
-            if (serverResponse.ok) {
-                const data = await serverResponse.json();
-                localizationCache[cacheKey] = localizationCache[cacheKey] || {};
-                localizationCache[cacheKey][languageCode] = data.name;
-                return data.name;
-            }
-        } catch (error) {
-            console.warn(`Failed to fetch from server: ${error}`);
-        }
-
-        // Fallback to PokeAPI
-        try {
-            const response = await fetch(`https://pokeapi.co/api/v2/${endpoint}/${name.toLowerCase().replace(/ /g, '-')}`);
-            if (!response.ok) return capitalizeWords(name);
-            
-            const data = await response.json();
-            const names = data.names || [];
-            const pokeLanguage = getPokeApiLanguageCode(languageCode);
-            
-            const localizedEntry = names.find((n: any) => n.language.name === pokeLanguage);
-            const result = localizedEntry?.name || capitalizeWords(name);
-            
-            localizationCache[cacheKey] = localizationCache[cacheKey] || {};
-            localizationCache[cacheKey][languageCode] = result;
-            
-            return result;
-        } catch (error) {
-            console.error(`Failed to fetch localized ${endpoint}:`, error);
-            return capitalizeWords(name);
-        }
-    }
-
-    /**
-     * @brief Capitalize each word in a string
-     */
-    function capitalizeWords(str: string): string {
-        return str
-            .split(' ')
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(' ');
-    }
-
-    /**
-     * @brief Convert roman numerals to arabic numbers
-     * @example "generation-iv" -> "Generation 4"
-     */
-    function romanToArabic(text: string | number): string {
-        if (typeof text === 'number') {
-            return `${text}`;
-        }
-
-        const romanMap: { [key: string]: number } = {
-            'i': 1, 'ii': 2, 'iii': 3, 'iv': 4, 'v': 5,
-            'vi': 6, 'vii': 7, 'viii': 8, 'ix': 9
-        };
-        
-        const match = text.match(/generation-(.+)/i);
-        if (match) {
-            const roman = match[1].toLowerCase();
-            const number = romanMap[roman];
-            return number ? `${number}` : text;
-        }
-        return text;
-    }
-
-    /**
      * @brief Cache for localized data files (abilities, colors, etc.)
      */
     const localizedDataCache: { [key: string]: any[] } = {};
@@ -188,7 +110,7 @@
         }
 
         try {
-            const response = await fetch(`/api/localized-data/${dataType}/${languageCode}`);
+            const response = await fetch(`/api/${dataType}/${languageCode}`);
             if (response.ok) {
                 const data = await response.json();
                 const items = Array.isArray(data) ? data : Object.values(data);
@@ -200,6 +122,17 @@
         }
         
         return [];
+    }
+
+    /**
+     * @brief Convert string to PascalCase
+     */
+    function toPascalCase(str: string): string {
+        return str
+            .toLowerCase()
+            .split(/[\s-_]+/)
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join('');
     }
 
     /**
@@ -224,7 +157,7 @@
                 return 'Unknown Ability';
             }
             case 'eggGroup': {
-                const eggGroups = await getLocalizedDataItems('egg-group', languageCode);
+                const eggGroups = await getLocalizedDataItems('egggroup', languageCode);
                 if (eggGroups.length > 0) {
                     const randomEggGroup = eggGroups[Math.floor(Math.random() * eggGroups.length)];
                     return randomEggGroup.localizedName || randomEggGroup.name;
@@ -232,7 +165,7 @@
                 return 'Unknown Egg Group';
             }
             case 'shape': {
-                const shapes = await getLocalizedDataItems('pokemon-shape', languageCode);
+                const shapes = await getLocalizedDataItems('shape', languageCode);
                 if (shapes.length > 0) {
                     const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
                     return randomShape.localizedName || randomShape.name;
@@ -240,7 +173,7 @@
                 return 'Unknown Shape';
             }
             case 'color': {
-                const colors = await getLocalizedDataItems('pokemon-color', languageCode);
+                const colors = await getLocalizedDataItems('color', languageCode);
                 if (colors.length > 0) {
                     const randomColor = colors[Math.floor(Math.random() * colors.length)];
                     return randomColor.localizedName || randomColor.name;
@@ -255,6 +188,22 @@
                 }
                 return 'Unknown Type';
             }
+            case 'category': {
+                const categories = await getLocalizedDataItems('category', languageCode);
+                if (categories.length > 0) {
+                    const randomCategory = categories[Math.floor(Math.random() * categories.length)];
+                    return randomCategory.localizedName || randomCategory.name || randomCategory.genus;
+                }
+                return 'Unknown Category';
+            }
+            case 'habitat': {
+                const habitats = await getLocalizedDataItems('habitat', languageCode);
+                if (habitats.length > 0) {
+                    const randomHabitat = habitats[Math.floor(Math.random() * habitats.length)];
+                    return toPascalCase(randomHabitat.name);
+                }
+                return 'Unknown Habitat';
+            }
             case 'generation': {
                 const generations = ['Generation 1', 'Generation 2', 'Generation 3', 'Generation 4', 'Generation 5', 'Generation 6', 'Generation 7', 'Generation 8', 'Generation 9'];
                 return generations[Math.floor(Math.random() * generations.length)];
@@ -262,6 +211,29 @@
             default:
                 return realValue;
         }
+    }
+
+    /**
+     * @brief Convert roman numerals to arabic numbers
+     * @example "generation-iv" -> "Generation 4"
+     */
+    function romanToArabic(text: string | number): string {
+        if (typeof text === 'number') {
+            return `${text}`;
+        }
+
+        const romanMap: { [key: string]: number } = {
+            'i': 1, 'ii': 2, 'iii': 3, 'iv': 4, 'v': 5,
+            'vi': 6, 'vii': 7, 'viii': 8, 'ix': 9
+        };
+        
+        const match = text.match(/generation-(.+)/i);
+        if (match) {
+            const roman = match[1].toLowerCase();
+            const number = romanMap[roman];
+            return number ? `${number}` : text;
+        }
+        return text;
     }
 
     /**
@@ -326,6 +298,12 @@
                                 }).join(', ');
                             }
                         }
+                        break;
+                    case 'category':
+                        value = enrichedData.category || 'Unknown';
+                        break;
+                    case 'habitat':
+                        value = enrichedData.habitat || 'Unknown';
                         break;
                 }
 

@@ -221,7 +221,7 @@ export interface SpriteChallengeQuestion {
  * @brief Available information types for information quiz
  * @description Types of Pokemon attributes that can be displayed as hints
  */
-export type InformationType = 'weight' | 'height' | 'abilities' | 'eggGroup' | 'generation' | 'shape' | 'color' | 'types';
+export type InformationType = 'weight' | 'height' | 'abilities' | 'eggGroup' | 'generation' | 'shape' | 'color' | 'types' | 'category' | 'habitat';
 
 /**
  * @brief Game mode for information quiz

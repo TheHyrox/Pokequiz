@@ -7,7 +7,7 @@ export async function getPokemonInformationData(
     languageId: string | number
 ): Promise<any> {
     try {
-        const res = await fetch(`/api/pokemon/${pokemonId}/information/${languageId}`);
+        const res = await fetch(`/api/pokemon/${pokemonId}/${languageId}`);
         if (!res.ok) return undefined;
         const data = await res.json();
         return data;

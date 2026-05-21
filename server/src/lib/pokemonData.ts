@@ -7,6 +7,8 @@ import fs from 'fs';
 import path from 'path';
 import { getServerDataDir } from './utils/utils.js';
 import { getGenerationForPokemon } from '../../../shared/utils/pokemonUtils.js';
+import { LANGUAGE_CODE_TO_ID } from '../../../shared/constants/index.js';
+import { getAllPokemonNames } from './pokemonCache.js';
 
 const DATA_DIR = getServerDataDir();
 
@@ -99,15 +101,9 @@ export function getPokemonById(id: number | string): PokemonEntry | null {
  */
 export function searchPokemonByName(name: string): PokemonEntry | null {
     const allPokemon = getAllPokemon();
-    const lowerName = name.toLowerCase();
+    const searchName = name.toLowerCase();
     
-    for (const [_, pokemon] of Object.entries(allPokemon)) {
-        if (pokemon.name.toLowerCase() === lowerName) {
-            return pokemon;
-        }
-    }
-    
-    return null;
+    return Object.values(allPokemon).find(p => p.name.toLowerCase() === searchName) || null;
 }
 
 /**
@@ -263,7 +259,7 @@ function getAllPokemonTypes(language: string): { [id: string]: any } {
  * @brief Get all Pokemon egg groups for a language
  */
 function getAllPokemonEggGroups(language: string): { [id: string]: any } {
-    const cacheKey = `pokemon-egg-groups:${language}`;
+    const cacheKey = `pokemon-egg-group:${language}`;
 
     if (!dataCache[cacheKey]) {
         const filePath = path.join(DATA_DIR, 'pokemon-egg-group', `${language}.json`);
@@ -337,12 +333,25 @@ function getAllPokemonShapes(language: string): { [id: string]: any } {
  * @param language Language code (en, fr, de, es, it, ja, ja-hrkt, ko, zh-hans, zh-hant)
  * @returns Enriched Pokemon data with all localized attributes
  */
-export function getLocalizedEnrichedPokemon(
+export async function getLocalizedEnrichedPokemon(
     pokemonId: number | string,
     language: string
-): any {
+): Promise<any> {
     const pokemon = getPokemonById(pokemonId);
     if (!pokemon) return null;
+
+    // Get localized name
+    const languageId = (LANGUAGE_CODE_TO_ID as any)[language];
+    let localizedName = pokemon.name;
+    if (languageId) {
+        try {
+            const names = await getAllPokemonNames(languageId);
+            const nameEntry = names.find(n => String(n.id) === String(pokemon.id));
+            if (nameEntry) localizedName = nameEntry.name;
+        } catch (error) {
+            console.warn(`Failed to fetch localized name for ${pokemon.id} in ${language}:`, error);
+        }
+    }
 
     const generationNumber = getGenerationForPokemon(pokemonId as number);
     const abilitiesData = Object.values(getAllPokemonAbilities(language)) as any[];
@@ -353,7 +362,7 @@ export function getLocalizedEnrichedPokemon(
 
     const abilityMap: { [key: string]: string } = {};
     const typeMap: { [key: string]: string } = {};
-    
+
     abilitiesData.forEach(ability => {
         abilityMap[ability.id] = ability.localizedName || ability.name;
     });
@@ -385,7 +394,7 @@ export function getLocalizedEnrichedPokemon(
         name: typeMap[type.id] || type.id
     }));
 
-    const localizedEggGroups = pokemon.eggGroups.map((eggGroupName: string) => 
+    const localizedEggGroups = pokemon.eggGroups.map((eggGroupName: string) =>
         eggGroupNameMap[eggGroupName] || eggGroupName
     );
 
@@ -397,18 +406,74 @@ export function getLocalizedEnrichedPokemon(
         ? shapeNameMap[pokemon.shape] || pokemon.shape
         : null;
 
-    const habitat = pokemon.habitatId ? getPokemonHabitat(pokemon.habitatId, language) : null;
+    let habitatId = pokemon.habitatId;
+    if (!habitatId && pokemon.habitatName) {
+        const enHabitats = getLocalizedDataItemsSync('habitat', 'en');
+        const normalizedSearchName = normalizeHabitatName(pokemon.habitatName);
+        const habitatEntry = Object.values(enHabitats).find((h: any) => 
+            normalizeHabitatName(h.name) === normalizedSearchName
+        ) as any;
+        if (habitatEntry) {
+            habitatId = habitatEntry.id;
+        }
+    }
+
+    const habitatData = habitatId ? getPokemonHabitat(habitatId, language) : null;
+    const habitatNameResult = habitatData ? habitatData.name : (pokemon.habitatName || null);
+    const habitat = habitatNameResult ? toPascalCase(habitatNameResult) : null;
+    const genusData = getPokemonGenus(pokemon.id, language);
+    const category = genusData ? genusData.genus : null;
 
     return {
         ...pokemon,
+        name: localizedName,
         generation: generationNumber,
         abilities: localizedAbilities,
         types: localizedTypes,
         eggGroups: localizedEggGroups,
         color: localizedColor,
         shape: localizedShape,
-        habitat
+        habitat,
+        category
     };
+}
+
+/**
+ * @brief Normalize habitat name for comparison
+ */
+function normalizeHabitatName(name: string): string {
+    return name.toLowerCase().replace(/[^a-z0-9]/g, '');
+}
+
+/**
+ * @brief Convert string to PascalCase
+ */
+function toPascalCase(str: string): string {
+    return str
+        .toLowerCase()
+        .split(/[\s-_]+/)
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join('');
+}
+
+/**
+ * @brief Sync helper to get localized data items (used for habitat ID lookup)
+ */
+function getLocalizedDataItemsSync(dataType: string, language: string): { [key: string]: any } {
+    const folderMap: { [key: string]: string } = {
+        'habitat': 'pokemon-habitats'
+    };
+    const folder = folderMap[dataType] || dataType;
+    const cacheKey = `${folder}:${language}`;
+
+    if (!dataCache[cacheKey]) {
+        const filePath = path.join(DATA_DIR, folder, `${language}.json`);
+        if (!fs.existsSync(filePath)) return {};
+        try {
+            dataCache[cacheKey] = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+        } catch { return {}; }
+    }
+    return dataCache[cacheKey];
 }
 
 /**
@@ -437,28 +502,4 @@ export function getPokemonGenus(
 
     const data = dataCache[cacheKey];
     return data[pokemonId] || null;
-}
-
-/**
- * @brief Get all Pokemon genera for a language
- */
-export function getAllPokemonGenera(language: string): { [id: string]: PokemonGenus } {
-    const cacheKey = `pokemon-genera:${language}`;
-
-    if (!dataCache[cacheKey]) {
-        const filePath = path.join(DATA_DIR, 'pokemon-genera', `${language}.json`);
-        if (!fs.existsSync(filePath)) {
-            return {};
-        }
-
-        try {
-            const fileContent = fs.readFileSync(filePath, 'utf-8');
-            dataCache[cacheKey] = JSON.parse(fileContent);
-        } catch (error) {
-            console.error(`Failed to load pokemon-genera/${language}.json:`, error);
-            return {};
-        }
-    }
-
-    return dataCache[cacheKey];
 }
