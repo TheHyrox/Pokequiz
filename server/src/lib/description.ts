@@ -6,34 +6,30 @@
 import { generationToId } from '../../../shared/utils/pokemonUtils.js';
 import { truncateDescription, scrambleDescription } from '../../../shared/utils/descriptionUtils.js';
 import { POKEMON_NAME_PLACEHOLDERS, LANGUAGE_ID_TO_CODE } from '../../../shared/constants/index.js';
+import { getPokemonNameLocalized } from './name.js';
 
 /**
- * @brief Fetches Pokemon descriptions from PokeAPI
+ * @brief Fetches Pokemon descriptions from PokeAPI or local data
  * @param pokemon - Pokemon ID or name
  * @param languageId - PokeAPI language ID as string
  * @param generation - Generation filter (optional, null for all)
- * @returns Array of unique description strings
- * @example
- * await getPokemonDescription("25", "9", null) // All English Pikachu descriptions
- * await getPokemonDescription("25", "9", "1") // Gen 1 English descriptions only
+ * @returns Array of unique description strings with names masked
  */
 export async function getPokemonDescription(
     pokemon: string,
     languageId: string,
     generation: string | null
 ): Promise<string[] | undefined> {
-    let generationId: number[] | null = null;
     let descriptions: string[] = [];
     const langId = parseInt(languageId);
+    const pokemonId = parseInt(pokemon);
 
-    if (generation != null) {
-        generationId = await generationToId(generation);
-    }
+    const pokemonName = await getPokemonNameLocalized(pokemonId, langId);
 
     const langCode = LANGUAGE_ID_TO_CODE[langId];
     if (langCode) {
         try {
-            const { getServerDataDir } = await import('./utils/' + 'utils.js');
+            const { getServerDataDir } = await import('./utils/utils.js');
             const fs = await import('fs');
             const path = await import('path');
 
@@ -44,10 +40,7 @@ export async function getPokemonDescription(
                 const pokemonData = allDescriptions[pokemon];
 
                 if (pokemonData && Array.isArray(pokemonData.descriptions)) {
-                    descriptions = pokemonData.descriptions.map((d: any) => d.text.replace(/\n/g, ' '));
-                    if (descriptions.length > 0) {
-                        return descriptions;
-                    }
+                    descriptions = pokemonData.descriptions.map((d: any) => d.text);
                 }
             }
         } catch (e) {
@@ -55,64 +48,81 @@ export async function getPokemonDescription(
         }
     }
 
-    try {
-        const url = `https://pokeapi.co/api/v2/pokemon-species/${pokemon}/`;
-        const response = await fetch(url);
-        const data = await response.json() as { flavor_text_entries: Array<{ language: { url: string }; version: { url: string }; flavor_text: string }>; names: { name: string; language: { url: string } }[] };
+    if (descriptions.length === 0) {
+        try {
+            const url = `https://pokeapi.co/api/v2/pokemon-species/${pokemon}/`;
+            const response = await fetch(url);
+            if (response.ok) {
+                const data = await response.json() as { 
+                    flavor_text_entries: Array<{ 
+                        language: { url: string }; 
+                        version: { url: string }; 
+                        flavor_text: string 
+                    }> 
+                };
 
-        for (const entry of data.flavor_text_entries) {
-            const entryLangId = parseInt(
-                entry.language.url.split('/').filter((part: string) => part).pop() || '0'
-            );
-
-            if (generationId == null && generation == null) {
-                if (entryLangId === langId) {
-                    descriptions.push(entry.flavor_text.replace(/\n/g, ' '));
+                let generationId: number[] | null = null;
+                if (generation != null) {
+                    generationId = await generationToId(generation);
                 }
-            } else if (generationId != null) {
-                for (const genVersionId of generationId) {
-                    if (entryLangId === langId && entry.version.url.endsWith(`/${genVersionId}/`)) {
-                        descriptions.push(entry.flavor_text.replace(/\n/g, ' '));
+
+                for (const entry of data.flavor_text_entries) {
+                    const entryLangId = parseInt(
+                        entry.language.url.split('/').filter((part: string) => part).pop() || '0'
+                    );
+
+                    if (entryLangId === langId) {
+                        if (generationId == null) {
+                            descriptions.push(entry.flavor_text);
+                        } else {
+                            for (const genVersionId of generationId) {
+                                if (entry.version.url.endsWith(`/${genVersionId}/`)) {
+                                    descriptions.push(entry.flavor_text);
+                                }
+                            }
+                        }
                     }
                 }
             }
+        } catch (e) {
+            console.error('Error fetching Pokemon description from PokeAPI:', e);
         }
-
-        return await noSpoilerDescription(descriptions, languageId, data);
-    } catch (e) {
-        console.error('Error fetching Pokemon description from PokeAPI:', e);
-        return undefined;
     }
+
+    if (descriptions.length === 0) return undefined;
+
+    return noSpoilerDescription(descriptions, languageId, pokemonName);
 }
 
 /**
  * @brief Replaces Pokemon name with placeholder in descriptions
  * @param descriptions - Array of description texts
- * @param lang - Language ID as string
- * @param data - Pokemon species data from API containing names
- * @returns Descriptions with Pokemon names replaced by placeholders
+ * @param langId - Language ID as string
+ * @param name - Localized Pokemon name for masking
+ * @returns Descriptions with Pokemon names replaced by placeholders and cleaned formatting
  */
-async function noSpoilerDescription(
+function noSpoilerDescription(
     descriptions: string[],
-    lang: string,
-    data: { names: Array<{ name: string; language: { url: string } }> }
-): Promise<string[]> {
-    const nameLocalized = data.names.find(
-        (name) => name.language.url.endsWith(`/${lang}/`)
-    );
+    langId: string,
+    name: string | null
+): string[] {
+    const placeholder = POKEMON_NAME_PLACEHOLDERS[langId] || 'this Pokemon';
+    
+    const processed = descriptions.map(desc => {
+        let text = desc.replace(/[\n\f\r]/g, ' ').replace(/\u00ad/g, '');
 
-    const placeholder = POKEMON_NAME_PLACEHOLDERS[lang] || 'this Pokemon';
-
-    for (let i = 0; i < descriptions.length; i++) {
-        if (nameLocalized) {
-            descriptions[i] = descriptions[i].replace(
-                new RegExp(nameLocalized.name, 'gi'),
-                placeholder
-            );
+        if (name) {
+            const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const regex = new RegExp(escapedName, 'gi');
+            text = text.replace(regex, placeholder);
         }
-    }
 
-    return removeDuplicateDescriptions(descriptions);
+        text = text.replace(/\s+/g, ' ').trim();
+        const escapedPlaceholder = placeholder.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        return text.replace(new RegExp(escapedPlaceholder, 'gi'), `<i>${placeholder}</i>`);
+    });
+
+    return removeDuplicateDescriptions(processed);
 }
 
 /**

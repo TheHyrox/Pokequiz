@@ -38,7 +38,7 @@
                 </h3>
 
                 {#if question.description}
-                    <p class="description">"{question.description}"</p>
+                    <p class="description">"{@html question.description}"</p>
                 {:else if question.revealedHints}
                     <div class="hints-container">
                         <h4 class="hints-title">{getLabel(languageCode, 'information_hints')}</h4>

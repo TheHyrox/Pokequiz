@@ -477,7 +477,7 @@
                 <!-- Description Section -->
                 <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
                     <p class="text-2xl text-gray-800 text-center leading-relaxed">
-                        "{description}"
+                        "{@html description}"
                     </p>
 
                     {#if settings.changeDescription && currentDescriptionIndex < allDescriptions.length - 1}
