@@ -43,7 +43,7 @@
             </p>
         {:else if gameMode === 'hardcore'}
             <p class="subtitle">
-                {getLabel(languageCode, 'question')} {currentQuestion}/{CHALLENGE_QUESTION_COUNT} | {getLabel(languageCode, 'score')}: {score}
+                {getLabel(languageCode, 'question')} {currentQuestion} | {getLabel(languageCode, 'score')}: {score}
             </p>
         {:else}
             <p class="subtitle">

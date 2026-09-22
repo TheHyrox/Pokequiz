@@ -13,6 +13,7 @@
     import TimerDisplay from '../components/quiz/TimerDisplay.svelte';
     import QuizEndModal from '../components/quiz/QuizEndModal.svelte';
     import ChallengeReviewScreen from '../components/quiz/ChallengeReviewScreen.svelte';
+    import HardcoreLivesDisplay from '../components/quiz/HardcoreLivesDisplay.svelte';
     import { getLabel } from './lib/translations';
     import { createToastHandlers } from './lib/toastUtils';
     import { saveInformationSettings } from './lib/storage';
@@ -31,6 +32,7 @@
     export let settings: InformationQuizSettings = DEFAULT_INFORMATION_QUIZ_SETTINGS;
 
     // Quiz state
+    $: totalQuestions = settings.gameMode === 'hardcore' ? 999 : 10;
     let currentQuestion = 1;
     let pokemonOptions: PokemonOption[] = [];
     let score = 0;
@@ -45,6 +47,7 @@
     let hardcoreTimeRemaining = 30;
     let hintRevealTimer: any = null;
     let hardcoreHintIndex = 0;
+    let hardcoreLives = 3;
 
     // Challenge mode state
     let challengeQuestions: InformationChallengeQuestion[] = [];
@@ -347,15 +350,15 @@
             if (settings.gameMode === 'easy') {
                 revealedHints = [...currentHints];
             }
-            // For normal mode, start with 1 random hint
+            // For normal mode, show half of the hints
             else if (settings.gameMode === 'normal') {
-                const randomHint = currentHints[Math.floor(Math.random() * currentHints.length)];
-                revealedHints = [randomHint];
+                const shuffled = [...currentHints].sort(() => Math.random() - 0.5);
+                revealedHints = shuffled.slice(0, Math.max(1, Math.floor(currentHints.length / 2)));
             }
-            // For challenge mode, show 3 random hints
+            // For challenge mode, show one third of the hints
             else if (settings.gameMode === 'challenge') {
                 const shuffled = [...currentHints].sort(() => Math.random() - 0.5);
-                revealedHints = shuffled.slice(0, Math.min(3, shuffled.length));
+                revealedHints = shuffled.slice(0, Math.max(1, Math.floor(currentHints.length / 3)));
             }
             // For hardcore mode, start with 2 random hints
             else if (settings.gameMode === 'hardcore') {
@@ -410,7 +413,7 @@
                 startTimer(true);
             }
 
-            if (settings.gameMode === 'hardcore' && !hardcoreTimeRemaining) {
+            if (settings.gameMode === 'hardcore') {
                 hardcoreTimeRemaining = 30;
                 startHardcoreTimer();
             }
@@ -475,17 +478,19 @@
      */
     function calculatePoints(): number {
         if (settings.gameMode === 'easy') {
+            return 1;
+        } else if (settings.gameMode === 'normal') {
             if (wrongAnsweredIds.size === 0) return 3;
             if (wrongAnsweredIds.size === 1) return 1;
             return 0;
-        } else if (settings.gameMode === 'normal') {
-            const points = Math.max(0, 5 - wrongAnsweredIds.size);
-            return points;
+        } else if (settings.gameMode === 'challenge') {
+            return 1;
         } else if (settings.gameMode === 'hardcore') {
-            // Points decrease with time used
             const timeUsed = 30 - hardcoreTimeRemaining;
-            const basePoints = Math.max(0, 10 - Math.floor(timeUsed / 3));
-            return basePoints;
+            if (timeUsed <= 4) return 5;
+            if (timeUsed <= 8) return 4;
+            if (timeUsed <= 16) return 3;
+            return 1;
         }
         return 0;
     }
@@ -521,10 +526,53 @@
             return;
         }
 
-        // Normal and Easy Modes: Check if wrong answer
+        // Timeout handling
+        if (!isCorrect && pokemonId === -1) {
+            showErrorToast(getLabel(languageCode, 'timeUp'));
+            if (settings.gameMode === 'hardcore') {
+                hardcoreLives--;
+                if (hardcoreLives <= 0) {
+                    disabledCards = true;
+                    const correctOption = pokemonOptions.find(p => p.isCorrect);
+                    if (correctOption) correctAnswer = correctOption;
+                    isWin = false;
+                    showEndModal = true;
+                    return;
+                }
+            }
+            
+            if (currentQuestion < totalQuestions) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                const correctOption = pokemonOptions.find(p => p.isCorrect);
+                if (correctOption) correctAnswer = correctOption;
+                isWin = true;
+                showEndModal = true;
+            }
+            return;
+        }
+
+        // Normal, Easy and Hardcore Modes: Check if wrong answer
         if (!isCorrect && pokemonId !== -1) {
             wrongAnsweredIds.add(pokemonId);
             wrongAnsweredIds = wrongAnsweredIds;
+
+            if (settings.gameMode === 'hardcore') {
+                hardcoreLives--;
+                if (hardcoreLives <= 0) {
+                    disabledCards = true;
+                    const correctOption = pokemonOptions.find(p => p.isCorrect);
+                    if (correctOption) {
+                        correctAnswer = correctOption;
+                    }
+                    isWin = false;
+                    showEndModal = true;
+                } else {
+                    showErrorToast(`${getLabel(languageCode, 'wrongAnswer')} - ${hardcoreLives} ${getLabel(languageCode, 'livesRemaining') || 'lives'}`);
+                }
+                return;
+            }
 
             // Normal mode: reveal next hint on wrong answer
             if (settings.gameMode === 'normal') {
@@ -541,7 +589,7 @@
         // Save settings before quiz ends
         saveInformationSettings(settings);
 
-        if (currentQuestion < 10) {
+        if (currentQuestion < totalQuestions) {
             currentQuestion++;
             loadQuestion();
         } else {
@@ -571,6 +619,7 @@
         showEndModal = false;
         currentQuestion = 1;
         score = 0;
+        hardcoreLives = 3;
         challengeQuestions = [];
         wrongAnsweredIds.clear();
         loadQuestion();
@@ -627,7 +676,7 @@
                     quizTitleLabel="information_quiz"
                     gameMode={settings.gameMode === 'easy' || settings.gameMode === 'normal' ? 'score' : settings.gameMode}
                     currentQuestion={currentQuestion}
-                    totalQuestions={10}
+                    totalQuestions={totalQuestions}
                     score={parseInt(score.toString())}
                     {onBackToHub}
                 />
@@ -652,8 +701,13 @@
                 {/if}
             </div>
 
-            <!-- Timer Display -->
-            {#if settings.hasTimeLimit}
+            <!-- Timer and Lives Display -->
+            {#if settings.gameMode === 'hardcore'}
+                <div class="mb-8 flex justify-between items-center gap-4">
+                    <TimerDisplay timeRemaining={hardcoreTimeRemaining} />
+                    <HardcoreLivesDisplay lives={hardcoreLives} />
+                </div>
+            {:else if settings.hasTimeLimit}
                 <div class="mb-8">
                     <TimerDisplay timeRemaining={timeRemaining} />
                 </div>

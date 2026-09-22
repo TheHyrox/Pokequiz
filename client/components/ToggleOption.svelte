@@ -1,14 +1,17 @@
 <script lang="ts">
     export let label: string;
     export let enabled: boolean = false;
+    export let disabled: boolean = false;
 </script>
 
-<div class="toggle-option">
-    <label class="toggle-label">
+<div class="toggle-option {disabled ? 'opacity-50 pointer-events-none grayscale' : ''}">
+    <label class="toggle-label" class:cursor-not-allowed={disabled}>
         <input
             type="checkbox"
             bind:checked={enabled}
+            {disabled}
             class="toggle-input"
+            class:cursor-not-allowed={disabled}
         />
         <span class="toggle-text">{label}</span>
     </label>
