@@ -29,11 +29,11 @@
 
 <style lang="postcss">
     .lives-container {
-        @apply flex gap-2 text-2xl items-center;
+        @apply flex justify-center items-center gap-2 text-2xl;
     }
 
     .life-heart {
-        @apply transition-all duration-300;
+        @apply inline-flex items-center justify-center transition-all duration-300;
     }
 
     .life-heart.active {

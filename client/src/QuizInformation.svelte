@@ -682,35 +682,49 @@
                 />
             </div>
 
-            <!-- Hints Display -->
-            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
-                <h3 class="text-lg font-semibold mb-4">{getLabel(languageCode, 'information_hints')}</h3>
-                <div class="hints-list space-y-2">
-                    {#each revealedHints as hint, hintIndex (hintIndex)}
-                        <div class="hint-item">
-                            <span class="hint-type font-semibold capitalize">{getLabel(languageCode, `information_${hint.type}`)}:</span>
-                            <span class="hint-value">{hint.value}</span>
-                        </div>
-                    {/each}
-                </div>
-
-                {#if settings.gameMode === 'normal'}
-                    <button on:click={revealNextHint} class="mt-4 px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600">
-                        {getLabel(languageCode, 'information_revealNextHint')}
-                    </button>
-                {/if}
-            </div>
-
-            <!-- Timer and Lives Display -->
             {#if settings.gameMode === 'hardcore'}
-                <div class="mb-8 flex justify-between items-center gap-4">
-                    <TimerDisplay timeRemaining={hardcoreTimeRemaining} />
-                    <HardcoreLivesDisplay lives={hardcoreLives} />
+                <div class="flex gap-4 mb-8 items-stretch">
+                    <div class="bg-white rounded-lg shadow-lg p-8 w-[80%]">
+                        <h3 class="text-lg font-semibold mb-4">{getLabel(languageCode, 'information_hints')}</h3>
+                        <div class="hints-list space-y-2">
+                            {#each revealedHints as hint, hintIndex (hintIndex)}
+                                <div class="hint-item">
+                                    <span class="hint-type font-semibold capitalize">{getLabel(languageCode, `information_${hint.type}`)}:</span>
+                                    <span class="hint-value">{hint.value}</span>
+                                </div>
+                            {/each}
+                        </div>
+                    </div>
+
+                    <div class="w-[20%] flex flex-col justify-center gap-4 bg-white rounded-lg shadow-lg p-4">
+                        <TimerDisplay timeRemaining={hardcoreTimeRemaining} />
+                        <HardcoreLivesDisplay lives={hardcoreLives} />
+                    </div>
                 </div>
-            {:else if settings.hasTimeLimit}
-                <div class="mb-8">
-                    <TimerDisplay timeRemaining={timeRemaining} />
+            {:else} 
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                    <h3 class="text-lg font-semibold mb-4">{getLabel(languageCode, 'information_hints')}</h3>
+                    <div class="hints-list space-y-2">
+                        {#each revealedHints as hint, hintIndex (hintIndex)}
+                            <div class="hint-item">
+                                <span class="hint-type font-semibold capitalize">{getLabel(languageCode, `information_${hint.type}`)}:</span>
+                                <span class="hint-value">{hint.value}</span>
+                            </div>
+                        {/each}
+                    </div>
+
+                    {#if settings.gameMode === 'normal'}
+                        <button on:click={revealNextHint} class="mt-4 px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600">
+                            {getLabel(languageCode, 'information_revealNextHint')}
+                        </button>
+                    {/if}
                 </div>
+
+                {#if settings.hasTimeLimit}
+                    <div class="mb-8">
+                        <TimerDisplay timeRemaining={timeRemaining} />
+                    </div>
+                {/if}
             {/if}
 
             <!-- Pokemon Cards Grid -->
