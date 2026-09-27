@@ -17,6 +17,9 @@
     /** Show sprite image (defaults to true for backward compatibility) */
     export let showSprite: boolean = true;
 
+    /** Show success styling (correct answer) */
+    export let showSuccess: boolean = false;
+
     const dispatch = createEventDispatcher();
     const spriteUrl = getSpriteUrl(pokemon.id, 'home');
 
@@ -31,7 +34,7 @@
 </script>
 
 <div
-    class={`pokemon-card ${showError ? 'error' : ''} ${disabled ? 'disabled' : ''}`}
+    class={`pokemon-card ${showError ? 'error' : ''} ${showSuccess ? 'success' : ''} ${disabled ? 'disabled' : ''}`}
     on:click={handleClick}
     role="button"
     tabindex="0"
@@ -75,6 +78,11 @@
         animation: shake 0.5s ease-in-out;
     }
 
+    .pokemon-card.success .card-inner {
+        @apply border-green-500;
+        animation: pulse-border 1.5s infinite;
+    }
+
     .pokemon-card.disabled .card-inner {
         @apply bg-gray-300 opacity-50;
     }
@@ -114,6 +122,21 @@
         }
         20%, 40%, 60%, 80% {
             transform: translateX(5px);
+        }
+    }
+
+    @keyframes pulse-border {
+        0% {
+            border-color: rgba(34, 197, 94, 1);
+            box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+        }
+        50% {
+            border-color: rgba(34, 197, 94, 0.5);
+            box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+        }
+        100% {
+            border-color: rgba(34, 197, 94, 1);
+            box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
         }
     }
 </style>

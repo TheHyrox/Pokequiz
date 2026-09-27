@@ -38,6 +38,10 @@
         show: false
     };
 
+    $: if (gameMode === 'hardcore') {
+        hasTimeLimit = false;
+    }
+
     const { showErrorToast } = createToastHandlers((state: ToastState) => {
         toastState = state;
     });
@@ -84,6 +88,7 @@
                 <ToggleOption
                     label={getLabel(languageCode, 'timeLimit')}
                     bind:enabled={hasTimeLimit}
+                    disabled={gameMode === 'hardcore'}
                 />
                 {#if hasTimeLimit}
                     <div class="ml-8">

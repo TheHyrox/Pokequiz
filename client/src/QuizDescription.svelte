@@ -35,7 +35,7 @@
 
     // Quiz state
     let currentQuestion = 1;
-    let totalQuestions = settings.gameMode === 'infinite' ? 999 : CHALLENGE_QUESTION_COUNT;
+    $: totalQuestions = ['infinite', 'hardcore'].includes(settings.gameMode) ? 999 : CHALLENGE_QUESTION_COUNT;
     let description = '';
     let pokemonOptions: PokemonOption[] = [];
     let loading = true;
@@ -45,6 +45,7 @@
     let allDescriptions: string[] = [];
     let wrongAnsweredIds: Set<number> = new Set();
     let disabledCards = false;
+    let revealCorrectAnswer = false;
     let errorCountThisQuestion = 0;
     let selectedLanguageId = languageId;
 
@@ -104,9 +105,30 @@
         disabledCards = true;
         showErrorToast(getLabel(languageCode, 'timeUp'));
 
+        if (settings.gameMode === 'challenge') {
+            const correctOption = pokemonOptions.find(p => p.isCorrect);
+            challengeQuestions.push({
+                questionNumber: currentQuestion,
+                description: description,
+                correctPokemonName: correctOption?.name || '',
+                correctPokemonId: correctOption?.id || 0,
+                userAnswerId: -1,
+                userAnswerName: 'Timeout',
+                allOptions: [...pokemonOptions],
+                isCorrect: false
+            });
+        }
+
         setTimeout(() => {
             if (settings.gameMode === 'infinite') {
-                loadQuestion();
+                handleGameEnd();
+            } else if (settings.gameMode === 'challenge') {
+                if (currentQuestion < CHALLENGE_QUESTION_COUNT) {
+                    currentQuestion++;
+                    loadQuestion();
+                } else {
+                    showChallengeReview = true;
+                }
             } else {
                 currentQuestion++;
                 if (currentQuestion <= totalQuestions) {
@@ -196,6 +218,7 @@
         currentDescriptionIndex = 0;
         wrongAnsweredIds.clear();
         disabledCards = false;
+        revealCorrectAnswer = false;
         toastState.show = false;
         errorCountThisQuestion = 0;
         hardcoreUserInput = '';
@@ -287,23 +310,45 @@
      * @brief Calculates points based on game mode and performance
      */
     function calculatePoints(): number {
+        const options = settings.numberOfOptions;
+
+        if (settings.gameMode === 'score') {
+            if (options >= 5) {
+                if (errorCountThisQuestion === 0) return 5;
+                if (errorCountThisQuestion === 1) return 3;
+                if (errorCountThisQuestion === 2) return 2;
+                if (errorCountThisQuestion === 3) return 1;
+                return 0;
+            } else if (options === 4) {
+                if (errorCountThisQuestion === 0) return 4;
+                if (errorCountThisQuestion === 1) return 2;
+                if (errorCountThisQuestion === 2) return 1;
+                return 0;
+            } else if (options === 3) {
+                if (errorCountThisQuestion === 0) return 3;
+                if (errorCountThisQuestion === 1) return 1;
+                return 0;
+            } else {
+                if (errorCountThisQuestion === 0) return 1;
+                return 0;
+            }
+        }
+
         if (settings.gameMode === 'infinite') {
+            if (options >= 10) return 5;
+            if (options >= 5) return 3;
+            if (options === 4 || options === 3) return 2;
             return 1;
         }
 
-        if (settings.hasTimeLimit) {
-            const timeUsed = settings.timeLimit - timeRemaining;
-            if (timeUsed < 2) return 10;
-            if (timeUsed < 5) return 5;
-            if (timeUsed < 15) return 3;
-            if (timeUsed < 25) return 2;
-            return 1;
-        } else {
-            if (errorCountThisQuestion === 0) return 3;
-            if (errorCountThisQuestion === 1) return 2;
-            if (errorCountThisQuestion === 2) return 1;
-            return 0;
-        }
+        return 1;
+    }
+
+    function getMaxErrorsAllowed(options: number): number {
+        if (options >= 5) return 4;
+        if (options === 4) return 3;
+        if (options === 3) return 2;
+        return 1;
     }
 
     /**
@@ -378,9 +423,11 @@
         if (isCorrect) {
             wrongAnsweredIds.clear();
             wrongAnsweredIds = wrongAnsweredIds;
+            revealCorrectAnswer = false;
 
             const points = calculatePoints();
             score += points;
+            errorCountThisQuestion = 0;
 
             if (settings.gameMode === 'infinite') {
                 loadQuestion();
@@ -407,6 +454,15 @@
             if (settings.gameMode === 'infinite') {
                 disabledCards = true;
                 handleGameEnd();
+            } else if (settings.gameMode === 'score') {
+                const maxErrors = getMaxErrorsAllowed(settings.numberOfOptions);
+                if (errorCountThisQuestion >= maxErrors) {
+                    revealCorrectAnswer = true;
+                    const correctOption = pokemonOptions.find(p => p.isCorrect);
+                    showErrorToast(`${getLabel(languageCode, 'wrongAnswer')} - ${correctOption?.name}`);
+                } else {
+                    showErrorToast(`${getLabel(languageCode, 'wrongAnswer')} ${getLabel(languageCode, 'keepGoing')}`);
+                }
             } else {
                 showErrorToast(`${getLabel(languageCode, 'wrongAnswer')} ${getLabel(languageCode, 'keepGoing')}`);
             }
@@ -527,6 +583,7 @@
                                 <Pokecard
                                     {pokemon}
                                     showError={wrongAnsweredIds.has(pokemon.id)}
+                                    showSuccess={revealCorrectAnswer && pokemon.isCorrect}
                                     disabled={disabledCards}
                                     on:selected={() => handleAnswer(pokemon.isCorrect, pokemon.id)}
                                 />
