@@ -38,6 +38,11 @@
         show: false
     };
 
+    $: if (gameMode === 'hardcore') {
+        hasTimeLimit = true;
+        timeLimit = 30;
+    }
+
     const { showErrorToast } = createToastHandlers((state: ToastState) => {
         toastState = state;
     });
