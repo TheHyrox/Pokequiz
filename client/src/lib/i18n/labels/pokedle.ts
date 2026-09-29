@@ -20,7 +20,9 @@ export type PokedleLabelKey =
     | 'pokedle_col_shape'
     | 'pokedle_col_category'
     | 'pokedle_col_habitat'
-    | 'pokedle_guessesLeft';
+    | 'pokedle_guessesLeft'
+    | 'pokedle_alreadyGuessed'
+    | 'pokedle_winWithGuesses';
 
 export const POKEDLE_LABELS: Record<LanguageCode, Record<PokedleLabelKey, string>> = {
     en: {
@@ -43,7 +45,9 @@ export const POKEDLE_LABELS: Record<LanguageCode, Record<PokedleLabelKey, string
         pokedle_col_shape: 'Form',
         pokedle_col_category: 'Category',
         pokedle_col_habitat: 'Habitat',
-        pokedle_guessesLeft: 'Guesses left: {0}'
+        pokedle_guessesLeft: 'Guesses left: {0}',
+        pokedle_alreadyGuessed: 'Pokemon already guessed.',
+        pokedle_winWithGuesses: 'You found {0} in {1} guess(es)'
     },
     fr: {
         pokedle_quiz: 'Quiz Pokedle',
@@ -65,7 +69,9 @@ export const POKEDLE_LABELS: Record<LanguageCode, Record<PokedleLabelKey, string
         pokedle_col_shape: 'Forme',
         pokedle_col_category: 'Catégorie',
         pokedle_col_habitat: 'Habitat',
-        pokedle_guessesLeft: 'Essais restants : {0}'
+        pokedle_guessesLeft: 'Essais restants : {0}',
+        pokedle_alreadyGuessed: 'Pokémon déjà proposé.',
+        pokedle_winWithGuesses: 'Vous avez trouvé {0} en {1} essai(s)'
     },
     de: {
         pokedle_quiz: 'Quiz Pokedle',
@@ -87,7 +93,9 @@ export const POKEDLE_LABELS: Record<LanguageCode, Record<PokedleLabelKey, string
         pokedle_col_shape: 'Form',
         pokedle_col_category: 'Kategorie',
         pokedle_col_habitat: 'Lebensraum',
-        pokedle_guessesLeft: 'Verbleibende Versuche: {0}'
+        pokedle_guessesLeft: 'Verbleibende Versuche: {0}',
+        pokedle_alreadyGuessed: 'Pokémon wurde bereits getippt.',
+        pokedle_winWithGuesses: 'Du hast {0} in {1} Versuchen gefunden'
     },
     es: {
         pokedle_quiz: 'Quiz Pokedle',
@@ -109,7 +117,9 @@ export const POKEDLE_LABELS: Record<LanguageCode, Record<PokedleLabelKey, string
         pokedle_col_shape: 'Forma',
         pokedle_col_category: 'Categoría',
         pokedle_col_habitat: 'Hábitat',
-        pokedle_guessesLeft: 'Intentos restantes: {0}'
+        pokedle_guessesLeft: 'Intentos restantes: {0}',
+        pokedle_alreadyGuessed: 'Pokémon ya adivinado.',
+        pokedle_winWithGuesses: '¡Encontraste a {0} en {1} intento(s)!'
     },
     it: {
         pokedle_quiz: 'Quiz Pokedle',
@@ -131,7 +141,9 @@ export const POKEDLE_LABELS: Record<LanguageCode, Record<PokedleLabelKey, string
         pokedle_col_shape: 'Forma',
         pokedle_col_category: 'Categoria',
         pokedle_col_habitat: 'Habitat',
-        pokedle_guessesLeft: 'Tentativi rimasti: {0}'
+        pokedle_guessesLeft: 'Tentativi rimasti: {0}',
+        pokedle_alreadyGuessed: 'Pokémon già provato.',
+        pokedle_winWithGuesses: 'Hai trovato {0} in {1} tentativi!'
     },
     'ja-hrkt': {
         pokedle_quiz: 'Quiz Pokedle',
@@ -153,7 +165,9 @@ export const POKEDLE_LABELS: Record<LanguageCode, Record<PokedleLabelKey, string
         pokedle_col_shape: 'かたち',
         pokedle_col_category: 'ぶんるい',
         pokedle_col_habitat: 'せいそくち',
-        pokedle_guessesLeft: '残りの挑戦回数: {0}'
+        pokedle_guessesLeft: '残りの挑戦回数: {0}',
+        pokedle_alreadyGuessed: 'すでに推測されたポケモンです。',
+        pokedle_winWithGuesses: '{1}かいのちょうせんで{0}をみつけました！'
     },
     ja: {
         pokedle_quiz: 'Quiz Pokedle',
@@ -175,7 +189,9 @@ export const POKEDLE_LABELS: Record<LanguageCode, Record<PokedleLabelKey, string
         pokedle_col_shape: '形',
         pokedle_col_category: '分類',
         pokedle_col_habitat: '生息地',
-        pokedle_guessesLeft: '残りの挑戦回数: {0}'
+        pokedle_guessesLeft: '残りの挑戦回数: {0}',
+        pokedle_alreadyGuessed: 'すでに推測されたポケモンです。',
+        pokedle_winWithGuesses: '{1}回の挑戦で{0}を見つけました！'
     },
     ko: {
         pokedle_quiz: 'Quiz Pokedle',
@@ -197,7 +213,9 @@ export const POKEDLE_LABELS: Record<LanguageCode, Record<PokedleLabelKey, string
         pokedle_col_shape: '모양',
         pokedle_col_category: '분류',
         pokedle_col_habitat: '서식지',
-        pokedle_guessesLeft: '남은 시도 횟수: {0}'
+        pokedle_guessesLeft: '남은 시도 횟수: {0}',
+        pokedle_alreadyGuessed: '이미 추측한 포켓몬입니다.',
+        pokedle_winWithGuesses: '{1}번의 시도로 {0}을(를) 찾았습니다!'
     },
     'zh-hans': {
         pokedle_quiz: 'Quiz Pokedle',
@@ -219,7 +237,9 @@ export const POKEDLE_LABELS: Record<LanguageCode, Record<PokedleLabelKey, string
         pokedle_col_shape: '形状',
         pokedle_col_category: '分类',
         pokedle_col_habitat: '栖息地',
-        pokedle_guessesLeft: '剩余猜测次数：{0}'
+        pokedle_guessesLeft: '剩余猜测次数：{0}',
+        pokedle_alreadyGuessed: '已经猜过该宝可梦。',
+        pokedle_winWithGuesses: '你在第 {1} 次尝试中找到了 {0}！'
     },
     'zh-hant': {
         pokedle_quiz: 'Quiz Pokedle',
@@ -241,6 +261,8 @@ export const POKEDLE_LABELS: Record<LanguageCode, Record<PokedleLabelKey, string
         pokedle_col_shape: '形狀',
         pokedle_col_category: '分類',
         pokedle_col_habitat: '棲息地',
-        pokedle_guessesLeft: '剩餘猜測次數：{0}'
+        pokedle_guessesLeft: '剩餘猜測次數：{0}',
+        pokedle_alreadyGuessed: '已經猜過該寶可夢。',
+        pokedle_winWithGuesses: '你在第 {1} 次嘗試中找到了 {0}！'
     }
 };

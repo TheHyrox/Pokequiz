@@ -9,6 +9,7 @@
     import { getPokemonInformationData } from './lib/pokemonInformationClient';
     import { preloadPokemonNames, getPokemonNameSync, getAllPokemonNamesSync } from './lib/pokemonNamesClient';
     import { normalizeText } from '../../shared/utils/textUtils';
+    import { savePokedleSettings } from './lib/storage';
     import type { PokedleQuizSettings, PokedleColumn, ToastState } from '../../shared/types';
     import { fly, fade } from 'svelte/transition';
 
@@ -22,6 +23,7 @@
     let guesses: any[] = [];
     let isGameOver: boolean = false;
     let hasWon: boolean = false;
+    let showEndModal: boolean = false;
     let isLoading: boolean = true;
     let isSubmitting: boolean = false;
     let currentInputValue: string = '';
@@ -37,6 +39,7 @@
     });
 
     onMount(async () => {
+        savePokedleSettings(settings);
         await preloadPokemonNames(languageId);
         await startNewGame();
     });
@@ -45,7 +48,9 @@
         isLoading = true;
         isGameOver = false;
         hasWon = false;
+        showEndModal = false;
         guesses = [];
+        currentInputValue = '';
         
         let correctId = getRandomPokemonId(settings.selectedGenerations);
         targetPokemonData = await getPokemonInformationData(correctId, languageId);
@@ -58,7 +63,12 @@
     }
 
     async function handleGuess(selectedOption: { id: number; name: string }) {
-        if (isGameOver || isSubmitting) return;
+        if (isGameOver || isSubmitting || guesses.length >= settings.guessLimit) return;
+
+        if (guesses.some(g => Number(g.id) === Number(selectedOption.id))) {
+            showErrorToast(getLabel(languageCode, 'pokedle_alreadyGuessed' as any));
+            return;
+        }
 
         isSubmitting = true;
         
@@ -72,11 +82,14 @@
 
             guesses = [...guesses, guessData];
 
-            if (selectedOption.id === targetPokemonData.id) {
+            if (Number(selectedOption.id) === Number(targetPokemonData.id)) {
                 hasWon = true;
                 isGameOver = true;
+                showEndModal = true;
             } else if (guesses.length >= settings.guessLimit) {
+                hasWon = false;
                 isGameOver = true;
+                showEndModal = true;
             }
         } catch (error) {
             showErrorToast('Error checking guess.');
@@ -86,7 +99,7 @@
     }
 
     function handleEnterSubmit() {
-        if (!currentInputValue.trim() || isSubmitting) return;
+        if (isGameOver || isSubmitting || guesses.length >= settings.guessLimit || !currentInputValue.trim()) return;
 
         const normalizedInput = normalizeText(currentInputValue);
         const allPokemon = Object.entries(getAllPokemonNamesSync(languageId));
@@ -205,31 +218,29 @@
                 {getLabel(languageCode, 'pokedle_quiz' as any)}
             </div>
             <div class="text-sm font-semibold text-white bg-blue-500 px-4 py-2 rounded-full shadow-sm">
-                {getLabel(languageCode, 'pokedle_guessesLeft' as any).replace('{0}', String(settings.guessLimit - guesses.length))}
+                {getLabel(languageCode, 'pokedle_guessesLeft' as any).replace('{0}', String(Math.max(0, settings.guessLimit - guesses.length)))}
             </div>
         </div>
 
         <div class="max-w-7xl mx-auto">
             <!-- Autocomplete Search Input -->
-            {#if !isGameOver}
-                <div class="max-w-md mx-auto mb-8 relative z-30">
-                    <Autocomplete
-                        pokemonList={Object.entries(getAllPokemonNamesSync(languageId)).map(([id, name]) => ({
-                            id: Number(id),
-                            name: name as string
-                        }))}
-                        placeholder="Type a Pokemon name..."
-                        bind:value={currentInputValue}
-                        selectedGenerations={settings.selectedGenerations}
-                        disabled={isSubmitting}
-                        on:select={(e) => {
-                            currentInputValue = '';
-                            handleGuess(e.detail.pokemon);
-                        }}
-                        on:submit={handleEnterSubmit}
-                    />
-                </div>
-            {/if}
+            <div class="max-w-md mx-auto mb-8 relative z-30">
+                <Autocomplete
+                    pokemonList={Object.entries(getAllPokemonNamesSync(languageId)).map(([id, name]) => ({
+                        id: Number(id),
+                        name: name as string
+                    }))}
+                    placeholder="Type a Pokemon name..."
+                    bind:value={currentInputValue}
+                    selectedGenerations={settings.selectedGenerations}
+                    disabled={isGameOver || isSubmitting || guesses.length >= settings.guessLimit}
+                    on:select={(e) => {
+                        currentInputValue = '';
+                        handleGuess(e.detail.pokemon);
+                    }}
+                    on:submit={handleEnterSubmit}
+                />
+            </div>
 
             <!-- Game Grid -->
             <div class="overflow-x-auto bg-white rounded-xl shadow-lg border border-gray-100">
@@ -292,23 +303,26 @@
     </div>
 {/if}
 
-{#if isGameOver}
+{#if showEndModal && targetPokemonData}
     <QuizEndModal
-        title={hasWon ? getLabel(languageCode, 'pokedle_win' as any) : getLabel(languageCode, 'pokedle_loss' as any)}
-        score={hasWon ? guesses.length : 0}
-        total={settings.guessLimit}
-        onRetry={startNewGame}
-        onBackToHub={onBackToHub}
+        isWin={hasWon}
+        score={guesses.length}
+        correctAnswer={{ id: targetPokemonData.id, name: targetPokemonData.name }}
         {languageCode}
-    >
-        <div slot="extra-content" class="text-center mt-4 mb-2">
-            <p class="text-gray-600 mb-2 font-medium">{getLabel(languageCode, 'pokedle_targetWas' as any)}</p>
-            <div class="flex flex-col items-center">
-                <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${targetPokemonData.id}.png`} alt={targetPokemonData.name} class="w-24 h-24 filter drop-shadow-md" />
-                <span class="text-2xl font-bold text-gray-800 capitalize">{targetPokemonData.name}</span>
-            </div>
-        </div>
-    </QuizEndModal>
+        gameMode="pokedle"
+        on:home={onBackToHub}
+        on:changeSettings={onBackToSettings}
+        on:retry={startNewGame}
+        on:close={() => { showEndModal = false; }}
+    />
 {/if}
 
-<Toast {toastState} />
+{#if toastState.show}
+    <Toast
+        message={toastState.message}
+        type={toastState.type}
+        autoClose={true}
+        duration={2000}
+        onClose={() => { toastState.show = false; }}
+    />
+{/if}

@@ -14,7 +14,7 @@
     import QuizPokedle from './QuizPokedle.svelte';
     import LanguageSelector from '../components/LanguageSelector.svelte';
     import { getLabel, LANGUAGE_ID_TO_CODE } from './lib/translations';
-    import { getCachedDescriptionSettings, getCachedSpriteSettings, getCachedInformationSettings } from './lib/storage';
+    import { getCachedDescriptionSettings, getCachedSpriteSettings, getCachedInformationSettings, getCachedPokedleSettings } from './lib/storage';
     import type { DescriptionQuizSettings as QuizSettingsType, SpriteQuizSettings as SpriteQuizSettingsType, InformationQuizSettings as InformationQuizSettingsType, PokedleQuizSettings as PokedleQuizSettingsType } from '../../shared/types';
 
     interface Game {
@@ -218,6 +218,7 @@
                         <PokedleQuizSettings
                             onStartQuiz={handleStartPokedleQuiz}
                             languageCode={currentLanguageCode}
+                            initialSettings={getCachedPokedleSettings()}
                         />
                     {/if}
                 </div>

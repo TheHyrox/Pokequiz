@@ -6,6 +6,7 @@
     import { getLabel } from '../src/lib/translations';
     import { createToastHandlers } from '../src/lib/toastUtils';
     import { ALL_GENERATIONS, ALL_POKEDLE_COLUMNS, DEFAULT_POKEDLE_QUIZ_SETTINGS } from '../../shared/constants';
+    import { savePokedleSettings } from '../src/lib/storage';
     import type { PokedleQuizSettings, PokedleColumn, ToastState } from '../../shared/types';
 
     export let onStartQuiz: (settings: PokedleQuizSettings) => void;
@@ -57,6 +58,7 @@
             selectedColumns: Array.from(selectedColumns),
             showMoreLessIndicators
         };
+        savePokedleSettings(settings);
         onStartQuiz(settings);
     }
 </script>
