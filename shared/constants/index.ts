@@ -224,7 +224,7 @@ export const HARDCORE_LIFE_REWARD_THRESHOLD = 10;
 // ============================================================
 // POKEDLE QUIZ CONSTANTS
 // ============================================================
-import type { PokedleColumn, PokedleQuizSettings } from '../types';
+import type { PokedleColumn, PokedleQuizSettings, NumberQuizSettings } from '../types';
 
 export const ALL_POKEDLE_COLUMNS: PokedleColumn[] = [
     'type1', 'type2', 'weight', 'height', 'color', 
@@ -238,3 +238,21 @@ export const DEFAULT_POKEDLE_QUIZ_SETTINGS: PokedleQuizSettings = {
     selectedColumns: ALL_POKEDLE_COLUMNS,
     showMoreLessIndicators: true
 };
+
+// ============================================================
+// NUMBER QUIZ CONSTANTS
+// ============================================================
+export const DEFAULT_NUMBER_QUIZ_SETTINGS: NumberQuizSettings = {
+    subMode: 'normal',
+    hasGuessLimit: true,
+    guessLimit: 8,
+    selectedGenerations: [...ALL_GENERATIONS],
+    showHigherLower: true,
+    blurEnabled: false,
+    blurStrength: 5,
+    pixelateEnabled: false,
+    pixelateStrength: 8,
+    silhouetteEnabled: false,
+    rotationEnabled: false
+};
+
