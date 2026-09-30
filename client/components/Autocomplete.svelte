@@ -109,10 +109,12 @@
     }
 
     function handleInput(): void {
+        if (disabled) return;
         filterPokemon();
     }
 
     function handleFocus(): void {
+        if (disabled) return;
         filterPokemon();
         dispatchEvent(new Event('focus', { bubbles: true }));
     }
@@ -142,7 +144,7 @@
         autocomplete="off"
     />
 
-    {#if showSuggestions && filteredList.length > 0}
+    {#if !disabled && showSuggestions && filteredList.length > 0}
         <div class="suggestions-dropdown">
             {#each filteredList as pokemon (pokemon.id)}
                 <button
@@ -181,7 +183,7 @@
     }
 
     .text-input:disabled {
-        @apply bg-gray-100 cursor-not-allowed opacity-50;
+        @apply bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed opacity-60 shadow-none;
     }
 
     .text-input::placeholder {

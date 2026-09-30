@@ -19,7 +19,7 @@
     /** Current language code */
     export let languageCode: string;
     /** Game mode (determines if answer is shown) */
-    export let gameMode: 'score' | 'infinite' | 'challenge' | 'hardcore' = 'score';
+    export let gameMode: 'score' | 'infinite' | 'challenge' | 'hardcore' | 'pokedle' = 'score';
 
     const dispatch = createEventDispatcher();
 
@@ -34,7 +34,9 @@
      * @brief Handles keyboard events for the modal overlay
      */
     function handleKeyDown(event: KeyboardEvent): void {
-        if (event.key === 'Escape' || event.key === 'Enter') {
+        if (event.key === 'Escape') {
+            handleClose();
+        } else if (event.key === 'Enter') {
             handleHome();
         }
     }
@@ -53,7 +55,14 @@
         dispatch('retry');
     }
 
-    const spriteUrl = getSpriteUrl(correctAnswer.id, 'home');
+    /**
+     * @brief Emits event for closing modal without navigating
+     */
+    function handleClose(): void {
+        dispatch('close');
+    }
+
+    $: spriteUrl = correctAnswer ? getSpriteUrl(correctAnswer.id, 'home') : '';
 </script>
 
 {#if isWin}
@@ -62,7 +71,7 @@
 
 <div 
     class="modal-overlay" 
-    on:click|self={handleHome}
+    on:click|self={handleClose}
     on:keydown={handleKeyDown}
     role="button"
     tabindex="0"
@@ -76,16 +85,27 @@
             </h1>
         </div>
 
-        <!-- Score Section -->
-        <div class="score-section">
-            <div class="score-display">
-                <p class="score-label">{getLabel(languageCode, 'finalScore')}</p>
-                <p class="score-value">{score}</p>
+        <!-- Score Section / Win Message -->
+        {#if gameMode === 'pokedle' && isWin && correctAnswer}
+            <div class="score-section bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200">
+                <p class="text-center text-lg font-bold text-green-800">
+                    {getLabel(languageCode, 'pokedle_winWithGuesses' as any)
+                        .replace('{0}', capitalizeFirst(correctAnswer.name))
+                        .replace('{1}', String(score))}
+                </p>
             </div>
-        </div>
+        {:else}
+            <!-- Score Section -->
+            <div class="score-section">
+                <div class="score-display">
+                    <p class="score-label">{getLabel(languageCode, 'finalScore')}</p>
+                    <p class="score-value">{score}</p>
+                </div>
+            </div>
+        {/if}
 
-        <!-- Correct Answer Section (only for hardcore/infinite modes) -->
-        {#if gameMode === 'hardcore' || gameMode === 'infinite'}
+        <!-- Correct Answer Section (only for hardcore/infinite/pokedle modes) -->
+        {#if (gameMode === 'hardcore' || gameMode === 'infinite' || gameMode === 'pokedle') && correctAnswer}
             <div class="answer-section">
                 <p class="answer-label">{getLabel(languageCode, 'correctAnswer')}:</p>
                 <div class="answer-card">

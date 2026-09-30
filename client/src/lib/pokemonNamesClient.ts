@@ -62,3 +62,10 @@ export async function getPokemonNameLocalized(pokemon: number, languageId: numbe
     // Try again after preload
     return getPokemonNameSync(pokemon, languageId);
 }
+
+/**
+ * Get all loaded pokemon names for a language
+ */
+export function getAllPokemonNamesSync(languageId: number): { [id: number]: string } {
+    return pokemonNamesCache[languageId] || {};
+}

@@ -7,13 +7,15 @@
     import DescriptionQuizSettings from '../components/DescriptionQuizSettings.svelte';
     import SpriteQuizSettings from '../components/SpriteQuizSettings.svelte';
     import InformationQuizSettings from '../components/InformationQuizSettings.svelte';
+    import PokedleQuizSettings from '../components/PokedleQuizSettings.svelte';
     import DescriptionQuiz from './QuizDescription.svelte';
     import SpritesQuiz from './QuizSprites.svelte';
     import QuizInformation from './QuizInformation.svelte';
+    import QuizPokedle from './QuizPokedle.svelte';
     import LanguageSelector from '../components/LanguageSelector.svelte';
     import { getLabel, LANGUAGE_ID_TO_CODE } from './lib/translations';
-    import { getCachedDescriptionSettings, getCachedSpriteSettings, getCachedInformationSettings } from './lib/storage';
-    import type { DescriptionQuizSettings as QuizSettingsType, SpriteQuizSettings as SpriteQuizSettingsType, InformationQuizSettings as InformationQuizSettingsType } from '../../shared/types';
+    import { getCachedDescriptionSettings, getCachedSpriteSettings, getCachedInformationSettings, getCachedPokedleSettings } from './lib/storage';
+    import type { DescriptionQuizSettings as QuizSettingsType, SpriteQuizSettings as SpriteQuizSettingsType, InformationQuizSettings as InformationQuizSettingsType, PokedleQuizSettings as PokedleQuizSettingsType } from '../../shared/types';
 
     interface Game {
         id: string;
@@ -40,6 +42,12 @@
             name: 'Sprites Quiz',
             description: 'Guess the Pokemon from its sprite',
             icon: '🎮'
+        },
+        {
+            id: 'pokedle-quiz',
+            name: 'Quiz Pokedle',
+            description: 'Guess the Pokemon with Wordle-style feedback',
+            icon: '🟩'
         }
     ];
 
@@ -48,6 +56,7 @@
     let quizSettings: QuizSettingsType | null = null;
     let spriteQuizSettings: SpriteQuizSettingsType | null = null;
     let informationQuizSettings: InformationQuizSettingsType | null = null;
+    let pokedleQuizSettings: PokedleQuizSettingsType | null = null;
     let selectedLanguageId: number = typeof window !== 'undefined' && localStorage.getItem('selectedLanguageId') 
         ? parseInt(localStorage.getItem('selectedLanguageId')!) 
         : 9;
@@ -106,6 +115,14 @@
     }
 
     /**
+     * @brief Starts the pokedle quiz with given settings
+     */
+    function handleStartPokedleQuiz(settings: PokedleQuizSettingsType): void {
+        pokedleQuizSettings = settings;
+        quizStarted = true;
+    }
+
+    /**
      * @brief Returns to the main hub
      */
     function backToHub(): void {
@@ -114,6 +131,7 @@
         quizSettings = null;
         spriteQuizSettings = null;
         informationQuizSettings = null;
+        pokedleQuizSettings = null;
         showingSettingsAfterQuiz = false;
     }
 
@@ -152,10 +170,10 @@
                     <button on:click={() => selectGame(game)} class="game-card">
                         <div class="game-icon">{game.icon}</div>
                         <h2 class="game-name">
-                            {getLabel(currentLanguageCode, game.id === 'description-quiz' ? 'description_quiz' : game.id === 'information-quiz' ? 'information_quiz' : 'sprites_quiz')}
+                            {getLabel(currentLanguageCode, game.id === 'description-quiz' ? 'description_quiz' : game.id === 'information-quiz' ? 'information_quiz' : game.id === 'sprites-quiz' ? 'sprites_quiz' : 'pokedle_quiz')}
                         </h2>
                         <p class="game-description">
-                            {getLabel(currentLanguageCode, game.id === 'description-quiz' ? 'description_guessFromDescription' : game.id === 'information-quiz' ? 'information_guessFromInfo' : 'sprites_guessFromSprite')}
+                            {getLabel(currentLanguageCode, game.id === 'description-quiz' ? 'description_guessFromDescription' : game.id === 'information-quiz' ? 'information_guessFromInfo' : game.id === 'sprites-quiz' ? 'sprites_guessFromSprite' : 'pokedle_guessFromInfo')}
                         </p>
                     </button>
                 {/each}
@@ -196,6 +214,12 @@
                             languageCode={currentLanguageCode}
                             initialSettings={getCachedSpriteSettings()}
                         />
+                    {:else if selectedGame?.id === 'pokedle-quiz'}
+                        <PokedleQuizSettings
+                            onStartQuiz={handleStartPokedleQuiz}
+                            languageCode={currentLanguageCode}
+                            initialSettings={getCachedPokedleSettings()}
+                        />
                     {/if}
                 </div>
             </div>
@@ -222,6 +246,15 @@
         <!-- Sprites Quiz Game -->
         <SpritesQuiz
             settings={spriteQuizSettings}
+            onBackToHub={backToHub}
+            onBackToSettings={backToSettingsFromQuiz}
+            languageCode={currentLanguageCode}
+            languageId={selectedLanguageId}
+        />
+    {:else if selectedGame?.id === 'pokedle-quiz' && quizStarted && pokedleQuizSettings}
+        <!-- Pokedle Quiz Game -->
+        <QuizPokedle
+            settings={pokedleQuizSettings}
             onBackToHub={backToHub}
             onBackToSettings={backToSettingsFromQuiz}
             languageCode={currentLanguageCode}

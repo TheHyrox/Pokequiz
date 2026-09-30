@@ -291,3 +291,26 @@ export interface InformationChallengeQuestion {
     /** Whether the user answered correctly */
     isCorrect: boolean;
 }
+
+// ============================================================
+// POKEDLE QUIZ TYPES
+// ============================================================
+
+/**
+ * @brief Available columns for the Pokedle Quiz
+ */
+export type PokedleColumn = 'type1' | 'type2' | 'weight' | 'height' | 'color' | 'abilities' | 'eggGroup' | 'generation' | 'shape' | 'category' | 'habitat';
+
+/**
+ * @brief Pokedle Quiz Settings
+ */
+export interface PokedleQuizSettings {
+    /** Maximum number of guesses (5 to 10) */
+    guessLimit: number;
+    /** Array of selected generation numbers (1-9) */
+    selectedGenerations: number[];
+    /** Selected columns to display */
+    selectedColumns: PokedleColumn[];
+    /** Whether to show "higher/lower" indicators for numeric values */
+    showMoreLessIndicators: boolean;
+}

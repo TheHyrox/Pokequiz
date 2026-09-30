@@ -220,3 +220,21 @@ export const HARDCORE_MAX_LIVES = 3;
  * @brief Consecutive correct answers needed to gain a life
  */
 export const HARDCORE_LIFE_REWARD_THRESHOLD = 10;
+
+// ============================================================
+// POKEDLE QUIZ CONSTANTS
+// ============================================================
+import type { PokedleColumn, PokedleQuizSettings } from '../types';
+
+export const ALL_POKEDLE_COLUMNS: PokedleColumn[] = [
+    'type1', 'type2', 'weight', 'height', 'color', 
+    'abilities', 'eggGroup', 'generation', 'shape', 
+    'category', 'habitat'
+];
+
+export const DEFAULT_POKEDLE_QUIZ_SETTINGS: PokedleQuizSettings = {
+    guessLimit: 8,
+    selectedGenerations: ALL_GENERATIONS,
+    selectedColumns: ALL_POKEDLE_COLUMNS,
+    showMoreLessIndicators: true
+};

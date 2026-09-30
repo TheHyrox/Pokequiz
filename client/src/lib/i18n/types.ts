@@ -9,6 +9,7 @@ import type { SettingsLabelKey } from './labels/settings';
 import type { ChallengeLabelKey } from './labels/challenge';
 import type { SpriteLabelKey } from './labels/sprites';
 import type { InformationLabelKey } from './labels/information';
+import type { PokedleLabelKey } from './labels/pokedle';
 
 /** All available language codes */
 export type LanguageCode =
@@ -30,4 +31,5 @@ export type LabelKey =
     | SettingsLabelKey
     | ChallengeLabelKey
     | SpriteLabelKey
-    | InformationLabelKey;
+    | InformationLabelKey
+    | PokedleLabelKey;

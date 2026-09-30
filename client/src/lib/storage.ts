@@ -3,12 +3,13 @@
  * @description Handles caching of language settings and quiz options
  */
 
-import type { DescriptionQuizSettings, SpriteQuizSettings, InformationQuizSettings } from '../../../shared/types';
+import type { DescriptionQuizSettings, SpriteQuizSettings, InformationQuizSettings, PokedleQuizSettings } from '../../../shared/types';
 
 const LANGUAGE_KEY = 'pokequiz_language';
 const DESCRIPTION_SETTINGS_KEY = 'pokequiz_description_settings';
 const SPRITE_SETTINGS_KEY = 'pokequiz_sprite_settings';
 const INFORMATION_SETTINGS_KEY = 'pokequiz_information_settings';
+const POKEDLE_SETTINGS_KEY = 'pokequiz_pokedle_settings';
 
 /**
  * @brief Get cached language ID
@@ -88,4 +89,25 @@ export function getCachedInformationSettings(): InformationQuizSettings | null {
 export function saveInformationSettings(settings: InformationQuizSettings): void {
     if (typeof window === 'undefined') return;
     localStorage.setItem(INFORMATION_SETTINGS_KEY, JSON.stringify(settings));
+}
+
+/**
+ * @brief Get cached pokedle quiz settings
+ */
+export function getCachedPokedleSettings(): PokedleQuizSettings | null {
+    if (typeof window === 'undefined') return null;
+    const cached = localStorage.getItem(POKEDLE_SETTINGS_KEY);
+    try {
+        return cached ? JSON.parse(cached) : null;
+    } catch {
+        return null;
+    }
+}
+
+/**
+ * @brief Save pokedle quiz settings to local storage
+ */
+export function savePokedleSettings(settings: PokedleQuizSettings): void {
+    if (typeof window === 'undefined') return;
+    localStorage.setItem(POKEDLE_SETTINGS_KEY, JSON.stringify(settings));
 }
