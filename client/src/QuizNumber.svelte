@@ -1,5 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte';
+    import QuizHeader from '../components/quiz/QuizHeader.svelte';
     import QuizEndModal from '../components/quiz/QuizEndModal.svelte';
     import NumberPointsReviewScreen from '../components/quiz/NumberPointsReviewScreen.svelte';
     import Toast from '../components/Toast.svelte';
@@ -369,48 +370,28 @@
         <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
     </div>
 {:else}
-    <div class="pt-20 lg:pt-6 px-4 pb-6 md:px-6 w-full max-w-2xl mx-auto">
-        <!-- Header -->
-        <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
-            <button
-                class="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white font-medium flex items-center gap-2"
-                on:click={onBackToSettings}
-            >
-                {l('back')}
-            </button>
-            <div class="text-xl md:text-2xl font-bold text-gray-800 dark:text-gray-100">
-                {l('number_quiz')}
-                <span class="text-sm font-semibold text-blue-600 dark:text-blue-300 bg-blue-50 dark:bg-blue-900/60 px-3 py-1 rounded-full ml-2">
-                    {settings.subMode === 'normal' ? l('number_subModeNormal') : l('number_subModePoints')}
-                </span>
+    <main class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 p-8 flex items-center justify-center">
+        <div class="max-w-4xl mx-auto w-full">
+            <!-- Quiz Header (harmonized with Description & Information quizzes) -->
+            <div class="quiz-header-row">
+                <QuizHeader
+                    {languageCode}
+                    quizTitleLabel="number_quiz"
+                    gameMode="score"
+                    currentQuestion={currentRound}
+                    totalQuestions={TOTAL_ROUNDS}
+                    score={pointsTotalScore}
+                    customSubtitle={settings.subMode === 'normal'
+                        ? (settings.hasGuessLimit && guessesLeft !== null
+                            ? `${l('number_subModeNormal')} | ${l('number_guessesLeft').replace('{0}', String(Math.max(0, guessesLeft)))}`
+                            : `${l('number_subModeNormal')} | ${l('number_unlimitedMode')}`)
+                        : ''}
+                    {onBackToHub}
+                />
             </div>
 
-            <!-- Header Badge / Counter -->
-            {#if settings.subMode === 'normal'}
-                {#if settings.hasGuessLimit && guessesLeft !== null}
-                    <div class="text-xs md:text-sm font-semibold text-white bg-blue-500 px-3.5 py-1.5 rounded-full shadow-sm">
-                        {l('number_guessesLeft').replace('{0}', String(Math.max(0, guessesLeft)))}
-                    </div>
-                {:else}
-                    <div class="text-xs md:text-sm font-semibold text-gray-500 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">
-                        {l('number_unlimitedMode')}
-                    </div>
-                {/if}
-            {:else}
-                <!-- Points Mode Round indicator & running score -->
-                <div class="flex items-center gap-2">
-                    <span class="text-xs font-bold text-blue-700 dark:text-blue-300 bg-blue-100 dark:bg-blue-900/60 px-3 py-1 rounded-full">
-                        {l('number_round').replace('{0}', String(currentRound)).replace('{1}', String(TOTAL_ROUNDS))}
-                    </span>
-                    <span class="text-xs font-bold text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">
-                        {pointsTotalScore.toLocaleString()} pts
-                    </span>
-                </div>
-            {/if}
-        </div>
-
-        <!-- Sprite Box -->
-        <div class="sprite-card mb-6">
+            <!-- Sprite Box -->
+            <div class="sprite-card mb-6 max-w-2xl mx-auto">
             <div class="sprite-frame">
                 <img
                     src={roundRevealed ? originalSpriteUrl : processedSpriteUrl}
@@ -478,7 +459,7 @@
 
         <!-- Normal Mode Guess History -->
         {#if settings.subMode === 'normal' && guesses.length > 0}
-            <div class="guess-history">
+            <div class="guess-history max-w-2xl mx-auto">
                 {#each [...guesses].reverse() as guess, i (guesses.length - i - 1)}
                     <div
                         transition:fade={{ duration: 200 }}
@@ -505,7 +486,8 @@
                 {/each}
             </div>
         {/if}
-    </div>
+        </div>
+    </main>
 {/if}
 
 <!-- Normal Mode End Modal -->
@@ -534,6 +516,10 @@
 {/if}
 
 <style lang="postcss">
+    .quiz-header-row {
+        @apply flex justify-between items-start mb-8 gap-8;
+    }
+
     .sprite-card {
         @apply bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center border border-gray-100;
     }

@@ -18,7 +18,9 @@
     /** Total number of questions */
     export let totalQuestions: number;
     /** Current score */
-    export let score: number;
+    export let score: number = 0;
+    /** Optional custom subtitle override */
+    export let customSubtitle: string = '';
     /** Callback when back button is clicked */
     export let onBackToHub: () => void;
 
@@ -33,7 +35,9 @@
 <div class="header">
     <div>
         <h1 class="title">Pokequiz - {getQuizTitle()}</h1>
-        {#if gameMode === 'infinite'}
+        {#if customSubtitle}
+            <p class="subtitle">{customSubtitle}</p>
+        {:else if gameMode === 'infinite'}
             <p class="subtitle">
                 {getLabel(languageCode, 'score')}: {score} | {getLabel(languageCode, 'infiniteModeLabel')}
             </p>
@@ -58,7 +62,7 @@
 
 <style lang="postcss">
     .header {
-        @apply flex justify-between items-start mb-8 gap-4;
+        @apply flex justify-between items-start mb-8 gap-4 w-full;
     }
 
     .title {
