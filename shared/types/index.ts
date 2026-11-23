@@ -314,3 +314,65 @@ export interface PokedleQuizSettings {
     /** Whether to show "higher/lower" indicators for numeric values */
     showMoreLessIndicators: boolean;
 }
+
+// ============================================================
+// NUMBER QUIZ TYPES
+// ============================================================
+
+/**
+ * @brief Number quiz sub-mode
+ * @description Controls game structure and scoring mechanics
+ */
+export type NumberQuizSubMode = 'normal' | 'points';
+
+/**
+ * @brief Single round record for Points mode
+ */
+export interface NumberPointsRound {
+    /** Round number (1-10) */
+    roundNumber: number;
+    /** Target Pokemon ID */
+    pokemonId: number;
+    /** Target Pokemon name */
+    pokemonName: string;
+    /** Sprite URL shown during the round */
+    spriteUrl: string;
+    /** Clean sprite URL without effects */
+    originalSpriteUrl: string;
+    /** User's guessed number */
+    userGuess: number;
+    /** Difference between user guess and target ID */
+    distance: number;
+    /** Points earned for this round (0-1000) */
+    points: number;
+}
+
+/**
+ * @brief Number quiz settings
+ * @description All customizable options for a number quiz session
+ */
+export interface NumberQuizSettings {
+    /** Sub game mode (scoring) */
+    subMode: NumberQuizSubMode;
+    /** Whether guess limit is enabled (Normal mode) */
+    hasGuessLimit: boolean;
+    /** Maximum number of guesses in Normal mode (5-10) */
+    guessLimit: number;
+    /** Selected generation numbers (1-9) */
+    selectedGenerations: number[];
+    /** Show higher/lower indicator */
+    showHigherLower: boolean;
+    /** Enable blur effect */
+    blurEnabled: boolean;
+    /** Blur strength 3-10 */
+    blurStrength: number;
+    /** Enable pixelation effect */
+    pixelateEnabled: boolean;
+    /** Pixelation strength 4-12 */
+    pixelateStrength: number;
+    /** Show silhouette */
+    silhouetteEnabled: boolean;
+    /** Random rotation */
+    rotationEnabled: boolean;
+}
+

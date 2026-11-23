@@ -10,6 +10,7 @@ import { CHALLENGE_LABELS } from './labels/challenge';
 import { SPRITES_LABELS } from './labels/sprites';
 import { INFORMATION_LABELS } from './labels/information';
 import { POKEDLE_LABELS } from './labels/pokedle';
+import { NUMBER_LABELS } from './labels/number';
 import type { LabelKey, LanguageCode } from './types';
 
 // Re-export from shared constants
@@ -34,7 +35,8 @@ const LABELS: Record<LanguageCode, Record<string, string>> = SUPPORTED_LANGUAGES
             ...CHALLENGE_LABELS[lang],
             ...SPRITES_LABELS[lang],
             ...INFORMATION_LABELS[lang],
-            ...POKEDLE_LABELS[lang]
+            ...POKEDLE_LABELS[lang],
+            ...NUMBER_LABELS[lang]
         };
         return acc;
     },
