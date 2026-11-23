@@ -13,7 +13,7 @@
     import { preloadPokemonNames, getPokemonNameSync } from './lib/pokemonNamesClient';
     import { capitalizeFirst } from '../../shared/utils/textUtils';
     import { pixelateImage, getCssFilters, getRandomRotation } from './lib/utils/imageEffects';
-    import { saveNumberSettings, recordQuizGameResult } from './lib/storage';
+    import { saveNumberSettings, recordQuizGameResult, getDailyChallengeStatus, saveDailyChallengeRun } from './lib/storage';
     import PokedexMiniCardModal from '../components/quiz/PokedexMiniCardModal.svelte';
     import type { NumberQuizSettings, NumberPointsRound, ToastState, PokemonOption } from '../../shared/types';
     import { fade, scale } from 'svelte/transition';
@@ -36,6 +36,8 @@
     let isLoading: boolean = true;
     let inputRef: HTMLInputElement;
     let selectedPokedexPokemon: { id: number; name: string } | null = null;
+    $: isDailyMode = Boolean(settings.isDailyChallenge || settings.dailySeed);
+    $: dailySeedStr = settings.dailySeed || getTodayDateString();
 
     // Normal mode state
     let guesses: { value: number; label: string; isCorrect: boolean; direction: 'higher' | 'lower' | null }[] = [];
@@ -198,7 +200,11 @@
     /**
      * @brief Starts/restarts the entire quiz
      */
-    async function startQuiz(): Promise<void> {
+    async function startQuiz(isRetry: boolean = false): Promise<void> {
+        if (isDailyMode && isRetry) {
+            showEndModal = false;
+            return;
+        }
         // Reset Normal mode state
         isGameOver = false;
         hasWon = false;
@@ -218,6 +224,28 @@
         preloadedNextRound = null;
 
         await loadQuestion();
+
+        // Restore saved Daily Challenge run if already played today
+        if (isDailyMode) {
+            const savedDaily = getDailyChallengeStatus('number', dailySeedStr);
+            if (savedDaily) {
+                if (settings.subMode === 'normal' && savedDaily.runData?.numberGuesses?.length) {
+                    guesses = [...savedDaily.runData.numberGuesses];
+                    if (savedDaily.completed) {
+                        isGameOver = true;
+                        hasWon = Boolean(savedDaily.isWin ?? guesses.some(g => g.isCorrect));
+                        finalNormalScore = guesses.length;
+                        showEndModal = false;
+                    }
+                } else if (settings.subMode === 'points' && savedDaily.runData?.numberPointsRounds?.length) {
+                    pointsRoundsHistory = [...savedDaily.runData.numberPointsRounds];
+                    pointsTotalScore = pointsRoundsHistory.reduce((sum, r) => sum + r.points, 0);
+                    if (savedDaily.completed || pointsRoundsHistory.length >= TOTAL_ROUNDS) {
+                        showPointsReview = true;
+                    }
+                }
+            }
+        }
     }
 
     onMount(async () => {
@@ -273,13 +301,18 @@
             finalNormalScore = guesses.length;
             recordQuizGameResult({
                 quizSlug: 'number',
-                modeKey: (settings.isDailyChallenge || settings.dailySeed) ? 'daily' : 'normal',
+                modeKey: isDailyMode ? 'daily' : 'normal',
                 isWin: true,
                 score: finalNormalScore,
                 guessesUsed: finalNormalScore,
                 lowerIsBetter: true,
-                dailyChallenge: (settings.isDailyChallenge || settings.dailySeed)
-                    ? { date: settings.dailySeed || getTodayDateString(), pokemonId: targetPokemonId }
+                dailyChallenge: isDailyMode
+                    ? {
+                        date: dailySeedStr,
+                        pokemonId: targetPokemonId,
+                        pokemonName: targetPokemonName,
+                        runData: { numberGuesses: [...guesses] }
+                    }
                     : undefined
             });
             showEndModal = true;
@@ -289,17 +322,33 @@
             finalNormalScore = guesses.length;
             recordQuizGameResult({
                 quizSlug: 'number',
-                modeKey: (settings.isDailyChallenge || settings.dailySeed) ? 'daily' : 'normal',
+                modeKey: isDailyMode ? 'daily' : 'normal',
                 isWin: false,
                 score: finalNormalScore,
                 guessesUsed: finalNormalScore,
                 lowerIsBetter: true,
-                dailyChallenge: (settings.isDailyChallenge || settings.dailySeed)
-                    ? { date: settings.dailySeed || getTodayDateString(), pokemonId: targetPokemonId }
+                dailyChallenge: isDailyMode
+                    ? {
+                        date: dailySeedStr,
+                        pokemonId: targetPokemonId,
+                        pokemonName: targetPokemonName,
+                        runData: { numberGuesses: [...guesses] }
+                    }
                     : undefined
             });
             showEndModal = true;
         } else {
+            if (isDailyMode) {
+                saveDailyChallengeRun({
+                    date: dailySeedStr,
+                    quiz: 'number',
+                    completed: false,
+                    score: guesses.length,
+                    pokemonId: targetPokemonId,
+                    pokemonName: targetPokemonName,
+                    runData: { numberGuesses: [...guesses] }
+                });
+            }
             setTimeout(() => {
                 inputRef?.focus();
             }, 50);
@@ -348,11 +397,16 @@
         } else {
             recordQuizGameResult({
                 quizSlug: 'number',
-                modeKey: (settings.isDailyChallenge || settings.dailySeed) ? 'daily' : 'points',
+                modeKey: isDailyMode ? 'daily' : 'points',
                 isWin: pointsTotalScore >= 5000,
                 score: pointsTotalScore,
-                dailyChallenge: (settings.isDailyChallenge || settings.dailySeed)
-                    ? { date: settings.dailySeed || getTodayDateString(), pokemonId: targetPokemonId }
+                dailyChallenge: isDailyMode
+                    ? {
+                        date: dailySeedStr,
+                        pokemonId: targetPokemonId,
+                        pokemonName: targetPokemonName,
+                        runData: { numberPointsRounds: [...pointsRoundsHistory] }
+                    }
                     : undefined
             });
             showPointsReview = true;
@@ -417,9 +471,10 @@
         {languageCode}
         rounds={pointsRoundsHistory}
         totalScore={pointsTotalScore}
+        isDailyChallenge={isDailyMode}
         on:home={onBackToHub}
         on:changeSettings={onBackToSettings}
-        on:retry={startQuiz}
+        on:retry={() => startQuiz(true)}
     />
 {:else if isLoading}
     <div class="min-h-screen flex items-center justify-center">
@@ -450,10 +505,10 @@
             <div class="sprite-card mb-6 max-w-2xl mx-auto">
             <div class="sprite-frame">
                 <img
-                    src={roundRevealed ? originalSpriteUrl : processedSpriteUrl}
+                    src={(roundRevealed || (isDailyMode && isGameOver)) ? originalSpriteUrl : processedSpriteUrl}
                     alt="Pokemon sprite"
                     class="sprite-img"
-                    style="filter: {getSpriteFilters(roundRevealed)}; transform: rotate({roundRevealed ? 0 : currentRotation}deg);"
+                    style="filter: {getSpriteFilters(roundRevealed || (isDailyMode && isGameOver))}; transform: rotate({(roundRevealed || (isDailyMode && isGameOver)) ? 0 : currentRotation}deg);"
                     on:error={() => {
                         const fallback = getSpriteUrl(targetPokemonId, 'default');
                         if (originalSpriteUrl !== fallback) {
@@ -463,6 +518,26 @@
                     }}
                 />
             </div>
+
+            {#if isDailyMode && isGameOver && settings.subMode === 'normal'}
+                <div class="daily-run-summary mt-4 w-full p-4 rounded-xl bg-amber-50 dark:bg-amber-950/60 border-2 border-amber-300 dark:border-amber-700 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="text-left">
+                        <div class="font-bold text-amber-900 dark:text-amber-200 text-sm">
+                            📅 {l('dailyAlreadyPlayed')}
+                        </div>
+                        <div class="text-xs text-amber-800 dark:text-amber-300 mt-1">
+                            {l('number_targetWas')} <span class="font-black">#{String(targetPokemonId).padStart(4, '0')} ({capitalizeFirst(targetPokemonName)})</span>
+                        </div>
+                    </div>
+                    <button
+                        type="button"
+                        on:click={() => { selectedPokedexPokemon = { id: targetPokemonId, name: targetPokemonName }; }}
+                        class="px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs shrink-0 cursor-pointer"
+                    >
+                        📖 {l('pokedexMiniCard')}: {capitalizeFirst(targetPokemonName)}
+                    </button>
+                </div>
+            {/if}
 
             <!-- Revealed feedback banner in Points mode -->
             {#if roundRevealed && settings.subMode === 'points'}
@@ -564,9 +639,10 @@
         correctAnswer={endModalAnswer}
         {languageCode}
         gameMode="number"
+        isDailyChallenge={isDailyMode}
         on:home={onBackToHub}
         on:changeSettings={onBackToSettings}
-        on:retry={startQuiz}
+        on:retry={() => startQuiz(true)}
         on:close={() => { showEndModal = false; }}
     />
 {/if}

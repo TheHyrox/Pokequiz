@@ -182,7 +182,26 @@ function createEmptyStatEntry(): QuizModeStatEntry {
 }
 
 /**
- * @brief Get personal stats store from localStorage
+ * @brief Prunes daily challenge records from previous days so only today's daily run is kept
+ */
+function pruneExpiredDailyChallenges(
+    dailyChallenges: Record<string, DailyChallengeRecord>,
+    todayStr: string = getTodayDateString()
+): { pruned: Record<string, DailyChallengeRecord>; changed: boolean } {
+    const pruned: Record<string, DailyChallengeRecord> = {};
+    let changed = false;
+    for (const [key, rec] of Object.entries(dailyChallenges || {})) {
+        if (rec && rec.date === todayStr) {
+            pruned[key] = rec;
+        } else {
+            changed = true;
+        }
+    }
+    return { pruned, changed };
+}
+
+/**
+ * @brief Get personal stats store from localStorage (automatically clearing old days' daily runs)
  */
 export function getPersonalStats(): PersonalStatsStore {
     if (typeof window === 'undefined') {
@@ -194,10 +213,14 @@ export function getPersonalStats(): PersonalStatsStore {
     }
     try {
         const parsed = JSON.parse(raw);
-        return {
-            modes: parsed?.modes && typeof parsed.modes === 'object' ? parsed.modes : {},
-            dailyChallenges: parsed?.dailyChallenges && typeof parsed.dailyChallenges === 'object' ? parsed.dailyChallenges : {}
-        };
+        const modes = parsed?.modes && typeof parsed.modes === 'object' ? parsed.modes : {};
+        const rawDaily = parsed?.dailyChallenges && typeof parsed.dailyChallenges === 'object' ? parsed.dailyChallenges : {};
+        const { pruned, changed } = pruneExpiredDailyChallenges(rawDaily);
+        const store: PersonalStatsStore = { modes, dailyChallenges: pruned };
+        if (changed) {
+            savePersonalStats(store);
+        }
+        return store;
     } catch {
         return { modes: {}, dailyChallenges: {} };
     }
@@ -246,7 +269,25 @@ export interface RecordGameResultOptions {
     dailyChallenge?: {
         date?: string;
         pokemonId?: number;
+        pokemonName?: string;
+        runData?: DailyChallengeRecord['runData'];
     };
+}
+
+/**
+ * @brief Save or update today's daily challenge progress/run snapshot (clears previous days automatically)
+ */
+export function saveDailyChallengeRun(record: DailyChallengeRecord): void {
+    const store = getPersonalStats();
+    const dateStr = record.date || getTodayDateString();
+    const { pruned } = pruneExpiredDailyChallenges(store.dailyChallenges, dateStr);
+    store.dailyChallenges = pruned;
+    const dailyKey = `${record.quiz}:${dateStr}`;
+    store.dailyChallenges[dailyKey] = {
+        ...record,
+        date: dateStr
+    };
+    savePersonalStats(store);
 }
 
 /**
@@ -258,6 +299,16 @@ export function recordQuizGameResult(opts: RecordGameResultOptions): QuizModeSta
     const entry: QuizModeStatEntry = store.modes[key]
         ? { ...createEmptyStatEntry(), ...store.modes[key] }
         : createEmptyStatEntry();
+
+    // Prevent recording duplicate stats if today's daily challenge was already completed
+    if (opts.dailyChallenge && (opts.quizSlug === 'pokedle' || opts.quizSlug === 'description' || opts.quizSlug === 'number')) {
+        const dateStr = opts.dailyChallenge.date || getTodayDateString();
+        const dailyKey = `${opts.quizSlug}:${dateStr}`;
+        const existingDaily = store.dailyChallenges[dailyKey];
+        if (existingDaily?.completed) {
+            return entry;
+        }
+    }
 
     entry.totalGamesPlayed += 1;
     if (opts.isWin) {
@@ -293,17 +344,22 @@ export function recordQuizGameResult(opts: RecordGameResultOptions): QuizModeSta
     entry.lastPlayedAt = new Date().toISOString();
     store.modes[key] = entry;
 
-    // Also record daily challenge completion if applicable
+    // Also record daily challenge completion and run snapshot if applicable
     if (opts.dailyChallenge && (opts.quizSlug === 'pokedle' || opts.quizSlug === 'description' || opts.quizSlug === 'number')) {
         const dateStr = opts.dailyChallenge.date || getTodayDateString();
+        const { pruned } = pruneExpiredDailyChallenges(store.dailyChallenges, dateStr);
+        store.dailyChallenges = pruned;
         const dailyKey = `${opts.quizSlug}:${dateStr}`;
         const existingDaily = store.dailyChallenges[dailyKey];
         const record: DailyChallengeRecord = {
             date: dateStr,
             quiz: opts.quizSlug,
-            completed: opts.isWin || (existingDaily?.completed ?? false),
+            completed: true,
+            isWin: opts.isWin,
             score: opts.score,
-            pokemonId: opts.dailyChallenge.pokemonId
+            pokemonId: opts.dailyChallenge.pokemonId ?? existingDaily?.pokemonId,
+            pokemonName: opts.dailyChallenge.pokemonName ?? existingDaily?.pokemonName,
+            runData: opts.dailyChallenge.runData ?? existingDaily?.runData
         };
         store.dailyChallenges[dailyKey] = record;
     }

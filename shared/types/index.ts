@@ -418,12 +418,27 @@ export interface DailyChallengeRecord {
     date: string;
     /** Quiz slug ('pokedle' | 'description' | 'number') */
     quiz: 'pokedle' | 'description' | 'number';
-    /** Whether the user won / completed the daily challenge */
+    /** Whether the user finished today's daily challenge (win or loss) */
     completed: boolean;
+    /** Whether the user won today's daily challenge */
+    isWin?: boolean;
     /** Score or guesses achieved */
     score: number;
     /** Target Pokemon ID (or last Pokemon ID) */
     pokemonId?: number;
+    /** Target Pokemon Name */
+    pokemonName?: string;
+    /** Saved run snapshot for visualizing the completed or in-progress run today */
+    runData?: {
+        /** Pokedle guessed Pokemon IDs in order */
+        pokedleGuessedIds?: number[];
+        /** Number Quiz normal mode guesses */
+        numberGuesses?: Array<{ value: number; label: string; isCorrect: boolean; direction: 'higher' | 'lower' | null }>;
+        /** Number Quiz points mode rounds */
+        numberPointsRounds?: NumberPointsRound[];
+        /** Description Quiz challenge/score review questions */
+        descriptionQuestions?: ChallengeQuestion[];
+    };
 }
 
 export interface PersonalStatsStore {

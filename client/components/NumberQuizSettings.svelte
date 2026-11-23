@@ -13,8 +13,10 @@
     import { buildShareableQuizUrl } from '../src/lib/urlSettings';
     import { getTodayDateString } from '../../shared/utils/seededRng';
     import { ALL_GENERATIONS, DEFAULT_NUMBER_QUIZ_SETTINGS } from '../../shared/constants';
-    import { saveNumberSettings } from '../src/lib/storage';
+    import { saveNumberSettings, getDailyChallengeStatus } from '../src/lib/storage';
     import type { NumberQuizSettings, NumberQuizSubMode, SpriteEffectSettings, ToastState } from '../../shared/types';
+
+    $: dailyCompletedToday = Boolean(getDailyChallengeStatus('number', getTodayDateString())?.completed);
 
     /** Callback when quiz starts with settings */
     export let onStartQuiz: (settings: NumberQuizSettings) => void;
@@ -223,9 +225,9 @@
         <button
             type="button"
             on:click={handleStartDailyChallenge}
-            class="daily-challenge-btn px-5 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-lg transition-colors cursor-pointer"
+            class="daily-challenge-btn px-5 py-3 {dailyCompletedToday ? 'bg-green-600 hover:bg-green-700' : 'bg-amber-500 hover:bg-amber-600'} text-white font-bold rounded-lg transition-colors cursor-pointer"
         >
-            📅 {getLabel(languageCode, 'dailyChallenge')} ({getTodayDateString()})
+            📅 {getLabel(languageCode, 'dailyChallenge')} ({getTodayDateString()}) {dailyCompletedToday ? `• ✓ ${getLabel(languageCode, 'dailyViewRun')}` : ''}
         </button>
         <button
             type="button"

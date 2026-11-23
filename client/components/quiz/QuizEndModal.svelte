@@ -24,6 +24,8 @@
     export let languageCode: string;
     /** Game mode (determines if answer is shown) */
     export let gameMode: 'score' | 'infinite' | 'challenge' | 'hardcore' | 'pokedle' | 'number' = 'score';
+    /** Whether retry is disabled (e.g. Daily Challenge can only be played once per day) */
+    export let isDailyChallenge: boolean = false;
 
     let selectedPokedexPokemon: { id: number; name: string } | null = null;
 
@@ -50,7 +52,11 @@
         if (event.key === 'Escape') {
             handleClose();
         } else if (event.key === 'Enter') {
-            handleRetry();
+            if (isDailyChallenge) {
+                handleClose();
+            } else {
+                handleRetry();
+            }
         }
     }
 
@@ -162,12 +168,21 @@
                 {getLabel(languageCode, 'changeSettings')}
             </button>
 
-            <button
-                on:click={handleRetry}
-                class="action-btn"
-            >
-                {getLabel(languageCode, 'retry')}
-            </button>
+            {#if isDailyChallenge}
+                <button
+                    on:click={handleClose}
+                    class="action-btn view-run-btn"
+                >
+                    {getLabel(languageCode, 'dailyViewRun')}
+                </button>
+            {:else}
+                <button
+                    on:click={handleRetry}
+                    class="action-btn retry-btn"
+                >
+                    {getLabel(languageCode, 'retry')}
+                </button>
+            {/if}
         </div>
     </div>
 </div>

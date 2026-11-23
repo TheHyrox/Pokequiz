@@ -86,22 +86,26 @@ export async function runNewFunctionalityTests() {
         });
 
         // ============================================================
-        // 2. DAILY CHALLENGE (SEEDED RNG, NO BACKEND ACCOUNT NEEDED)
+        // 2. DAILY CHALLENGE (SEEDED RNG, NO RETRY, VIEW RUN, CLEARED DAILY)
         // ============================================================
-        await runner.test('daily-seeded-rng', 'Daily Challenge uses YYYY-MM-DD deterministic PRNG seed so repeated runs get the exact same Pokémon', async () => {
+        await runner.test('daily-seeded-rng', 'Daily Challenge uses YYYY-MM-DD deterministic PRNG seed, blocks retries, visualizes completed run, and prunes old days', async () => {
+            await navigateHome(cdp);
+            await evalJS(cdp, `localStorage.clear()`);
+
             // Test 1: Pokedle Daily Challenge twice -> same target Pokemon ID
             await navigateHome(cdp);
             await evalJS(cdp, `window.__apiLog = []`);
             await evalJS(cdp, `document.querySelector('.daily-pokedle-btn').click()`);
             await waitFor(cdp, `document.querySelector('input[type="text"]')`);
             await waitFor(cdp, `(window.__apiLog || []).some(l => /\\/api\\/pokemon\\/\\d+\\/\\d+$/.test(l.url))`);
-            const pokedleDailyId1 = await evalJS(cdp, `(() => {
+            const pokedleDailyTarget = await evalJS(cdp, `(() => {
                 const call = [...window.__apiLog].reverse().find(l => /\\/api\\/pokemon\\/\\d+\\/\\d+$/.test(l.url));
-                return call?.data?.id;
+                return call?.data ? { id: call.data.id, name: call.data.name } : null;
             })()`);
+            const pokedleDailyId1 = pokedleDailyTarget?.id;
             assert.ok(pokedleDailyId1 >= 1 && pokedleDailyId1 <= 1025, `Valid Pokedle daily ID: ${pokedleDailyId1}`);
 
-            // Restart Pokedle Daily Challenge from Hub and verify identical Pokemon ID
+            // Restart Pokedle Daily Challenge before making a guess and verify identical Pokemon ID
             await navigateHome(cdp);
             await evalJS(cdp, `window.__apiLog = []`);
             await evalJS(cdp, `document.querySelector('.daily-pokedle-btn').click()`);
@@ -112,6 +116,64 @@ export async function runNewFunctionalityTests() {
                 return call?.data?.id;
             })()`);
             assert.equal(pokedleDailyId1, pokedleDailyId2, 'Pokedle Daily Challenge must deterministically pick the same Pokemon');
+
+            // Complete the Pokedle Daily Challenge by guessing the target Pokemon
+            await evalJS(cdp, `(() => {
+                const input = document.querySelector('input[type="text"]');
+                input.focus();
+                input.value = ${JSON.stringify(pokedleDailyTarget.name)};
+                input.dispatchEvent(new Event('input', { bubbles: true }));
+                input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+            })()`);
+            await waitFor(cdp, `document.querySelector('.modal-content.win')`, 10000);
+
+            // Verify Retry button is replaced by View Run button in Daily Challenge End Modal
+            const hasRetryBtn = await evalJS(cdp, `Boolean(document.querySelector('.modal-content .retry-btn'))`);
+            const hasViewRunBtn = await evalJS(cdp, `Boolean(document.querySelector('.modal-content .view-run-btn'))`);
+            assert.equal(hasRetryBtn, false, 'Daily Challenge end modal must not allow Retry');
+            assert.equal(hasViewRunBtn, true, 'Daily Challenge end modal must show View Run button');
+
+            // Click View Run button -> closes modal, input is disabled, and daily run summary is shown
+            await evalJS(cdp, `document.querySelector('.modal-content .view-run-btn').click()`);
+            await sleep(100);
+            const runViewState1 = await evalJS(cdp, `({
+                inputDisabled: document.querySelector('input[type="text"]')?.disabled,
+                guessRows: document.querySelectorAll('table tbody tr').length,
+                hasSummaryBanner: Boolean(document.querySelector('.daily-run-summary'))
+            })`);
+            assert.equal(runViewState1.inputDisabled, true, 'Input must be disabled after completing daily challenge');
+            assert.equal(runViewState1.guessRows, 1, 'Completed guess row must be visible');
+            assert.equal(runViewState1.hasSummaryBanner, true, 'Daily completed summary banner must be visible');
+
+            // Navigate back to Hub and re-open Pokedle Daily Challenge -> must restore and visualize our run (no retry!)
+            await navigateHome(cdp);
+            await evalJS(cdp, `document.querySelector('.daily-pokedle-btn').click()`);
+            await waitFor(cdp, `document.querySelector('.daily-run-summary')`);
+            const runViewState2 = await evalJS(cdp, `({
+                inputDisabled: document.querySelector('input[type="text"]')?.disabled,
+                guessRows: document.querySelectorAll('table tbody tr').length
+            })`);
+            assert.equal(runViewState2.inputDisabled, true, 'Re-opening completed daily challenge must keep input disabled');
+            assert.equal(runViewState2.guessRows, 1, 'Re-opening completed daily challenge must restore previous guesses');
+
+            // Verify automatic daily cleanup of old days' dailyChallenges records
+            await evalJS(cdp, `(() => {
+                const store = JSON.parse(localStorage.getItem('pokequiz_personal_stats') || '{}');
+                store.dailyChallenges = store.dailyChallenges || {};
+                store.dailyChallenges['pokedle:1999-01-01'] = {
+                    date: '1999-01-01',
+                    quiz: 'pokedle',
+                    completed: true,
+                    score: 3
+                };
+                localStorage.setItem('pokequiz_personal_stats', JSON.stringify(store));
+            })()`);
+            await navigateHome(cdp);
+            const hasExpiredDaily = await evalJS(cdp, `(() => {
+                const store = JSON.parse(localStorage.getItem('pokequiz_personal_stats') || '{}');
+                return Boolean(store.dailyChallenges?.['pokedle:1999-01-01']);
+            })()`);
+            assert.equal(hasExpiredDaily, false, 'Expired daily challenge records from previous days must be automatically cleared');
 
             // Test 2: Number Quiz Daily Challenge twice -> same target Pokemon ID
             await navigateHome(cdp);

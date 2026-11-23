@@ -8,8 +8,10 @@
     import { buildShareableQuizUrl } from '../src/lib/urlSettings';
     import { getTodayDateString } from '../../shared/utils/seededRng';
     import { ALL_GENERATIONS, ALL_POKEDLE_COLUMNS, DEFAULT_POKEDLE_QUIZ_SETTINGS } from '../../shared/constants';
-    import { savePokedleSettings } from '../src/lib/storage';
+    import { savePokedleSettings, getDailyChallengeStatus } from '../src/lib/storage';
     import type { PokedleQuizSettings, PokedleColumn, ToastState } from '../../shared/types';
+
+    $: dailyCompletedToday = Boolean(getDailyChallengeStatus('pokedle', getTodayDateString())?.completed);
 
     export let onStartQuiz: (settings: PokedleQuizSettings) => void;
     export let languageCode: string = 'en';
@@ -171,9 +173,9 @@
         <button
             type="button"
             on:click={handleStartDailyChallenge}
-            class="daily-challenge-btn px-5 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-lg transition-colors cursor-pointer"
+            class="daily-challenge-btn px-5 py-3 {dailyCompletedToday ? 'bg-green-600 hover:bg-green-700' : 'bg-amber-500 hover:bg-amber-600'} text-white font-bold rounded-lg transition-colors cursor-pointer"
         >
-            📅 {getLabel(languageCode, 'dailyChallenge')} ({getTodayDateString()})
+            📅 {getLabel(languageCode, 'dailyChallenge')} ({getTodayDateString()}) {dailyCompletedToday ? `• ✓ ${getLabel(languageCode, 'dailyViewRun')}` : ''}
         </button>
         <button
             type="button"

@@ -16,6 +16,8 @@
     export let rounds: NumberPointsRound[];
     /** Total score accumulated */
     export let totalScore: number;
+    /** Whether retry is disabled (Daily Challenge mode) */
+    export let isDailyChallenge: boolean = false;
 
     let selectedPokedexPokemon: { id: number; name: string } | null = null;
 
@@ -164,9 +166,11 @@
         <button on:click={handleChangeSettings} class="btn-action bg-amber-500 hover:bg-amber-600">
             {l('changeSettings')}
         </button>
-        <button on:click={handleRetry} class="btn-action bg-blue-500 hover:bg-blue-600">
-            {l('number_playAgain')}
-        </button>
+        {#if !isDailyChallenge}
+            <button on:click={handleRetry} class="btn-action bg-blue-500 hover:bg-blue-600">
+                {l('number_playAgain')}
+            </button>
+        {/if}
     </div>
 </div>
 

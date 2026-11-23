@@ -15,6 +15,10 @@
     export let challengeQuestions: Array<ChallengeQuestion & Partial<InformationChallengeQuestion>>;
     /** Callback when back button is clicked */
     export let onBackToHub: () => void;
+    /** Optional custom score override (e.g. for Daily Challenge score mode) */
+    export let customScoreText: string = '';
+    /** Optional Daily Challenge notice banner */
+    export let dailyNoticeText: string = '';
 
     let selectedPokedexPokemon: { id: number; name: string } | null = null;
 
@@ -28,8 +32,13 @@
 
     <div class="summary-card">
         <h2 class="summary-title">{getLabel(languageCode, 'reviewAnswers')}</h2>
+        {#if dailyNoticeText}
+            <div class="daily-run-summary mb-3 p-3 rounded-lg bg-amber-50 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-700 text-amber-900 dark:text-amber-200 text-sm font-bold">
+                📅 {dailyNoticeText}
+            </div>
+        {/if}
         <p class="summary-score">
-            {getLabel(languageCode, 'score')}: {correctCount}/{CHALLENGE_QUESTION_COUNT}
+            {getLabel(languageCode, 'score')}: {customScoreText || `${correctCount}/${CHALLENGE_QUESTION_COUNT}`}
         </p>
         <p class="text-sm text-blue-600 dark:text-blue-400 font-medium mt-2">
             📖 {getLabel(languageCode, 'clickPokemonForInfo')}

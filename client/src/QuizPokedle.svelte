@@ -10,7 +10,7 @@
     import { getPokemonInformationData } from './lib/pokemonInformationClient';
     import { preloadPokemonNames, getPokemonNameSync, getAllPokemonNamesSync } from './lib/pokemonNamesClient';
     import { normalizeText } from '../../shared/utils/textUtils';
-    import { savePokedleSettings, recordQuizGameResult } from './lib/storage';
+    import { savePokedleSettings, recordQuizGameResult, getDailyChallengeStatus, saveDailyChallengeRun } from './lib/storage';
     import PokedexMiniCardModal from '../components/quiz/PokedexMiniCardModal.svelte';
     import type { PokedleQuizSettings, PokedleColumn, ToastState } from '../../shared/types';
     import { fly, fade } from 'svelte/transition';
@@ -31,6 +31,8 @@
     let currentInputValue: string = '';
     let selectedPokedexPokemon: { id: number; name: string } | null = null;
     let gameIndex: number = 0;
+    $: isDailyMode = Boolean(settings.isDailyChallenge || settings.dailySeed);
+    $: dailySeedStr = settings.dailySeed || getTodayDateString();
 
     let toastState: ToastState = {
         message: '',
@@ -48,7 +50,12 @@
         await startNewGame();
     });
 
-    async function startNewGame() {
+    async function startNewGame(allowRetry: boolean = false) {
+        if (isDailyMode && allowRetry) {
+            // Daily Challenge cannot be retried — just show the completed run
+            showEndModal = false;
+            return;
+        }
         isLoading = true;
         isGameOver = false;
         hasWon = false;
@@ -57,9 +64,8 @@
         currentInputValue = '';
         
         let correctId: number;
-        if (settings.isDailyChallenge || settings.dailySeed) {
-            const seedDate = settings.dailySeed || getTodayDateString();
-            const rng = createSeededRng(`${seedDate}:pokedle:round:0`);
+        if (isDailyMode) {
+            const rng = createSeededRng(`${dailySeedStr}:pokedle:round:0`);
             correctId = getRandomPokemonId(settings.selectedGenerations, rng);
         } else {
             correctId = getRandomPokemonId(settings.selectedGenerations);
@@ -70,12 +76,30 @@
         if (!targetPokemonData) {
             showErrorToast('Failed to load target Pokemon data.');
         }
+
+        // Restore saved Daily Challenge run if already played today
+        if (isDailyMode && targetPokemonData) {
+            const savedDaily = getDailyChallengeStatus('pokedle', dailySeedStr);
+            if (savedDaily && savedDaily.runData?.pokedleGuessedIds?.length) {
+                const loadedGuesses: any[] = [];
+                for (const gId of savedDaily.runData.pokedleGuessedIds) {
+                    const gData = await getPokemonInformationData(gId, languageId);
+                    if (gData) loadedGuesses.push(gData);
+                }
+                guesses = loadedGuesses;
+                if (savedDaily.completed) {
+                    isGameOver = true;
+                    hasWon = Boolean(savedDaily.isWin ?? guesses.some(g => Number(g.id) === Number(targetPokemonData.id)));
+                    showEndModal = false;
+                }
+            }
+        }
         
         isLoading = false;
     }
 
     function recordPokedleStats(won: boolean, guessCount: number) {
-        const modeKey = (settings.isDailyChallenge || settings.dailySeed) ? 'daily' : 'wordle';
+        const modeKey = isDailyMode ? 'daily' : 'wordle';
         recordQuizGameResult({
             quizSlug: 'pokedle',
             modeKey,
@@ -83,8 +107,15 @@
             score: guessCount,
             guessesUsed: guessCount,
             lowerIsBetter: true,
-            dailyChallenge: (settings.isDailyChallenge || settings.dailySeed)
-                ? { date: settings.dailySeed || getTodayDateString(), pokemonId: Number(targetPokemonData?.id) }
+            dailyChallenge: isDailyMode
+                ? {
+                    date: dailySeedStr,
+                    pokemonId: Number(targetPokemonData?.id),
+                    pokemonName: targetPokemonData?.name,
+                    runData: {
+                        pokedleGuessedIds: guesses.map(g => Number(g.id))
+                    }
+                }
                 : undefined
         });
     }
@@ -119,6 +150,19 @@
                 isGameOver = true;
                 recordPokedleStats(false, guesses.length);
                 showEndModal = true;
+            } else if (isDailyMode) {
+                // Save in-progress daily guesses so refreshing doesn't reset the daily attempt
+                saveDailyChallengeRun({
+                    date: dailySeedStr,
+                    quiz: 'pokedle',
+                    completed: false,
+                    score: guesses.length,
+                    pokemonId: Number(targetPokemonData?.id),
+                    pokemonName: targetPokemonData?.name,
+                    runData: {
+                        pokedleGuessedIds: guesses.map(g => Number(g.id))
+                    }
+                });
             }
         } catch (error) {
             showErrorToast('Error checking guess.');
@@ -257,6 +301,26 @@
         </div>
 
         <div class="max-w-7xl mx-auto">
+            {#if isDailyMode && isGameOver && targetPokemonData}
+                <div class="daily-run-summary max-w-2xl mx-auto mb-6 p-4 rounded-xl bg-amber-50 dark:bg-amber-950/60 border-2 border-amber-300 dark:border-amber-700 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div>
+                        <div class="font-bold text-amber-900 dark:text-amber-200 text-sm">
+                            📅 {getLabel(languageCode, 'dailyAlreadyPlayed')}
+                        </div>
+                        <div class="text-xs text-amber-800 dark:text-amber-300 mt-1">
+                            {getLabel(languageCode, 'correctAnswer')}: <span class="font-black">{targetPokemonData.name}</span> ({guesses.length}/{settings.guessLimit})
+                        </div>
+                    </div>
+                    <button
+                        type="button"
+                        on:click={() => { selectedPokedexPokemon = { id: Number(targetPokemonData.id), name: targetPokemonData.name }; }}
+                        class="px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs shrink-0 cursor-pointer"
+                    >
+                        📖 {getLabel(languageCode, 'pokedexMiniCard')}: {targetPokemonData.name}
+                    </button>
+                </div>
+            {/if}
+
             <!-- Autocomplete Search Input -->
             <div class="max-w-md mx-auto mb-8 relative z-30">
                 <Autocomplete
@@ -346,12 +410,13 @@
     <QuizEndModal
         isWin={hasWon}
         score={guesses.length}
-        correctAnswer={{ id: targetPokemonData.id, name: targetPokemonData.name }}
+        correctAnswer={{ id: targetPokemonData.id, name: targetPokemonData.name, isCorrect: true }}
         {languageCode}
         gameMode="pokedle"
+        isDailyChallenge={isDailyMode}
         on:home={onBackToHub}
         on:changeSettings={onBackToSettings}
-        on:retry={startNewGame}
+        on:retry={() => startNewGame(true)}
         on:close={() => { showEndModal = false; }}
     />
 {/if}

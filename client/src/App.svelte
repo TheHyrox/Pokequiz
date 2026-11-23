@@ -316,7 +316,7 @@
                             <span>🟩</span>
                             <span>{getLabel(currentLanguageCode, 'pokedle_quiz')}</span>
                             {#if dailyStatuses.pokedle?.completed}
-                                <span class="text-xs">✓</span>
+                                <span class="text-xs px-1.5 py-0.5 rounded bg-green-200 dark:bg-green-800 text-green-900 dark:text-green-100">✓ {getLabel(currentLanguageCode, 'dailyViewRun')}</span>
                             {/if}
                         </button>
 
@@ -328,7 +328,7 @@
                             <span>📝</span>
                             <span>{getLabel(currentLanguageCode, 'description_quiz')}</span>
                             {#if dailyStatuses.description?.completed}
-                                <span class="text-xs">✓</span>
+                                <span class="text-xs px-1.5 py-0.5 rounded bg-green-200 dark:bg-green-800 text-green-900 dark:text-green-100">✓ {getLabel(currentLanguageCode, 'dailyViewRun')}</span>
                             {/if}
                         </button>
 
@@ -340,7 +340,7 @@
                             <span>🔢</span>
                             <span>{getLabel(currentLanguageCode, 'number_quiz')}</span>
                             {#if dailyStatuses.number?.completed}
-                                <span class="text-xs">✓</span>
+                                <span class="text-xs px-1.5 py-0.5 rounded bg-green-200 dark:bg-green-800 text-green-900 dark:text-green-100">✓ {getLabel(currentLanguageCode, 'dailyViewRun')}</span>
                             {/if}
                         </button>
                     </div>

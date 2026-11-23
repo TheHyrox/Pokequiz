@@ -20,7 +20,7 @@
     import { getLabel } from './lib/translations';
     import { createToastHandlers } from './lib/toastUtils';
     import { normalizeText } from '../../shared/utils/textUtils.js';
-    import { saveDescriptionSettings, recordQuizGameResult } from './lib/storage';
+    import { saveDescriptionSettings, recordQuizGameResult, getDailyChallengeStatus, saveDailyChallengeRun } from './lib/storage';
     import { CHALLENGE_QUESTION_COUNT, DEFAULT_QUIZ_SETTINGS, HARDCORE_INITIAL_STATE, HARDCORE_MAX_LIVES, HARDCORE_LIFE_REWARD_THRESHOLD } from '../../shared/constants';
     import type { DescriptionQuizSettings, PokemonOption, ChallengeQuestion, ToastState, HardcoreModeState } from '../../shared/types';
 
@@ -69,6 +69,8 @@
     let currentStreakInRun = 0;
     let bestStreakInRun = 0;
     let selectedPokedexPokemon: { id: number; name: string } | null = null;
+    $: isDailyMode = Boolean(settings.isDailyChallenge || settings.dailySeed);
+    $: dailySeedStr = settings.dailySeed || getTodayDateString();
 
     // Toast state
     let toastState: ToastState = {
@@ -110,7 +112,7 @@
         disabledCards = true;
         showErrorToast(getLabel(languageCode, 'timeUp'));
 
-        if (settings.gameMode === 'challenge') {
+        if (settings.gameMode === 'challenge' || isDailyMode) {
             const correctOption = pokemonOptions.find(p => p.isCorrect);
             challengeQuestions.push({
                 questionNumber: currentQuestion,
@@ -369,7 +371,7 @@
     }
 
     function recordDescStats(won: boolean, finalScore: number): void {
-        const isDaily = Boolean(settings.isDailyChallenge || settings.dailySeed);
+        const isDaily = isDailyMode;
         const modeKey = isDaily ? 'daily' : settings.gameMode;
         recordQuizGameResult({
             quizSlug: 'description',
@@ -378,7 +380,14 @@
             score: finalScore,
             runStreak: Math.max(bestStreakInRun, currentStreakInRun),
             dailyChallenge: isDaily
-                ? { date: settings.dailySeed || getTodayDateString(), pokemonId: lastCorrectAnswer?.id }
+                ? {
+                    date: dailySeedStr,
+                    pokemonId: lastCorrectAnswer?.id,
+                    pokemonName: lastCorrectAnswer?.name,
+                    runData: {
+                        descriptionQuestions: [...challengeQuestions]
+                    }
+                }
                 : undefined
         });
     }
@@ -390,7 +399,11 @@
         if (timerInterval) clearInterval(timerInterval);
         isWin = true;
         recordDescStats(true, score);
-        showEndModal = true;
+        if (isDailyMode && challengeQuestions.length > 0) {
+            showChallengeReview = true;
+        } else {
+            showEndModal = true;
+        }
     }
 
     /**
@@ -400,7 +413,11 @@
         if (timerInterval) clearInterval(timerInterval);
         isWin = false;
         recordDescStats(settings.gameMode === 'infinite' && score > 0, score);
-        showEndModal = true;
+        if (isDailyMode && challengeQuestions.length > 0) {
+            showChallengeReview = true;
+        } else {
+            showEndModal = true;
+        }
     }
 
     /**
@@ -411,6 +428,13 @@
     }
 
     function handleEndModalRetry(): void {
+        if (isDailyMode) {
+            showEndModal = false;
+            if (challengeQuestions.length > 0) {
+                showChallengeReview = true;
+            }
+            return;
+        }
         // Reset quiz state
         currentQuestion = 1;
         score = 0;
@@ -463,6 +487,23 @@
         }
 
         if (isCorrect) {
+            if (isDailyMode) {
+                const selectedOption = pokemonOptions.find(p => p.id === pokemonId);
+                const correctOption = pokemonOptions.find(p => p.isCorrect);
+                challengeQuestions = [
+                    ...challengeQuestions,
+                    {
+                        questionNumber: currentQuestion,
+                        description: description,
+                        correctPokemonName: correctOption?.name || '',
+                        correctPokemonId: correctOption?.id || 0,
+                        userAnswerId: pokemonId,
+                        userAnswerName: selectedOption?.name || '',
+                        allOptions: [...pokemonOptions],
+                        isCorrect: errorCountThisQuestion === 0
+                    }
+                ];
+            }
             if (errorCountThisQuestion === 0) {
                 currentStreakInRun++;
                 if (currentStreakInRun > bestStreakInRun) bestStreakInRun = currentStreakInRun;
@@ -474,6 +515,18 @@
             const points = calculatePoints();
             score += points;
             errorCountThisQuestion = 0;
+
+            if (isDailyMode && currentQuestion < totalQuestions) {
+                saveDailyChallengeRun({
+                    date: dailySeedStr,
+                    quiz: 'description',
+                    completed: false,
+                    score,
+                    pokemonId: lastCorrectAnswer?.id,
+                    pokemonName: lastCorrectAnswer?.name,
+                    runData: { descriptionQuestions: [...challengeQuestions] }
+                });
+            }
 
             if (settings.gameMode === 'infinite') {
                 loadQuestion();
@@ -542,7 +595,23 @@
     // Save settings to local storage
     saveDescriptionSettings(settings);
 
-    loadQuestion();
+    const savedDailyDesc = (settings.isDailyChallenge || settings.dailySeed)
+        ? getDailyChallengeStatus('description', settings.dailySeed || getTodayDateString())
+        : null;
+
+    if (savedDailyDesc && savedDailyDesc.completed && savedDailyDesc.runData?.descriptionQuestions?.length) {
+        score = savedDailyDesc.score;
+        challengeQuestions = [...savedDailyDesc.runData.descriptionQuestions];
+        loading = false;
+        showChallengeReview = true;
+    } else {
+        if (savedDailyDesc && !savedDailyDesc.completed && savedDailyDesc.runData?.descriptionQuestions?.length) {
+            score = savedDailyDesc.score || 0;
+            challengeQuestions = [...savedDailyDesc.runData.descriptionQuestions];
+            currentQuestion = Math.min(CHALLENGE_QUESTION_COUNT, challengeQuestions.length + 1);
+        }
+        loadQuestion();
+    }
 
     onMount(async () => {
         // Preload all pokemon names to avoid repeated fetch requests during quiz
@@ -565,15 +634,24 @@
                 correctAnswer={lastCorrectAnswer}
                 {languageCode}
                 gameMode={settings.gameMode}
+                isDailyChallenge={isDailyMode}
                 on:home={handleEndModalHome}
                 on:changeSettings={handleEndModalChangeSettings}
                 on:retry={handleEndModalRetry}
+                on:close={() => {
+                    showEndModal = false;
+                    if (isDailyMode && challengeQuestions.length > 0) {
+                        showChallengeReview = true;
+                    }
+                }}
             />
         {:else if showChallengeReview}
             <ChallengeReviewScreen
                 {languageCode}
                 {challengeQuestions}
                 {onBackToHub}
+                customScoreText={isDailyMode && settings.gameMode !== 'challenge' ? `${score} pts` : ''}
+                dailyNoticeText={isDailyMode ? getLabel(languageCode, 'dailyAlreadyPlayed') : ''}
             />
         {:else}
             <!-- Quiz Header -->
