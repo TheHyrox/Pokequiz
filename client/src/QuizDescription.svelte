@@ -487,7 +487,7 @@
     });
 </script>
 
-<main class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 p-8 flex items-center justify-center">
+<main class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 p-8 flex items-center justify-center">
     <div class="max-w-4xl mx-auto w-full">
         {#if showEndModal}
             <QuizEndModal
@@ -526,7 +526,7 @@
 
             {#if loading}
                 <div class="text-center py-12">
-                    <p class="text-gray-600">{getLabel(languageCode, 'loading')}</p>
+                    <p class="text-gray-600 dark:text-gray-300">{getLabel(languageCode, 'loading')}</p>
                 </div>
             {:else}
                 <!-- Timer Display -->
@@ -535,8 +535,8 @@
                 {/if}
 
                 <!-- Description Section -->
-                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
-                    <p class="text-2xl text-gray-800 text-center leading-relaxed">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8 border border-transparent dark:border-gray-700">
+                    <p class="text-2xl text-gray-800 dark:text-gray-100 text-center leading-relaxed">
                         "{@html description}"
                     </p>
 
@@ -555,9 +555,9 @@
                 <!-- Pokemon Cards Grid or Hardcore Input -->
                 {#if settings.gameMode === 'hardcore'}
                     <div class="max-w-2xl mx-auto">
-                        <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8 border border-transparent dark:border-gray-700">
                             <div class="mb-4">
-                                <span class="block text-lg font-semibold text-gray-700 mb-2">
+                                <span class="block text-lg font-semibold text-gray-700 dark:text-gray-200 mb-2">
                                     {getLabel(languageCode, 'enterPokemonName')}
                                 </span>
                                 <Autocomplete

@@ -373,14 +373,14 @@
         <!-- Header -->
         <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
             <button
-                class="text-gray-600 hover:text-gray-800 font-medium flex items-center gap-2"
+                class="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white font-medium flex items-center gap-2"
                 on:click={onBackToSettings}
             >
                 {l('back')}
             </button>
-            <div class="text-xl md:text-2xl font-bold text-gray-800">
+            <div class="text-xl md:text-2xl font-bold text-gray-800 dark:text-gray-100">
                 {l('number_quiz')}
-                <span class="text-sm font-semibold text-blue-600 bg-blue-50 px-3 py-1 rounded-full ml-2">
+                <span class="text-sm font-semibold text-blue-600 dark:text-blue-300 bg-blue-50 dark:bg-blue-900/60 px-3 py-1 rounded-full ml-2">
                     {settings.subMode === 'normal' ? l('number_subModeNormal') : l('number_subModePoints')}
                 </span>
             </div>
@@ -392,17 +392,17 @@
                         {l('number_guessesLeft').replace('{0}', String(Math.max(0, guessesLeft)))}
                     </div>
                 {:else}
-                    <div class="text-xs md:text-sm font-semibold text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+                    <div class="text-xs md:text-sm font-semibold text-gray-500 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">
                         {l('number_unlimitedMode')}
                     </div>
                 {/if}
             {:else}
                 <!-- Points Mode Round indicator & running score -->
                 <div class="flex items-center gap-2">
-                    <span class="text-xs font-bold text-blue-700 bg-blue-100 px-3 py-1 rounded-full">
+                    <span class="text-xs font-bold text-blue-700 dark:text-blue-300 bg-blue-100 dark:bg-blue-900/60 px-3 py-1 rounded-full">
                         {l('number_round').replace('{0}', String(currentRound)).replace('{1}', String(TOTAL_ROUNDS))}
                     </span>
-                    <span class="text-xs font-bold text-gray-700 bg-gray-100 px-3 py-1 rounded-full">
+                    <span class="text-xs font-bold text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">
                         {pointsTotalScore.toLocaleString()} pts
                     </span>
                 </div>
@@ -430,14 +430,14 @@
             <!-- Revealed feedback banner in Points mode -->
             {#if roundRevealed && settings.subMode === 'points'}
                 <div transition:scale={{ duration: 250 }} class="mt-4 w-full text-center">
-                    <div class="p-4 rounded-xl {roundDistance === 0 ? 'bg-green-100 border border-green-300' : 'bg-blue-50 border border-blue-200'}">
-                        <div class="text-2xl font-black {roundDistance === 0 ? 'text-green-700' : 'text-blue-700'} mb-1">
+                    <div class="p-4 rounded-xl {roundDistance === 0 ? 'bg-green-100 dark:bg-green-950/70 border border-green-300 dark:border-green-600' : 'bg-blue-50 dark:bg-blue-950/70 border border-blue-200 dark:border-blue-700'}">
+                        <div class="text-2xl font-black {roundDistance === 0 ? 'text-green-700 dark:text-green-300' : 'text-blue-700 dark:text-blue-300'} mb-1">
                             +{roundPointsEarned} pts {roundDistance === 0 ? '🎯' : ''}
                         </div>
-                        <div class="text-sm font-semibold text-gray-700">
-                            {l('number_targetWas')} <span class="font-black text-gray-900">#{String(targetPokemonId).padStart(4, '0')}</span> ({capitalizeFirst(targetPokemonName)})
+                        <div class="text-sm font-semibold text-gray-700 dark:text-gray-200">
+                            {l('number_targetWas')} <span class="font-black text-gray-900 dark:text-white">#{String(targetPokemonId).padStart(4, '0')}</span> ({capitalizeFirst(targetPokemonName)})
                         </div>
-                        <div class="text-xs text-gray-500 mt-1">
+                        <div class="text-xs text-gray-500 dark:text-gray-300 mt-1">
                             {l('number_yourGuess')} #{String(roundUserGuess).padStart(4, '0')} • {l('number_difference')} {roundDistance === 0 ? '0' : (roundUserGuess > targetPokemonId ? `+${roundDistance}` : `-${roundDistance}`)}
                         </div>
                     </div>

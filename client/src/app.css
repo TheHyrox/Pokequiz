@@ -27,10 +27,17 @@ html.dark .round-pokemon-name,
 html.dark .mode-name,
 html.dark .radio-text,
 html.dark .toggle-text,
+html.dark .toggle-label,
 html.dark .checkbox-label,
+html.dark .checkbox-label span,
+html.dark .radio-label span,
+html.dark .information-checkbox span,
 html.dark .slider-label,
 html.dark .stepper-label,
-html.dark .language-label {
+html.dark .language-label,
+html.dark .option-name,
+html.dark .guess-label,
+html.dark .hints-title {
     @apply text-gray-100;
 }
 
@@ -39,15 +46,179 @@ html.dark .subtitle,
 html.dark .game-description,
 html.dark .mode-description,
 html.dark .radio-description,
-html.dark .summary-score {
+html.dark .summary-score,
+html.dark .description,
+html.dark .disabled-hint,
+html.dark .checkbox-label.disabled span,
+html.dark .guess-attempt,
+html.dark .stat-label,
+html.dark .round-tag,
+html.dark .comp-label,
+html.dark .answer-label,
+html.dark .score-label {
     @apply text-gray-300;
+}
+
+html.dark .strength-value,
+html.dark .recommended-tag,
+html.dark .slider-value {
+    @apply text-blue-400;
 }
 
 html.dark .text-input,
 html.dark .number-input,
 html.dark .stepper-input,
 html.dark .language-select {
-    @apply bg-gray-700 border-gray-600 text-gray-100;
+    @apply bg-gray-700 border-gray-600 text-gray-100 placeholder-gray-400;
+}
+
+html.dark .text-input:disabled,
+html.dark .number-input:disabled,
+html.dark .stepper-input:disabled {
+    @apply bg-gray-800 border-gray-700 text-gray-500;
+}
+
+/* Checkboxes and radio inputs in dark mode */
+html.dark input[type="checkbox"]:not(:checked),
+html.dark input[type="radio"]:not(:checked) {
+    @apply bg-gray-700 border-gray-500;
+}
+
+html.dark input[type="checkbox"]:disabled,
+html.dark input[type="radio"]:disabled {
+    @apply bg-gray-800 border-gray-700 opacity-50;
+}
+
+/* Range sliders in dark mode */
+html.dark input[type="range"] {
+    @apply bg-gray-700 rounded-lg;
+}
+
+/* Stepper buttons in dark mode */
+html.dark .stepper-btn {
+    @apply bg-gray-800 border-gray-600 text-blue-400;
+}
+
+html.dark .stepper-btn:hover:not(:disabled) {
+    @apply bg-gray-700 border-blue-400;
+}
+
+html.dark .stepper-btn:disabled {
+    @apply bg-gray-800/50 border-gray-700 text-gray-600;
+}
+
+/* Select All / Deselect All buttons in dark mode */
+html.dark .select-all {
+    @apply border-green-500 text-green-400;
+}
+
+html.dark .select-all:hover {
+    @apply bg-green-900/40;
+}
+
+html.dark .deselect-all {
+    @apply border-red-500 text-red-400;
+}
+
+html.dark .deselect-all:hover {
+    @apply bg-red-900/40;
+}
+
+/* Hints in Information Quiz and Challenge Review */
+html.dark .hints-container {
+    @apply bg-blue-950/50 border-blue-500;
+}
+
+html.dark .hint-item {
+    @apply bg-blue-950/60 border-blue-500 text-gray-100;
+}
+
+html.dark .hint-item.fake {
+    @apply bg-amber-950/60 border-amber-500;
+}
+
+html.dark .hint-type {
+    @apply text-blue-300;
+}
+
+html.dark .hint-value {
+    @apply text-gray-100;
+}
+
+/* Option cards & Guess rows in dark mode */
+html.dark .pokemon-card.disabled .card-inner {
+    @apply bg-gray-800/50 border-gray-700 opacity-50;
+}
+
+html.dark .option-neutral {
+    @apply bg-gray-700/50 border-gray-600;
+}
+
+html.dark .option-correct,
+html.dark .guess-row.correct {
+    @apply bg-green-950/60 border-green-500 text-gray-100;
+}
+
+html.dark .option-wrong,
+html.dark .guess-row.wrong {
+    @apply bg-red-950/60 border-red-500 text-gray-100;
+}
+
+html.dark .hint-higher {
+    @apply bg-blue-900/70 text-blue-200;
+}
+
+html.dark .hint-lower {
+    @apply bg-orange-900/70 text-orange-200;
+}
+
+/* End Modal & Review cards in dark mode */
+html.dark .modal-header.win {
+    @apply from-green-950/80 to-emerald-950/80;
+}
+
+html.dark .modal-header.win .modal-title {
+    @apply text-green-400;
+}
+
+html.dark .modal-header.lose {
+    @apply from-red-950/80 to-orange-950/80;
+}
+
+html.dark .modal-header.lose .modal-title {
+    @apply text-red-400;
+}
+
+html.dark .score-section {
+    @apply from-gray-700/80 to-gray-700/60;
+}
+
+html.dark .score-value {
+    @apply text-blue-400;
+}
+
+html.dark .answer-card {
+    @apply from-purple-950/60 to-pink-950/60 border-purple-700;
+}
+
+html.dark .answer-name {
+    @apply text-purple-300;
+}
+
+html.dark .timer-display:not(.timer-danger) {
+    @apply bg-blue-950/80 text-blue-300 border border-blue-700;
+}
+
+html.dark .timer-display.timer-danger {
+    @apply bg-red-950/80 text-red-300 border border-red-700;
+}
+
+html.dark .round-card {
+    @apply bg-gray-800 border-gray-700;
+}
+
+html.dark .stat-value {
+    @apply text-gray-100;
 }
 
 html.dark .suggestions-dropdown {
@@ -82,6 +253,7 @@ html.dark .generation-checkbox:hover {
 }
 
 html.dark .radio-label:has(input:checked),
+html.dark .game-mode-option:has(input:checked),
 html.dark .generation-checkbox:has(input:checked) {
     @apply bg-blue-900/40 border-blue-500;
 }
@@ -89,4 +261,5 @@ html.dark .generation-checkbox:has(input:checked) {
 html.dark .separator {
     @apply bg-gray-700;
 }
+
 

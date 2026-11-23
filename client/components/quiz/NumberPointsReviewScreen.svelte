@@ -49,7 +49,7 @@
         <button on:click={handleHome} class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg font-medium transition-colors">
             {l('back')}
         </button>
-        <div class="text-sm font-semibold text-gray-500">
+        <div class="text-sm font-semibold text-gray-500 dark:text-gray-300">
             {l('number_quiz')} • {l('number_subModePoints')}
         </div>
     </div>
@@ -57,10 +57,10 @@
     <!-- Summary Total Card -->
     <div class="summary-hero-card mb-8">
         <div class="text-center">
-            <h1 class="text-3xl md:text-4xl font-black text-gray-800 mb-2">
+            <h1 class="text-3xl md:text-4xl font-black text-gray-800 dark:text-gray-100 mb-2">
                 {l('number_summary')}
             </h1>
-            <p class="text-gray-600 font-medium mb-6">
+            <p class="text-gray-600 dark:text-gray-300 font-medium mb-6">
                 {perfectRoundsCount > 0 ? `🎯 ${perfectRoundsCount} ${l('number_exact')}` : ''}
             </p>
 
@@ -92,13 +92,13 @@
     <!-- 10 Rounds Details List -->
     <div class="rounds-grid mb-8">
         {#each rounds as round (round.roundNumber)}
-            <div class="round-card {round.distance === 0 ? 'border-green-400 bg-green-50/40' : round.points >= 750 ? 'border-blue-300 bg-white' : 'border-gray-200 bg-white'}">
+            <div class="round-card {round.distance === 0 ? 'border-green-400 bg-green-50/40 dark:bg-green-950/30 dark:border-green-500' : round.points >= 750 ? 'border-blue-300 dark:border-blue-500 bg-white dark:bg-gray-800' : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800'}">
                 <!-- Round header -->
                 <div class="round-header">
                     <span class="round-tag">
                         {l('number_round').replace('{0}', String(round.roundNumber)).replace('{1}', '10')}
                     </span>
-                    <span class="round-points-tag {round.distance === 0 ? 'bg-green-500 text-white' : round.points >= 750 ? 'bg-blue-500 text-white' : round.points >= 500 ? 'bg-amber-500 text-white' : 'bg-gray-200 text-gray-700'}">
+                    <span class="round-points-tag {round.distance === 0 ? 'bg-green-500 text-white' : round.points >= 750 ? 'bg-blue-500 text-white' : round.points >= 500 ? 'bg-amber-500 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200'}">
                         +{round.points} pts
                     </span>
                 </div>
@@ -118,15 +118,15 @@
                         <div class="comparison-grid">
                             <div class="comp-item">
                                 <span class="comp-label">{l('number_targetWas')}</span>
-                                <span class="comp-val text-green-700 font-black">#{String(round.pokemonId).padStart(4, '0')}</span>
+                                <span class="comp-val text-green-700 dark:text-green-400 font-black">#{String(round.pokemonId).padStart(4, '0')}</span>
                             </div>
                             <div class="comp-item">
                                 <span class="comp-label">{l('number_yourGuess')}</span>
-                                <span class="comp-val {round.distance === 0 ? 'text-green-700 font-black' : 'text-gray-800 font-bold'}">#{String(round.userGuess).padStart(4, '0')}</span>
+                                <span class="comp-val {round.distance === 0 ? 'text-green-700 dark:text-green-400 font-black' : 'text-gray-800 dark:text-gray-100 font-bold'}">#{String(round.userGuess).padStart(4, '0')}</span>
                             </div>
                             <div class="comp-item">
                                 <span class="comp-label">{l('number_difference')}</span>
-                                <span class="comp-val {round.distance === 0 ? 'text-green-600 font-bold' : 'text-orange-600 font-bold'}">
+                                <span class="comp-val {round.distance === 0 ? 'text-green-600 dark:text-green-400 font-bold' : 'text-orange-600 dark:text-orange-400 font-bold'}">
                                     {#if round.distance === 0}
                                         ✓ 0
                                     {:else if round.userGuess > round.pokemonId}
