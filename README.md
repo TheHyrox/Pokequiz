@@ -9,6 +9,7 @@ Test your Pokémon knowledge with multiple quiz modes and customizable difficult
 - [Stack](#stack)
 - [Features](#features)
 - [How to Build and Play](#how-to-build-and-play)
+- [Testing & Verification](#testing--verification)
 - [Contributing](#contributing)
 - [License](#license)
 - [Special Thanks](#special-thanks)
@@ -18,10 +19,10 @@ Test your Pokémon knowledge with multiple quiz modes and customizable difficult
 ## Stack
 
 **Frontend:**
-- [Svelte 4](https://svelte.dev/) - Reactive UI framework
+- [Svelte 5](https://svelte.dev/) - Reactive UI framework
 - [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
 - [Vite](https://vitejs.dev/) - Lightning-fast build tool
-- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS (with Dark Mode support)
 
 **Backend:**
 - [Node.js](https://nodejs.org/) - JavaScript runtime
@@ -32,24 +33,20 @@ Test your Pokémon knowledge with multiple quiz modes and customizable difficult
 
 ## Features
 
-- **📝 Description Quiz** - Guess the Pokémon from its Pokédex description
-- **🎮 Sprites Quiz** - Guess the Pokémon from its sprite image
+- **📝 Description Quiz** - Guess the Pokémon from its Pokédex description (with word truncation & scrambling)
+- **ℹ️ Information Quiz** - Guess the Pokémon from its characteristics (types, abilities, weight, height, habitat, egg group, color, shape, category, generation) with progressive hints and optional fake hints
+- **🎮 Sprites Quiz** - Guess the Pokémon from its sprite image (Default, Home, Official Artwork; front/back views; blur, pixelate, silhouette, and random rotation effects)
+- **🟩 Quiz Pokedle** - Wordle-style deduction game with color-coded attribute feedback and higher/lower indicators
+- **🔢 Number Quiz** - Guess the National Pokédex number (1–1025) from the sprite in Normal mode (Higher/Lower hints) or 10-round Points mode (0–1,000 pts per round based on accuracy)
 - **🎯 Multiple Game Modes**
-  - Score Mode - 10 rounds, be as accurate and fast as possible
-  - Infinite Mode - Quiz without limits, only your skills
-  - Challenge Mode - 10 rounds with final review (like an exam)
-  - Hardcore Mode - Limited lives and no hints
-- **🌍 Multi-language Support** - English, French, Spanish, German, Italian, Japanese, Korean, Chinese (Simplified & Traditional)
-- **⚙️ Customizable Settings**
-  - Time limit per rounds
-  - Select specific Pokémon generations (Gen 1-9)
-  - Word truncation difficulty levels
-  - Word scrambling option
-  - Multiple sprite sources
-  - Visual effects (pixelate, blur)
-
-And more features to come! I'm thinking on addings new quiz modes, more customization options, and improving the overall experience.
-
+  - Score / Easy / Normal Modes - 10 rounds, earn more points for fewer errors
+  - Infinite Mode - Quiz without limits, keep your streak alive
+  - Challenge Mode - 10 rounds with final exam-style review screen
+  - Hardcore Mode - 3 lives, autocomplete input or timed progressive hints
+  - Points Mode (Number Quiz) - 10 rounds, up to 10,000 points total based on distance
+- **🌍 Multi-language Support** - English, French, Spanish, German, Italian, Japanese (Kanji & Hiragana), Korean, Chinese (Simplified & Traditional) with automatic English fallback
+- **🌙 Dark Mode** - Toggle between light and dark themes, persisted in `localStorage`
+- **🔗 URL Hash Routing** - Browser Back/Forward navigation across the hub, quiz settings, and active quizzes
 
 ![](./screenshots/Main_Page.png)
 <details> <summary><b>More screenshots</b></summary>
@@ -91,6 +88,30 @@ This will start:
 - **Client**: http://localhost:5173 (Vite dev server, you must go on this one)
 - **Server**: http://localhost:3000 (Express server)
 
+### Production Build
+
+```bash
+npm run build
+npm start
+```
+
+---
+
+## Testing & Verification
+
+```bash
+# Type-check the codebase
+npm run check
+
+# Run the automated end-to-end test suite
+npm test
+
+# Re-run the Pokémon data enrichment script (base stats, cries, evolution chains)
+npm run enrich
+```
+
+---
+
 ## Contributing
 
 We welcome contributions! Here's how you can help:
@@ -107,7 +128,7 @@ Found a bug or have a feature request?
 Want to contribute code?
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/newquiz`)
-3. Make your changes
+3. Register new quizzes in `client/src/lib/quizRegistry.ts`
 4. Commit your work (`git commit -m 'Add new quiz mode'`)
 5. Push to your branch (`git push origin feature/newquiz`)
 6. [Open a Pull Request](https://github.com/TheHyrox/Pokequiz/pulls) with a description of your changes
@@ -116,7 +137,7 @@ Want to contribute code?
 
 - Write TypeScript
 - Follow existing code structure and naming conventions
-- Test your changes before submitting
+- Test your changes before submitting (`npm run check && npm test`)
 
 ---
 

@@ -8,7 +8,7 @@
     import GenerationSelector from './quiz/GenerationSelector.svelte';
     import SpriteEffectsSelector from './quiz/SpriteEffectsSelector.svelte';
     import Toast from './Toast.svelte';
-    import { getLabel } from '../src/lib/translations';
+    import { getLabel, type LabelKey } from '../src/lib/translations';
     import { createToastHandlers } from '../src/lib/toastUtils';
     import { ALL_GENERATIONS, DEFAULT_NUMBER_QUIZ_SETTINGS } from '../../shared/constants';
     import { saveNumberSettings } from '../src/lib/storage';
@@ -70,8 +70,8 @@
         onStartQuiz(settings);
     }
 
-    function l(key: string): string {
-        return getLabel(languageCode, key as any);
+    function l(key: LabelKey): string {
+        return getLabel(languageCode, key);
     }
 </script>
 
@@ -140,11 +140,11 @@
             {:else}
                 <!-- Points Mode Info Box -->
                 <div class="settings-section">
-                    <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg text-blue-900 text-sm space-y-2">
+                    <div class="p-4 bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-700 rounded-lg text-blue-900 dark:text-blue-100 text-sm space-y-2">
                         <div class="font-semibold flex items-center gap-2">
                             <span>ℹ️</span> {l('number_subModePoints')} (10 Rounds)
                         </div>
-                        <p class="text-xs leading-relaxed text-blue-800">
+                        <p class="text-xs leading-relaxed text-blue-800 dark:text-blue-200">
                             • {l('number_pointsRule1')}<br />
                             • {l('number_pointsRule2')}<br />
                             • {l('number_pointsRule3')}

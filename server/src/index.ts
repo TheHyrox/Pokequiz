@@ -56,10 +56,76 @@ app.get('/api/health', (req, res) => {
 
 app.get('/api/quiz', (req, res) => {
     res.json([
-        { id: 'description', name: 'Description Quiz' },
-        { id: 'information', name: 'Information Quiz' },
-        { id: 'sprite', name: 'Sprite Quiz' }
+        {
+            id: 'description-quiz',
+            slug: 'description',
+            name: 'Description Quiz',
+            titleKey: 'description_quiz',
+            descriptionKey: 'description_guessFromDescription',
+            icon: '📝',
+            modes: ['score', 'infinite', 'challenge', 'hardcore'],
+            difficulty: 'Medium'
+        },
+        {
+            id: 'information-quiz',
+            slug: 'information',
+            name: 'Information Quiz',
+            titleKey: 'information_quiz',
+            descriptionKey: 'information_guessFromInfo',
+            icon: 'ℹ️',
+            modes: ['easy', 'normal', 'challenge', 'hardcore'],
+            difficulty: 'Hard'
+        },
+        {
+            id: 'sprites-quiz',
+            slug: 'sprites',
+            name: 'Sprites Quiz',
+            titleKey: 'sprites_quiz',
+            descriptionKey: 'sprites_guessFromSprite',
+            icon: '🎮',
+            modes: ['score', 'infinite', 'challenge', 'hardcore'],
+            difficulty: 'Easy'
+        },
+        {
+            id: 'pokedle-quiz',
+            slug: 'pokedle',
+            name: 'Quiz Pokedle',
+            titleKey: 'pokedle_quiz',
+            descriptionKey: 'pokedle_guessFromInfo',
+            icon: '🟩',
+            modes: ['wordle'],
+            difficulty: 'Medium'
+        },
+        {
+            id: 'number-quiz',
+            slug: 'number',
+            name: 'Number Quiz',
+            titleKey: 'number_quiz',
+            descriptionKey: 'number_guessFromSprite',
+            icon: '🔢',
+            modes: ['normal', 'points'],
+            difficulty: 'Hard'
+        }
     ]);
+});
+
+app.get('/api/pokemon/batch/:lang', async (req, res) => {
+    try {
+        const langCode = getLanguageCode(req.params.lang);
+        const idsParam = typeof req.query.ids === 'string' ? req.query.ids : '';
+        const ids = idsParam.split(',').map(s => s.trim()).filter(Boolean).slice(0, 50);
+        const results: Record<string, any> = {};
+        for (const id of ids) {
+            const enriched = await getLocalizedEnrichedPokemon(id, langCode);
+            if (enriched) {
+                results[id] = enriched;
+            }
+        }
+        res.json(results);
+    } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+        res.status(400).json({ error: errorMessage });
+    }
 });
 
 app.get('/api/pokemon/names/:lang', async (req, res) => {

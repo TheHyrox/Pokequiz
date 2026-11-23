@@ -1,142 +1,150 @@
 <script lang="ts">
     /**
      * @brief Main application component
-     * @description Hub for navigating between games and settings
+     * @description Hub for navigating between games and settings with URL hash routing and dark mode
      */
     import { onMount } from 'svelte';
-    import DescriptionQuizSettings from '../components/DescriptionQuizSettings.svelte';
-    import SpriteQuizSettings from '../components/SpriteQuizSettings.svelte';
-    import InformationQuizSettings from '../components/InformationQuizSettings.svelte';
-    import PokedleQuizSettings from '../components/PokedleQuizSettings.svelte';
-    import NumberQuizSettingsComponent from '../components/NumberQuizSettings.svelte';
-    import DescriptionQuiz from './QuizDescription.svelte';
-    import SpritesQuiz from './QuizSprites.svelte';
-    import QuizInformation from './QuizInformation.svelte';
-    import QuizPokedle from './QuizPokedle.svelte';
-    import QuizNumber from './QuizNumber.svelte';
     import LanguageSelector from '../components/LanguageSelector.svelte';
     import { getLabel, LANGUAGE_ID_TO_CODE } from './lib/translations';
-    import { getCachedDescriptionSettings, getCachedSpriteSettings, getCachedInformationSettings, getCachedPokedleSettings, getCachedNumberSettings } from './lib/storage';
-    import type { DescriptionQuizSettings as QuizSettingsType, SpriteQuizSettings as SpriteQuizSettingsType, InformationQuizSettings as InformationQuizSettingsType, PokedleQuizSettings as PokedleQuizSettingsType, NumberQuizSettings as NumberQuizSettingsType } from '../../shared/types';
+    import {
+        getCachedLanguageId,
+        saveLanguageId,
+        getCachedDarkMode,
+        saveDarkMode
+    } from './lib/storage';
+    import { QUIZ_REGISTRY, QUIZ_REGISTRY_MAP, type QuizRegistryEntry } from './lib/quizRegistry';
 
-    interface Game {
-        id: string;
-        name: string;
-        description: string;
-        icon: string;
-    }
-
-    let games: Game[] = [
-        {
-            id: 'description-quiz',
-            name: 'Description Quiz',
-            description: 'Guess the Pokemon from its Pokédex description',
-            icon: '📝'
-        },
-        {
-            id: 'information-quiz',
-            name: 'Information Quiz',
-            description: 'Guess the Pokemon from its characteristics',
-            icon: 'ℹ️'
-        },
-        {
-            id: 'sprites-quiz',
-            name: 'Sprites Quiz',
-            description: 'Guess the Pokemon from its sprite',
-            icon: '🎮'
-        },
-        {
-            id: 'pokedle-quiz',
-            name: 'Quiz Pokedle',
-            description: 'Guess the Pokemon with Wordle-style feedback',
-            icon: '🟩'
-        },
-        {
-            id: 'number-quiz',
-            name: 'Number Quiz',
-            description: 'Guess the Pokédex number or the Pokémon',
-            icon: '🔢'
-        }
-    ];
-
-    let selectedGame: Game | null = null;
+    let games: QuizRegistryEntry[] = QUIZ_REGISTRY;
+    let selectedGame: QuizRegistryEntry | null = null;
     let quizStarted = false;
-    let quizSettings: QuizSettingsType | null = null;
-    let spriteQuizSettings: SpriteQuizSettingsType | null = null;
-    let informationQuizSettings: InformationQuizSettingsType | null = null;
-    let pokedleQuizSettings: PokedleQuizSettingsType | null = null;
-    let numberQuizSettings: NumberQuizSettingsType | null = null;
-    let selectedLanguageId: number = typeof window !== 'undefined' && localStorage.getItem('selectedLanguageId') 
-        ? parseInt(localStorage.getItem('selectedLanguageId')!) 
-        : 9;
-    let showingSettingsAfterQuiz = false;
+    let activeQuizSettings: any = null;
+    let selectedLanguageId: number = getCachedLanguageId() ?? 9;
+    let isDarkMode: boolean = getCachedDarkMode();
+    let isHandlingPopState = false;
 
-    // Derive language code from shared constants (removes duplicate mapping)
+    // Derive language code from shared constants
     $: currentLanguageCode = LANGUAGE_ID_TO_CODE[selectedLanguageId] || 'en';
 
-    // Persist language selection
+    // Persist language selection via storage.ts
     $: if (typeof window !== 'undefined') {
-        localStorage.setItem('selectedLanguageId', selectedLanguageId.toString());
+        saveLanguageId(selectedLanguageId);
     }
 
-    onMount(async () => {
-        try {
-            const response = await fetch('/api/quiz');
-            if (response.ok) {
-                const apiQuizzes = await response.json();
-                console.log('Quizzes from API:', apiQuizzes);
-            }
-        } catch (error) {
-            console.error('Failed to fetch quizzes:', error);
+    // Apply and persist dark mode
+    $: if (typeof document !== 'undefined') {
+        document.documentElement.classList.toggle('dark', isDarkMode);
+        saveDarkMode(isDarkMode);
+    }
+
+    function toggleDarkMode(): void {
+        isDarkMode = !isDarkMode;
+    }
+
+    /**
+     * @brief Sync current state to window.location.hash / History API
+     */
+    function updateUrlHash(replace: boolean = false): void {
+        if (typeof window === 'undefined' || isHandlingPopState) return;
+
+        let targetHash = '';
+        if (selectedGame) {
+            targetHash = quizStarted
+                ? `#/${selectedGame.slug}/play`
+                : `#/${selectedGame.slug}`;
         }
+
+        const currentHash = window.location.hash || '';
+        if (currentHash === targetHash) return;
+
+        const newUrl = targetHash || window.location.pathname + window.location.search;
+        if (replace) {
+            window.history.replaceState({ gameId: selectedGame?.id ?? null, quizStarted }, '', newUrl);
+        } else {
+            window.history.pushState({ gameId: selectedGame?.id ?? null, quizStarted }, '', newUrl);
+        }
+    }
+
+    /**
+     * @brief Restore state from window.location.hash
+     */
+    function syncStateFromUrl(): void {
+        if (typeof window === 'undefined') return;
+        isHandlingPopState = true;
+
+        try {
+            const rawHash = window.location.hash.replace(/^#\/?/, '').trim();
+            if (!rawHash) {
+                selectedGame = null;
+                quizStarted = false;
+                activeQuizSettings = null;
+                return;
+            }
+
+            const [gameKey, subRoute] = rawHash.split('/');
+            const matchedGame = QUIZ_REGISTRY_MAP[gameKey];
+
+            if (!matchedGame) {
+                selectedGame = null;
+                quizStarted = false;
+                activeQuizSettings = null;
+                return;
+            }
+
+            selectedGame = matchedGame;
+
+            if (subRoute === 'play') {
+                const cached = activeQuizSettings ?? matchedGame.getCachedSettings();
+                if (cached) {
+                    activeQuizSettings = cached;
+                    quizStarted = true;
+                } else {
+                    quizStarted = false;
+                }
+            } else {
+                quizStarted = false;
+            }
+        } finally {
+            isHandlingPopState = false;
+        }
+    }
+
+    onMount(() => {
+        if (window.location.hash) {
+            syncStateFromUrl();
+        } else {
+            updateUrlHash(true);
+        }
+
+        const handleRouteChange = () => {
+            syncStateFromUrl();
+        };
+
+        window.addEventListener('popstate', handleRouteChange);
+        window.addEventListener('hashchange', handleRouteChange);
+
+        return () => {
+            window.removeEventListener('popstate', handleRouteChange);
+            window.removeEventListener('hashchange', handleRouteChange);
+        };
     });
 
     /**
      * @brief Selects a game to configure
      */
-    function selectGame(game: Game): void {
+    function selectGame(game: QuizRegistryEntry): void {
         selectedGame = game;
         quizStarted = false;
+        activeQuizSettings = null;
+        updateUrlHash();
     }
 
     /**
-     * @brief Starts the description quiz with given settings
+     * @brief Starts the currently selected quiz with given settings
      */
-    function handleStartDescriptionQuiz(settings: QuizSettingsType): void {
-        quizSettings = settings;
+    function handleStartQuiz(settings: any): void {
+        activeQuizSettings = settings;
         quizStarted = true;
-    }
-
-    /**
-     * @brief Starts the sprites quiz with given settings
-     */
-    function handleStartSpritesQuiz(settings: SpriteQuizSettingsType): void {
-        spriteQuizSettings = settings;
-        quizStarted = true;
-    }
-
-    /**
-     * @brief Starts the information quiz with given settings
-     */
-    function handleStartInformationQuiz(settings: InformationQuizSettingsType): void {
-        informationQuizSettings = settings;
-        quizStarted = true;
-    }
-
-    /**
-     * @brief Starts the pokedle quiz with given settings
-     */
-    function handleStartPokedleQuiz(settings: PokedleQuizSettingsType): void {
-        pokedleQuizSettings = settings;
-        quizStarted = true;
-    }
-
-    /**
-     * @brief Starts the number quiz with given settings
-     */
-    function handleStartNumberQuiz(settings: NumberQuizSettingsType): void {
-        numberQuizSettings = settings;
-        quizStarted = true;
+        updateUrlHash();
     }
 
     /**
@@ -145,27 +153,31 @@
     function backToHub(): void {
         selectedGame = null;
         quizStarted = false;
-        quizSettings = null;
-        spriteQuizSettings = null;
-        informationQuizSettings = null;
-        pokedleQuizSettings = null;
-        numberQuizSettings = null;
-        showingSettingsAfterQuiz = false;
+        activeQuizSettings = null;
+        updateUrlHash();
     }
 
-
     /**
-     * @brief Returns to settings from quiz with changeSettings button
+     * @brief Returns to settings from quiz
      */
     function backToSettingsFromQuiz(): void {
         quizStarted = false;
-        showingSettingsAfterQuiz = true;
+        updateUrlHash();
     }
 </script>
 
-<main class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100">
-    <!-- Language Selector -->
-    <div class="absolute top-6 right-6">
+<main class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 transition-colors duration-200">
+    <!-- Top Right Controls: Dark Mode Toggle & Language Selector -->
+    <div class="absolute top-6 right-6 z-40 flex items-center gap-3">
+        <button
+            type="button"
+            on:click={toggleDarkMode}
+            class="theme-toggle-btn"
+            aria-label={isDarkMode ? getLabel(currentLanguageCode, 'lightMode') : getLabel(currentLanguageCode, 'darkMode')}
+            title={isDarkMode ? getLabel(currentLanguageCode, 'lightMode') : getLabel(currentLanguageCode, 'darkMode')}
+        >
+            {isDarkMode ? '☀️' : '🌙'}
+        </button>
         <LanguageSelector
             bind:selectedLanguageId
             currentLanguageCode={currentLanguageCode}
@@ -174,35 +186,25 @@
 
     <!-- Main Hub -->
     {#if !selectedGame}
-        <div class="flex flex-col items-center justify-center min-h-screen px-4">
+        <div class="flex flex-col items-center justify-center min-h-screen px-4 py-16">
             <div class="text-center mb-12">
-                <h1 class="text-5xl font-bold text-gray-800 mb-4">
+                <h1 class="text-5xl font-bold text-gray-800 dark:text-gray-100 mb-4">
                     {getLabel(currentLanguageCode, 'pokequiz')}
                 </h1>
-                <p class="text-lg text-gray-600">
+                <p class="text-lg text-gray-600 dark:text-gray-300">
                     {getLabel(currentLanguageCode, 'testYourKnowledge')}
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl w-full">
                 {#each games as game (game.id)}
                     <button on:click={() => selectGame(game)} class="game-card">
                         <div class="game-icon">{game.icon}</div>
                         <h2 class="game-name">
-                            {game.id === 'description-quiz' ? getLabel(currentLanguageCode, 'description_quiz') :
-                             game.id === 'information-quiz' ? getLabel(currentLanguageCode, 'information_quiz') :
-                             game.id === 'sprites-quiz' ? getLabel(currentLanguageCode, 'sprites_quiz') :
-                             game.id === 'pokedle-quiz' ? getLabel(currentLanguageCode, 'pokedle_quiz') :
-                             game.id === 'number-quiz' ? getLabel(currentLanguageCode, 'number_quiz' as any) :
-                             game.name}
+                            {getLabel(currentLanguageCode, game.titleKey)}
                         </h2>
                         <p class="game-description">
-                            {game.id === 'description-quiz' ? getLabel(currentLanguageCode, 'description_guessFromDescription') :
-                             game.id === 'information-quiz' ? getLabel(currentLanguageCode, 'information_guessFromInfo') :
-                             game.id === 'sprites-quiz' ? getLabel(currentLanguageCode, 'sprites_guessFromSprite') :
-                             game.id === 'pokedle-quiz' ? getLabel(currentLanguageCode, 'pokedle_guessFromInfo' as any) :
-                             game.id === 'number-quiz' ? getLabel(currentLanguageCode, 'number_guessFromSprite' as any) :
-                             game.description}
+                            {getLabel(currentLanguageCode, game.descriptionKey)}
                         </p>
                     </button>
                 {/each}
@@ -210,95 +212,29 @@
         </div>
     {:else if !quizStarted}
         <!-- Settings Page -->
-        <div class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 p-8 flex flex-col">
+        <div class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 p-8 flex flex-col">
             <button
-                on:click={() => {
-                    if (showingSettingsAfterQuiz) {
-                        backToHub();
-                    } else {
-                        backToHub();
-                    }
-                }}
+                on:click={backToHub}
                 class="mb-6 px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg transition-colors w-fit"
             >
                 {getLabel(currentLanguageCode, 'back')}
             </button>
             <div class="flex items-center justify-center flex-1">
                 <div class="w-full">
-                    {#if selectedGame?.id === 'description-quiz'}
-                        <DescriptionQuizSettings
-                            onStartQuiz={handleStartDescriptionQuiz}
-                            languageCode={currentLanguageCode}
-                            initialSettings={getCachedDescriptionSettings()}
-                        />
-                    {:else if selectedGame?.id === 'information-quiz'}
-                        <InformationQuizSettings
-                            onStartQuiz={handleStartInformationQuiz}
-                            languageCode={currentLanguageCode}
-                            initialSettings={getCachedInformationSettings()}
-                        />
-                    {:else if selectedGame?.id === 'sprites-quiz'}
-                        <SpriteQuizSettings
-                            onStartQuiz={handleStartSpritesQuiz}
-                            languageCode={currentLanguageCode}
-                            initialSettings={getCachedSpriteSettings()}
-                        />
-                    {:else if selectedGame?.id === 'pokedle-quiz'}
-                        <PokedleQuizSettings
-                            onStartQuiz={handleStartPokedleQuiz}
-                            languageCode={currentLanguageCode}
-                            initialSettings={getCachedPokedleSettings()}
-                        />
-                    {:else if selectedGame?.id === 'number-quiz'}
-                        <NumberQuizSettingsComponent
-                            onStartQuiz={handleStartNumberQuiz}
-                            languageCode={currentLanguageCode}
-                            initialSettings={getCachedNumberSettings()}
-                        />
-                    {/if}
+                    <svelte:component
+                        this={selectedGame.SettingsComponent}
+                        onStartQuiz={handleStartQuiz}
+                        languageCode={currentLanguageCode}
+                        initialSettings={activeQuizSettings ?? selectedGame.getCachedSettings()}
+                    />
                 </div>
             </div>
         </div>
-    {:else if selectedGame?.id === 'description-quiz' && quizStarted && quizSettings}
-        <!-- Description Quiz Game -->
-        <DescriptionQuiz
-            settings={quizSettings}
-            onBackToHub={backToHub}
-            onBackToSettings={backToSettingsFromQuiz}
-            languageCode={currentLanguageCode}
-            languageId={selectedLanguageId}
-        />
-    {:else if selectedGame?.id === 'information-quiz' && quizStarted && informationQuizSettings}
-        <!-- Information Quiz Game -->
-        <QuizInformation
-            settings={informationQuizSettings}
-            onBackToHub={backToHub}
-            onBackToSettings={backToSettingsFromQuiz}
-            languageCode={currentLanguageCode}
-            languageId={selectedLanguageId}
-        />
-    {:else if selectedGame?.id === 'sprites-quiz' && quizStarted && spriteQuizSettings}
-        <!-- Sprites Quiz Game -->
-        <SpritesQuiz
-            settings={spriteQuizSettings}
-            onBackToHub={backToHub}
-            onBackToSettings={backToSettingsFromQuiz}
-            languageCode={currentLanguageCode}
-            languageId={selectedLanguageId}
-        />
-    {:else if selectedGame?.id === 'pokedle-quiz' && quizStarted && pokedleQuizSettings}
-        <!-- Pokedle Quiz Game -->
-        <QuizPokedle
-            settings={pokedleQuizSettings}
-            onBackToHub={backToHub}
-            onBackToSettings={backToSettingsFromQuiz}
-            languageCode={currentLanguageCode}
-            languageId={selectedLanguageId}
-        />
-    {:else if selectedGame?.id === 'number-quiz' && quizStarted && numberQuizSettings}
-        <!-- Number Quiz Game -->
-        <QuizNumber
-            settings={numberQuizSettings}
+    {:else if selectedGame && quizStarted && activeQuizSettings}
+        <!-- Active Quiz Game -->
+        <svelte:component
+            this={selectedGame.QuizComponent}
+            settings={activeQuizSettings}
             onBackToHub={backToHub}
             onBackToSettings={backToSettingsFromQuiz}
             languageCode={currentLanguageCode}
@@ -313,13 +249,23 @@
         padding: 0;
     }
 
+    .theme-toggle-btn {
+        @apply px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg;
+        @apply bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100;
+        @apply transition-all duration-200 cursor-pointer text-lg leading-none shadow-sm;
+    }
+
+    .theme-toggle-btn:hover {
+        @apply border-blue-400 shadow-md;
+    }
+
     .game-card {
-        @apply bg-white rounded-xl shadow-md p-8 transition-all duration-300 cursor-pointer;
-        @apply border-4 border-transparent;
+        @apply bg-white dark:bg-gray-800 rounded-xl shadow-md p-8 transition-all duration-200 cursor-pointer;
+        @apply border-2 border-transparent flex flex-col items-center text-center relative;
     }
 
     .game-card:hover {
-        @apply shadow-xl scale-110 border-blue-500;
+        @apply shadow-xl -translate-y-1 border-blue-500;
     }
 
     .game-icon {
@@ -327,10 +273,10 @@
     }
 
     .game-name {
-        @apply text-2xl font-bold text-gray-800 mb-2;
+        @apply text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2;
     }
 
     .game-description {
-        @apply text-gray-600;
+        @apply text-gray-600 dark:text-gray-300 text-sm;
     }
 </style>

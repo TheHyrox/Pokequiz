@@ -6,6 +6,8 @@
 import type { DescriptionQuizSettings, SpriteQuizSettings, InformationQuizSettings, PokedleQuizSettings, NumberQuizSettings } from '../../../shared/types';
 
 const LANGUAGE_KEY = 'pokequiz_language';
+const LEGACY_LANGUAGE_KEY = 'selectedLanguageId';
+const DARK_MODE_KEY = 'pokequiz_dark_mode';
 const DESCRIPTION_SETTINGS_KEY = 'pokequiz_description_settings';
 const SPRITE_SETTINGS_KEY = 'pokequiz_sprite_settings';
 const INFORMATION_SETTINGS_KEY = 'pokequiz_information_settings';
@@ -17,8 +19,10 @@ const NUMBER_SETTINGS_KEY = 'pokequiz_number_settings';
  */
 export function getCachedLanguageId(): number | null {
     if (typeof window === 'undefined') return null;
-    const cached = localStorage.getItem(LANGUAGE_KEY);
-    return cached ? parseInt(cached) : null;
+    const cached = localStorage.getItem(LANGUAGE_KEY) ?? localStorage.getItem(LEGACY_LANGUAGE_KEY);
+    if (!cached) return null;
+    const parsed = parseInt(cached, 10);
+    return isNaN(parsed) ? null : parsed;
 }
 
 /**
@@ -27,6 +31,23 @@ export function getCachedLanguageId(): number | null {
 export function saveLanguageId(languageId: number): void {
     if (typeof window === 'undefined') return;
     localStorage.setItem(LANGUAGE_KEY, languageId.toString());
+    localStorage.removeItem(LEGACY_LANGUAGE_KEY);
+}
+
+/**
+ * @brief Get cached dark mode state
+ */
+export function getCachedDarkMode(): boolean {
+    if (typeof window === 'undefined') return false;
+    return localStorage.getItem(DARK_MODE_KEY) === 'true';
+}
+
+/**
+ * @brief Save dark mode state to local storage
+ */
+export function saveDarkMode(isDark: boolean): void {
+    if (typeof window === 'undefined') return;
+    localStorage.setItem(DARK_MODE_KEY, isDark ? 'true' : 'false');
 }
 
 /**

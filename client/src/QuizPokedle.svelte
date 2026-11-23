@@ -66,7 +66,7 @@
         if (isGameOver || isSubmitting || guesses.length >= settings.guessLimit) return;
 
         if (guesses.some(g => Number(g.id) === Number(selectedOption.id))) {
-            showErrorToast(getLabel(languageCode, 'pokedle_alreadyGuessed' as any));
+            showErrorToast(getLabel(languageCode, 'pokedle_alreadyGuessed'));
             return;
         }
 
@@ -115,7 +115,7 @@
     }
 
     function getColumnLabel(col: PokedleColumn): string {
-        return getLabel(languageCode, `pokedle_col_${col}` as any);
+        return getLabel(languageCode, `pokedle_col_${col}`);
     }
 
     function checkMatch(guessedData: any, col: PokedleColumn): { state: 'green' | 'yellow' | 'red', arrow?: 'up' | 'down' } {
@@ -209,16 +209,16 @@
         <!-- Header -->
         <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4 mb-8">
             <button
-                class="text-gray-600 hover:text-gray-800 font-medium flex items-center gap-2"
+                class="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white font-medium flex items-center gap-2"
                 on:click={onBackToSettings}
             >
                 {getLabel(languageCode, 'back')}
             </button>
-            <div class="text-2xl font-bold text-gray-800">
-                {getLabel(languageCode, 'pokedle_quiz' as any)}
+            <div class="text-2xl font-bold text-gray-800 dark:text-gray-100">
+                {getLabel(languageCode, 'pokedle_quiz')}
             </div>
             <div class="text-sm font-semibold text-white bg-blue-500 px-4 py-2 rounded-full shadow-sm">
-                {getLabel(languageCode, 'pokedle_guessesLeft' as any).replace('{0}', String(Math.max(0, settings.guessLimit - guesses.length)))}
+                {getLabel(languageCode, 'pokedle_guessesLeft').replace('{0}', String(Math.max(0, settings.guessLimit - guesses.length)))}
             </div>
         </div>
 
@@ -243,24 +243,24 @@
             </div>
 
             <!-- Game Grid -->
-            <div class="overflow-x-auto bg-white rounded-xl shadow-lg border border-gray-100">
+            <div class="overflow-x-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700">
                 <table class="w-full text-left border-collapse min-w-max">
                     <thead>
-                        <tr class="bg-gray-50 border-b-2 border-gray-200">
-                            <th class="py-3 px-4 font-bold text-gray-700 text-center sticky left-0 bg-gray-50 z-10 border-r border-gray-200">Pokemon</th>
+                        <tr class="bg-gray-50 dark:bg-gray-900/70 border-b-2 border-gray-200 dark:border-gray-700">
+                            <th class="py-3 px-4 font-bold text-gray-700 dark:text-gray-200 text-center sticky left-0 bg-gray-50 dark:bg-gray-900 z-10 border-r border-gray-200 dark:border-gray-700">Pokemon</th>
                             {#each settings.selectedColumns as col}
-                                <th class="py-3 px-4 font-bold text-gray-700 text-center capitalize">{getColumnLabel(col)}</th>
+                                <th class="py-3 px-4 font-bold text-gray-700 dark:text-gray-200 text-center capitalize">{getColumnLabel(col)}</th>
                             {/each}
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-100">
+                    <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
                         {#each guesses as guess (guess.id)}
                             <tr transition:fade={{ duration: 300 }}>
                                 <!-- Pokemon Name and Sprite -->
-                                <td class="py-3 px-4 sticky left-0 bg-white z-10 border-r border-gray-100 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)]">
+                                <td class="py-3 px-4 sticky left-0 bg-white dark:bg-gray-800 z-10 border-r border-gray-100 dark:border-gray-700 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)]">
                                     <div class="flex flex-col items-center gap-1 min-w-[100px]">
                                         <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${guess.id}.png`} alt={guess.name} class="w-16 h-16 object-contain" />
-                                        <span class="font-bold text-gray-800 text-sm text-center">{guess.name}</span>
+                                        <span class="font-bold text-gray-800 dark:text-gray-100 text-sm text-center">{guess.name}</span>
                                     </div>
                                 </td>
                                 

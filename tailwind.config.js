@@ -1,7 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+    darkMode: 'class',
     content: [
-        "./client/src/**/*.{html,js,svelte,ts}",
+        "./index.html",
+        "./client/**/*.{html,js,svelte,ts}",
     ],
     theme: {
         extend: {},

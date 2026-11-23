@@ -647,7 +647,7 @@
     });
 </script>
 
-<main class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 p-8 flex items-center justify-center">
+<main class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 p-8 flex items-center justify-center">
     {#if showEndModal && correctAnswer}
         <QuizEndModal
             {isWin}
@@ -684,8 +684,8 @@
 
             {#if settings.gameMode === 'hardcore'}
                 <div class="flex gap-4 mb-8 items-stretch">
-                    <div class="bg-white rounded-lg shadow-lg p-8 w-[80%]">
-                        <h3 class="text-lg font-semibold mb-4">{getLabel(languageCode, 'information_hints')}</h3>
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 w-[80%] border border-transparent dark:border-gray-700">
+                        <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-100">{getLabel(languageCode, 'information_hints')}</h3>
                         <div class="hints-list space-y-2">
                             {#each revealedHints as hint, hintIndex (hintIndex)}
                                 <div class="hint-item">
@@ -696,14 +696,14 @@
                         </div>
                     </div>
 
-                    <div class="w-[20%] flex flex-col justify-center gap-4 bg-white rounded-lg shadow-lg p-4">
+                    <div class="w-[20%] flex flex-col justify-center gap-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border border-transparent dark:border-gray-700">
                         <TimerDisplay timeRemaining={hardcoreTimeRemaining} />
                         <HardcoreLivesDisplay lives={hardcoreLives} />
                     </div>
                 </div>
             {:else} 
-                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
-                    <h3 class="text-lg font-semibold mb-4">{getLabel(languageCode, 'information_hints')}</h3>
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8 border border-transparent dark:border-gray-700">
+                    <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-100">{getLabel(languageCode, 'information_hints')}</h3>
                     <div class="hints-list space-y-2">
                         {#each revealedHints as hint, hintIndex (hintIndex)}
                             <div class="hint-item">

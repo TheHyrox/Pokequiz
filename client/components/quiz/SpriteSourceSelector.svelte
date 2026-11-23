@@ -3,7 +3,7 @@
      * @brief Sprite source selector component
      * @description Select sprite quality/style (default, home, official)
      */
-    import { getLabel } from '../../src/lib/translations';
+    import { getLabel, type LabelKey } from '../../src/lib/translations';
     import type { SpriteSource } from '../../../shared/types';
 
     /** Currently selected sprite source */
@@ -17,12 +17,12 @@
      * @brief Get label for sprite source
      */
     function getSourceLabel(source: SpriteSource): string {
-        const sourceKeyMap: Record<SpriteSource, string> = {
+        const sourceKeyMap: Record<SpriteSource, LabelKey> = {
             'default': 'sprites_default',
             'home': 'sprites_home',
             'official': 'sprites_official'
         };
-        return getLabel(languageCode, sourceKeyMap[source] as any);
+        return getLabel(languageCode, sourceKeyMap[source]);
     }
 </script>
 

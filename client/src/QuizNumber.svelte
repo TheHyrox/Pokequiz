@@ -1,12 +1,13 @@
 <script lang="ts">
     import { onMount } from 'svelte';
+    import QuizHeader from '../components/quiz/QuizHeader.svelte';
     import QuizEndModal from '../components/quiz/QuizEndModal.svelte';
     import NumberPointsReviewScreen from '../components/quiz/NumberPointsReviewScreen.svelte';
     import Toast from '../components/Toast.svelte';
-    import { getLabel } from './lib/translations';
+    import { getLabel, type LabelKey } from './lib/translations';
     import { createToastHandlers } from './lib/toastUtils';
     import { getRandomPokemonId } from '../../shared/utils/pokemonUtils';
-    import { getSpriteUrl } from '../../shared/constants/sprites';
+    import { getQuizSpriteUrl, getSpriteUrl } from '../../shared/constants/sprites';
     import { GENERATION_RANGES, CHALLENGE_QUESTION_COUNT } from '../../shared/constants';
     import { preloadPokemonNames, getPokemonNameSync } from './lib/pokemonNamesClient';
     import { capitalizeFirst } from '../../shared/utils/textUtils';
@@ -60,8 +61,8 @@
         toastState = state;
     });
 
-    function l(key: string): string {
-        return getLabel(languageCode, key as any);
+    function l(key: LabelKey): string {
+        return getLabel(languageCode, key);
     }
 
     /**
@@ -110,25 +111,73 @@
         });
     }
 
+    // Preloaded next round state (for instant transitions between Points rounds)
+    let preloadedNextRound: {
+        pokemonId: number;
+        pokemonName: string;
+        originalSpriteUrl: string;
+        processedSpriteUrl: string;
+        rotation: number;
+    } | null = null;
+    let preloadingPromise: Promise<void> | null = null;
+
+    async function prepareRoundData() {
+        const pokemonId = getRandomPokemonId(settings.selectedGenerations);
+        const pokemonName = getPokemonNameSync(pokemonId, languageId) || `#${pokemonId}`;
+        const origUrl = getQuizSpriteUrl(pokemonId, 'front', 'home');
+        const procUrl = await applySpriteEffects(origUrl);
+
+        if (typeof Image !== 'undefined') {
+            const img = new Image();
+            img.src = procUrl;
+            if (origUrl !== procUrl) {
+                const origImg = new Image();
+                origImg.src = origUrl;
+            }
+        }
+
+        const rotation = settings.rotationEnabled ? getRandomRotation() : 0;
+        return {
+            pokemonId,
+            pokemonName,
+            originalSpriteUrl: origUrl,
+            processedSpriteUrl: procUrl,
+            rotation
+        };
+    }
+
+    function preloadNextRoundInBackground(): void {
+        if (settings.subMode !== 'points' || currentRound >= TOTAL_ROUNDS) return;
+        if (preloadedNextRound || preloadingPromise) return;
+        preloadingPromise = prepareRoundData()
+            .then((data) => {
+                preloadedNextRound = data;
+            })
+            .catch(() => {})
+            .finally(() => {
+                preloadingPromise = null;
+            });
+    }
+
     /**
      * @brief Loads a question/round with effects
      */
     async function loadQuestion(): Promise<void> {
-        isLoading = true;
         currentNumberInput = '';
 
-        // Pick random pokemon from selected generations
-        targetPokemonId = getRandomPokemonId(settings.selectedGenerations);
-        targetPokemonName = getPokemonNameSync(targetPokemonId, languageId) || `#${targetPokemonId}`;
+        let roundData = preloadedNextRound;
+        preloadedNextRound = null;
 
-        // Get Home sprite URL
-        originalSpriteUrl = getSpriteUrl(targetPokemonId, 'home');
+        if (!roundData) {
+            isLoading = true;
+            roundData = await prepareRoundData();
+        }
 
-        // Apply pixelation effect if needed
-        processedSpriteUrl = await applySpriteEffects(originalSpriteUrl);
-
-        // Rotation
-        currentRotation = settings.rotationEnabled ? getRandomRotation() : 0;
+        targetPokemonId = roundData.pokemonId;
+        targetPokemonName = roundData.pokemonName;
+        originalSpriteUrl = roundData.originalSpriteUrl;
+        processedSpriteUrl = roundData.processedSpriteUrl;
+        currentRotation = roundData.rotation;
 
         isLoading = false;
         setTimeout(() => {
@@ -156,6 +205,7 @@
         roundRevealed = false;
         pointsRoundsHistory = [];
         showPointsReview = false;
+        preloadedNextRound = null;
 
         await loadQuestion();
     }
@@ -250,6 +300,9 @@
 
         // Reveal round feedback
         roundRevealed = true;
+
+        // Preload the next round's sprite in the background during result state
+        preloadNextRoundInBackground();
     }
 
     /**
@@ -317,68 +370,55 @@
         <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
     </div>
 {:else}
-    <div class="pt-20 lg:pt-6 px-4 pb-6 md:px-6 w-full max-w-2xl mx-auto">
-        <!-- Header -->
-        <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
-            <button
-                class="text-gray-600 hover:text-gray-800 font-medium flex items-center gap-2"
-                on:click={onBackToSettings}
-            >
-                {l('back')}
-            </button>
-            <div class="text-xl md:text-2xl font-bold text-gray-800">
-                {l('number_quiz')}
-                <span class="text-sm font-semibold text-blue-600 bg-blue-50 px-3 py-1 rounded-full ml-2">
-                    {settings.subMode === 'normal' ? l('number_subModeNormal') : l('number_subModePoints')}
-                </span>
+    <main class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 p-8 flex items-center justify-center">
+        <div class="max-w-4xl mx-auto w-full">
+            <!-- Quiz Header (harmonized with Description & Information quizzes) -->
+            <div class="quiz-header-row">
+                <QuizHeader
+                    {languageCode}
+                    quizTitleLabel="number_quiz"
+                    gameMode="score"
+                    currentQuestion={currentRound}
+                    totalQuestions={TOTAL_ROUNDS}
+                    score={pointsTotalScore}
+                    customSubtitle={settings.subMode === 'normal'
+                        ? (settings.hasGuessLimit && guessesLeft !== null
+                            ? `${l('number_subModeNormal')} | ${l('number_guessesLeft').replace('{0}', String(Math.max(0, guessesLeft)))}`
+                            : `${l('number_subModeNormal')} | ${l('number_unlimitedMode')}`)
+                        : ''}
+                    {onBackToHub}
+                />
             </div>
 
-            <!-- Header Badge / Counter -->
-            {#if settings.subMode === 'normal'}
-                {#if settings.hasGuessLimit && guessesLeft !== null}
-                    <div class="text-xs md:text-sm font-semibold text-white bg-blue-500 px-3.5 py-1.5 rounded-full shadow-sm">
-                        {l('number_guessesLeft').replace('{0}', String(Math.max(0, guessesLeft)))}
-                    </div>
-                {:else}
-                    <div class="text-xs md:text-sm font-semibold text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
-                        {l('number_unlimitedMode')}
-                    </div>
-                {/if}
-            {:else}
-                <!-- Points Mode Round indicator & running score -->
-                <div class="flex items-center gap-2">
-                    <span class="text-xs font-bold text-blue-700 bg-blue-100 px-3 py-1 rounded-full">
-                        {l('number_round').replace('{0}', String(currentRound)).replace('{1}', String(TOTAL_ROUNDS))}
-                    </span>
-                    <span class="text-xs font-bold text-gray-700 bg-gray-100 px-3 py-1 rounded-full">
-                        {pointsTotalScore.toLocaleString()} pts
-                    </span>
-                </div>
-            {/if}
-        </div>
-
-        <!-- Sprite Box -->
-        <div class="sprite-card mb-6">
+            <!-- Sprite Box -->
+            <div class="sprite-card mb-6 max-w-2xl mx-auto">
             <div class="sprite-frame">
                 <img
                     src={roundRevealed ? originalSpriteUrl : processedSpriteUrl}
                     alt="Pokemon sprite"
                     class="sprite-img"
                     style="filter: {getSpriteFilters(roundRevealed)}; transform: rotate({roundRevealed ? 0 : currentRotation}deg);"
+                    on:error={() => {
+                        const fallback = getSpriteUrl(targetPokemonId, 'default');
+                        if (originalSpriteUrl !== fallback) {
+                            originalSpriteUrl = fallback;
+                            processedSpriteUrl = fallback;
+                        }
+                    }}
                 />
             </div>
 
             <!-- Revealed feedback banner in Points mode -->
             {#if roundRevealed && settings.subMode === 'points'}
                 <div transition:scale={{ duration: 250 }} class="mt-4 w-full text-center">
-                    <div class="p-4 rounded-xl {roundDistance === 0 ? 'bg-green-100 border border-green-300' : 'bg-blue-50 border border-blue-200'}">
-                        <div class="text-2xl font-black {roundDistance === 0 ? 'text-green-700' : 'text-blue-700'} mb-1">
+                    <div class="p-4 rounded-xl {roundDistance === 0 ? 'bg-green-100 dark:bg-green-950/70 border border-green-300 dark:border-green-600' : 'bg-blue-50 dark:bg-blue-950/70 border border-blue-200 dark:border-blue-700'}">
+                        <div class="text-2xl font-black {roundDistance === 0 ? 'text-green-700 dark:text-green-300' : 'text-blue-700 dark:text-blue-300'} mb-1">
                             +{roundPointsEarned} pts {roundDistance === 0 ? '🎯' : ''}
                         </div>
-                        <div class="text-sm font-semibold text-gray-700">
-                            {l('number_targetWas')} <span class="font-black text-gray-900">#{String(targetPokemonId).padStart(4, '0')}</span> ({capitalizeFirst(targetPokemonName)})
+                        <div class="text-sm font-semibold text-gray-700 dark:text-gray-200">
+                            {l('number_targetWas')} <span class="font-black text-gray-900 dark:text-white">#{String(targetPokemonId).padStart(4, '0')}</span> ({capitalizeFirst(targetPokemonName)})
                         </div>
-                        <div class="text-xs text-gray-500 mt-1">
+                        <div class="text-xs text-gray-500 dark:text-gray-300 mt-1">
                             {l('number_yourGuess')} #{String(roundUserGuess).padStart(4, '0')} • {l('number_difference')} {roundDistance === 0 ? '0' : (roundUserGuess > targetPokemonId ? `+${roundDistance}` : `-${roundDistance}`)}
                         </div>
                     </div>
@@ -419,7 +459,7 @@
 
         <!-- Normal Mode Guess History -->
         {#if settings.subMode === 'normal' && guesses.length > 0}
-            <div class="guess-history">
+            <div class="guess-history max-w-2xl mx-auto">
                 {#each [...guesses].reverse() as guess, i (guesses.length - i - 1)}
                     <div
                         transition:fade={{ duration: 200 }}
@@ -446,7 +486,8 @@
                 {/each}
             </div>
         {/if}
-    </div>
+        </div>
+    </main>
 {/if}
 
 <!-- Normal Mode End Modal -->
@@ -475,6 +516,10 @@
 {/if}
 
 <style lang="postcss">
+    .quiz-header-row {
+        @apply flex justify-between items-start mb-8 gap-8;
+    }
+
     .sprite-card {
         @apply bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center border border-gray-100;
     }

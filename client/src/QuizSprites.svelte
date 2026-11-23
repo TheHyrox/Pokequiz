@@ -241,24 +241,22 @@
         return settings.selectedSpriteTypes[Math.floor(Math.random() * settings.selectedSpriteTypes.length)];
     }
 
+    // Preloaded next round state
+    let preloadedNextQuestion: {
+        correctId: number;
+        correctName: string;
+        pokemonOptions: PokemonOption[];
+        originalSpriteUrl: string;
+        spriteUrl: string;
+        usedFallback: boolean;
+        rotation: number;
+    } | null = null;
+    let preloadingNextPromise: Promise<void> | null = null;
+
     /**
-     * @brief Loads a new quiz question
+     * @brief Prepares a question data object (used by loadQuestion and background preloader)
      */
-    async function loadQuestion(): Promise<void> {
-        if (timerInterval) clearInterval(timerInterval);
-
-        loading = true;
-        pokemonOptions = [];
-        spriteUrl = '';
-        wrongAnsweredIds.clear();
-        disabledCards = false;
-        revealCorrectAnswer = false;
-        toastState.show = false;
-        errorCountThisQuestion = 0;
-        hardcoreUserInput = '';
-        currentRotation = 0;
-
-        // Get unique random pokemon IDs based on numberOfOptions
+    async function prepareQuestionData() {
         const selectedPokemon = new Set<number>();
         const pokemonIds: number[] = [];
 
@@ -269,7 +267,6 @@
         selectedPokemon.add(correctId);
         pokemonIds.push(correctId);
 
-        // Get remaining unique random pokemon
         while (pokemonIds.length < settings.numberOfOptions) {
             const randomId = getRandomPokemonId(settings.selectedGenerations);
             if (!selectedPokemon.has(randomId)) {
@@ -278,28 +275,23 @@
             }
         }
 
-        // Get sprite URL
         const spriteType = getRandomSpriteType();
         const spriteResult: SpriteUrlResult = await getQuizSpriteUrlWithFallback(correctId, spriteType, settings.spriteSource);
-        
-        // Show toast if fallback was used
-        if (spriteResult.usedFallback) {
-            showErrorToast(getLabel(languageCode, 'spriteFallbackUsed'));
-        }
-        
-        // Store original URL before applying effects
-        originalSpriteUrl = spriteResult.url;
-        
-        // Apply effects
-        spriteUrl = await applyEffects(spriteResult.url);
+        const origUrl = spriteResult.url;
+        const processedUrl = await applyEffects(origUrl);
 
-        // Set rotation if enabled
-        if (settings.effects.rotationEnabled) {
-            currentRotation = getRandomRotation();
+        // Warm browser image cache
+        if (typeof Image !== 'undefined') {
+            const preloadImg = new Image();
+            preloadImg.src = processedUrl;
+            if (origUrl !== processedUrl) {
+                const origImg = new Image();
+                origImg.src = origUrl;
+            }
         }
 
-        const correctName = await getPokemonNameLocalized(correctId, selectedLanguageId);
-        correctPokemonName = correctName || '';
+        const rotation = settings.effects.rotationEnabled ? getRandomRotation() : 0;
+        const correctName = (await getPokemonNameLocalized(correctId, selectedLanguageId)) || '';
 
         const options: PokemonOption[] = [];
         for (const pokemonId of pokemonIds) {
@@ -311,13 +303,72 @@
             });
         }
 
-        pokemonOptions = options.sort(() => Math.random() - 0.5);
-        
-        // Store the correct answer for end modal
-        lastCorrectAnswer = pokemonOptions.find(p => p.isCorrect) || { id: correctId, name: correctPokemonName, isCorrect: true };
-        
+        return {
+            correctId,
+            correctName,
+            pokemonOptions: options.sort(() => Math.random() - 0.5),
+            originalSpriteUrl: origUrl,
+            spriteUrl: processedUrl,
+            usedFallback: spriteResult.usedFallback,
+            rotation
+        };
+    }
+
+    /**
+     * @brief Preloads the next round's sprite and options in the background
+     */
+    function preloadNextQuestionInBackground(): void {
+        if (preloadedNextQuestion || preloadingNextPromise) return;
+        preloadingNextPromise = prepareQuestionData()
+            .then((data) => {
+                preloadedNextQuestion = data;
+            })
+            .catch(() => {})
+            .finally(() => {
+                preloadingNextPromise = null;
+            });
+    }
+
+    /**
+     * @brief Loads a new quiz question
+     */
+    async function loadQuestion(): Promise<void> {
+        if (timerInterval) clearInterval(timerInterval);
+
+        wrongAnsweredIds.clear();
+        disabledCards = false;
+        revealCorrectAnswer = false;
+        toastState.show = false;
+        errorCountThisQuestion = 0;
+        hardcoreUserInput = '';
+
+        let qData = preloadedNextQuestion;
+        preloadedNextQuestion = null;
+
+        if (!qData) {
+            loading = true;
+            pokemonOptions = [];
+            spriteUrl = '';
+            currentRotation = 0;
+            qData = await prepareQuestionData();
+        }
+
+        if (qData.usedFallback) {
+            showErrorToast(getLabel(languageCode, 'spriteFallbackUsed'));
+        }
+
+        originalSpriteUrl = qData.originalSpriteUrl;
+        spriteUrl = qData.spriteUrl;
+        currentRotation = qData.rotation;
+        correctPokemonName = qData.correctName;
+        pokemonOptions = qData.pokemonOptions;
+        lastCorrectAnswer = pokemonOptions.find(p => p.isCorrect) || { id: qData.correctId, name: correctPokemonName, isCorrect: true };
+
         loading = false;
         startTimer();
+
+        // Preload next round's sprite in the background so transitions feel instant
+        preloadNextQuestionInBackground();
 
         if (settings.gameMode === 'hardcore') {
             setTimeout(() => {
@@ -406,6 +457,7 @@
         hardcoreState = { ...HARDCORE_INITIAL_STATE };
         challengeQuestions = [];
         showEndModal = false;
+        preloadedNextQuestion = null;
         loadQuestion();
     }
 
@@ -514,7 +566,7 @@
     });
 </script>
 
-<main class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 p-8 flex items-center justify-center">
+<main class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 p-8 flex items-center justify-center">
     <div class="max-w-4xl mx-auto w-full">
         {#if showEndModal}
             <QuizEndModal
@@ -553,7 +605,7 @@
 
             {#if loading}
                 <div class="text-center py-12">
-                    <p class="text-gray-600">{getLabel(languageCode, 'loading')}</p>
+                    <p class="text-gray-600 dark:text-gray-300">{getLabel(languageCode, 'loading')}</p>
                 </div>
             {:else}
                 <!-- Timer Display -->
@@ -562,7 +614,7 @@
                 {/if}
 
                 <!-- Sprite Section -->
-                <div class="bg-white rounded-lg shadow-lg p-8 mb-8 flex justify-center items-center">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8 flex justify-center items-center border border-transparent dark:border-gray-700">
                     <div class="sprite-container" style="transform: rotate({currentRotation}deg);">
                         <img
                             src={spriteUrl}
@@ -576,9 +628,9 @@
                 <!-- Pokemon Cards Grid or Hardcore Input -->
                 {#if settings.gameMode === 'hardcore'}
                     <div class="max-w-2xl mx-auto">
-                        <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8 border border-transparent dark:border-gray-700">
                             <div class="mb-4">
-                                <span class="block text-lg font-semibold text-gray-700 mb-2">
+                                <span class="block text-lg font-semibold text-gray-700 dark:text-gray-200 mb-2">
                                     {getLabel(languageCode, 'enterPokemonName')}
                                 </span>
                                 <Autocomplete

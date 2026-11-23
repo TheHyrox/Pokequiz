@@ -25,6 +25,31 @@ export interface Type {
     id: string | number;
 }
 
+export interface BaseStats {
+    hp: number;
+    attack: number;
+    defense: number;
+    specialAttack: number;
+    specialDefense: number;
+    speed: number;
+    total: number;
+}
+
+export interface PokemonCries {
+    latest: string;
+    legacy: string | null;
+}
+
+export interface ParsedEvolutionChain {
+    chainId: number | null;
+    members: Array<{ id: number; name: string }>;
+    stage: number;
+    totalStages: number;
+    isFullyEvolved: boolean;
+    evolvesFromId: number | null;
+    evolvesToIds: number[];
+}
+
 export interface PokemonEntry {
     id: number | string;
     name: string;
@@ -38,6 +63,9 @@ export interface PokemonEntry {
     habitatName: string | null;
     shape: string | null;
     evolutionChain: string | null;
+    parsedEvolutionChain?: ParsedEvolutionChain;
+    baseStats?: BaseStats;
+    cries?: PokemonCries;
     abilities: Ability[];
     types: Type[];
 }
