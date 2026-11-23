@@ -6,10 +6,12 @@
     import { getLabel } from './lib/translations';
     import { createToastHandlers } from './lib/toastUtils';
     import { getRandomPokemonId } from '../../shared/utils/pokemonUtils';
+    import { createSeededRng, getTodayDateString } from '../../shared/utils/seededRng';
     import { getPokemonInformationData } from './lib/pokemonInformationClient';
     import { preloadPokemonNames, getPokemonNameSync, getAllPokemonNamesSync } from './lib/pokemonNamesClient';
     import { normalizeText } from '../../shared/utils/textUtils';
-    import { savePokedleSettings } from './lib/storage';
+    import { savePokedleSettings, recordQuizGameResult } from './lib/storage';
+    import PokedexMiniCardModal from '../components/quiz/PokedexMiniCardModal.svelte';
     import type { PokedleQuizSettings, PokedleColumn, ToastState } from '../../shared/types';
     import { fly, fade } from 'svelte/transition';
 
@@ -27,6 +29,8 @@
     let isLoading: boolean = true;
     let isSubmitting: boolean = false;
     let currentInputValue: string = '';
+    let selectedPokedexPokemon: { id: number; name: string } | null = null;
+    let gameIndex: number = 0;
 
     let toastState: ToastState = {
         message: '',
@@ -52,7 +56,15 @@
         guesses = [];
         currentInputValue = '';
         
-        let correctId = getRandomPokemonId(settings.selectedGenerations);
+        let correctId: number;
+        if (settings.isDailyChallenge || settings.dailySeed) {
+            const seedDate = settings.dailySeed || getTodayDateString();
+            const rng = createSeededRng(`${seedDate}:pokedle:round:0`);
+            correctId = getRandomPokemonId(settings.selectedGenerations, rng);
+        } else {
+            correctId = getRandomPokemonId(settings.selectedGenerations);
+        }
+        gameIndex++;
         targetPokemonData = await getPokemonInformationData(correctId, languageId);
         
         if (!targetPokemonData) {
@@ -60,6 +72,21 @@
         }
         
         isLoading = false;
+    }
+
+    function recordPokedleStats(won: boolean, guessCount: number) {
+        const modeKey = (settings.isDailyChallenge || settings.dailySeed) ? 'daily' : 'wordle';
+        recordQuizGameResult({
+            quizSlug: 'pokedle',
+            modeKey,
+            isWin: won,
+            score: guessCount,
+            guessesUsed: guessCount,
+            lowerIsBetter: true,
+            dailyChallenge: (settings.isDailyChallenge || settings.dailySeed)
+                ? { date: settings.dailySeed || getTodayDateString(), pokemonId: Number(targetPokemonData?.id) }
+                : undefined
+        });
     }
 
     async function handleGuess(selectedOption: { id: number; name: string }) {
@@ -85,10 +112,12 @@
             if (Number(selectedOption.id) === Number(targetPokemonData.id)) {
                 hasWon = true;
                 isGameOver = true;
+                recordPokedleStats(true, guesses.length);
                 showEndModal = true;
             } else if (guesses.length >= settings.guessLimit) {
                 hasWon = false;
                 isGameOver = true;
+                recordPokedleStats(false, guesses.length);
                 showEndModal = true;
             }
         } catch (error) {
@@ -214,8 +243,13 @@
             >
                 {getLabel(languageCode, 'back')}
             </button>
-            <div class="text-2xl font-bold text-gray-800 dark:text-gray-100">
-                {getLabel(languageCode, 'pokedle_quiz')}
+            <div class="text-2xl font-bold text-gray-800 dark:text-gray-100 flex items-center gap-2">
+                <span>{getLabel(languageCode, 'pokedle_quiz')}</span>
+                {#if settings.isDailyChallenge || settings.dailySeed}
+                    <span class="px-2.5 py-0.5 text-xs font-mono font-bold rounded-full bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-200 border border-amber-300">
+                        📅 {settings.dailySeed || getTodayDateString()}
+                    </span>
+                {/if}
             </div>
             <div class="text-sm font-semibold text-white bg-blue-500 px-4 py-2 rounded-full shadow-sm">
                 {getLabel(languageCode, 'pokedle_guessesLeft').replace('{0}', String(Math.max(0, settings.guessLimit - guesses.length)))}
@@ -256,12 +290,17 @@
                     <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
                         {#each guesses as guess (guess.id)}
                             <tr transition:fade={{ duration: 300 }}>
-                                <!-- Pokemon Name and Sprite -->
+                                <!-- Pokemon Name and Sprite (clickable to view Pokédex Mini-Card) -->
                                 <td class="py-3 px-4 sticky left-0 bg-white dark:bg-gray-800 z-10 border-r border-gray-100 dark:border-gray-700 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)]">
-                                    <div class="flex flex-col items-center gap-1 min-w-[100px]">
+                                    <button
+                                        type="button"
+                                        on:click={() => { selectedPokedexPokemon = { id: Number(guess.id), name: guess.name }; }}
+                                        title={getLabel(languageCode, 'clickPokemonForInfo')}
+                                        class="flex flex-col items-center gap-1 min-w-[100px] w-full cursor-pointer hover:scale-105 transition-transform bg-transparent border-none"
+                                    >
                                         <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${guess.id}.png`} alt={guess.name} class="w-16 h-16 object-contain" />
                                         <span class="font-bold text-gray-800 dark:text-gray-100 text-sm text-center">{guess.name}</span>
-                                    </div>
+                                    </button>
                                 </td>
                                 
                                 <!-- Attributes -->
@@ -314,6 +353,15 @@
         on:changeSettings={onBackToSettings}
         on:retry={startNewGame}
         on:close={() => { showEndModal = false; }}
+    />
+{/if}
+
+{#if selectedPokedexPokemon}
+    <PokedexMiniCardModal
+        pokemonId={selectedPokedexPokemon.id}
+        pokemonName={selectedPokedexPokemon.name}
+        {languageCode}
+        on:close={() => { selectedPokedexPokemon = null; }}
     />
 {/if}
 

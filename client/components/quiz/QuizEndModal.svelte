@@ -8,18 +8,30 @@
     import { getSpriteUrl } from '../../../shared/constants/sprites';
     import { getLabel } from '../../src/lib/translations';
     import Confetti from './Confetti.svelte';
+    import PokedexMiniCardModal from './PokedexMiniCardModal.svelte';
     import type { PokemonOption } from '../../../shared/types';
 
     /** Whether quiz was won (true) or lost (false) */
     export let isWin: boolean;
     /** Final score achieved */
     export let score: number;
+    /** Total questions in quiz (optional) */
+    export let totalQuestions: number = 10;
+    $: void totalQuestions;
     /** The correct answer for the current/last question */
     export let correctAnswer: PokemonOption;
     /** Current language code */
     export let languageCode: string;
     /** Game mode (determines if answer is shown) */
     export let gameMode: 'score' | 'infinite' | 'challenge' | 'hardcore' | 'pokedle' | 'number' = 'score';
+
+    let selectedPokedexPokemon: { id: number; name: string } | null = null;
+
+    function openMiniCard(pokemon: { id: number; name: string }): void {
+        if (pokemon && pokemon.id > 0) {
+            selectedPokedexPokemon = pokemon;
+        }
+    }
 
     const dispatch = createEventDispatcher();
 
@@ -34,10 +46,11 @@
      * @brief Handles keyboard events for the modal overlay
      */
     function handleKeyDown(event: KeyboardEvent): void {
+        if (selectedPokedexPokemon) return;
         if (event.key === 'Escape') {
             handleClose();
         } else if (event.key === 'Enter') {
-            handleHome();
+            handleRetry();
         }
     }
 
@@ -104,11 +117,16 @@
             </div>
         {/if}
 
-        <!-- Correct Answer Section (only for hardcore/infinite/pokedle/number modes) -->
-        {#if (gameMode === 'hardcore' || gameMode === 'infinite' || gameMode === 'pokedle' || gameMode === 'number') && correctAnswer}
+        <!-- Correct Answer Section (clickable to open Pokédex Mini-Card) -->
+        {#if correctAnswer && correctAnswer.id > 0}
             <div class="answer-section">
                 <p class="answer-label">{getLabel(languageCode, 'correctAnswer')}:</p>
-                <div class="answer-card">
+                <button
+                    type="button"
+                    on:click={() => openMiniCard(correctAnswer)}
+                    class="answer-card w-full cursor-pointer text-center"
+                    title={getLabel(languageCode, 'clickPokemonForInfo')}
+                >
                     <img
                         src={spriteUrl}
                         alt={correctAnswer.name}
@@ -121,7 +139,10 @@
                             {capitalizeFirst(correctAnswer.name)}
                         {/if}
                     </p>
-                </div>
+                    <span class="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-purple-600 dark:text-purple-300 bg-purple-100/80 dark:bg-purple-900/50 px-2.5 py-1 rounded-full">
+                        📖 {getLabel(languageCode, 'pokedexMiniCard')}
+                    </span>
+                </button>
             </div>
         {/if}
 
@@ -150,6 +171,15 @@
         </div>
     </div>
 </div>
+
+{#if selectedPokedexPokemon}
+    <PokedexMiniCardModal
+        pokemonId={selectedPokedexPokemon.id}
+        pokemonName={selectedPokedexPokemon.name}
+        {languageCode}
+        on:close={() => { selectedPokedexPokemon = null; }}
+    />
+{/if}
 
 <style lang="postcss">
     .modal-overlay {

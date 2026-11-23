@@ -7,6 +7,7 @@
     import { getPokemonDescription, truncateDescription, scrambleDescription } from './lib/pokemonDescriptionClient';
     import { getPokemonNameLocalized, preloadPokemonNames } from './lib/pokemonNamesClient';
     import { getRandomPokemonId } from '../../shared/utils/pokemonUtils';
+    import { createSeededRng, getTodayDateString, seededShuffle } from '../../shared/utils/seededRng';
     import Pokecard from '../components/pokecard.svelte';
     import Toast from '../components/Toast.svelte';
     import Autocomplete from '../components/Autocomplete.svelte';
@@ -15,10 +16,11 @@
     import ChallengeReviewScreen from '../components/quiz/ChallengeReviewScreen.svelte';
     import HardcoreLivesDisplay from '../components/quiz/HardcoreLivesDisplay.svelte';
     import QuizEndModal from '../components/quiz/QuizEndModal.svelte';
+    import PokedexMiniCardModal from '../components/quiz/PokedexMiniCardModal.svelte';
     import { getLabel } from './lib/translations';
     import { createToastHandlers } from './lib/toastUtils';
     import { normalizeText } from '../../shared/utils/textUtils.js';
-    import { saveDescriptionSettings } from './lib/storage';
+    import { saveDescriptionSettings, recordQuizGameResult } from './lib/storage';
     import { CHALLENGE_QUESTION_COUNT, DEFAULT_QUIZ_SETTINGS, HARDCORE_INITIAL_STATE, HARDCORE_MAX_LIVES, HARDCORE_LIFE_REWARD_THRESHOLD } from '../../shared/constants';
     import type { DescriptionQuizSettings, PokemonOption, ChallengeQuestion, ToastState, HardcoreModeState } from '../../shared/types';
 
@@ -64,6 +66,9 @@
     let showEndModal = false;
     let lastCorrectAnswer: PokemonOption = { id: 0, name: '', isCorrect: true };
     let isWin = false;
+    let currentStreakInRun = 0;
+    let bestStreakInRun = 0;
+    let selectedPokedexPokemon: { id: number; name: string } | null = null;
 
     // Toast state
     let toastState: ToastState = {
@@ -223,20 +228,26 @@
         errorCountThisQuestion = 0;
         hardcoreUserInput = '';
 
+        const isDaily = Boolean(settings.isDailyChallenge || settings.dailySeed);
+        const seedDate = settings.dailySeed || getTodayDateString();
+        const roundRng = isDaily
+            ? createSeededRng(`${seedDate}:description:round:${currentQuestion - 1}`)
+            : Math.random;
+
         // Get unique random pokemon IDs based on numberOfOptions
         const selectedPokemon = new Set<number>();
         const pokemonIds: number[] = [];
 
-        let correctId = getRandomPokemonId(settings.selectedGenerations);
+        let correctId = getRandomPokemonId(settings.selectedGenerations, roundRng);
         while (selectedPokemon.has(correctId)) {
-            correctId = getRandomPokemonId(settings.selectedGenerations);
+            correctId = getRandomPokemonId(settings.selectedGenerations, roundRng);
         }
         selectedPokemon.add(correctId);
         pokemonIds.push(correctId);
 
         // Get remaining unique random pokemon
         while (pokemonIds.length < settings.numberOfOptions) {
-            const randomId = getRandomPokemonId(settings.selectedGenerations);
+            const randomId = getRandomPokemonId(settings.selectedGenerations, roundRng);
             if (!selectedPokemon.has(randomId)) {
                 selectedPokemon.add(randomId);
                 pokemonIds.push(randomId);
@@ -263,7 +274,9 @@
             });
         }
 
-        pokemonOptions = options.sort(() => Math.random() - 0.5);
+        pokemonOptions = isDaily
+            ? seededShuffle(options, roundRng)
+            : options.sort(() => Math.random() - 0.5);
         
         // Store the correct answer for end modal
         lastCorrectAnswer = pokemonOptions.find(p => p.isCorrect) || { id: correctId, name: correctPokemonName, isCorrect: true };
@@ -297,12 +310,16 @@
     }
 
     /**
-     * @brief Changes to next available description
+     * @brief Changes to next available description (or loops through descriptions)
      */
     function changeDescription(): void {
+        if (allDescriptions.length <= 1) return;
         if (currentDescriptionIndex < allDescriptions.length - 1) {
             currentDescriptionIndex++;
             description = allDescriptions[currentDescriptionIndex];
+        } else {
+            currentDescriptionIndex = 0;
+            description = allDescriptions[0];
         }
     }
 
@@ -351,12 +368,28 @@
         return 1;
     }
 
+    function recordDescStats(won: boolean, finalScore: number): void {
+        const isDaily = Boolean(settings.isDailyChallenge || settings.dailySeed);
+        const modeKey = isDaily ? 'daily' : settings.gameMode;
+        recordQuizGameResult({
+            quizSlug: 'description',
+            modeKey,
+            isWin: won,
+            score: finalScore,
+            runStreak: Math.max(bestStreakInRun, currentStreakInRun),
+            dailyChallenge: isDaily
+                ? { date: settings.dailySeed || getTodayDateString(), pokemonId: lastCorrectAnswer?.id }
+                : undefined
+        });
+    }
+
     /**
      * @brief Ends the quiz and shows results
      */
     function endQuiz(): void {
         if (timerInterval) clearInterval(timerInterval);
         isWin = true;
+        recordDescStats(true, score);
         showEndModal = true;
     }
 
@@ -366,6 +399,7 @@
     function handleGameEnd(): void {
         if (timerInterval) clearInterval(timerInterval);
         isWin = false;
+        recordDescStats(settings.gameMode === 'infinite' && score > 0, score);
         showEndModal = true;
     }
 
@@ -380,6 +414,8 @@
         // Reset quiz state
         currentQuestion = 1;
         score = 0;
+        currentStreakInRun = 0;
+        bestStreakInRun = 0;
         hardcoreState = { ...HARDCORE_INITIAL_STATE };
         challengeQuestions = [];
         showEndModal = false;
@@ -419,12 +455,18 @@
                 currentQuestion++;
                 loadQuestion();
             } else {
+                const correctCount = challengeQuestions.filter(q => q.isCorrect).length;
+                recordDescStats(correctCount >= 5, correctCount);
                 showChallengeReview = true;
             }
             return;
         }
 
         if (isCorrect) {
+            if (errorCountThisQuestion === 0) {
+                currentStreakInRun++;
+                if (currentStreakInRun > bestStreakInRun) bestStreakInRun = currentStreakInRun;
+            }
             wrongAnsweredIds.clear();
             wrongAnsweredIds = wrongAnsweredIds;
             revealCorrectAnswer = false;
@@ -442,6 +484,7 @@
                 endQuiz();
             }
         } else {
+            currentStreakInRun = 0;
             errorCountThisQuestion++;
             wrongAnsweredIds.add(pokemonId);
             wrongAnsweredIds = wrongAnsweredIds;
@@ -473,6 +516,29 @@
         }
     }
 
+    function handleGlobalKeydown(event: KeyboardEvent): void {
+        if (loading || showEndModal || showChallengeReview || selectedPokedexPokemon) return;
+        const active = document.activeElement as HTMLElement | null;
+        const isInputFocused = active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.tagName === 'SELECT');
+
+        if (event.key === ' ' && !isInputFocused) {
+            if (settings.changeDescription && allDescriptions.length > 1) {
+                event.preventDefault();
+                changeDescription();
+            }
+        } else if (event.key === 'Enter' && !isInputFocused) {
+            if (revealCorrectAnswer) {
+                event.preventDefault();
+                if (currentQuestion < totalQuestions) {
+                    currentQuestion++;
+                    loadQuestion();
+                } else {
+                    endQuiz();
+                }
+            }
+        }
+    }
+
     // Save settings to local storage
     saveDescriptionSettings(settings);
 
@@ -486,6 +552,8 @@
         }
     });
 </script>
+
+<svelte:window on:keydown={handleGlobalKeydown} />
 
 <main class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 p-8 flex items-center justify-center">
     <div class="max-w-4xl mx-auto w-full">
@@ -544,9 +612,21 @@
                         <div class="text-center mt-6">
                             <button
                                 on:click={changeDescription}
-                                class="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors"
+                                class="change-description-btn px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors"
                             >
                                 {getLabel(languageCode, 'description_changeDescriptionBtn')}
+                            </button>
+                        </div>
+                    {/if}
+
+                    {#if revealCorrectAnswer && lastCorrectAnswer}
+                        <div class="mt-4 flex flex-wrap items-center justify-center gap-3">
+                            <button
+                                type="button"
+                                on:click={() => { selectedPokedexPokemon = { id: lastCorrectAnswer.id, name: lastCorrectAnswer.name }; }}
+                                class="pokedex-inspect-btn px-4 py-2 bg-purple-100 hover:bg-purple-200 dark:bg-purple-900/60 text-purple-800 dark:text-purple-200 font-bold text-sm rounded-lg transition-colors cursor-pointer"
+                            >
+                                📖 {getLabel(languageCode, 'pokedexMiniCard')}: {lastCorrectAnswer.name}
                             </button>
                         </div>
                     {/if}
@@ -599,6 +679,15 @@
         {/if}
     </div>
 </main>
+
+{#if selectedPokedexPokemon}
+    <PokedexMiniCardModal
+        pokemonId={selectedPokedexPokemon.id}
+        pokemonName={selectedPokedexPokemon.name}
+        {languageCode}
+        on:close={() => { selectedPokedexPokemon = null; }}
+    />
+{/if}
 
 {#if toastState.show}
     <Toast

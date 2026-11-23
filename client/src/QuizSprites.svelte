@@ -14,11 +14,12 @@
     import SpriteChallengeReviewScreen from '../components/quiz/SpriteChallengeReviewScreen.svelte';
     import HardcoreLivesDisplay from '../components/quiz/HardcoreLivesDisplay.svelte';
     import QuizEndModal from '../components/quiz/QuizEndModal.svelte';
+    import PokedexMiniCardModal from '../components/quiz/PokedexMiniCardModal.svelte';
     import { getLabel } from './lib/translations';
     import { createToastHandlers } from './lib/toastUtils';
     import { normalizeText } from '../../shared/utils/textUtils.js';
     import { pixelateImage, getCssFiltersFromSettings, getRandomRotation } from './lib/utils/imageEffects';
-    import { saveSpriteSettings } from './lib/storage';
+    import { saveSpriteSettings, recordQuizGameResult } from './lib/storage';
     import { getQuizSpriteUrlWithFallback } from '../../shared/constants/sprites';
     import type { SpriteUrlResult } from '../../shared/constants/sprites';
     import { CHALLENGE_QUESTION_COUNT, DEFAULT_SPRITE_QUIZ_SETTINGS, HARDCORE_INITIAL_STATE, HARDCORE_MAX_LIVES, HARDCORE_LIFE_REWARD_THRESHOLD } from '../../shared/constants';
@@ -66,6 +67,9 @@
     let showEndModal = false;
     let lastCorrectAnswer: PokemonOption = { id: 0, name: '', isCorrect: true };
     let isWin = false;
+    let currentStreakInRun = 0;
+    let bestStreakInRun = 0;
+    let selectedPokedexPokemon: { id: number; name: string } | null = null;
 
     // Toast state
     let toastState: ToastState = {
@@ -422,12 +426,23 @@
         return 1;
     }
 
+    function recordSpritesStats(won: boolean, finalScore: number): void {
+        recordQuizGameResult({
+            quizSlug: 'sprites',
+            modeKey: settings.gameMode,
+            isWin: won,
+            score: finalScore,
+            runStreak: Math.max(bestStreakInRun, currentStreakInRun)
+        });
+    }
+
     /**
      * @brief Ends the quiz and shows results
      */
     function endQuiz(): void {
         if (timerInterval) clearInterval(timerInterval);
         isWin = true;
+        recordSpritesStats(true, score);
         showEndModal = true;
     }
 
@@ -437,6 +452,7 @@
     function handleGameEnd(): void {
         if (timerInterval) clearInterval(timerInterval);
         isWin = false;
+        recordSpritesStats(settings.gameMode === 'infinite' && score > 0, score);
         showEndModal = true;
     }
 
@@ -454,6 +470,8 @@
         // Reset quiz state
         currentQuestion = 1;
         score = 0;
+        currentStreakInRun = 0;
+        bestStreakInRun = 0;
         hardcoreState = { ...HARDCORE_INITIAL_STATE };
         challengeQuestions = [];
         showEndModal = false;
@@ -498,12 +516,18 @@
                 currentQuestion++;
                 loadQuestion();
             } else {
+                const correctCount = challengeQuestions.filter(q => q.isCorrect).length;
+                recordSpritesStats(correctCount >= 5, correctCount);
                 showChallengeReview = true;
             }
             return;
         }
 
         if (isCorrect) {
+            if (errorCountThisQuestion === 0) {
+                currentStreakInRun++;
+                if (currentStreakInRun > bestStreakInRun) bestStreakInRun = currentStreakInRun;
+            }
             wrongAnsweredIds.clear();
             wrongAnsweredIds = wrongAnsweredIds;
             revealCorrectAnswer = false;
@@ -521,6 +545,7 @@
                 endQuiz();
             }
         } else {
+            currentStreakInRun = 0;
             errorCountThisQuestion++;
             wrongAnsweredIds.add(pokemonId);
             wrongAnsweredIds = wrongAnsweredIds;
@@ -552,6 +577,24 @@
         }
     }
 
+    function handleGlobalKeydown(event: KeyboardEvent): void {
+        if (loading || showEndModal || showChallengeReview || selectedPokedexPokemon) return;
+        const active = document.activeElement as HTMLElement | null;
+        const isInputFocused = active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.tagName === 'SELECT');
+
+        if (event.key === 'Enter' && !isInputFocused) {
+            if (revealCorrectAnswer) {
+                event.preventDefault();
+                if (currentQuestion < totalQuestions) {
+                    currentQuestion++;
+                    loadQuestion();
+                } else {
+                    endQuiz();
+                }
+            }
+        }
+    }
+
     // Save settings to local storage
     saveSpriteSettings(settings);
 
@@ -565,6 +608,8 @@
         }
     });
 </script>
+
+<svelte:window on:keydown={handleGlobalKeydown} />
 
 <main class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 p-8 flex items-center justify-center">
     <div class="max-w-4xl mx-auto w-full">
@@ -614,7 +659,7 @@
                 {/if}
 
                 <!-- Sprite Section -->
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8 flex justify-center items-center border border-transparent dark:border-gray-700">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8 flex flex-col justify-center items-center border border-transparent dark:border-gray-700">
                     <div class="sprite-container" style="transform: rotate({currentRotation}deg);">
                         <img
                             src={spriteUrl}
@@ -623,6 +668,17 @@
                             style="filter: {getEffectFilters()};"
                         />
                     </div>
+                    {#if revealCorrectAnswer && lastCorrectAnswer}
+                        <div class="mt-4 flex flex-wrap items-center justify-center gap-3">
+                            <button
+                                type="button"
+                                on:click={() => { selectedPokedexPokemon = { id: lastCorrectAnswer.id, name: lastCorrectAnswer.name }; }}
+                                class="pokedex-inspect-btn px-4 py-2 bg-purple-100 hover:bg-purple-200 dark:bg-purple-900/60 text-purple-800 dark:text-purple-200 font-bold text-sm rounded-lg transition-colors cursor-pointer"
+                            >
+                                📖 {getLabel(languageCode, 'pokedexMiniCard')}: {lastCorrectAnswer.name}
+                            </button>
+                        </div>
+                    {/if}
                 </div>
 
                 <!-- Pokemon Cards Grid or Hardcore Input -->
@@ -673,6 +729,15 @@
         {/if}
     </div>
 </main>
+
+{#if selectedPokedexPokemon}
+    <PokedexMiniCardModal
+        pokemonId={selectedPokedexPokemon.id}
+        pokemonName={selectedPokedexPokemon.name}
+        {languageCode}
+        on:close={() => { selectedPokedexPokemon = null; }}
+    />
+{/if}
 
 {#if toastState.show}
     <Toast

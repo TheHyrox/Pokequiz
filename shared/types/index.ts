@@ -65,6 +65,10 @@ export interface DescriptionQuizSettings {
     enableScramble: boolean;
     /** Number of Pokemon options to display (2-10) */
     numberOfOptions: number;
+    /** Whether this session is Today's Daily Challenge */
+    isDailyChallenge?: boolean;
+    /** Explicit PRNG seed (e.g. YYYY-MM-DD) */
+    dailySeed?: string;
 }
 
 /**
@@ -175,6 +179,10 @@ export interface SpriteQuizSettings {
     effects: SpriteEffectSettings;
     /** Number of Pokemon options to display (2-10) */
     numberOfOptions: number;
+    /** Whether this session is Today's Daily Challenge */
+    isDailyChallenge?: boolean;
+    /** Explicit PRNG seed (e.g. YYYY-MM-DD) */
+    dailySeed?: string;
 }
 
 /**
@@ -313,6 +321,10 @@ export interface PokedleQuizSettings {
     selectedColumns: PokedleColumn[];
     /** Whether to show "higher/lower" indicators for numeric values */
     showMoreLessIndicators: boolean;
+    /** Whether this session is Today's Daily Challenge */
+    isDailyChallenge?: boolean;
+    /** Explicit PRNG seed (e.g. YYYY-MM-DD) */
+    dailySeed?: string;
 }
 
 // ============================================================
@@ -374,5 +386,51 @@ export interface NumberQuizSettings {
     silhouetteEnabled: boolean;
     /** Random rotation */
     rotationEnabled: boolean;
+    /** Whether this session is Today's Daily Challenge */
+    isDailyChallenge?: boolean;
+    /** Explicit PRNG seed (e.g. YYYY-MM-DD) */
+    dailySeed?: string;
 }
+
+// ============================================================
+// PERSONAL STATS & STREAKS TYPES
+// ============================================================
+
+export interface QuizModeStatEntry {
+    /** Total games completed in this quiz/mode */
+    totalGamesPlayed: number;
+    /**Total wins (where applicable) */
+    totalWins: number;
+    /** Best score achieved (higher is better for score/points/infinite/challenge/hardcore; lower is better for normal number/pokedle guesses) */
+    bestScore: number | null;
+    /** Current win/round streak */
+    currentStreak: number;
+    /** Longest streak achieved */
+    longestStreak: number;
+    /** Total guesses across all won games (for Pokedle / Number Normal average guesses) */
+    totalGuessesInWins?: number;
+    /** ISO timestamp of last game played */
+    lastPlayedAt?: string;
+}
+
+export interface DailyChallengeRecord {
+    /** Date string YYYY-MM-DD */
+    date: string;
+    /** Quiz slug ('pokedle' | 'description' | 'number') */
+    quiz: 'pokedle' | 'description' | 'number';
+    /** Whether the user won / completed the daily challenge */
+    completed: boolean;
+    /** Score or guesses achieved */
+    score: number;
+    /** Target Pokemon ID (or last Pokemon ID) */
+    pokemonId?: number;
+}
+
+export interface PersonalStatsStore {
+    /** Keyed by `${quizSlug}:${modeKey}` */
+    modes: Record<string, QuizModeStatEntry>;
+    /** Keyed by `${quizSlug}:${YYYY-MM-DD}` */
+    dailyChallenges: Record<string, DailyChallengeRecord>;
+}
+
 

@@ -16,7 +16,7 @@
     import HardcoreLivesDisplay from '../components/quiz/HardcoreLivesDisplay.svelte';
     import { getLabel } from './lib/translations';
     import { createToastHandlers } from './lib/toastUtils';
-    import { saveInformationSettings } from './lib/storage';
+    import { saveInformationSettings, recordQuizGameResult } from './lib/storage';
     import { CHALLENGE_QUESTION_COUNT, DEFAULT_INFORMATION_QUIZ_SETTINGS } from '../../shared/constants';
     import type { InformationQuizSettings, PokemonOption, ToastState, InformationHint, InformationChallengeQuestion } from '../../shared/types';
 
@@ -58,6 +58,18 @@
     let correctAnswer: PokemonOption | null = null;
     let lastCorrectId = 0;
     let isWin = false;
+    let currentStreakInRun = 0;
+    let bestStreakInRun = 0;
+
+    function recordInfoStats(won: boolean, finalScore: number): void {
+        recordQuizGameResult({
+            quizSlug: 'information',
+            modeKey: settings.gameMode,
+            isWin: won,
+            score: finalScore,
+            runStreak: Math.max(bestStreakInRun, currentStreakInRun)
+        });
+    }
 
     // Timer
     let timerInterval: any = null;
@@ -521,6 +533,8 @@
                 currentQuestion++;
                 loadQuestion();
             } else {
+                const correctCount = challengeQuestions.filter(q => q.isCorrect).length;
+                recordInfoStats(correctCount >= 5, correctCount);
                 showChallengeReview = true;
             }
             return;
@@ -528,6 +542,7 @@
 
         // Timeout handling
         if (!isCorrect && pokemonId === -1) {
+            currentStreakInRun = 0;
             showErrorToast(getLabel(languageCode, 'timeUp'));
             if (settings.gameMode === 'hardcore') {
                 hardcoreLives--;
@@ -536,6 +551,7 @@
                     const correctOption = pokemonOptions.find(p => p.isCorrect);
                     if (correctOption) correctAnswer = correctOption;
                     isWin = false;
+                    recordInfoStats(false, score);
                     showEndModal = true;
                     return;
                 }
@@ -548,6 +564,7 @@
                 const correctOption = pokemonOptions.find(p => p.isCorrect);
                 if (correctOption) correctAnswer = correctOption;
                 isWin = true;
+                recordInfoStats(true, score);
                 showEndModal = true;
             }
             return;
@@ -555,6 +572,7 @@
 
         // Normal, Easy and Hardcore Modes: Check if wrong answer
         if (!isCorrect && pokemonId !== -1) {
+            currentStreakInRun = 0;
             wrongAnsweredIds.add(pokemonId);
             wrongAnsweredIds = wrongAnsweredIds;
 
@@ -567,6 +585,7 @@
                         correctAnswer = correctOption;
                     }
                     isWin = false;
+                    recordInfoStats(false, score);
                     showEndModal = true;
                 } else {
                     showErrorToast(`${getLabel(languageCode, 'wrongAnswer')} - ${hardcoreLives} ${getLabel(languageCode, 'livesRemaining') || 'lives'}`);
@@ -583,6 +602,10 @@
         }
 
         // Correct answer or no more attempts
+        if (wrongAnsweredIds.size === 0) {
+            currentStreakInRun++;
+            if (currentStreakInRun > bestStreakInRun) bestStreakInRun = currentStreakInRun;
+        }
         const points = calculatePoints();
         score += points;
 
@@ -598,6 +621,7 @@
                 correctAnswer = correctOption;
             }
             isWin = true;
+            recordInfoStats(true, score);
             showEndModal = true;
         }
     }
@@ -619,10 +643,25 @@
         showEndModal = false;
         currentQuestion = 1;
         score = 0;
+        currentStreakInRun = 0;
+        bestStreakInRun = 0;
         hardcoreLives = 3;
         challengeQuestions = [];
         wrongAnsweredIds.clear();
         loadQuestion();
+    }
+
+    function handleGlobalKeydown(event: KeyboardEvent): void {
+        if (showEndModal || showChallengeReview) return;
+        const active = document.activeElement as HTMLElement | null;
+        const isInputFocused = active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.tagName === 'SELECT');
+
+        if (event.key === ' ' && !isInputFocused) {
+            if (settings.gameMode === 'normal') {
+                event.preventDefault();
+                revealNextHint();
+            }
+        }
     }
 
     function handleChallengeReviewBack(): void {
@@ -646,6 +685,8 @@
         };
     });
 </script>
+
+<svelte:window on:keydown={handleGlobalKeydown} />
 
 <main class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 p-8 flex items-center justify-center">
     {#if showEndModal && correctAnswer}
