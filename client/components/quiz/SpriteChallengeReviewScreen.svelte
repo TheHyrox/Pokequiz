@@ -6,6 +6,7 @@
     import { getLabel } from '../../src/lib/translations';
     import type { SpriteChallengeQuestion } from '../../../shared/types';
     import { CHALLENGE_QUESTION_COUNT } from '../../../shared/constants';
+    import PokedexMiniCardModal from './PokedexMiniCardModal.svelte';
 
     /** Current language code for translations */
     export let languageCode: string;
@@ -13,6 +14,8 @@
     export let challengeQuestions: SpriteChallengeQuestion[];
     /** Callback when back button is clicked */
     export let onBackToHub: () => void;
+
+    let selectedPokedexPokemon: { id: number; name: string } | null = null;
 
     $: correctCount = challengeQuestions.filter(q => q.isCorrect).length;
 </script>
@@ -26,6 +29,9 @@
         <h2 class="summary-title">{getLabel(languageCode, 'reviewAnswers')}</h2>
         <p class="summary-score">
             {getLabel(languageCode, 'score')}: {correctCount}/{CHALLENGE_QUESTION_COUNT}
+        </p>
+        <p class="text-sm text-blue-600 dark:text-blue-400 font-medium mt-2">
+            📖 {getLabel(languageCode, 'clickPokemonForInfo')}
         </p>
     </div>
 
@@ -45,10 +51,15 @@
                 <div class="options-grid">
                     {#each question.allOptions as option (option.id)}
                         <div
-                            class="option-card"
+                            class="option-card cursor-pointer hover:shadow-md hover:scale-[1.02]"
                             class:option-correct={option.isCorrect}
                             class:option-wrong={option.id === question.userAnswerId && !option.isCorrect}
                             class:option-neutral={!option.isCorrect && option.id !== question.userAnswerId}
+                            role="button"
+                            tabindex="0"
+                            title={getLabel(languageCode, 'clickPokemonForInfo')}
+                            on:click={() => { selectedPokedexPokemon = { id: option.id, name: option.name }; }}
+                            on:keydown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectedPokedexPokemon = { id: option.id, name: option.name }; } }}
                         >
                             <p class="option-name">{option.name}</p>
                             {#if option.isCorrect}
@@ -68,6 +79,15 @@
         {getLabel(languageCode, 'back')}
     </button>
 </div>
+
+{#if selectedPokedexPokemon}
+    <PokedexMiniCardModal
+        pokemonId={selectedPokedexPokemon.id}
+        pokemonName={selectedPokedexPokemon.name}
+        {languageCode}
+        on:close={() => { selectedPokedexPokemon = null; }}
+    />
+{/if}
 
 <style lang="postcss">
     .review-container {

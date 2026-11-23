@@ -13,7 +13,7 @@ const SPRITE_BASE_URL = 'https://raw.githubusercontent.com/PokeAPI/sprites/maste
 /**
  * @brief Available sprite variants
  */
-export type SpriteVariant = 'default' | 'home' | 'official' | 'shiny';
+export type SpriteVariant = 'default' | 'home' | 'home_shiny' | 'official' | 'official_shiny' | 'shiny';
 
 /**
  * @brief Sprite URL generator functions by variant
@@ -25,8 +25,12 @@ export const SPRITE_URLS = {
     BACK_DEFAULT: (id: number): string => `${SPRITE_BASE_URL}/back/${id}.png`,
     /** High-quality Home artwork (front only) */
     HOME: (id: number): string => `${SPRITE_BASE_URL}/other/home/${id}.png`,
+    /** High-quality Home shiny artwork (front only) */
+    HOME_SHINY: (id: number): string => `${SPRITE_BASE_URL}/other/home/shiny/${id}.png`,
     /** Official Ken Sugimori artwork (front only) */
     OFFICIAL: (id: number): string => `${SPRITE_BASE_URL}/other/official-artwork/${id}.png`,
+    /** Official Ken Sugimori shiny artwork (front only) */
+    OFFICIAL_SHINY: (id: number): string => `${SPRITE_BASE_URL}/other/official-artwork/shiny/${id}.png`,
     /** Shiny variant sprite */
     SHINY: (id: number): string => `${SPRITE_BASE_URL}/shiny/${id}.png`
 } as const;
@@ -45,8 +49,12 @@ export function getSpriteUrl(id: number, variant: SpriteVariant = 'default'): st
     switch (variant) {
         case 'home':
             return SPRITE_URLS.HOME(id);
+        case 'home_shiny':
+            return SPRITE_URLS.HOME_SHINY(id);
         case 'official':
             return SPRITE_URLS.OFFICIAL(id);
+        case 'official_shiny':
+            return SPRITE_URLS.OFFICIAL_SHINY(id);
         case 'shiny':
             return SPRITE_URLS.SHINY(id);
         default:

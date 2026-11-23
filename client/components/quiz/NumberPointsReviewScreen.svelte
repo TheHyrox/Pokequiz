@@ -7,6 +7,7 @@
     import { capitalizeFirst } from '../../../shared/utils/textUtils.js';
     import { getLabel, type LabelKey } from '../../src/lib/translations';
     import Confetti from './Confetti.svelte';
+    import PokedexMiniCardModal from './PokedexMiniCardModal.svelte';
     import type { NumberPointsRound } from '../../../shared/types';
 
     /** Current language code for translations */
@@ -15,6 +16,10 @@
     export let rounds: NumberPointsRound[];
     /** Total score accumulated */
     export let totalScore: number;
+    /** Whether retry is disabled (Daily Challenge mode) */
+    export let isDailyChallenge: boolean = false;
+
+    let selectedPokedexPokemon: { id: number; name: string } | null = null;
 
     const dispatch = createEventDispatcher();
 
@@ -90,9 +95,19 @@
     </div>
 
     <!-- 10 Rounds Details List -->
+    <p class="text-sm text-blue-600 dark:text-blue-400 font-medium mb-3 text-center">
+        📖 {l('clickPokemonForInfo')}
+    </p>
     <div class="rounds-grid mb-8">
         {#each rounds as round (round.roundNumber)}
-            <div class="round-card {round.distance === 0 ? 'border-green-400 bg-green-50/40 dark:bg-green-950/30 dark:border-green-500' : round.points >= 750 ? 'border-blue-300 dark:border-blue-500 bg-white dark:bg-gray-800' : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800'}">
+            <div
+                class="round-card cursor-pointer {round.distance === 0 ? 'border-green-400 bg-green-50/40 dark:bg-green-950/30 dark:border-green-500' : round.points >= 750 ? 'border-blue-300 dark:border-blue-500 bg-white dark:bg-gray-800' : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800'}"
+                role="button"
+                tabindex="0"
+                title={l('clickPokemonForInfo')}
+                on:click={() => { selectedPokedexPokemon = { id: round.pokemonId, name: round.pokemonName }; }}
+                on:keydown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectedPokedexPokemon = { id: round.pokemonId, name: round.pokemonName }; } }}
+            >
                 <!-- Round header -->
                 <div class="round-header">
                     <span class="round-tag">
@@ -151,11 +166,22 @@
         <button on:click={handleChangeSettings} class="btn-action bg-amber-500 hover:bg-amber-600">
             {l('changeSettings')}
         </button>
-        <button on:click={handleRetry} class="btn-action bg-blue-500 hover:bg-blue-600">
-            {l('number_playAgain')}
-        </button>
+        {#if !isDailyChallenge}
+            <button on:click={handleRetry} class="btn-action bg-blue-500 hover:bg-blue-600">
+                {l('number_playAgain')}
+            </button>
+        {/if}
     </div>
 </div>
+
+{#if selectedPokedexPokemon}
+    <PokedexMiniCardModal
+        pokemonId={selectedPokedexPokemon.id}
+        pokemonName={selectedPokedexPokemon.name}
+        {languageCode}
+        on:close={() => { selectedPokedexPokemon = null; }}
+    />
+{/if}
 
 <style lang="postcss">
     .summary-hero-card {

@@ -7,12 +7,14 @@
     import { getLabel, type LabelKey } from './lib/translations';
     import { createToastHandlers } from './lib/toastUtils';
     import { getRandomPokemonId } from '../../shared/utils/pokemonUtils';
+    import { createSeededRng, getTodayDateString } from '../../shared/utils/seededRng';
     import { getQuizSpriteUrl, getSpriteUrl } from '../../shared/constants/sprites';
     import { GENERATION_RANGES, CHALLENGE_QUESTION_COUNT } from '../../shared/constants';
     import { preloadPokemonNames, getPokemonNameSync } from './lib/pokemonNamesClient';
     import { capitalizeFirst } from '../../shared/utils/textUtils';
     import { pixelateImage, getCssFilters, getRandomRotation } from './lib/utils/imageEffects';
-    import { saveNumberSettings } from './lib/storage';
+    import { saveNumberSettings, recordQuizGameResult, getDailyChallengeStatus, saveDailyChallengeRun } from './lib/storage';
+    import PokedexMiniCardModal from '../components/quiz/PokedexMiniCardModal.svelte';
     import type { NumberQuizSettings, NumberPointsRound, ToastState, PokemonOption } from '../../shared/types';
     import { fade, scale } from 'svelte/transition';
 
@@ -33,6 +35,9 @@
     let currentNumberInput: string = '';
     let isLoading: boolean = true;
     let inputRef: HTMLInputElement;
+    let selectedPokedexPokemon: { id: number; name: string } | null = null;
+    $: isDailyMode = Boolean(settings.isDailyChallenge || settings.dailySeed);
+    $: dailySeedStr = settings.dailySeed || getTodayDateString();
 
     // Normal mode state
     let guesses: { value: number; label: string; isCorrect: boolean; direction: 'higher' | 'lower' | null }[] = [];
@@ -121,8 +126,15 @@
     } | null = null;
     let preloadingPromise: Promise<void> | null = null;
 
-    async function prepareRoundData() {
-        const pokemonId = getRandomPokemonId(settings.selectedGenerations);
+    async function prepareRoundData(roundNum: number = currentRound) {
+        let pokemonId: number;
+        if (settings.isDailyChallenge || settings.dailySeed) {
+            const seedDate = settings.dailySeed || getTodayDateString();
+            const rng = createSeededRng(`${seedDate}:number:round:${roundNum - 1}`);
+            pokemonId = getRandomPokemonId(settings.selectedGenerations, rng);
+        } else {
+            pokemonId = getRandomPokemonId(settings.selectedGenerations);
+        }
         const pokemonName = getPokemonNameSync(pokemonId, languageId) || `#${pokemonId}`;
         const origUrl = getQuizSpriteUrl(pokemonId, 'front', 'home');
         const procUrl = await applySpriteEffects(origUrl);
@@ -149,7 +161,7 @@
     function preloadNextRoundInBackground(): void {
         if (settings.subMode !== 'points' || currentRound >= TOTAL_ROUNDS) return;
         if (preloadedNextRound || preloadingPromise) return;
-        preloadingPromise = prepareRoundData()
+        preloadingPromise = prepareRoundData(currentRound + 1)
             .then((data) => {
                 preloadedNextRound = data;
             })
@@ -188,7 +200,11 @@
     /**
      * @brief Starts/restarts the entire quiz
      */
-    async function startQuiz(): Promise<void> {
+    async function startQuiz(isRetry: boolean = false): Promise<void> {
+        if (isDailyMode && isRetry) {
+            showEndModal = false;
+            return;
+        }
         // Reset Normal mode state
         isGameOver = false;
         hasWon = false;
@@ -208,6 +224,28 @@
         preloadedNextRound = null;
 
         await loadQuestion();
+
+        // Restore saved Daily Challenge run if already played today
+        if (isDailyMode) {
+            const savedDaily = getDailyChallengeStatus('number', dailySeedStr);
+            if (savedDaily) {
+                if (settings.subMode === 'normal' && savedDaily.runData?.numberGuesses?.length) {
+                    guesses = [...savedDaily.runData.numberGuesses];
+                    if (savedDaily.completed) {
+                        isGameOver = true;
+                        hasWon = Boolean(savedDaily.isWin ?? guesses.some(g => g.isCorrect));
+                        finalNormalScore = guesses.length;
+                        showEndModal = false;
+                    }
+                } else if (settings.subMode === 'points' && savedDaily.runData?.numberPointsRounds?.length) {
+                    pointsRoundsHistory = [...savedDaily.runData.numberPointsRounds];
+                    pointsTotalScore = pointsRoundsHistory.reduce((sum, r) => sum + r.points, 0);
+                    if (savedDaily.completed || pointsRoundsHistory.length >= TOTAL_ROUNDS) {
+                        showPointsReview = true;
+                    }
+                }
+            }
+        }
     }
 
     onMount(async () => {
@@ -261,13 +299,56 @@
             hasWon = true;
             isGameOver = true;
             finalNormalScore = guesses.length;
+            recordQuizGameResult({
+                quizSlug: 'number',
+                modeKey: isDailyMode ? 'daily' : 'normal',
+                isWin: true,
+                score: finalNormalScore,
+                guessesUsed: finalNormalScore,
+                lowerIsBetter: true,
+                dailyChallenge: isDailyMode
+                    ? {
+                        date: dailySeedStr,
+                        pokemonId: targetPokemonId,
+                        pokemonName: targetPokemonName,
+                        runData: { numberGuesses: [...guesses] }
+                    }
+                    : undefined
+            });
             showEndModal = true;
         } else if (settings.hasGuessLimit && guesses.length >= settings.guessLimit) {
             hasWon = false;
             isGameOver = true;
             finalNormalScore = guesses.length;
+            recordQuizGameResult({
+                quizSlug: 'number',
+                modeKey: isDailyMode ? 'daily' : 'normal',
+                isWin: false,
+                score: finalNormalScore,
+                guessesUsed: finalNormalScore,
+                lowerIsBetter: true,
+                dailyChallenge: isDailyMode
+                    ? {
+                        date: dailySeedStr,
+                        pokemonId: targetPokemonId,
+                        pokemonName: targetPokemonName,
+                        runData: { numberGuesses: [...guesses] }
+                    }
+                    : undefined
+            });
             showEndModal = true;
         } else {
+            if (isDailyMode) {
+                saveDailyChallengeRun({
+                    date: dailySeedStr,
+                    quiz: 'number',
+                    completed: false,
+                    score: guesses.length,
+                    pokemonId: targetPokemonId,
+                    pokemonName: targetPokemonName,
+                    runData: { numberGuesses: [...guesses] }
+                });
+            }
             setTimeout(() => {
                 inputRef?.focus();
             }, 50);
@@ -314,6 +395,20 @@
             roundRevealed = false;
             await loadQuestion();
         } else {
+            recordQuizGameResult({
+                quizSlug: 'number',
+                modeKey: isDailyMode ? 'daily' : 'points',
+                isWin: pointsTotalScore >= 5000,
+                score: pointsTotalScore,
+                dailyChallenge: isDailyMode
+                    ? {
+                        date: dailySeedStr,
+                        pokemonId: targetPokemonId,
+                        pokemonName: targetPokemonName,
+                        runData: { numberPointsRounds: [...pointsRoundsHistory] }
+                    }
+                    : undefined
+            });
             showPointsReview = true;
         }
     }
@@ -346,6 +441,19 @@
         }
     }
 
+    function handleGlobalKeydown(event: KeyboardEvent): void {
+        if (selectedPokedexPokemon || showEndModal || showPointsReview) return;
+        if (event.key === 'Enter' && roundRevealed && settings.subMode === 'points') {
+            // Avoid double-triggering if the keydown originated from the number input that just revealed the round
+            const target = event.target as HTMLElement | null;
+            if (target && (target.tagName === 'INPUT' || target.tagName === 'BUTTON')) return;
+            const active = document.activeElement as HTMLElement | null;
+            if (active && active.tagName === 'BUTTON') return;
+            event.preventDefault();
+            handleNextRound();
+        }
+    }
+
     $: guessesLeft = settings.hasGuessLimit ? settings.guessLimit - guesses.length : null;
 
     $: endModalAnswer = {
@@ -355,15 +463,18 @@
     } as PokemonOption;
 </script>
 
+<svelte:window on:keydown={handleGlobalKeydown} />
+
 {#if showPointsReview}
     <!-- Points Mode 10-Round Summary Screen -->
     <NumberPointsReviewScreen
         {languageCode}
         rounds={pointsRoundsHistory}
         totalScore={pointsTotalScore}
+        isDailyChallenge={isDailyMode}
         on:home={onBackToHub}
         on:changeSettings={onBackToSettings}
-        on:retry={startQuiz}
+        on:retry={() => startQuiz(true)}
     />
 {:else if isLoading}
     <div class="min-h-screen flex items-center justify-center">
@@ -394,10 +505,10 @@
             <div class="sprite-card mb-6 max-w-2xl mx-auto">
             <div class="sprite-frame">
                 <img
-                    src={roundRevealed ? originalSpriteUrl : processedSpriteUrl}
+                    src={(roundRevealed || (isDailyMode && isGameOver)) ? originalSpriteUrl : processedSpriteUrl}
                     alt="Pokemon sprite"
                     class="sprite-img"
-                    style="filter: {getSpriteFilters(roundRevealed)}; transform: rotate({roundRevealed ? 0 : currentRotation}deg);"
+                    style="filter: {getSpriteFilters(roundRevealed || (isDailyMode && isGameOver))}; transform: rotate({(roundRevealed || (isDailyMode && isGameOver)) ? 0 : currentRotation}deg);"
                     on:error={() => {
                         const fallback = getSpriteUrl(targetPokemonId, 'default');
                         if (originalSpriteUrl !== fallback) {
@@ -408,10 +519,37 @@
                 />
             </div>
 
+            {#if isDailyMode && isGameOver && settings.subMode === 'normal'}
+                <div class="daily-run-summary mt-4 w-full p-4 rounded-xl bg-amber-50 dark:bg-amber-950/60 border-2 border-amber-300 dark:border-amber-700 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="text-left">
+                        <div class="font-bold text-amber-900 dark:text-amber-200 text-sm">
+                            📅 {l('dailyAlreadyPlayed')}
+                        </div>
+                        <div class="text-xs text-amber-800 dark:text-amber-300 mt-1">
+                            {l('number_targetWas')} <span class="font-black">#{String(targetPokemonId).padStart(4, '0')} ({capitalizeFirst(targetPokemonName)})</span>
+                        </div>
+                    </div>
+                    <button
+                        type="button"
+                        on:click={() => { selectedPokedexPokemon = { id: targetPokemonId, name: targetPokemonName }; }}
+                        class="px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs shrink-0 cursor-pointer"
+                    >
+                        📖 {l('pokedexMiniCard')}: {capitalizeFirst(targetPokemonName)}
+                    </button>
+                </div>
+            {/if}
+
             <!-- Revealed feedback banner in Points mode -->
             {#if roundRevealed && settings.subMode === 'points'}
                 <div transition:scale={{ duration: 250 }} class="mt-4 w-full text-center">
-                    <div class="p-4 rounded-xl {roundDistance === 0 ? 'bg-green-100 dark:bg-green-950/70 border border-green-300 dark:border-green-600' : 'bg-blue-50 dark:bg-blue-950/70 border border-blue-200 dark:border-blue-700'}">
+                    <div
+                        class="p-4 rounded-xl cursor-pointer transition-transform hover:scale-[1.01] {roundDistance === 0 ? 'bg-green-100 dark:bg-green-950/70 border border-green-300 dark:border-green-600' : 'bg-blue-50 dark:bg-blue-950/70 border border-blue-200 dark:border-blue-700'}"
+                        role="button"
+                        tabindex="0"
+                        title={l('clickPokemonForInfo')}
+                        on:click={() => { selectedPokedexPokemon = { id: targetPokemonId, name: targetPokemonName }; }}
+                        on:keydown={(e) => { if (e.key === ' ') { e.preventDefault(); selectedPokedexPokemon = { id: targetPokemonId, name: targetPokemonName }; } }}
+                    >
                         <div class="text-2xl font-black {roundDistance === 0 ? 'text-green-700 dark:text-green-300' : 'text-blue-700 dark:text-blue-300'} mb-1">
                             +{roundPointsEarned} pts {roundDistance === 0 ? '🎯' : ''}
                         </div>
@@ -421,11 +559,14 @@
                         <div class="text-xs text-gray-500 dark:text-gray-300 mt-1">
                             {l('number_yourGuess')} #{String(roundUserGuess).padStart(4, '0')} • {l('number_difference')} {roundDistance === 0 ? '0' : (roundUserGuess > targetPokemonId ? `+${roundDistance}` : `-${roundDistance}`)}
                         </div>
+                        <div class="mt-2 inline-flex items-center gap-1 text-xs font-bold text-blue-600 dark:text-blue-300 bg-white/80 dark:bg-gray-800/80 px-2.5 py-0.5 rounded-full">
+                            📖 {l('pokedexMiniCard')}
+                        </div>
                     </div>
 
                     <button
                         on:click={handleNextRound}
-                        class="mt-4 w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-bold text-base shadow-lg transition-transform active:scale-95 cursor-pointer"
+                        class="next-round-btn mt-4 w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-bold text-base shadow-lg transition-transform active:scale-95 cursor-pointer"
                     >
                         {currentRound < TOTAL_ROUNDS ? l('number_nextRound') : l('number_finishQuiz')}
                     </button>
@@ -498,10 +639,20 @@
         correctAnswer={endModalAnswer}
         {languageCode}
         gameMode="number"
+        isDailyChallenge={isDailyMode}
         on:home={onBackToHub}
         on:changeSettings={onBackToSettings}
-        on:retry={startQuiz}
+        on:retry={() => startQuiz(true)}
         on:close={() => { showEndModal = false; }}
+    />
+{/if}
+
+{#if selectedPokedexPokemon}
+    <PokedexMiniCardModal
+        pokemonId={selectedPokedexPokemon.id}
+        pokemonName={selectedPokedexPokemon.name}
+        {languageCode}
+        on:close={() => { selectedPokedexPokemon = null; }}
     />
 {/if}
 

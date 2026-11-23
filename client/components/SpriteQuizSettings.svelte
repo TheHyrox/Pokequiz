@@ -14,6 +14,7 @@
     import Toast from './Toast.svelte';
     import { getLabel } from '../src/lib/translations';
     import { createToastHandlers } from '../src/lib/toastUtils';
+    import { buildShareableQuizUrl } from '../src/lib/urlSettings';
     import { ALL_GENERATIONS, DEFAULT_SPRITE_EFFECTS } from '../../shared/constants';
     import type { SpriteQuizSettings, GameMode, ToastState, SpriteType, SpriteSource, SpriteEffectSettings } from '../../shared/types';
 
@@ -45,9 +46,41 @@
         hasTimeLimit = false;
     }
 
-    const { showErrorToast } = createToastHandlers((state: ToastState) => {
+    const { showErrorToast, showSuccessToast } = createToastHandlers((state: ToastState) => {
         toastState = state;
     });
+
+    function buildCurrentSettings(): SpriteQuizSettings {
+        return {
+            hasTimeLimit,
+            timeLimit,
+            gameMode,
+            selectedGenerations: Array.from(selectedGenerations),
+            selectedSpriteTypes,
+            spriteSource,
+            effects,
+            numberOfOptions
+        };
+    }
+
+    async function handleShareSettings(): Promise<void> {
+        if (selectedGenerations.size === 0) {
+            showErrorToast(getLabel(languageCode, 'selectAtLeastOneGeneration'));
+            return;
+        }
+        if (selectedSpriteTypes.length === 0) {
+            showErrorToast(getLabel(languageCode, 'sprites_selectAtLeastOneSpriteType'));
+            return;
+        }
+        const url = buildShareableQuizUrl('sprites', buildCurrentSettings(), false);
+        if (typeof window !== 'undefined') {
+            window.history.replaceState(window.history.state, '', url);
+            try {
+                await navigator.clipboard?.writeText(url);
+            } catch {}
+        }
+        showSuccessToast(getLabel(languageCode, 'shareLinkCopied'));
+    }
 
     /**
      * @brief Validates settings and starts the quiz
@@ -63,16 +96,7 @@
             return;
         }
 
-        const finalSettings: SpriteQuizSettings = {
-            hasTimeLimit,
-            timeLimit,
-            gameMode,
-            selectedGenerations: Array.from(selectedGenerations),
-            selectedSpriteTypes,
-            spriteSource,
-            effects,
-            numberOfOptions
-        };
+        const finalSettings = buildCurrentSettings();
         onStartQuiz(finalSettings);
     }
 </script>
@@ -142,10 +166,19 @@
         </div>
     </div>
 
-    <!-- Start Button -->
-    <button on:click={handleStartQuiz} class="start-button">
-        {getLabel(languageCode, 'startQuiz')}
-    </button>
+    <!-- Action Buttons: Start & Share Settings -->
+    <div class="flex flex-col sm:flex-row gap-3">
+        <button on:click={handleStartQuiz} class="start-button flex-1">
+            {getLabel(languageCode, 'startQuiz')}
+        </button>
+        <button
+            type="button"
+            on:click={handleShareSettings}
+            class="share-settings-btn px-5 py-3 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-lg transition-colors cursor-pointer"
+        >
+            🔗 {getLabel(languageCode, 'shareSettings')}
+        </button>
+    </div>
 </div>
 
 {#if toastState.show}

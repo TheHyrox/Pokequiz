@@ -5,9 +5,13 @@
     import Toast from './Toast.svelte';
     import { getLabel } from '../src/lib/translations';
     import { createToastHandlers } from '../src/lib/toastUtils';
+    import { buildShareableQuizUrl } from '../src/lib/urlSettings';
+    import { getTodayDateString } from '../../shared/utils/seededRng';
     import { ALL_GENERATIONS, ALL_POKEDLE_COLUMNS, DEFAULT_POKEDLE_QUIZ_SETTINGS } from '../../shared/constants';
-    import { savePokedleSettings } from '../src/lib/storage';
+    import { savePokedleSettings, getDailyChallengeStatus } from '../src/lib/storage';
     import type { PokedleQuizSettings, PokedleColumn, ToastState } from '../../shared/types';
+
+    $: dailyCompletedToday = Boolean(getDailyChallengeStatus('pokedle', getTodayDateString())?.completed);
 
     export let onStartQuiz: (settings: PokedleQuizSettings) => void;
     export let languageCode: string = 'en';
@@ -24,9 +28,45 @@
         show: false
     };
 
-    const { showErrorToast } = createToastHandlers((state: ToastState) => {
+    const { showErrorToast, showSuccessToast } = createToastHandlers((state: ToastState) => {
         toastState = state;
     });
+
+    function buildCurrentSettings(isDaily: boolean = false): PokedleQuizSettings {
+        return {
+            guessLimit: isDaily ? 8 : guessLimit,
+            selectedGenerations: isDaily ? [...ALL_GENERATIONS] : Array.from(selectedGenerations),
+            selectedColumns: isDaily ? [...ALL_POKEDLE_COLUMNS] : Array.from(selectedColumns),
+            showMoreLessIndicators: isDaily ? true : showMoreLessIndicators,
+            isDailyChallenge: isDaily,
+            dailySeed: isDaily ? getTodayDateString() : undefined
+        };
+    }
+
+    async function handleShareSettings(): Promise<void> {
+        if (selectedGenerations.size === 0) {
+            showErrorToast(getLabel(languageCode, 'selectAtLeastOneGeneration'));
+            return;
+        }
+        if (selectedColumns.size === 0) {
+            showErrorToast(getLabel(languageCode, 'pokedle_columns'));
+            return;
+        }
+        const url = buildShareableQuizUrl('pokedle', buildCurrentSettings(false), false);
+        if (typeof window !== 'undefined') {
+            window.history.replaceState(window.history.state, '', url);
+            try {
+                await navigator.clipboard?.writeText(url);
+            } catch {}
+        }
+        showSuccessToast(getLabel(languageCode, 'shareLinkCopied'));
+    }
+
+    function handleStartDailyChallenge(): void {
+        const settings = buildCurrentSettings(true);
+        savePokedleSettings(settings);
+        onStartQuiz(settings);
+    }
 
     function toggleColumn(col: PokedleColumn): void {
         if (selectedColumns.has(col)) {
@@ -125,10 +165,26 @@
         </div>
     </div>
 
-    <!-- Start Button -->
-    <button on:click={handleStartQuiz} class="start-button">
-        {getLabel(languageCode, 'startQuiz')}
-    </button>
+    <!-- Action Buttons: Start, Daily Challenge & Share Settings -->
+    <div class="flex flex-col sm:flex-row gap-3">
+        <button on:click={handleStartQuiz} class="start-button flex-1">
+            {getLabel(languageCode, 'startQuiz')}
+        </button>
+        <button
+            type="button"
+            on:click={handleStartDailyChallenge}
+            class="daily-challenge-btn px-5 py-3 {dailyCompletedToday ? 'bg-green-600 hover:bg-green-700' : 'bg-amber-500 hover:bg-amber-600'} text-white font-bold rounded-lg transition-colors cursor-pointer"
+        >
+            📅 {getLabel(languageCode, 'dailyChallenge')} ({getTodayDateString()}) {dailyCompletedToday ? `• ✓ ${getLabel(languageCode, 'dailyViewRun')}` : ''}
+        </button>
+        <button
+            type="button"
+            on:click={handleShareSettings}
+            class="share-settings-btn px-5 py-3 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-lg transition-colors cursor-pointer"
+        >
+            🔗 {getLabel(languageCode, 'shareSettings')}
+        </button>
+    </div>
 </div>
 
 {#if toastState.show}

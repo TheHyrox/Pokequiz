@@ -11,8 +11,13 @@
     import Toast from './Toast.svelte';
     import { getLabel } from '../src/lib/translations';
     import { createToastHandlers } from '../src/lib/toastUtils';
+    import { buildShareableQuizUrl } from '../src/lib/urlSettings';
+    import { getDailyChallengeStatus } from '../src/lib/storage';
+    import { getTodayDateString } from '../../shared/utils/seededRng';
     import { ALL_GENERATIONS } from '../../shared/constants';
     import type { DescriptionQuizSettings, GameMode, ToastState } from '../../shared/types';
+
+    $: dailyCompletedToday = Boolean(getDailyChallengeStatus('description', getTodayDateString())?.completed);
 
     /** Callback when quiz starts with settings */
     export let onStartQuiz: (settings: DescriptionQuizSettings) => void;
@@ -42,9 +47,43 @@
         hasTimeLimit = false;
     }
 
-    const { showErrorToast } = createToastHandlers((state: ToastState) => {
+    const { showErrorToast, showSuccessToast } = createToastHandlers((state: ToastState) => {
         toastState = state;
     });
+
+    function buildCurrentSettings(isDaily: boolean = false): DescriptionQuizSettings {
+        return {
+            hasTimeLimit: isDaily ? false : hasTimeLimit,
+            timeLimit,
+            gameMode: isDaily ? 'score' : gameMode,
+            changeDescription,
+            selectedGenerations: isDaily ? [...ALL_GENERATIONS] : Array.from(selectedGenerations),
+            truncateStrength,
+            enableScramble,
+            numberOfOptions: isDaily ? 4 : numberOfOptions,
+            isDailyChallenge: isDaily,
+            dailySeed: isDaily ? getTodayDateString() : undefined
+        };
+    }
+
+    async function handleShareSettings(): Promise<void> {
+        if (selectedGenerations.size === 0) {
+            showErrorToast(getLabel(languageCode, 'selectAtLeastOneGeneration'));
+            return;
+        }
+        const url = buildShareableQuizUrl('description', buildCurrentSettings(false), false);
+        if (typeof window !== 'undefined') {
+            window.history.replaceState(window.history.state, '', url);
+            try {
+                await navigator.clipboard?.writeText(url);
+            } catch {}
+        }
+        showSuccessToast(getLabel(languageCode, 'shareLinkCopied'));
+    }
+
+    function handleStartDailyChallenge(): void {
+        onStartQuiz(buildCurrentSettings(true));
+    }
 
     /**
      * @brief Validates settings and starts the quiz
@@ -55,16 +94,7 @@
             return;
         }
 
-        const finalSettings: DescriptionQuizSettings = {
-            hasTimeLimit,
-            timeLimit,
-            gameMode,
-            changeDescription,
-            selectedGenerations: Array.from(selectedGenerations),
-            truncateStrength,
-            enableScramble,
-            numberOfOptions
-        };
+        const finalSettings = buildCurrentSettings(false);
         onStartQuiz(finalSettings);
     }
 </script>
@@ -156,10 +186,26 @@
         </div>
     </div>
 
-    <!-- Start Button -->
-    <button on:click={handleStartQuiz} class="start-button">
-        {getLabel(languageCode, 'startQuiz')}
-    </button>
+    <!-- Action Buttons: Start, Daily Challenge & Share Settings -->
+    <div class="flex flex-col sm:flex-row gap-3">
+        <button on:click={handleStartQuiz} class="start-button flex-1">
+            {getLabel(languageCode, 'startQuiz')}
+        </button>
+        <button
+            type="button"
+            on:click={handleStartDailyChallenge}
+            class="daily-challenge-btn px-5 py-3 {dailyCompletedToday ? 'bg-green-600 hover:bg-green-700' : 'bg-amber-500 hover:bg-amber-600'} text-white font-bold rounded-lg transition-colors cursor-pointer"
+        >
+            📅 {getLabel(languageCode, 'dailyChallenge')} ({getTodayDateString()}) {dailyCompletedToday ? `• ✓ ${getLabel(languageCode, 'dailyViewRun')}` : ''}
+        </button>
+        <button
+            type="button"
+            on:click={handleShareSettings}
+            class="share-settings-btn px-5 py-3 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-lg transition-colors cursor-pointer"
+        >
+            🔗 {getLabel(languageCode, 'shareSettings')}
+        </button>
+    </div>
 </div>
 
 {#if toastState.show}

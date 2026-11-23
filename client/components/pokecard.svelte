@@ -38,7 +38,9 @@
     on:click={handleClick}
     role="button"
     tabindex="0"
-    on:keydown={(e) => e.key === 'Enter' && handleClick()}
+    aria-label={pokemon.name}
+    aria-disabled={disabled}
+    on:keydown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleClick(); } }}
 >
     <div class="card-inner">
         {#if showSprite}

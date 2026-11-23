@@ -6,6 +6,7 @@ import { runInformationQuizTests } from './test_quiz_information.mjs';
 import { runSpritesQuizTests } from './test_quiz_sprites.mjs';
 import { runPokedleQuizTests } from './test_quiz_pokedle.mjs';
 import { runNumberQuizTests } from './test_quiz_number.mjs';
+import { runNewFunctionalityTests } from './test_new_features.mjs';
 
 const CHROME_PATH = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 
@@ -46,7 +47,8 @@ async function main() {
             runInformationQuizTests,
             runSpritesQuizTests,
             runPokedleQuizTests,
-            runNumberQuizTests
+            runNumberQuizTests,
+            runNewFunctionalityTests
         ];
 
         for (const runSuite of suites) {

@@ -38,6 +38,7 @@
     let inputElement: HTMLInputElement;
     let showSuggestions = false;
     let filteredList: PokemonOption[] = [];
+    let highlightedIndex = -1;
 
     const dispatch = createEventDispatcher();
     const MAX_SUGGESTIONS = 15;
@@ -84,6 +85,7 @@
             .slice(0, MAX_SUGGESTIONS);
 
         showSuggestions = filteredList.length > 0;
+        highlightedIndex = -1;
     }
 
     /**
@@ -93,6 +95,7 @@
     function selectPokemon(pokemon: PokemonOption): void {
         value = pokemon.name;
         showSuggestions = false;
+        highlightedIndex = -1;
         dispatch('select', { pokemon });
     }
 
@@ -100,11 +103,26 @@
      * @brief Handles keyboard navigation
      */
     function handleKeyDown(event: KeyboardEvent): void {
-        if (event.key === 'Enter') {
-            showSuggestions = false;
-            dispatch('submit');
+        if (event.key === 'ArrowDown' && showSuggestions && filteredList.length > 0) {
+            event.preventDefault();
+            highlightedIndex = (highlightedIndex + 1) % filteredList.length;
+        } else if (event.key === 'ArrowUp' && showSuggestions && filteredList.length > 0) {
+            event.preventDefault();
+            highlightedIndex = (highlightedIndex - 1 + filteredList.length) % filteredList.length;
+        } else if (event.key === 'Enter') {
+            if (showSuggestions && highlightedIndex >= 0 && highlightedIndex < filteredList.length) {
+                event.preventDefault();
+                const picked = filteredList[highlightedIndex];
+                selectPokemon(picked);
+                dispatch('submit');
+            } else {
+                showSuggestions = false;
+                highlightedIndex = -1;
+                dispatch('submit');
+            }
         } else if (event.key === 'Escape') {
             showSuggestions = false;
+            highlightedIndex = -1;
         }
     }
 
@@ -145,12 +163,14 @@
     />
 
     {#if !disabled && showSuggestions && filteredList.length > 0}
-        <div class="suggestions-dropdown">
-            {#each filteredList as pokemon (pokemon.id)}
+        <div class="suggestions-dropdown" role="listbox">
+            {#each filteredList as pokemon, idx (pokemon.id)}
                 <button
                     type="button"
+                    role="option"
+                    aria-selected={idx === highlightedIndex}
                     on:click={() => selectPokemon(pokemon)}
-                    class="suggestion-item"
+                    class="suggestion-item {idx === highlightedIndex ? 'bg-blue-100 dark:bg-gray-700' : ''}"
                 >
                     <img
                         src={getSpriteUrl(pokemon.id)}

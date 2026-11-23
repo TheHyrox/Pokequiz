@@ -9,20 +9,22 @@ import type { GenerationRange } from '../types';
 /**
  * @brief Gets a random integer from 0 to max-1
  * @param max - Upper bound (exclusive)
+ * @param rng - Optional custom random number generator returning [0, 1)
  * @returns Random integer in range [0, max)
  */
-export function getRandomInt(max: number): number {
-    return Math.floor(Math.random() * max);
+export function getRandomInt(max: number, rng: () => number = Math.random): number {
+    return Math.floor(rng() * max);
 }
 
 /**
  * @brief Gets a random Pokemon ID from selected generations
  * @param selectedGenerations - Array of generation numbers to include
+ * @param rng - Optional custom random number generator returning [0, 1)
  * @returns Random Pokemon ID within the selected generations
  */
-export function getRandomPokemonId(selectedGenerations: number[]): number {
+export function getRandomPokemonId(selectedGenerations: number[], rng: () => number = Math.random): number {
     if (selectedGenerations.length === 0) {
-        return getRandomInt(TOTAL_POKEMON) + 1;
+        return getRandomInt(TOTAL_POKEMON, rng) + 1;
     }
 
     const validRanges: GenerationRange[] = selectedGenerations
@@ -30,11 +32,11 @@ export function getRandomPokemonId(selectedGenerations: number[]): number {
         .map(gen => GENERATION_RANGES[gen]);
 
     if (validRanges.length === 0) {
-        return getRandomInt(TOTAL_POKEMON) + 1;
+        return getRandomInt(TOTAL_POKEMON, rng) + 1;
     }
 
-    const randomRange = validRanges[Math.floor(Math.random() * validRanges.length)];
-    const offset = Math.floor(Math.random() * (randomRange.max - randomRange.min + 1));
+    const randomRange = validRanges[Math.floor(rng() * validRanges.length)];
+    const offset = Math.floor(rng() * (randomRange.max - randomRange.min + 1));
     return randomRange.min + offset;
 }
 
