@@ -44,7 +44,13 @@ export type NumberLabelKey =
     | 'number_nextRound'
     | 'number_finishQuiz'
     | 'number_summary'
-    | 'number_playAgain';
+    | 'number_playAgain'
+    | 'number_spriteEffects'
+    | 'number_pointsRule1'
+    | 'number_pointsRule2'
+    | 'number_pointsRule3'
+    | 'number_avgPerRound'
+    | 'number_exactCount';
 
 export const NUMBER_LABELS: Record<LanguageCode, Record<NumberLabelKey, string>> = {
     en: {
@@ -91,7 +97,13 @@ export const NUMBER_LABELS: Record<LanguageCode, Record<NumberLabelKey, string>>
         number_nextRound: 'Next Round →',
         number_finishQuiz: 'See Results',
         number_summary: '10-Round Summary',
-        number_playAgain: 'Play Again'
+        number_playAgain: 'Play Again',
+        number_spriteEffects: 'Sprite Effects',
+        number_pointsRule1: '1 guess per Pokémon.',
+        number_pointsRule2: 'Score from 0 to 1,000 points per round based on distance.',
+        number_pointsRule3: 'Maximum total score: 10,000 points.',
+        number_avgPerRound: 'Avg / round',
+        number_exactCount: 'Exact'
     },
     fr: {
         number_quiz: 'Quiz Numéro',
@@ -137,7 +149,13 @@ export const NUMBER_LABELS: Record<LanguageCode, Record<NumberLabelKey, string>>
         number_nextRound: 'Manche suivante →',
         number_finishQuiz: 'Voir les résultats',
         number_summary: 'Récapitulatif des 10 manches',
-        number_playAgain: 'Rejouer'
+        number_playAgain: 'Rejouer',
+        number_spriteEffects: 'Effets sur le sprite',
+        number_pointsRule1: '1 seul essai par Pokémon.',
+        number_pointsRule2: 'Score de 0 à 1000 points par round calculé selon l\'écart.',
+        number_pointsRule3: 'Score maximum total : 10 000 points.',
+        number_avgPerRound: 'Moyenne / round',
+        number_exactCount: 'Exacts'
     },
     de: {
         number_quiz: 'Nummern-Quiz',
@@ -183,7 +201,13 @@ export const NUMBER_LABELS: Record<LanguageCode, Record<NumberLabelKey, string>>
         number_nextRound: 'Nächste Runde →',
         number_finishQuiz: 'Ergebnisse ansehen',
         number_summary: '10-Runden-Zusammenfassung',
-        number_playAgain: 'Nochmal spielen'
+        number_playAgain: 'Nochmal spielen',
+        number_spriteEffects: 'Sprite-Effekte',
+        number_pointsRule1: '1 Versuch pro Pokémon.',
+        number_pointsRule2: '0 bis 1.000 Punkte pro Runde je nach Abweichung.',
+        number_pointsRule3: 'Maximale Gesamtpunktzahl: 10.000 Punkte.',
+        number_avgPerRound: 'Ø / Runde',
+        number_exactCount: 'Exakt'
     },
     es: {
         number_quiz: 'Quiz de Número',
@@ -229,7 +253,13 @@ export const NUMBER_LABELS: Record<LanguageCode, Record<NumberLabelKey, string>>
         number_nextRound: 'Siguiente ronda →',
         number_finishQuiz: 'Ver resultados',
         number_summary: 'Resumen de 10 rondas',
-        number_playAgain: 'Jugar de nuevo'
+        number_playAgain: 'Jugar de nuevo',
+        number_spriteEffects: 'Efectos del sprite',
+        number_pointsRule1: '1 intento por Pokémon.',
+        number_pointsRule2: 'Puntuación de 0 a 1000 puntos por ronda según la distancia.',
+        number_pointsRule3: 'Puntuación máxima total: 10 000 puntos.',
+        number_avgPerRound: 'Media / ronda',
+        number_exactCount: 'Exactos'
     },
     it: {
         number_quiz: 'Quiz Numero',
@@ -275,7 +305,13 @@ export const NUMBER_LABELS: Record<LanguageCode, Record<NumberLabelKey, string>>
         number_nextRound: 'Prossimo round →',
         number_finishQuiz: 'Vedi risultati',
         number_summary: 'Riepilogo dei 10 round',
-        number_playAgain: 'Gioca di nuovo'
+        number_playAgain: 'Gioca di nuovo',
+        number_spriteEffects: 'Effetti sullo sprite',
+        number_pointsRule1: '1 tentativo per Pokémon.',
+        number_pointsRule2: 'Punteggio da 0 a 1000 punti per round in base alla distanza.',
+        number_pointsRule3: 'Punteggio massimo totale: 10.000 punti.',
+        number_avgPerRound: 'Media / round',
+        number_exactCount: 'Esatti'
     },
     'ja-hrkt': {
         number_quiz: 'ナンバークイズ',
@@ -321,7 +357,13 @@ export const NUMBER_LABELS: Record<LanguageCode, Record<NumberLabelKey, string>>
         number_nextRound: 'つぎのラウンド →',
         number_finishQuiz: 'けっかをみる',
         number_summary: '10ラウンドのけっか',
-        number_playAgain: 'もういちどあそぶ'
+        number_playAgain: 'もういちどあそぶ',
+        number_spriteEffects: 'スプライトエフェクト',
+        number_pointsRule1: 'ポケモンごとに1かいのみ。',
+        number_pointsRule2: 'ごさにおうじてラウンドごとに0〜1000てん。',
+        number_pointsRule3: 'さいだいごうけいスコア：10,000てん。',
+        number_avgPerRound: 'へいきん / ラウンド',
+        number_exactCount: 'ぴったり'
     },
     ja: {
         number_quiz: 'ナンバークイズ',
@@ -367,7 +409,13 @@ export const NUMBER_LABELS: Record<LanguageCode, Record<NumberLabelKey, string>>
         number_nextRound: '次のラウンド →',
         number_finishQuiz: '結果を見る',
         number_summary: '10ラウンドの結果まとめ',
-        number_playAgain: 'もう一度遊ぶ'
+        number_playAgain: 'もう一度遊ぶ',
+        number_spriteEffects: 'スプライトエフェクト',
+        number_pointsRule1: 'ポケモンごとに1回のみ。',
+        number_pointsRule2: '誤差に応じてラウンドごとに0〜1000点。',
+        number_pointsRule3: '最大合計スコア：10,000点。',
+        number_avgPerRound: '平均 / ラウンド',
+        number_exactCount: 'ぴったり'
     },
     ko: {
         number_quiz: '도감 번호 퀴즈',
@@ -413,7 +461,13 @@ export const NUMBER_LABELS: Record<LanguageCode, Record<NumberLabelKey, string>>
         number_nextRound: '다음 라운드 →',
         number_finishQuiz: '결과 보기',
         number_summary: '10 라운드 요약',
-        number_playAgain: '다시 플레이'
+        number_playAgain: '다시 플레이',
+        number_spriteEffects: '스프라이트 효과',
+        number_pointsRule1: '포켓몬당 1회만 추측 가능.',
+        number_pointsRule2: '오차에 따라 라운드당 0~1000점 부여.',
+        number_pointsRule3: '최대 총점: 10,000점.',
+        number_avgPerRound: '평균 / 라운드',
+        number_exactCount: '정확'
     },
     'zh-hans': {
         number_quiz: '图鉴编号竞猜',
@@ -459,7 +513,13 @@ export const NUMBER_LABELS: Record<LanguageCode, Record<NumberLabelKey, string>>
         number_nextRound: '下一轮 →',
         number_finishQuiz: '查看结果',
         number_summary: '10 轮结果汇总',
-        number_playAgain: '再玩一次'
+        number_playAgain: '再玩一次',
+        number_spriteEffects: '立绘特效',
+        number_pointsRule1: '每只宝可梦仅限猜 1 次。',
+        number_pointsRule2: '每轮根据误差获得 0 至 1000 分。',
+        number_pointsRule3: '最高总分：10,000 分。',
+        number_avgPerRound: '平均 / 轮',
+        number_exactCount: '完全命中'
     },
     'zh-hant': {
         number_quiz: '圖鑑編號競猜',
@@ -505,6 +565,12 @@ export const NUMBER_LABELS: Record<LanguageCode, Record<NumberLabelKey, string>>
         number_nextRound: '下一輪 →',
         number_finishQuiz: '查看結果',
         number_summary: '10 輪結果匯總',
-        number_playAgain: '再玩一次'
+        number_playAgain: '再玩一次',
+        number_spriteEffects: '立繪特效',
+        number_pointsRule1: '每隻寶可夢僅限猜 1 次。',
+        number_pointsRule2: '每輪根據誤差獲得 0 至 1000 分。',
+        number_pointsRule3: '最高總分：10,000 分。',
+        number_avgPerRound: '平均 / 輪',
+        number_exactCount: '完全命中'
     }
 };

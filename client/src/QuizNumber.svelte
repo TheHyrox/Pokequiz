@@ -317,7 +317,7 @@
         <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
     </div>
 {:else}
-    <div class="p-4 md:p-6 w-full max-w-2xl mx-auto">
+    <div class="pt-20 lg:pt-6 px-4 pb-6 md:px-6 w-full max-w-2xl mx-auto">
         <!-- Header -->
         <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
             <button
@@ -456,7 +456,7 @@
         score={finalNormalScore}
         correctAnswer={endModalAnswer}
         {languageCode}
-        gameMode="pokedle"
+        gameMode="number"
         on:home={onBackToHub}
         on:changeSettings={onBackToSettings}
         on:retry={startQuiz}
@@ -492,7 +492,7 @@
     }
 
     .number-input {
-        @apply flex-1 border-2 border-gray-300 rounded-xl px-4 py-3 text-lg font-semibold text-center;
+        @apply flex-1 min-w-0 border-2 border-gray-300 rounded-xl px-3 sm:px-4 py-3 text-base sm:text-lg font-semibold text-center;
         @apply focus:outline-none focus:border-blue-500 ring-2 ring-transparent focus:ring-blue-100 transition-all;
     }
 

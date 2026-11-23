@@ -1,16 +1,24 @@
 <script lang="ts">
+    /**
+     * @brief Number quiz settings configuration panel
+     * @description Provides UI for configuring Number Quiz options before starting
+     */
     import Slider from './Slider.svelte';
     import ToggleOption from './ToggleOption.svelte';
     import GenerationSelector from './quiz/GenerationSelector.svelte';
+    import SpriteEffectsSelector from './quiz/SpriteEffectsSelector.svelte';
     import Toast from './Toast.svelte';
     import { getLabel } from '../src/lib/translations';
     import { createToastHandlers } from '../src/lib/toastUtils';
     import { ALL_GENERATIONS, DEFAULT_NUMBER_QUIZ_SETTINGS } from '../../shared/constants';
     import { saveNumberSettings } from '../src/lib/storage';
-    import type { NumberQuizSettings, NumberQuizSubMode, ToastState } from '../../shared/types';
+    import type { NumberQuizSettings, NumberQuizSubMode, SpriteEffectSettings, ToastState } from '../../shared/types';
 
+    /** Callback when quiz starts with settings */
     export let onStartQuiz: (settings: NumberQuizSettings) => void;
+    /** Current language code for translations */
     export let languageCode: string = 'en';
+    /** Initial settings from cache (or null if new game) */
     export let initialSettings: NumberQuizSettings | null = null;
 
     const defaults = DEFAULT_NUMBER_QUIZ_SETTINGS;
@@ -20,12 +28,14 @@
     let guessLimit: number = initialSettings?.guessLimit ?? defaults.guessLimit;
     let selectedGenerations: Set<number> = new Set(initialSettings?.selectedGenerations ?? ALL_GENERATIONS);
     let showHigherLower: boolean = initialSettings?.showHigherLower ?? defaults.showHigherLower;
-    let blurEnabled: boolean = initialSettings?.blurEnabled ?? defaults.blurEnabled;
-    let blurStrength: number = initialSettings?.blurStrength ?? defaults.blurStrength;
-    let pixelateEnabled: boolean = initialSettings?.pixelateEnabled ?? defaults.pixelateEnabled;
-    let pixelateStrength: number = initialSettings?.pixelateStrength ?? defaults.pixelateStrength;
-    let silhouetteEnabled: boolean = initialSettings?.silhouetteEnabled ?? defaults.silhouetteEnabled;
-    let rotationEnabled: boolean = initialSettings?.rotationEnabled ?? defaults.rotationEnabled;
+    let effects: SpriteEffectSettings = {
+        blurEnabled: initialSettings?.blurEnabled ?? defaults.blurEnabled,
+        blurStrength: initialSettings?.blurStrength ?? defaults.blurStrength,
+        pixelateEnabled: initialSettings?.pixelateEnabled ?? defaults.pixelateEnabled,
+        pixelateStrength: initialSettings?.pixelateStrength ?? defaults.pixelateStrength,
+        silhouetteEnabled: initialSettings?.silhouetteEnabled ?? defaults.silhouetteEnabled,
+        rotationEnabled: initialSettings?.rotationEnabled ?? defaults.rotationEnabled
+    };
 
     let toastState: ToastState = {
         message: '',
@@ -49,12 +59,12 @@
             guessLimit,
             selectedGenerations: Array.from(selectedGenerations),
             showHigherLower,
-            blurEnabled,
-            blurStrength,
-            pixelateEnabled,
-            pixelateStrength,
-            silhouetteEnabled,
-            rotationEnabled
+            blurEnabled: effects.blurEnabled,
+            blurStrength: effects.blurStrength,
+            pixelateEnabled: effects.pixelateEnabled,
+            pixelateStrength: effects.pixelateStrength,
+            silhouetteEnabled: effects.silhouetteEnabled,
+            rotationEnabled: effects.rotationEnabled
         };
         saveNumberSettings(settings);
         onStartQuiz(settings);
@@ -66,32 +76,38 @@
 </script>
 
 <div class="settings-container">
-    <div class="settings-grid flex-col md:flex-row">
-        <!-- LEFT COLUMN: Game mode & rules -->
+    <div class="settings-grid">
+        <!-- LEFT COLUMN: Game Modes & Rules -->
         <div class="settings-column">
-            <!-- Sub Mode Section -->
             <div class="settings-section">
                 <h3 class="settings-section-title">{l('number_subMode')}</h3>
-                <div class="mode-tabs">
-                    <button
-                        class="mode-tab {subMode === 'normal' ? 'active' : ''}"
-                        on:click={() => { subMode = 'normal'; }}
-                    >
-                        🎯 {l('number_subModeNormal')}
-                    </button>
-                    <button
-                        class="mode-tab {subMode === 'points' ? 'active' : ''}"
-                        on:click={() => { subMode = 'points'; }}
-                    >
-                        🏆 {l('number_subModePoints')}
-                    </button>
+                <p class="section-description">{getLabel(languageCode, 'gameModeDescription')}</p>
+                <div class="game-mode-options">
+                    <label class="radio-label">
+                        <input
+                            type="radio"
+                            name="numberSubMode"
+                            value="normal"
+                            bind:group={subMode}
+                            class="radio-input"
+                        />
+                        <span class="radio-text">{l('number_subModeNormal')}</span>
+                        <span class="radio-description">{l('number_normalModeDescription')}</span>
+                    </label>
+                    <label class="radio-label">
+                        <input
+                            type="radio"
+                            name="numberSubMode"
+                            value="points"
+                            bind:group={subMode}
+                            class="radio-input"
+                        />
+                        <span class="radio-text">{l('number_subModePoints')}</span>
+                        <span class="radio-description">{l('number_pointsModeDescription')}</span>
+                    </label>
                 </div>
-                <p class="section-description mt-3">
-                    {subMode === 'normal' ? l('number_normalModeDescription') : l('number_pointsModeDescription')}
-                </p>
             </div>
 
-            <!-- Normal Mode specific options -->
             {#if subMode === 'normal'}
                 <!-- Guess Limit Section -->
                 <div class="settings-section">
@@ -101,7 +117,7 @@
                         bind:enabled={hasGuessLimit}
                     />
                     {#if hasGuessLimit}
-                        <div class="mt-3">
+                        <div class="ml-8">
                             <Slider
                                 label={l('number_guessLimit')}
                                 bind:value={guessLimit}
@@ -115,6 +131,7 @@
 
                 <!-- Show Higher/Lower Section -->
                 <div class="settings-section">
+                    <h3 class="settings-section-title">{l('number_showHigherLower')}</h3>
                     <ToggleOption
                         label={l('number_showHigherLower')}
                         bind:enabled={showHigherLower}
@@ -123,14 +140,14 @@
             {:else}
                 <!-- Points Mode Info Box -->
                 <div class="settings-section">
-                    <div class="p-4 bg-blue-50 border border-blue-200 rounded-xl text-blue-900 text-sm space-y-2">
-                        <div class="font-bold flex items-center gap-2">
+                    <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg text-blue-900 text-sm space-y-2">
+                        <div class="font-semibold flex items-center gap-2">
                             <span>ℹ️</span> {l('number_subModePoints')} (10 Rounds)
                         </div>
                         <p class="text-xs leading-relaxed text-blue-800">
-                            • 1 seul essai par Pokémon.<br />
-                            • Score de 0 à 1000 points par round calculé selon l'écart.<br />
-                            • Score maximum total : 10 000 points.
+                            • {l('number_pointsRule1')}<br />
+                            • {l('number_pointsRule2')}<br />
+                            • {l('number_pointsRule3')}
                         </p>
                     </div>
                 </div>
@@ -142,57 +159,16 @@
 
         <!-- RIGHT COLUMN: Generations & Sprite Effects -->
         <div class="settings-column">
-            <!-- Generation Selector -->
+            <!-- Pokemon Generations Section -->
             <GenerationSelector {languageCode} bind:selectedGenerations />
 
-            <!-- Sprite Effects Section -->
+            <!-- Sprite Effects Selector (shared with Sprite Quiz) -->
             <div class="settings-section">
-                <h3 class="settings-section-title">🎨 Effets sur le sprite</h3>
-
-                <!-- Blur -->
-                <ToggleOption
-                    label={l('number_blurEffect')}
-                    bind:enabled={blurEnabled}
-                />
-                {#if blurEnabled}
-                    <div class="mt-2 mb-3">
-                        <Slider
-                            label={l('number_blurStrength')}
-                            bind:value={blurStrength}
-                            min={3}
-                            max={10}
-                            step={1}
-                        />
-                    </div>
-                {/if}
-
-                <!-- Pixelation -->
-                <ToggleOption
-                    label={l('number_pixelateEffect')}
-                    bind:enabled={pixelateEnabled}
-                />
-                {#if pixelateEnabled}
-                    <div class="mt-2 mb-3">
-                        <Slider
-                            label={l('number_pixelateStrength')}
-                            bind:value={pixelateStrength}
-                            min={4}
-                            max={12}
-                            step={1}
-                        />
-                    </div>
-                {/if}
-
-                <!-- Silhouette -->
-                <ToggleOption
-                    label={l('number_silhouette')}
-                    bind:enabled={silhouetteEnabled}
-                />
-
-                <!-- Random Rotation -->
-                <ToggleOption
-                    label={l('number_randomRotation')}
-                    bind:enabled={rotationEnabled}
+                <SpriteEffectsSelector
+                    {languageCode}
+                    bind:effects
+                    spriteSource="home"
+                    selectedSpriteTypes={['front']}
                 />
             </div>
         </div>
@@ -216,11 +192,11 @@
 
 <style lang="postcss">
     .settings-container {
-        @apply bg-white rounded-lg shadow-lg p-8 w-full max-w-4xl mx-auto;
+        @apply bg-white rounded-lg shadow-lg p-8;
     }
 
     .settings-grid {
-        @apply flex gap-8 mb-8;
+        @apply flex flex-col md:flex-row gap-8 mb-8;
     }
 
     .settings-column {
@@ -236,29 +212,39 @@
     }
 
     .settings-section-title {
-        @apply text-lg font-semibold text-gray-700;
-        margin-bottom: 0.75rem;
+        @apply text-lg font-semibold text-gray-700 mb-2;
     }
 
     .section-description {
-        @apply text-sm text-gray-600 italic;
+        @apply text-sm text-gray-600 mb-4 italic;
     }
 
-    .mode-tabs {
-        @apply flex gap-2;
+    .game-mode-options {
+        @apply space-y-3;
     }
 
-    .mode-tab {
-        @apply flex-1 py-2.5 px-3 rounded-lg border-2 border-gray-200 font-semibold text-gray-600 text-sm;
-        @apply transition-all duration-200 cursor-pointer bg-white text-center;
+    .radio-label {
+        @apply flex flex-col p-3 border-2 border-gray-200 rounded-lg cursor-pointer transition-all;
     }
 
-    .mode-tab:hover {
-        @apply border-blue-400 text-blue-600;
+    .radio-label:hover {
+        @apply border-blue-400 bg-blue-50;
     }
 
-    .mode-tab.active {
-        @apply border-blue-500 bg-blue-500 text-white;
+    .radio-label:has(input:checked) {
+        @apply border-blue-500 bg-blue-50;
+    }
+
+    .radio-input {
+        @apply w-4 h-4 accent-blue-500 cursor-pointer mb-2;
+    }
+
+    .radio-text {
+        @apply font-medium text-gray-700;
+    }
+
+    .radio-description {
+        @apply text-sm text-gray-500 mt-1;
     }
 
     .start-button {
@@ -272,5 +258,9 @@
 
     .start-button:active {
         @apply bg-blue-700;
+    }
+
+    .ml-8 {
+        margin-left: 2rem;
     }
 </style>

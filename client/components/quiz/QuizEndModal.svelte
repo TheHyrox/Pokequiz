@@ -19,7 +19,7 @@
     /** Current language code */
     export let languageCode: string;
     /** Game mode (determines if answer is shown) */
-    export let gameMode: 'score' | 'infinite' | 'challenge' | 'hardcore' | 'pokedle' = 'score';
+    export let gameMode: 'score' | 'infinite' | 'challenge' | 'hardcore' | 'pokedle' | 'number' = 'score';
 
     const dispatch = createEventDispatcher();
 
@@ -86,11 +86,11 @@
         </div>
 
         <!-- Score Section / Win Message -->
-        {#if gameMode === 'pokedle' && isWin && correctAnswer}
+        {#if (gameMode === 'pokedle' || gameMode === 'number') && isWin && correctAnswer}
             <div class="score-section bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200">
                 <p class="text-center text-lg font-bold text-green-800">
                     {getLabel(languageCode, 'pokedle_winWithGuesses' as any)
-                        .replace('{0}', capitalizeFirst(correctAnswer.name))
+                        .replace('{0}', gameMode === 'number' ? `#${String(correctAnswer.id).padStart(4, '0')} ${capitalizeFirst(correctAnswer.name)}` : capitalizeFirst(correctAnswer.name))
                         .replace('{1}', String(score))}
                 </p>
             </div>
@@ -104,8 +104,8 @@
             </div>
         {/if}
 
-        <!-- Correct Answer Section (only for hardcore/infinite/pokedle modes) -->
-        {#if (gameMode === 'hardcore' || gameMode === 'infinite' || gameMode === 'pokedle') && correctAnswer}
+        <!-- Correct Answer Section (only for hardcore/infinite/pokedle/number modes) -->
+        {#if (gameMode === 'hardcore' || gameMode === 'infinite' || gameMode === 'pokedle' || gameMode === 'number') && correctAnswer}
             <div class="answer-section">
                 <p class="answer-label">{getLabel(languageCode, 'correctAnswer')}:</p>
                 <div class="answer-card">
@@ -114,7 +114,13 @@
                         alt={correctAnswer.name}
                         class="answer-sprite"
                     />
-                    <p class="answer-name">{capitalizeFirst(correctAnswer.name)}</p>
+                    <p class="answer-name">
+                        {#if gameMode === 'number'}
+                            #{String(correctAnswer.id).padStart(4, '0')} {capitalizeFirst(correctAnswer.name)}
+                        {:else}
+                            {capitalizeFirst(correctAnswer.name)}
+                        {/if}
+                    </p>
                 </div>
             </div>
         {/if}

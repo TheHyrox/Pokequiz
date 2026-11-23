@@ -43,7 +43,7 @@
     <Confetti />
 {/if}
 
-<div class="review-container max-w-4xl mx-auto p-4 md:p-6">
+<div class="review-container max-w-4xl mx-auto pt-20 lg:pt-6 px-4 pb-6 md:px-6">
     <!-- Top back button -->
     <div class="flex justify-between items-center mb-6">
         <button on:click={handleHome} class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg font-medium transition-colors">
@@ -78,11 +78,11 @@
                     <span class="stat-value">{Math.round((totalScore / 10000) * 100)}%</span>
                 </div>
                 <div class="stat-box">
-                    <span class="stat-label">Moyenne / round</span>
+                    <span class="stat-label">{l('number_avgPerRound')}</span>
                     <span class="stat-value">{averagePoints} pts</span>
                 </div>
                 <div class="stat-box col-span-2 md:col-span-1">
-                    <span class="stat-label">Exacts</span>
+                    <span class="stat-label">{l('number_exactCount')}</span>
                     <span class="stat-value">{perfectRoundsCount} / 10</span>
                 </div>
             </div>
