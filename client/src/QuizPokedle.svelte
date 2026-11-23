@@ -282,8 +282,8 @@
         <!-- Header -->
         <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4 mb-8">
             <button
-                class="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white font-medium flex items-center gap-2"
-                on:click={onBackToSettings}
+                class="pokedle-back-btn text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white font-medium flex items-center gap-2"
+                on:click={isDailyMode ? onBackToHub : onBackToSettings}
             >
                 {getLabel(languageCode, 'back')}
             </button>

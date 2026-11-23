@@ -156,6 +156,12 @@ export async function runNewFunctionalityTests() {
             assert.equal(runViewState2.inputDisabled, true, 'Re-opening completed daily challenge must keep input disabled');
             assert.equal(runViewState2.guessRows, 1, 'Re-opening completed daily challenge must restore previous guesses');
 
+            // Clicking the return button in Daily Quiz Pokedle must return to the home menu (hub), not settings
+            await evalJS(cdp, `document.querySelector('.pokedle-back-btn').click()`);
+            await waitFor(cdp, `document.querySelectorAll('.game-card').length >= 5`);
+            const onSettings = await evalJS(cdp, `Boolean(document.querySelector('.settings-container'))`);
+            assert.equal(onSettings, false, 'Daily Quiz Pokedle back button must return to home menu, not settings');
+
             // Verify automatic daily cleanup of old days' dailyChallenges records
             await evalJS(cdp, `(() => {
                 const store = JSON.parse(localStorage.getItem('pokequiz_personal_stats') || '{}');
