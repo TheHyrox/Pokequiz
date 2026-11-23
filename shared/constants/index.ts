@@ -3,7 +3,7 @@
  * @description Single source of truth for languages, generations, and configuration
  */
 
-import type { Language, GenerationRange, SpriteEffectSettings, SpriteQuizSettings, HardcoreModeState, InformationQuizSettings } from '../types';
+import type { Language, GenerationRange, SpriteEffectSettings, SpriteQuizSettings, HardcoreModeState } from '../types';
 
 /**
  * @brief Supported languages with PokeAPI IDs

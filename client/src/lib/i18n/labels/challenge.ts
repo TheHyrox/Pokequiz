@@ -94,6 +94,6 @@ export const CHALLENGE_LABELS = {
         hardcoreMode: '硬核模式',
         typeThePokemonName: '輸入口袋妖怪的名字（用當前語言）'
     }
-} as const;
+};
 
 export type ChallengeLabelKey = keyof typeof CHALLENGE_LABELS.en;

@@ -15,7 +15,10 @@
         "build:server": "tsc --project server/tsconfig.json",
         "build:client": "vite build",
         "preview": "vite preview",
-        "start": "node server/dist/server/src/index.js"
+        "start": "node server/dist/server/src/index.js",
+        "test": "node tests/run_all.mjs",
+        "check": "tsc --noEmit",
+        "enrich": "tsx scripts/enrichPokemonData.ts"
     },
     "keywords": [
         "pokemon",

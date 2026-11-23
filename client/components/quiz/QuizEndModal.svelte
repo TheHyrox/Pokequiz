@@ -89,7 +89,7 @@
         {#if (gameMode === 'pokedle' || gameMode === 'number') && isWin && correctAnswer}
             <div class="score-section bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200">
                 <p class="text-center text-lg font-bold text-green-800">
-                    {getLabel(languageCode, 'pokedle_winWithGuesses' as any)
+                    {getLabel(languageCode, 'pokedle_winWithGuesses')
                         .replace('{0}', gameMode === 'number' ? `#${String(correctAnswer.id).padStart(4, '0')} ${capitalizeFirst(correctAnswer.name)}` : capitalizeFirst(correctAnswer.name))
                         .replace('{1}', String(score))}
                 </p>

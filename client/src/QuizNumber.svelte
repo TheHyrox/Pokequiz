@@ -3,10 +3,10 @@
     import QuizEndModal from '../components/quiz/QuizEndModal.svelte';
     import NumberPointsReviewScreen from '../components/quiz/NumberPointsReviewScreen.svelte';
     import Toast from '../components/Toast.svelte';
-    import { getLabel } from './lib/translations';
+    import { getLabel, type LabelKey } from './lib/translations';
     import { createToastHandlers } from './lib/toastUtils';
     import { getRandomPokemonId } from '../../shared/utils/pokemonUtils';
-    import { getSpriteUrl } from '../../shared/constants/sprites';
+    import { getQuizSpriteUrl, getSpriteUrl } from '../../shared/constants/sprites';
     import { GENERATION_RANGES, CHALLENGE_QUESTION_COUNT } from '../../shared/constants';
     import { preloadPokemonNames, getPokemonNameSync } from './lib/pokemonNamesClient';
     import { capitalizeFirst } from '../../shared/utils/textUtils';
@@ -60,8 +60,8 @@
         toastState = state;
     });
 
-    function l(key: string): string {
-        return getLabel(languageCode, key as any);
+    function l(key: LabelKey): string {
+        return getLabel(languageCode, key);
     }
 
     /**
@@ -110,25 +110,73 @@
         });
     }
 
+    // Preloaded next round state (for instant transitions between Points rounds)
+    let preloadedNextRound: {
+        pokemonId: number;
+        pokemonName: string;
+        originalSpriteUrl: string;
+        processedSpriteUrl: string;
+        rotation: number;
+    } | null = null;
+    let preloadingPromise: Promise<void> | null = null;
+
+    async function prepareRoundData() {
+        const pokemonId = getRandomPokemonId(settings.selectedGenerations);
+        const pokemonName = getPokemonNameSync(pokemonId, languageId) || `#${pokemonId}`;
+        const origUrl = getQuizSpriteUrl(pokemonId, 'front', 'home');
+        const procUrl = await applySpriteEffects(origUrl);
+
+        if (typeof Image !== 'undefined') {
+            const img = new Image();
+            img.src = procUrl;
+            if (origUrl !== procUrl) {
+                const origImg = new Image();
+                origImg.src = origUrl;
+            }
+        }
+
+        const rotation = settings.rotationEnabled ? getRandomRotation() : 0;
+        return {
+            pokemonId,
+            pokemonName,
+            originalSpriteUrl: origUrl,
+            processedSpriteUrl: procUrl,
+            rotation
+        };
+    }
+
+    function preloadNextRoundInBackground(): void {
+        if (settings.subMode !== 'points' || currentRound >= TOTAL_ROUNDS) return;
+        if (preloadedNextRound || preloadingPromise) return;
+        preloadingPromise = prepareRoundData()
+            .then((data) => {
+                preloadedNextRound = data;
+            })
+            .catch(() => {})
+            .finally(() => {
+                preloadingPromise = null;
+            });
+    }
+
     /**
      * @brief Loads a question/round with effects
      */
     async function loadQuestion(): Promise<void> {
-        isLoading = true;
         currentNumberInput = '';
 
-        // Pick random pokemon from selected generations
-        targetPokemonId = getRandomPokemonId(settings.selectedGenerations);
-        targetPokemonName = getPokemonNameSync(targetPokemonId, languageId) || `#${targetPokemonId}`;
+        let roundData = preloadedNextRound;
+        preloadedNextRound = null;
 
-        // Get Home sprite URL
-        originalSpriteUrl = getSpriteUrl(targetPokemonId, 'home');
+        if (!roundData) {
+            isLoading = true;
+            roundData = await prepareRoundData();
+        }
 
-        // Apply pixelation effect if needed
-        processedSpriteUrl = await applySpriteEffects(originalSpriteUrl);
-
-        // Rotation
-        currentRotation = settings.rotationEnabled ? getRandomRotation() : 0;
+        targetPokemonId = roundData.pokemonId;
+        targetPokemonName = roundData.pokemonName;
+        originalSpriteUrl = roundData.originalSpriteUrl;
+        processedSpriteUrl = roundData.processedSpriteUrl;
+        currentRotation = roundData.rotation;
 
         isLoading = false;
         setTimeout(() => {
@@ -156,6 +204,7 @@
         roundRevealed = false;
         pointsRoundsHistory = [];
         showPointsReview = false;
+        preloadedNextRound = null;
 
         await loadQuestion();
     }
@@ -250,6 +299,9 @@
 
         // Reveal round feedback
         roundRevealed = true;
+
+        // Preload the next round's sprite in the background during result state
+        preloadNextRoundInBackground();
     }
 
     /**
@@ -365,6 +417,13 @@
                     alt="Pokemon sprite"
                     class="sprite-img"
                     style="filter: {getSpriteFilters(roundRevealed)}; transform: rotate({roundRevealed ? 0 : currentRotation}deg);"
+                    on:error={() => {
+                        const fallback = getSpriteUrl(targetPokemonId, 'default');
+                        if (originalSpriteUrl !== fallback) {
+                            originalSpriteUrl = fallback;
+                            processedSpriteUrl = fallback;
+                        }
+                    }}
                 />
             </div>
 

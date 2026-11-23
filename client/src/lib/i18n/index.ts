@@ -28,33 +28,34 @@ const SUPPORTED_LANGUAGES: LanguageCode[] = [
  */
 const LABELS: Record<LanguageCode, Record<string, string>> = SUPPORTED_LANGUAGES.reduce(
     (acc, lang) => {
-        acc[lang] = {
-            ...COMMON_LABELS[lang],
-            ...QUIZ_LABELS[lang],
-            ...SETTINGS_LABELS[lang],
-            ...CHALLENGE_LABELS[lang],
-            ...SPRITES_LABELS[lang],
-            ...INFORMATION_LABELS[lang],
-            ...POKEDLE_LABELS[lang],
-            ...NUMBER_LABELS[lang]
-        };
+        acc[lang] = Object.assign(
+            {},
+            COMMON_LABELS[lang],
+            QUIZ_LABELS[lang],
+            SETTINGS_LABELS[lang],
+            CHALLENGE_LABELS[lang],
+            SPRITES_LABELS[lang],
+            INFORMATION_LABELS[lang],
+            POKEDLE_LABELS[lang],
+            NUMBER_LABELS[lang]
+        );
         return acc;
     },
     {} as Record<LanguageCode, Record<string, string>>
 );
 
 /**
- * @brief Gets a localized label by key
+ * @brief Gets a localized label by key with fallback to English
  * @param languageCode - ISO language code (e.g., 'en', 'fr')
  * @param key - Label key to retrieve
- * @returns Localized string, or the key itself if not found
+ * @returns Localized string, falling back to English, or the key itself if not found
  * @example
  * getLabel('en', 'pokequiz') // returns 'Pokequiz'
  * getLabel('fr', 'back') // returns '← Retour'
  */
 export function getLabel(languageCode: string, key: LabelKey): string {
     const lang = LABELS[languageCode as LanguageCode] || LABELS.en;
-    return lang[key] || key;
+    return lang[key] || LABELS.en[key] || key;
 }
 
 /**

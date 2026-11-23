@@ -66,7 +66,7 @@
         if (isGameOver || isSubmitting || guesses.length >= settings.guessLimit) return;
 
         if (guesses.some(g => Number(g.id) === Number(selectedOption.id))) {
-            showErrorToast(getLabel(languageCode, 'pokedle_alreadyGuessed' as any));
+            showErrorToast(getLabel(languageCode, 'pokedle_alreadyGuessed'));
             return;
         }
 
@@ -115,7 +115,7 @@
     }
 
     function getColumnLabel(col: PokedleColumn): string {
-        return getLabel(languageCode, `pokedle_col_${col}` as any);
+        return getLabel(languageCode, `pokedle_col_${col}`);
     }
 
     function checkMatch(guessedData: any, col: PokedleColumn): { state: 'green' | 'yellow' | 'red', arrow?: 'up' | 'down' } {
@@ -214,11 +214,11 @@
             >
                 {getLabel(languageCode, 'back')}
             </button>
-            <div class="text-2xl font-bold text-gray-800">
-                {getLabel(languageCode, 'pokedle_quiz' as any)}
+            <div class="text-2xl font-bold text-gray-800 dark:text-gray-100">
+                {getLabel(languageCode, 'pokedle_quiz')}
             </div>
             <div class="text-sm font-semibold text-white bg-blue-500 px-4 py-2 rounded-full shadow-sm">
-                {getLabel(languageCode, 'pokedle_guessesLeft' as any).replace('{0}', String(Math.max(0, settings.guessLimit - guesses.length)))}
+                {getLabel(languageCode, 'pokedle_guessesLeft').replace('{0}', String(Math.max(0, settings.guessLimit - guesses.length)))}
             </div>
         </div>
 

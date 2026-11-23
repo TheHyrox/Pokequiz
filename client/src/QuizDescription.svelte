@@ -25,7 +25,7 @@
     /** Callback to return to hub */
     export let onBackToHub: () => void;
     /** Callback to return to settings */
-    export const onBackToSettings: (() => void) | null = null;
+    export let onBackToSettings: (() => void) | null = null;
     /** Current language code */
     export let languageCode: string = 'en';
     /** Current language ID */
@@ -387,7 +387,11 @@
     }
 
     function handleEndModalChangeSettings(): void {
-        onBackToHub();
+        if (onBackToSettings) {
+            onBackToSettings();
+        } else {
+            onBackToHub();
+        }
     }
 
     /**

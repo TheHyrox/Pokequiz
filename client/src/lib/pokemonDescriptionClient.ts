@@ -6,7 +6,7 @@ import { truncateDescription, scrambleDescription } from '../../../shared/utils/
 
 export { truncateDescription, scrambleDescription };
 
-export async function getPokemonDescription(pokemon: string, languageId: string, generation: string | null): Promise<string[] | undefined> {
+export async function getPokemonDescription(pokemon: string, languageId: string, _generation: string | null = null): Promise<string[] | undefined> {
     try {
         const res = await fetch(`/api/pokemon/${pokemon}/description/${languageId}`);
         if (!res.ok) return undefined;

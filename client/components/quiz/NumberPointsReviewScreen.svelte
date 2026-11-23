@@ -5,7 +5,7 @@
      */
     import { createEventDispatcher } from 'svelte';
     import { capitalizeFirst } from '../../../shared/utils/textUtils.js';
-    import { getLabel } from '../../src/lib/translations';
+    import { getLabel, type LabelKey } from '../../src/lib/translations';
     import Confetti from './Confetti.svelte';
     import type { NumberPointsRound } from '../../../shared/types';
 
@@ -18,8 +18,8 @@
 
     const dispatch = createEventDispatcher();
 
-    function l(key: string): string {
-        return getLabel(languageCode, key as any);
+    function l(key: LabelKey): string {
+        return getLabel(languageCode, key);
     }
 
     function handleHome(): void {

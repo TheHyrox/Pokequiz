@@ -3,14 +3,14 @@
      * @brief Quiz header component
      * @description Displays quiz title, score, question counter, and back button
      */
-    import { getLabel } from '../../src/lib/translations';
+    import { getLabel, type LabelKey } from '../../src/lib/translations';
     import type { GameMode } from '../../../shared/types';
     import { CHALLENGE_QUESTION_COUNT } from '../../../shared/constants';
 
     /** Current language code for translations */
     export let languageCode: string;
     /** Quiz title label key for getLabel() */
-    export let quizTitleLabel: string = 'description_quiz';
+    export let quizTitleLabel: LabelKey = 'description_quiz';
     /** Current game mode */
     export let gameMode: GameMode;
     /** Current question number */
@@ -23,10 +23,10 @@
     export let onBackToHub: () => void;
 
     /**
-     * @brief Get the quiz title with proper type casting
+     * @brief Get the quiz title
      */
     function getQuizTitle(): string {
-        return getLabel(languageCode, quizTitleLabel as string);
+        return getLabel(languageCode, quizTitleLabel);
     }
 </script>
 

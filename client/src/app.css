@@ -1,3 +1,92 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Dark mode styling overrides for common containers, text, and inputs */
+html.dark body {
+    @apply bg-gray-900 text-gray-100;
+}
+
+html.dark .settings-container,
+html.dark .question-card,
+html.dark .summary-card,
+html.dark .summary-hero-card,
+html.dark .sprite-card,
+html.dark .modal-content,
+html.dark .card-inner {
+    @apply bg-gray-800 text-gray-100 border-gray-700;
+}
+
+html.dark .settings-section-title,
+html.dark .section-label,
+html.dark .title,
+html.dark .game-name,
+html.dark .pokemon-name,
+html.dark .summary-title,
+html.dark .round-pokemon-name,
+html.dark .mode-name,
+html.dark .radio-text,
+html.dark .toggle-text,
+html.dark .checkbox-label,
+html.dark .slider-label,
+html.dark .stepper-label,
+html.dark .language-label {
+    @apply text-gray-100;
+}
+
+html.dark .section-description,
+html.dark .subtitle,
+html.dark .game-description,
+html.dark .mode-description,
+html.dark .radio-description,
+html.dark .summary-score {
+    @apply text-gray-300;
+}
+
+html.dark .text-input,
+html.dark .number-input,
+html.dark .stepper-input,
+html.dark .language-select {
+    @apply bg-gray-700 border-gray-600 text-gray-100;
+}
+
+html.dark .suggestions-dropdown {
+    @apply bg-gray-800 border-gray-600;
+}
+
+html.dark .suggestion-item {
+    @apply border-gray-700;
+}
+
+html.dark .suggestion-item:hover {
+    @apply bg-gray-700;
+}
+
+html.dark .effects-container,
+html.dark .stat-box,
+html.dark .comparison-grid,
+html.dark .sprite-wrapper {
+    @apply bg-gray-700/60 border-gray-600;
+}
+
+html.dark .radio-label,
+html.dark .game-mode-option,
+html.dark .generation-checkbox {
+    @apply border-gray-700;
+}
+
+html.dark .radio-label:hover,
+html.dark .game-mode-option:hover,
+html.dark .generation-checkbox:hover {
+    @apply bg-gray-700/70 border-blue-400;
+}
+
+html.dark .radio-label:has(input:checked),
+html.dark .generation-checkbox:has(input:checked) {
+    @apply bg-blue-900/40 border-blue-500;
+}
+
+html.dark .separator {
+    @apply bg-gray-700;
+}
+

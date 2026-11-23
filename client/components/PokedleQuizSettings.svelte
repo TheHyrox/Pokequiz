@@ -38,7 +38,7 @@
     }
 
     function getColumnLabel(col: PokedleColumn): string {
-        return getLabel(languageCode, `pokedle_col_${col}` as any);
+        return getLabel(languageCode, `pokedle_col_${col}`);
     }
 
     function handleStartQuiz(): void {
@@ -48,7 +48,7 @@
         }
 
         if (selectedColumns.size === 0) {
-            showErrorToast(getLabel(languageCode, 'pokedle_columns' as any)); // You must select at least one column
+            showErrorToast(getLabel(languageCode, 'pokedle_columns')); // You must select at least one column
             return;
         }
 
@@ -73,7 +73,7 @@
                 <p class="section-description">Configure specific mechanics for Pokedle mode.</p>
                 <div class="mt-4">
                     <ToggleOption
-                        label={getLabel(languageCode, 'pokedle_showIndicators' as any)}
+                        label={getLabel(languageCode, 'pokedle_showIndicators')}
                         bind:enabled={showMoreLessIndicators}
                     />
                 </div>
@@ -81,11 +81,11 @@
 
             <!-- Guess Limit Section -->
             <div class="settings-section">
-                <h3 class="settings-section-title">{getLabel(languageCode, 'pokedle_guessLimit' as any)}</h3>
+                <h3 class="settings-section-title">{getLabel(languageCode, 'pokedle_guessLimit')}</h3>
                 <p class="section-description">Maximum number of attempts to find the Pokemon.</p>
                 <div class="mt-4">
                     <Slider
-                        label={getLabel(languageCode, 'pokedle_guessLimit' as any)}
+                        label={getLabel(languageCode, 'pokedle_guessLimit')}
                         bind:value={guessLimit}
                         min={5}
                         max={10}
@@ -106,7 +106,7 @@
 
             <!-- Columns Section -->
             <div class="settings-section">
-                <h3 class="settings-section-title">{getLabel(languageCode, 'pokedle_columns' as any)}</h3>
+                <h3 class="settings-section-title">{getLabel(languageCode, 'pokedle_columns')}</h3>
                 <p class="section-description">Select which attributes to display in the game grid.</p>
                 
                 <div class="information-grid">

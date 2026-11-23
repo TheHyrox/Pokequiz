@@ -8,7 +8,7 @@
     import GenerationSelector from './quiz/GenerationSelector.svelte';
     import SpriteEffectsSelector from './quiz/SpriteEffectsSelector.svelte';
     import Toast from './Toast.svelte';
-    import { getLabel } from '../src/lib/translations';
+    import { getLabel, type LabelKey } from '../src/lib/translations';
     import { createToastHandlers } from '../src/lib/toastUtils';
     import { ALL_GENERATIONS, DEFAULT_NUMBER_QUIZ_SETTINGS } from '../../shared/constants';
     import { saveNumberSettings } from '../src/lib/storage';
@@ -70,8 +70,8 @@
         onStartQuiz(settings);
     }
 
-    function l(key: string): string {
-        return getLabel(languageCode, key as any);
+    function l(key: LabelKey): string {
+        return getLabel(languageCode, key);
     }
 </script>
 
