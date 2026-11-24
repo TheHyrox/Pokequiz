@@ -14,6 +14,8 @@ import {
     getPokemonHabitat,
     getLocalizedEnrichedPokemon
 } from './lib/pokemonData.js';
+import { spriteQuizService } from './lib/spriteQuizService.js';
+import type { SpriteSource, ZoomArtworkSource } from '../../shared/types/index.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -55,58 +57,56 @@ app.get('/api/health', (req, res) => {
 });
 
 app.get('/api/quiz', (req, res) => {
-    res.json([
-        {
-            id: 'description-quiz',
-            slug: 'description',
-            name: 'Description Quiz',
-            titleKey: 'description_quiz',
-            descriptionKey: 'description_guessFromDescription',
-            icon: '📝',
-            modes: ['score', 'infinite', 'challenge', 'hardcore'],
-            difficulty: 'Medium'
-        },
-        {
-            id: 'information-quiz',
-            slug: 'information',
-            name: 'Information Quiz',
-            titleKey: 'information_quiz',
-            descriptionKey: 'information_guessFromInfo',
-            icon: 'ℹ️',
-            modes: ['easy', 'normal', 'challenge', 'hardcore'],
-            difficulty: 'Hard'
-        },
-        {
-            id: 'sprites-quiz',
-            slug: 'sprites',
-            name: 'Sprites Quiz',
-            titleKey: 'sprites_quiz',
-            descriptionKey: 'sprites_guessFromSprite',
-            icon: '🎮',
-            modes: ['score', 'infinite', 'challenge', 'hardcore'],
-            difficulty: 'Easy'
-        },
-        {
-            id: 'pokedle-quiz',
-            slug: 'pokedle',
-            name: 'Quiz Pokedle',
-            titleKey: 'pokedle_quiz',
-            descriptionKey: 'pokedle_guessFromInfo',
-            icon: '🟩',
-            modes: ['wordle'],
-            difficulty: 'Medium'
-        },
-        {
-            id: 'number-quiz',
-            slug: 'number',
-            name: 'Number Quiz',
-            titleKey: 'number_quiz',
-            descriptionKey: 'number_guessFromSprite',
-            icon: '🔢',
-            modes: ['normal', 'points'],
-            difficulty: 'Hard'
-        }
-    ]);
+    res.json(spriteQuizService.getQuizCatalog());
+});
+
+app.get('/api/pokemon/:id/sprites', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const zoomSource = (req.query.zoomSource as ZoomArtworkSource) || 'official';
+        const shinySource = (req.query.shinySource as SpriteSource) || 'default';
+        const initialCropSize = req.query.initialCropSize ? parseInt(String(req.query.initialCropSize), 10) : 30;
+        const zoomStep = req.query.zoomStep ? parseInt(String(req.query.zoomStep), 10) : 15;
+        const fakeOptionsCount = req.query.fakes ? parseInt(String(req.query.fakes), 10) : 4;
+
+        const metadata = await spriteQuizService.getPokemonSpriteMetadata(id, 'en', {
+            zoomSource,
+            shinySource,
+            initialCropSize,
+            zoomStep,
+            fakeOptionsCount
+        });
+        if (!metadata) return res.status(404).json({ error: 'Pokemon not found' });
+        res.json(metadata);
+    } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+        res.status(400).json({ error: errorMessage });
+    }
+});
+
+app.get('/api/pokemon/:id/sprites/:lang', async (req, res) => {
+    try {
+        const { id, lang } = req.params;
+        const langCode = getLanguageCode(lang);
+        const zoomSource = (req.query.zoomSource as ZoomArtworkSource) || 'official';
+        const shinySource = (req.query.shinySource as SpriteSource) || 'default';
+        const initialCropSize = req.query.initialCropSize ? parseInt(String(req.query.initialCropSize), 10) : 30;
+        const zoomStep = req.query.zoomStep ? parseInt(String(req.query.zoomStep), 10) : 15;
+        const fakeOptionsCount = req.query.fakes ? parseInt(String(req.query.fakes), 10) : 4;
+
+        const metadata = await spriteQuizService.getPokemonSpriteMetadata(id, langCode, {
+            zoomSource,
+            shinySource,
+            initialCropSize,
+            zoomStep,
+            fakeOptionsCount
+        });
+        if (!metadata) return res.status(404).json({ error: 'Pokemon not found' });
+        res.json(metadata);
+    } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+        res.status(400).json({ error: errorMessage });
+    }
 });
 
 app.get('/api/pokemon/batch/:lang', async (req, res) => {

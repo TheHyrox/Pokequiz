@@ -10,19 +10,25 @@ import SpriteQuizSettingsComponent from '../../components/SpriteQuizSettings.sve
 import InformationQuizSettingsComponent from '../../components/InformationQuizSettings.svelte';
 import PokedleQuizSettingsComponent from '../../components/PokedleQuizSettings.svelte';
 import NumberQuizSettingsComponent from '../../components/NumberQuizSettings.svelte';
+import ZoomQuizSettingsComponent from '../../components/ZoomQuizSettings.svelte';
+import ShinyQuizSettingsComponent from '../../components/ShinyQuizSettings.svelte';
 
 import DescriptionQuiz from '../QuizDescription.svelte';
 import SpritesQuiz from '../QuizSprites.svelte';
 import QuizInformation from '../QuizInformation.svelte';
 import QuizPokedle from '../QuizPokedle.svelte';
 import QuizNumber from '../QuizNumber.svelte';
+import QuizZoom from '../QuizZoom.svelte';
+import QuizShiny from '../QuizShiny.svelte';
 
 import {
     getCachedDescriptionSettings,
     getCachedSpriteSettings,
     getCachedInformationSettings,
     getCachedPokedleSettings,
-    getCachedNumberSettings
+    getCachedNumberSettings,
+    getCachedZoomSettings,
+    getCachedShinySettings
 } from './storage';
 import type { LabelKey } from './i18n';
 
@@ -30,6 +36,8 @@ export type QuizId =
     | 'description-quiz'
     | 'information-quiz'
     | 'sprites-quiz'
+    | 'zoom-quiz'
+    | 'shiny-quiz'
     | 'pokedle-quiz'
     | 'number-quiz';
 
@@ -82,6 +90,30 @@ export const QUIZ_REGISTRY: QuizRegistryEntry[] = [
         SettingsComponent: SpriteQuizSettingsComponent,
         QuizComponent: SpritesQuiz,
         getCachedSettings: getCachedSpriteSettings
+    },
+    {
+        id: 'zoom-quiz',
+        slug: 'zoom',
+        name: 'Zoomed Sprite Quiz',
+        description: 'Guess the Pokemon from a zoomed-in 25%–40% cropped artwork',
+        titleKey: 'zoom_quiz',
+        descriptionKey: 'zoom_guessFromCrop',
+        icon: '🔍',
+        SettingsComponent: ZoomQuizSettingsComponent,
+        QuizComponent: QuizZoom,
+        getCachedSettings: getCachedZoomSettings
+    },
+    {
+        id: 'shiny-quiz',
+        slug: 'shiny',
+        name: 'Shiny Quiz',
+        description: 'Is this sprite shiny? Or pick the real shiny among color-shifted fakes',
+        titleKey: 'shiny_quiz',
+        descriptionKey: 'shiny_guessFromShiny',
+        icon: '✨',
+        SettingsComponent: ShinyQuizSettingsComponent,
+        QuizComponent: QuizShiny,
+        getCachedSettings: getCachedShinySettings
     },
     {
         id: 'pokedle-quiz',

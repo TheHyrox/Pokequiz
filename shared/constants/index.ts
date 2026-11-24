@@ -256,3 +256,36 @@ export const DEFAULT_NUMBER_QUIZ_SETTINGS: NumberQuizSettings = {
     rotationEnabled: false
 };
 
+// ============================================================
+// ZOOMED / CROPPED SPRITE QUIZ CONSTANTS
+// ============================================================
+import type { ZoomQuizSettings, ShinyQuizSettings } from '../types';
+
+export const DEFAULT_ZOOM_QUIZ_SETTINGS: ZoomQuizSettings = {
+    hasTimeLimit: false,
+    timeLimit: 20,
+    gameMode: 'score',
+    selectedGenerations: [...ALL_GENERATIONS],
+    spriteSource: 'official',
+    initialCropSize: 30,
+    zoomStep: 15,
+    allowManualHints: true,
+    numberOfOptions: 4
+};
+
+// ============================================================
+// SHINY VS. NORMAL QUIZ CONSTANTS
+// ============================================================
+export const DEFAULT_SHINY_QUIZ_SETTINGS: ShinyQuizSettings = {
+    variant: 'binary',
+    gameMode: 'score',
+    hasTimeLimit: false,
+    timeLimit: 15,
+    selectedGenerations: [...ALL_GENERATIONS],
+    spriteSource: 'default',
+    numberOfFakes: 4,
+    showPokemonName: true,
+    showNormalReference: true
+};
+
+

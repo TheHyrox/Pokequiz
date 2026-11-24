@@ -10,8 +10,10 @@
     export let spriteSource: SpriteSource = 'home';
     /** Language code for labels */
     export let languageCode: string = 'en';
+    /** Optional list of allowed sources (defaults to all three) */
+    export let allowedSources: SpriteSource[] = ['default', 'home', 'official'];
 
-    const sources: SpriteSource[] = ['default', 'home', 'official'];
+    $: sources = allowedSources;
 
     /**
      * @brief Get label for sprite source

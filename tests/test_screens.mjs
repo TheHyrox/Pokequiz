@@ -18,6 +18,8 @@ export async function runScreenMatrixTests() {
         'Description Quiz',
         'Information Quiz',
         'Sprites Quiz',
+        'Zoomed Sprite Quiz',
+        'Shiny Quiz',
         'Quiz Pokedle',
         'Number Quiz'
     ];

@@ -393,6 +393,126 @@ export interface NumberQuizSettings {
 }
 
 // ============================================================
+// ZOOMED / CROPPED SPRITE QUIZ TYPES
+// ============================================================
+
+/**
+ * @brief Artwork source for Zoomed / Cropped Sprite Quiz
+ */
+export type ZoomArtworkSource = 'official' | 'home';
+
+/**
+ * @brief Zoomed / Cropped Sprite Quiz settings
+ */
+export interface ZoomQuizSettings {
+    /** Whether time limit is enabled */
+    hasTimeLimit: boolean;
+    /** Time limit per question in seconds */
+    timeLimit: number;
+    /** Selected game mode */
+    gameMode: GameMode;
+    /** Array of selected generation numbers (1-9) */
+    selectedGenerations: number[];
+    /** High-resolution artwork source ('official' or 'home') */
+    spriteSource: ZoomArtworkSource;
+    /** Initial cropped region percentage (25-40) */
+    initialCropSize: number;
+    /** Percentage zoom-out step per wrong guess or hint (10-25) */
+    zoomStep: number;
+    /** Allow manual zoom-out hint button / Space shortcut */
+    allowManualHints: boolean;
+    /** Number of Pokemon options to display (2-24) */
+    numberOfOptions: number;
+    /** Whether this session is Today's Daily Challenge */
+    isDailyChallenge?: boolean;
+    /** Explicit PRNG seed (e.g. YYYY-MM-DD) */
+    dailySeed?: string;
+}
+
+// ============================================================
+// SHINY VS. NORMAL QUIZ TYPES
+// ============================================================
+
+/**
+ * @brief Shiny vs. Normal Quiz gameplay variant
+ * @description 'binary' = "Is this sprite shiny?" fast-paced mode;
+ *              'spot' = "Pick the real shiny among 4-6 color-shifted fakes"
+ */
+export type ShinyQuizVariant = 'binary' | 'spot';
+
+/**
+ * @brief Single sprite option in "Spot the Real Shiny" mode
+ */
+export interface ShinyFakeOption {
+    /** Unique option identifier (e.g. 'real' or 'fake-1') */
+    id: string;
+    /** Sprite image URL (real shiny URL or Canvas hue-shifted data URL) */
+    spriteUrl: string;
+    /** Whether this option is the genuine shiny sprite */
+    isRealShiny: boolean;
+    /** Applied hue shift in degrees (0 for real shiny) */
+    hueShiftDegrees: number;
+}
+
+/**
+ * @brief Shiny vs. Normal Quiz settings
+ */
+export interface ShinyQuizSettings {
+    /** Selected quiz variant ('binary' or 'spot') */
+    variant: ShinyQuizVariant;
+    /** Selected game mode ('score' | 'infinite' | 'challenge' | 'hardcore') */
+    gameMode: GameMode;
+    /** Whether time limit is enabled */
+    hasTimeLimit: boolean;
+    /** Time limit per question in seconds */
+    timeLimit: number;
+    /** Array of selected generation numbers (1-9) */
+    selectedGenerations: number[];
+    /** Sprite source ('default' uses SPRITE_URLS.SHINY, 'home' uses HOME_SHINY, 'official' uses OFFICIAL_SHINY) */
+    spriteSource: SpriteSource;
+    /** Total number of color options in 'spot' variant (4-6) */
+    numberOfFakes: number;
+    /** Display the Pokemon name & Pokedex ID during the question */
+    showPokemonName: boolean;
+    /** Display the normal sprite as a color reference in 'spot' mode */
+    showNormalReference: boolean;
+    /** Whether this session is Today's Daily Challenge */
+    isDailyChallenge?: boolean;
+    /** Explicit PRNG seed (e.g. YYYY-MM-DD) */
+    dailySeed?: string;
+}
+
+/**
+ * @brief Challenge mode question record for Shiny vs. Normal Quiz
+ */
+export interface ShinyChallengeQuestion {
+    /** Question number (1-10) */
+    questionNumber: number;
+    /** Variant played for this question */
+    variant: ShinyQuizVariant;
+    /** Target Pokemon ID */
+    pokemonId: number;
+    /** Target Pokemon localized name */
+    pokemonName: string;
+    /** Normal sprite URL */
+    normalSpriteUrl: string;
+    /** Real shiny sprite URL */
+    shinySpriteUrl: string;
+    /** Sprite URL shown to the user */
+    shownSpriteUrl: string;
+    /** In 'binary' mode: whether the shown sprite was shiny */
+    wasTargetShiny?: boolean;
+    /** In 'binary' mode: what the user answered (true = shiny, false = normal, null = timeout) */
+    userGuessedShiny?: boolean | null;
+    /** In 'spot' mode: all 4-6 options shown */
+    fakeOptions?: ShinyFakeOption[];
+    /** In 'spot' mode: option ID selected by user */
+    userSelectedOptionId?: string;
+    /** Whether the user answered correctly */
+    isCorrect: boolean;
+}
+
+// ============================================================
 // PERSONAL STATS & STREAKS TYPES
 // ============================================================
 

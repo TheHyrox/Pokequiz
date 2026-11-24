@@ -4,6 +4,8 @@ import { runScreenMatrixTests } from './test_screens.mjs';
 import { runDescriptionQuizTests } from './test_quiz_description.mjs';
 import { runInformationQuizTests } from './test_quiz_information.mjs';
 import { runSpritesQuizTests } from './test_quiz_sprites.mjs';
+import { runZoomQuizTests } from './test_quiz_zoom.mjs';
+import { runShinyQuizTests } from './test_quiz_shiny.mjs';
 import { runPokedleQuizTests } from './test_quiz_pokedle.mjs';
 import { runNumberQuizTests } from './test_quiz_number.mjs';
 import { runNewFunctionalityTests } from './test_new_features.mjs';
@@ -46,6 +48,8 @@ async function main() {
             runDescriptionQuizTests,
             runInformationQuizTests,
             runSpritesQuizTests,
+            runZoomQuizTests,
+            runShinyQuizTests,
             runPokedleQuizTests,
             runNumberQuizTests,
             runNewFunctionalityTests
