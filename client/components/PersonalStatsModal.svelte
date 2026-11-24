@@ -100,6 +100,28 @@
             ]
         },
         {
+            slug: 'zoom',
+            icon: '🔍',
+            titleKey: 'zoom_quiz',
+            modes: [
+                { key: 'score', label: l('scoreMode') },
+                { key: 'infinite', label: l('infiniteMode') },
+                { key: 'challenge', label: l('challengeMode') },
+                { key: 'hardcore', label: l('hardcoreMode') }
+            ]
+        },
+        {
+            slug: 'shiny',
+            icon: '✨',
+            titleKey: 'shiny_quiz',
+            modes: [
+                { key: 'score', label: l('scoreMode') },
+                { key: 'infinite', label: l('infiniteMode') },
+                { key: 'challenge', label: l('challengeMode') },
+                { key: 'hardcore', label: l('hardcoreMode') }
+            ]
+        },
+        {
             slug: 'information',
             icon: 'ℹ️',
             titleKey: 'information_quiz',

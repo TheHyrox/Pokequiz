@@ -13,7 +13,9 @@ import {
     DEFAULT_SPRITE_QUIZ_SETTINGS,
     DEFAULT_INFORMATION_QUIZ_SETTINGS,
     DEFAULT_POKEDLE_QUIZ_SETTINGS,
-    DEFAULT_NUMBER_QUIZ_SETTINGS
+    DEFAULT_NUMBER_QUIZ_SETTINGS,
+    DEFAULT_ZOOM_QUIZ_SETTINGS,
+    DEFAULT_SHINY_QUIZ_SETTINGS
 } from '../../../shared/constants';
 import type {
     DescriptionQuizSettings,
@@ -21,6 +23,10 @@ import type {
     InformationQuizSettings,
     PokedleQuizSettings,
     NumberQuizSettings,
+    ZoomQuizSettings,
+    ShinyQuizSettings,
+    ZoomArtworkSource,
+    ShinyQuizVariant,
     GameMode,
     InformationGameMode,
     InformationType,
@@ -31,7 +37,7 @@ import type {
 } from '../../../shared/types';
 import { getTodayDateString } from '../../../shared/utils/seededRng';
 
-export type QuizSlug = 'description' | 'information' | 'sprites' | 'pokedle' | 'number';
+export type QuizSlug = 'description' | 'information' | 'sprites' | 'pokedle' | 'number' | 'zoom' | 'shiny';
 
 export interface ParsedUrlQuizConfig {
     quizSlug: QuizSlug;
@@ -174,6 +180,40 @@ export function encodeQuizSettingsToParams(
             if (s.rotationEnabled) params.set('rotation', '1');
             break;
         }
+        case 'zoom': {
+            const s = settings as ZoomQuizSettings;
+            params.set('mode', s.gameMode);
+            if (s.gameMode === 'hardcore') params.set('hardcore', '1');
+            if (s.hasTimeLimit) {
+                params.set('timer', '1');
+                params.set('time', String(s.timeLimit));
+            }
+            if (s.spriteSource) {
+                params.set('source', s.spriteSource);
+            }
+            params.set('crop', String(s.initialCropSize ?? 30));
+            params.set('step', String(s.zoomStep ?? 15));
+            params.set('hints', s.allowManualHints ? '1' : '0');
+            params.set('options', String(s.numberOfOptions ?? 4));
+            break;
+        }
+        case 'shiny': {
+            const s = settings as ShinyQuizSettings;
+            params.set('variant', s.variant);
+            params.set('mode', s.gameMode);
+            if (s.gameMode === 'hardcore') params.set('hardcore', '1');
+            if (s.hasTimeLimit) {
+                params.set('timer', '1');
+                params.set('time', String(s.timeLimit));
+            }
+            if (s.spriteSource) {
+                params.set('source', s.spriteSource);
+            }
+            params.set('fakes', String(s.numberOfFakes ?? 4));
+            params.set('showName', s.showPokemonName ? '1' : '0');
+            params.set('showRef', s.showNormalReference ? '1' : '0');
+            break;
+        }
     }
 
     if (extra?.play) {
@@ -222,15 +262,17 @@ export function parseQuizSettingsFromUrl(searchStr?: string, hashStr?: string): 
         quizParam = quizParam.replace(/-quiz$/, '');
     }
 
+    const validQuizSlugs = ['description', 'information', 'sprites', 'pokedle', 'number', 'zoom', 'shiny'];
+
     if (!quizParam && rawHash) {
         const cleanHash = rawHash.replace(/^#\/?/, '').split('?')[0];
         const [hashSlug] = cleanHash.split('/');
-        if (['description', 'information', 'sprites', 'pokedle', 'number'].includes(hashSlug)) {
+        if (validQuizSlugs.includes(hashSlug)) {
             quizParam = hashSlug;
         }
     }
 
-    if (!['description', 'information', 'sprites', 'pokedle', 'number'].includes(quizParam)) {
+    if (!validQuizSlugs.includes(quizParam)) {
         return null;
     }
 
@@ -414,6 +456,81 @@ export function parseQuizSettingsFromUrl(searchStr?: string, hashStr?: string): 
                 pixelateStrength,
                 silhouetteEnabled,
                 rotationEnabled,
+                isDailyChallenge,
+                dailySeed
+            };
+            return { quizSlug, settings, autoStart };
+        }
+
+        case 'zoom': {
+            const def = DEFAULT_ZOOM_QUIZ_SETTINGS;
+            let gameMode: GameMode = def.gameMode;
+            const modeParam = params.get('mode') as GameMode | null;
+            if (isHardcoreFlag) {
+                gameMode = 'hardcore';
+            } else if (modeParam && ['score', 'infinite', 'challenge', 'hardcore'].includes(modeParam)) {
+                gameMode = modeParam;
+            }
+
+            const hasTimeLimit = gameMode === 'hardcore' ? false : parseBool(params.get('timer') ?? params.get('hasTimeLimit'), def.hasTimeLimit);
+            const timeLimit = parseIntClamped(params.get('time') ?? params.get('timeLimit'), 5, 30, def.timeLimit);
+            const sourceParam = params.get('source') as ZoomArtworkSource | null;
+            const spriteSource: ZoomArtworkSource =
+                sourceParam && ['official', 'home'].includes(sourceParam) ? sourceParam : def.spriteSource;
+            const initialCropSize = parseIntClamped(params.get('crop') ?? params.get('initialCropSize'), 10, 40, def.initialCropSize);
+            const zoomStep = parseIntClamped(params.get('step') ?? params.get('zoomStep'), 10, 25, def.zoomStep);
+            const allowManualHints = parseBool(params.get('hints') ?? params.get('allowManualHints'), def.allowManualHints);
+            const numberOfOptions = parseIntClamped(params.get('options'), 2, 24, def.numberOfOptions);
+
+            const settings: ZoomQuizSettings = {
+                hasTimeLimit,
+                timeLimit,
+                gameMode,
+                selectedGenerations,
+                spriteSource,
+                initialCropSize,
+                zoomStep,
+                allowManualHints,
+                numberOfOptions,
+                isDailyChallenge,
+                dailySeed
+            };
+            return { quizSlug, settings, autoStart };
+        }
+
+        case 'shiny': {
+            const def = DEFAULT_SHINY_QUIZ_SETTINGS;
+            const variantParam = params.get('variant') as ShinyQuizVariant | null;
+            const variant: ShinyQuizVariant =
+                variantParam && ['binary', 'spot'].includes(variantParam) ? variantParam : def.variant;
+
+            let gameMode: GameMode = def.gameMode;
+            const modeParam = params.get('mode') as GameMode | null;
+            if (isHardcoreFlag) {
+                gameMode = 'hardcore';
+            } else if (modeParam && ['score', 'infinite', 'challenge', 'hardcore'].includes(modeParam)) {
+                gameMode = modeParam;
+            }
+
+            const hasTimeLimit = gameMode === 'hardcore' ? false : parseBool(params.get('timer') ?? params.get('hasTimeLimit'), def.hasTimeLimit);
+            const timeLimit = parseIntClamped(params.get('time') ?? params.get('timeLimit'), 5, 30, def.timeLimit);
+            const sourceParam = params.get('source') as SpriteSource | null;
+            const spriteSource: SpriteSource =
+                sourceParam && ['default', 'home', 'official'].includes(sourceParam) ? sourceParam : def.spriteSource;
+            const numberOfFakes = parseIntClamped(params.get('fakes') ?? params.get('numberOfFakes'), 4, 6, def.numberOfFakes);
+            const showPokemonName = parseBool(params.get('showName') ?? params.get('showPokemonName'), def.showPokemonName);
+            const showNormalReference = parseBool(params.get('showRef') ?? params.get('showNormalReference'), def.showNormalReference);
+
+            const settings: ShinyQuizSettings = {
+                variant,
+                gameMode,
+                hasTimeLimit,
+                timeLimit,
+                selectedGenerations,
+                spriteSource,
+                numberOfFakes,
+                showPokemonName,
+                showNormalReference,
                 isDailyChallenge,
                 dailySeed
             };

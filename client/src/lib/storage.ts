@@ -9,6 +9,8 @@ import type {
     InformationQuizSettings,
     PokedleQuizSettings,
     NumberQuizSettings,
+    ZoomQuizSettings,
+    ShinyQuizSettings,
     PersonalStatsStore,
     QuizModeStatEntry,
     DailyChallengeRecord
@@ -23,6 +25,8 @@ const SPRITE_SETTINGS_KEY = 'pokequiz_sprite_settings';
 const INFORMATION_SETTINGS_KEY = 'pokequiz_information_settings';
 const POKEDLE_SETTINGS_KEY = 'pokequiz_pokedle_settings';
 const NUMBER_SETTINGS_KEY = 'pokequiz_number_settings';
+const ZOOM_SETTINGS_KEY = 'pokequiz_zoom_settings';
+const SHINY_SETTINGS_KEY = 'pokequiz_shiny_settings';
 const PERSONAL_STATS_KEY = 'pokequiz_personal_stats';
 
 /**
@@ -166,6 +170,48 @@ export function saveNumberSettings(settings: NumberQuizSettings): void {
     localStorage.setItem(NUMBER_SETTINGS_KEY, JSON.stringify(settings));
 }
 
+/**
+ * @brief Get cached zoom quiz settings
+ */
+export function getCachedZoomSettings(): ZoomQuizSettings | null {
+    if (typeof window === 'undefined') return null;
+    const cached = localStorage.getItem(ZOOM_SETTINGS_KEY);
+    try {
+        return cached ? JSON.parse(cached) : null;
+    } catch {
+        return null;
+    }
+}
+
+/**
+ * @brief Save zoom quiz settings to local storage
+ */
+export function saveZoomSettings(settings: ZoomQuizSettings): void {
+    if (typeof window === 'undefined') return;
+    localStorage.setItem(ZOOM_SETTINGS_KEY, JSON.stringify(settings));
+}
+
+/**
+ * @brief Get cached shiny quiz settings
+ */
+export function getCachedShinySettings(): ShinyQuizSettings | null {
+    if (typeof window === 'undefined') return null;
+    const cached = localStorage.getItem(SHINY_SETTINGS_KEY);
+    try {
+        return cached ? JSON.parse(cached) : null;
+    } catch {
+        return null;
+    }
+}
+
+/**
+ * @brief Save shiny quiz settings to local storage
+ */
+export function saveShinySettings(settings: ShinyQuizSettings): void {
+    if (typeof window === 'undefined') return;
+    localStorage.setItem(SHINY_SETTINGS_KEY, JSON.stringify(settings));
+}
+
 // ============================================================
 // PERSONAL STATS & STREAKS (LOCAL STORAGE)
 // ============================================================
@@ -255,7 +301,7 @@ export function getModeStats(quizSlug: string, modeKey: string): QuizModeStatEnt
 }
 
 export interface RecordGameResultOptions {
-    quizSlug: 'description' | 'information' | 'sprites' | 'pokedle' | 'number';
+    quizSlug: 'description' | 'information' | 'sprites' | 'pokedle' | 'number' | 'zoom' | 'shiny';
     modeKey: string;
     isWin: boolean;
     score: number;

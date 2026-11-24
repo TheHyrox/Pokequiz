@@ -220,3 +220,97 @@ export async function getQuizSpriteUrlWithFallback(
         actualSource: 'default'
     };
 }
+
+/**
+ * @brief Get normal or shiny sprite URL for the Shiny vs. Normal Quiz
+ * @param id - Pokemon National Pokedex ID
+ * @param isShiny - Whether to return the shiny variant
+ * @param source - Sprite source ('default', 'home', or 'official')
+ * @returns Full URL string for the normal or shiny sprite
+ */
+export function getShinyQuizSpriteUrl(
+    id: number,
+    isShiny: boolean,
+    source: SpriteSource = 'default'
+): string {
+    if (isShiny) {
+        switch (source) {
+            case 'home':
+                return SPRITE_URLS.HOME_SHINY(id);
+            case 'official':
+                return SPRITE_URLS.OFFICIAL_SHINY(id);
+            default:
+                return SPRITE_URLS.SHINY(id);
+        }
+    }
+
+    switch (source) {
+        case 'home':
+            return SPRITE_URLS.HOME(id);
+        case 'official':
+            return SPRITE_URLS.OFFICIAL(id);
+        default:
+            return SPRITE_URLS.DEFAULT(id);
+    }
+}
+
+/**
+ * @brief Result of resolving a normal + shiny sprite pair with fallback support
+ */
+export interface ShinySpritePairResult {
+    normalUrl: string;
+    shinyUrl: string;
+    actualSource: SpriteSource;
+    usedFallback: boolean;
+}
+
+/**
+ * @brief Resolve both normal and shiny sprite URLs for a Pokemon with fallback to 'default' (SPRITE_URLS.SHINY)
+ */
+export async function getShinySpritePairWithFallback(
+    id: number,
+    preferredSource: SpriteSource = 'default',
+    timeoutMs: number = 5000
+): Promise<ShinySpritePairResult> {
+    const candidateSources: SpriteSource[] = [
+        preferredSource,
+        ...(['default', 'home', 'official'] as SpriteSource[]).filter(s => s !== preferredSource)
+    ];
+
+    async function checkExists(testUrl: string): Promise<boolean> {
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+            const response = await fetch(testUrl, {
+                method: 'HEAD',
+                signal: controller.signal
+            });
+            clearTimeout(timeoutId);
+            return response.ok || response.status !== 404;
+        } catch {
+            return true;
+        }
+    }
+
+    for (const src of candidateSources) {
+        const normalUrl = getShinyQuizSpriteUrl(id, false, src);
+        const shinyUrl = getShinyQuizSpriteUrl(id, true, src);
+        const [normalOk, shinyOk] = await Promise.all([checkExists(normalUrl), checkExists(shinyUrl)]);
+        if (normalOk && shinyOk) {
+            return {
+                normalUrl,
+                shinyUrl,
+                actualSource: src,
+                usedFallback: src !== preferredSource
+            };
+        }
+    }
+
+    return {
+        normalUrl: SPRITE_URLS.DEFAULT(id),
+        shinyUrl: SPRITE_URLS.SHINY(id),
+        actualSource: 'default',
+        usedFallback: preferredSource !== 'default'
+    };
+}
+
