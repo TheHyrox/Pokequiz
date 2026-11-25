@@ -107,7 +107,7 @@
                 >
                     {#if cell.pokemonId && cell.pokemonName}
                         <img
-                            src={getSpriteUrl(cell.pokemonId, 'home')}
+                            src={getSpriteUrl(cell.pokemonId, cell.pokemonId > 1025 ? 'default' : 'home')}
                             alt={cell.pokemonName}
                             class="w-12 h-12 sm:w-16 sm:h-16 object-contain transition-transform group-hover:scale-105"
                             on:error={(e) => {

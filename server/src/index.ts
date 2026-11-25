@@ -90,6 +90,17 @@ app.get('/api/sudoku/board', (req, res) => {
     }
 });
 
+app.get('/api/sudoku/forms/:lang', async (req, res) => {
+    try {
+        const langId = getLanguageId(req.params.lang);
+        const forms = await sudokuQuizService.getAlternateFormNames(parseInt(langId, 10));
+        res.json(forms);
+    } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+        res.status(400).json({ error: errorMessage });
+    }
+});
+
 app.get('/api/pokemon/:id/sprites', async (req, res) => {
     try {
         const { id } = req.params;

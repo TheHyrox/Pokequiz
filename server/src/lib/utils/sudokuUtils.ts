@@ -289,7 +289,7 @@ export const EVOLVED_BY_ITEM_IDS = new Set<number>([
 /**
  * @brief Region ID ranges (including Hisui 899-905 and Galar 810-898)
  */
-export const REGION_RANGES: Record<string, { min: number; max: number; extraIds?: number[] }> = {
+export const REGION_RANGES: Record<string, { min: number; max: number }> = {
     kanto:  { min: 1, max: 151 },
     johto:  { min: 152, max: 251 },
     hoenn:  { min: 252, max: 386 },
@@ -298,7 +298,7 @@ export const REGION_RANGES: Record<string, { min: number; max: number; extraIds?
     kalos:  { min: 650, max: 721 },
     alola:  { min: 722, max: 809 },
     galar:  { min: 810, max: 898 },
-    hisui:  { min: 899, max: 905, extraIds: [58, 59, 100, 101, 157, 211, 215, 503, 549, 570, 571, 628, 705, 706, 713, 724] },
+    hisui:  { min: 899, max: 905 },
     paldea: { min: 906, max: 1025 }
 };
 
@@ -474,9 +474,7 @@ export function doesPokemonMatchRestriction(pokemon: PokemonEntry, restriction: 
         case 'region': {
             const range = REGION_RANGES[restriction.value];
             if (!range) return false;
-            if (id >= range.min && id <= range.max) return true;
-            if (range.extraIds && range.extraIds.includes(id)) return true;
-            return false;
+            return id >= range.min && id <= range.max;
         }
 
         case 'type': {
@@ -556,9 +554,9 @@ export function doesPokemonMatchRestriction(pokemon: PokemonEntry, restriction: 
  */
 export function areRestrictionsCompatibleAxes(r1: SudokuRestriction, r2: SudokuRestriction): boolean {
     if (r1.id === r2.id) return false;
-    // Two regions cannot intersect unless one is Hisui (which shares regional forms)
+    // No Pokémon belongs to two different regions
     if (r1.category === 'region' && r2.category === 'region') {
-        if (r1.value !== 'hisui' && r2.value !== 'hisui') return false;
+        return false;
     }
     // Dual type and Monotype are mutually exclusive
     if (

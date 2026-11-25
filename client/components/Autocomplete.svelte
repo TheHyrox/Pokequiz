@@ -34,6 +34,8 @@
     export let autofocus: boolean = false;
     /** Selected generation numbers for filtering (empty or all = no filter) */
     export let selectedGenerations: number[] = [];
+    /** Whether to show the #id badge in suggestions */
+    export let showId: boolean = true;
 
     let inputElement: HTMLInputElement;
     let showSuggestions = false;
@@ -179,7 +181,9 @@
                         on:error
                     />
                     <div class="suggestion-text">
-                        <span class="pokemon-id">#{pokemon.id}</span>
+                        {#if showId}
+                            <span class="pokemon-id">#{pokemon.id}</span>
+                        {/if}
                         <span class="pokemon-name">{pokemon.name}</span>
                     </div>
                 </button>
