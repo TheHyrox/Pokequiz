@@ -33,7 +33,10 @@
 </script>
 
 <div class="header">
-    <div>
+    <button on:click={onBackToHub} class="back-button">
+        {getLabel(languageCode, 'back')}
+    </button>
+    <div class="flex-1">
         <h1 class="title">Pokequiz - {getQuizTitle()}</h1>
         {#if customSubtitle}
             <p class="subtitle">{customSubtitle}</p>
@@ -55,9 +58,6 @@
             </p>
         {/if}
     </div>
-    <button on:click={onBackToHub} class="back-button">
-        {getLabel(languageCode, 'back')}
-    </button>
 </div>
 
 <style lang="postcss">

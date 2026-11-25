@@ -114,6 +114,16 @@ export class SpriteQuizService {
             icon: '🔢',
             modes: ['normal', 'points'],
             difficulty: 'Hard'
+        },
+        {
+            id: 'sudoku-quiz',
+            slug: 'sudoku',
+            name: 'PokéSudoku',
+            titleKey: 'sudoku_quiz',
+            descriptionKey: 'sudoku_description',
+            icon: '🧩',
+            modes: ['daily', 'normal', 'custom'],
+            difficulty: 'Hard'
         }
     ];
 

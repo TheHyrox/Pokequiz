@@ -12,6 +12,7 @@ import PokedleQuizSettingsComponent from '../../components/PokedleQuizSettings.s
 import NumberQuizSettingsComponent from '../../components/NumberQuizSettings.svelte';
 import ZoomQuizSettingsComponent from '../../components/ZoomQuizSettings.svelte';
 import ShinyQuizSettingsComponent from '../../components/ShinyQuizSettings.svelte';
+import SudokuQuizSettingsComponent from '../../components/SudokuQuizSettings.svelte';
 
 import DescriptionQuiz from '../QuizDescription.svelte';
 import SpritesQuiz from '../QuizSprites.svelte';
@@ -20,6 +21,7 @@ import QuizPokedle from '../QuizPokedle.svelte';
 import QuizNumber from '../QuizNumber.svelte';
 import QuizZoom from '../QuizZoom.svelte';
 import QuizShiny from '../QuizShiny.svelte';
+import QuizSudoku from '../QuizSudoku.svelte';
 
 import {
     getCachedDescriptionSettings,
@@ -28,7 +30,8 @@ import {
     getCachedPokedleSettings,
     getCachedNumberSettings,
     getCachedZoomSettings,
-    getCachedShinySettings
+    getCachedShinySettings,
+    getCachedSudokuSettings
 } from './storage';
 import type { LabelKey } from './i18n';
 
@@ -39,7 +42,8 @@ export type QuizId =
     | 'zoom-quiz'
     | 'shiny-quiz'
     | 'pokedle-quiz'
-    | 'number-quiz';
+    | 'number-quiz'
+    | 'sudoku-quiz';
 
 export interface QuizRegistryEntry<TSettings = any> {
     id: QuizId;
@@ -138,6 +142,18 @@ export const QUIZ_REGISTRY: QuizRegistryEntry[] = [
         SettingsComponent: NumberQuizSettingsComponent,
         QuizComponent: QuizNumber,
         getCachedSettings: getCachedNumberSettings
+    },
+    {
+        id: 'sudoku-quiz',
+        slug: 'sudoku',
+        name: 'PokéSudoku',
+        description: 'Fill the grid with Pokémon matching both row and column restrictions',
+        titleKey: 'sudoku_quiz',
+        descriptionKey: 'sudoku_description',
+        icon: '🧩',
+        SettingsComponent: SudokuQuizSettingsComponent,
+        QuizComponent: QuizSudoku,
+        getCachedSettings: getCachedSudokuSettings
     }
 ];
 

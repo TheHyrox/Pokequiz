@@ -536,8 +536,8 @@ export interface QuizModeStatEntry {
 export interface DailyChallengeRecord {
     /** Date string YYYY-MM-DD */
     date: string;
-    /** Quiz slug ('pokedle' | 'description' | 'number') */
-    quiz: 'pokedle' | 'description' | 'number';
+    /** Quiz slug ('pokedle' | 'description' | 'number' | 'sudoku') */
+    quiz: 'pokedle' | 'description' | 'number' | 'sudoku';
     /** Whether the user finished today's daily challenge (win or loss) */
     completed: boolean;
     /** Whether the user won today's daily challenge */
@@ -558,6 +558,18 @@ export interface DailyChallengeRecord {
         numberPointsRounds?: NumberPointsRound[];
         /** Description Quiz challenge/score review questions */
         descriptionQuestions?: ChallengeQuestion[];
+        /** Sudoku Quiz cell states & guess count */
+        sudokuState?: {
+            gridSize: number;
+            guessesUsed: number;
+            cells: Array<{
+                row: number;
+                col: number;
+                pokemonId: number | null;
+                pokemonName: string | null;
+                isValid: boolean | null;
+            }>;
+        };
     };
 }
 
@@ -567,5 +579,151 @@ export interface PersonalStatsStore {
     /** Keyed by `${quizSlug}:${YYYY-MM-DD}` */
     dailyChallenges: Record<string, DailyChallengeRecord>;
 }
+
+// ============================================================
+// SUDOKU (POKEGRID) QUIZ TYPES
+// ============================================================
+
+/**
+ * @brief Game mode for Sudoku Quiz
+ * @description 'daily' (3x3, seeded, 10 guesses), 'normal' (3x3 training, 10 guesses), 'custom' (2x2 to 5x5, configurable)
+ */
+export type SudokuGameMode = 'daily' | 'normal' | 'custom';
+
+/**
+ * @brief Grid size for Sudoku Quiz (2x2 to 5x5)
+ */
+export type SudokuGridSize = 2 | 3 | 4 | 5;
+
+/**
+ * @brief Restriction category types for Sudoku rows and columns
+ */
+export type SudokuRestrictionCategory =
+    | 'region'
+    | 'type'
+    | 'evolution'
+    | 'dualType'
+    | 'monotype'
+    | 'baby'
+    | 'starter'
+    | 'fossil'
+    | 'legendary'
+    | 'mythical'
+    | 'ultraBeast'
+    | 'paradox'
+    | 'mega'
+    | 'primal'
+    | 'gigantamax';
+
+/**
+ * @brief Region identifier for Sudoku restriction
+ */
+export type SudokuRegionId =
+    | 'kanto'
+    | 'joht'
+    | 'johto'
+    | 'hoenn'
+    | 'sinnoh'
+    | 'unova'
+    | 'kalos'
+    | 'alola'
+    | 'galar'
+    | 'hisui'
+    | 'paldea';
+
+/**
+ * @brief Evolution sub-criteria for Sudoku restriction
+ */
+export type SudokuEvolutionCriterionId =
+    | 'basic'
+    | 'stage1'
+    | 'stage2'
+    | 'friendship'
+    | 'trade'
+    | 'item'
+    | 'levelup';
+
+/**
+ * @brief Descriptor for a single row or column restriction in the Sudoku grid
+ */
+export interface SudokuRestriction {
+    /** Unique restriction identifier (e.g. 'region:kanto', 'type:10', 'evolution:trade', 'baby') */
+    id: string;
+    /** Category of restriction */
+    category: SudokuRestrictionCategory;
+    /** Value within the category (e.g. 'kanto', '10', 'stage1', orsame as category for boolean traits) */
+    value: string;
+    /** Translation key or localized display label */
+    labelKey: string;
+    /** Optional badge/icon or color class hint */
+    icon?: string;
+}
+
+/**
+ * @brief Single cell state in the Sudoku grid
+ */
+export interface SudokuCellState {
+    /** 0-based row index */
+    row: number;
+    /** 0-based column index */
+    col: number;
+    /** Currently placed or attempted Pokemon ID (null if empty) */
+    pokemonId: number | null;
+    /** Localized name of the Pokemon in this cell */
+    pokemonName: string | null;
+    /** Whether the placed Pokemon satisfies both row and column restrictions (false triggers red border & retry) */
+    isValid: boolean | null;
+    /** Number of valid candidate Pokemon for this cell intersection */
+    validCandidateCount: number;
+    /** Sample canonical valid Pokemon ID (for end-of-game reveal / hint) */
+    sampleValidPokemonId?: number;
+}
+
+/**
+ * @brief Generated Sudoku Board payload from server / generator
+ */
+export interface SudokuBoardPayload {
+    /** Grid dimension N (2..5) */
+    gridSize: SudokuGridSize;
+    /** Row restrictions of length N */
+    rowRestrictions: SudokuRestriction[];
+    /** Column restrictions of length N */
+    colRestrictions: SudokuRestriction[];
+    /** Matrix [row][col] of valid Pokemon IDs for each intersection */
+    cellValidPokemonIds: number[][][];
+    /** Matrix [row][col] of one guaranteed disjoint solution Pokemon ID per cell */
+    guaranteedSolutionIds: number[][];
+}
+
+/**
+ * @brief Sudoku Quiz Settings configuration
+ */
+export interface SudokuQuizSettings {
+    /** Selected game mode ('daily' | 'normal' | 'custom') */
+    gameMode: SudokuGameMode;
+    /** Grid dimension (2 to 5, fixed to 3 in daily and normal modes) */
+    gridSize: SudokuGridSize;
+    /** Unlimited guesses toggle */
+    unlimitedGuesses: boolean;
+    /** Maximum number of guesses when unlimitedGuesses is false (default 10 in daily/normal) */
+    guessLimit: number;
+    /** Whether countdown timer is enabled */
+    hasTimeLimit: boolean;
+    /** Total timer duration in seconds */
+    timeLimit: number;
+    /** Prevent board from becoming unsolvable & ensure generated boards have a valid solution */
+    softLockGuard: boolean;
+    /** Allow each Pokemon to be used only once across the grid (disallow duplicate answers) */
+    uniquePokemonOnly: boolean;
+    /** Allowed restriction categories in custom mode */
+    allowedCategories: SudokuRestrictionCategory[];
+    /** Allowed individual restriction IDs in custom mode (e.g. 'region:kanto', 'type:10', 'evolution:trade', 'baby') */
+    allowedRestrictions?: string[];
+    /** Whether this session is Today's Daily Challenge */
+    isDailyChallenge?: boolean;
+    /** Explicit PRNG seed (e.g. YYYY-MM-DD) */
+    dailySeed?: string;
+}
+
 
 

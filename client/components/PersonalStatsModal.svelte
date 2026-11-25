@@ -141,6 +141,16 @@
                 { key: 'points', label: l('number_subModePoints') },
                 { key: 'daily', label: l('dailyChallenge') }
             ]
+        },
+        {
+            slug: 'sudoku',
+            icon: '🧩',
+            titleKey: 'sudoku_quiz',
+            modes: [
+                { key: 'daily', label: l('sudoku_mode_daily') },
+                { key: 'normal', label: l('sudoku_mode_normal') },
+                { key: 'custom', label: l('sudoku_mode_custom') }
+            ]
         }
     ] as QuizStatsSection[];
 
