@@ -8,6 +8,7 @@ import { runZoomQuizTests } from './test_quiz_zoom.mjs';
 import { runShinyQuizTests } from './test_quiz_shiny.mjs';
 import { runPokedleQuizTests } from './test_quiz_pokedle.mjs';
 import { runNumberQuizTests } from './test_quiz_number.mjs';
+import { runSudokuQuizTests } from './test_quiz_sudoku.mjs';
 import { runNewFunctionalityTests } from './test_new_features.mjs';
 
 const CHROME_PATH = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
@@ -43,7 +44,7 @@ async function main() {
     const summaries = [];
 
     try {
-        const suites = [
+        const allSuites = [
             runScreenMatrixTests,
             runDescriptionQuizTests,
             runInformationQuizTests,
@@ -52,8 +53,13 @@ async function main() {
             runShinyQuizTests,
             runPokedleQuizTests,
             runNumberQuizTests,
+            runSudokuQuizTests,
             runNewFunctionalityTests
         ];
+        const filter = process.env.TEST_SUITE?.toLowerCase();
+        const suites = filter
+            ? allSuites.filter(s => s.name.toLowerCase().includes(filter))
+            : allSuites;
 
         for (const runSuite of suites) {
             console.log(`\n=== Running ${runSuite.name} ===`);

@@ -50,7 +50,9 @@ export const SETTINGS_LABELS = {
         hardcoreUnder2Seconds: 'Used in < 2s: 10 pts',
         hardcoreUnder5Seconds: 'Used in < 5s: 5 pts',
         hardcoreUnder15Seconds: 'Used in < 15s: 3 pts',
-        hardcoreLives: '3 lives limit'
+        hardcoreLives: '3 lives limit',
+        enableTimeLimit: 'Enable Timer',
+        timePerQuestion: 'Timer Duration (seconds)'
     },
     fr: {
         gameSettings: 'Paramètres de Jeu',
@@ -98,7 +100,9 @@ export const SETTINGS_LABELS = {
         hardcoreUnder2Seconds: 'Répondu en < 2s : 10 pts',
         hardcoreUnder5Seconds: 'Répondu en < 5s : 5 pts',
         hardcoreUnder15Seconds: 'Répondu en < 15s : 3 pts',
-        hardcoreLives: 'Limite de 3 vies'
+        hardcoreLives: 'Limite de 3 vies',
+        enableTimeLimit: 'Activer le chronomètre',
+        timePerQuestion: 'Durée du chronomètre (secondes)'
     },
     de: {
         gameSettings: 'Spieleinstellungen',
@@ -146,7 +150,9 @@ export const SETTINGS_LABELS = {
         hardcoreUnder2Seconds: 'In < 2s: 10 Pkt.',
         hardcoreUnder5Seconds: 'In < 5s: 5 Pkt.',
         hardcoreUnder15Seconds: 'In < 15s: 3 Pkt.',
-        hardcoreLives: '3 Leben Limit'
+        hardcoreLives: '3 Leben Limit',
+        enableTimeLimit: 'Timer aktivieren',
+        timePerQuestion: 'Timer-Dauer (Sekunden)'
     },
     es: {
         gameSettings: 'Configuración del Juego',
@@ -194,7 +200,9 @@ export const SETTINGS_LABELS = {
         hardcoreUnder2Seconds: 'En < 2s: 10 pts',
         hardcoreUnder5Seconds: 'En < 5s: 5 pts',
         hardcoreUnder15Seconds: 'En < 15s: 3 pts',
-        hardcoreLives: 'Límite de 3 vidas'
+        hardcoreLives: 'Límite de 3 vidas',
+        enableTimeLimit: 'Activar temporizador',
+        timePerQuestion: 'Duración del temporizador (segundos)'
     },
     it: {
         gameSettings: 'Impostazioni del Gioco',
@@ -242,7 +250,9 @@ export const SETTINGS_LABELS = {
         hardcoreUnder2Seconds: 'In < 2s: 10 pt',
         hardcoreUnder5Seconds: 'In < 5s: 5 pt',
         hardcoreUnder15Seconds: 'In < 15s: 3 pt',
-        hardcoreLives: 'Limite di 3 vite'
+        hardcoreLives: 'Limite di 3 vite',
+        enableTimeLimit: 'Abilita timer',
+        timePerQuestion: 'Durata del timer (secondi)'
     },
     'ja-hrkt': {
         gameSettings: 'ゲーム せってい',
@@ -290,7 +300,9 @@ export const SETTINGS_LABELS = {
         hardcoreUnder2Seconds: '< 2びょう: 10てん',
         hardcoreUnder5Seconds: '< 5びょう: 5てん',
         hardcoreUnder15Seconds: '< 15びょう: 3てん',
-        hardcoreLives: '3らいふ せいげん'
+        hardcoreLives: '3らいふ せいげん',
+        enableTimeLimit: 'タイマーをゆうこうにする',
+        timePerQuestion: 'せいげんじかん（びょう）'
     },
     ja: {
         gameSettings: 'ゲーム設定',
@@ -338,7 +350,9 @@ export const SETTINGS_LABELS = {
         hardcoreUnder2Seconds: '2秒未満: 10点',
         hardcoreUnder5Seconds: '5秒未満: 5点',
         hardcoreUnder15Seconds: '15秒未満: 3点',
-        hardcoreLives: '残機3ライフ'
+        hardcoreLives: '残機3ライフ',
+        enableTimeLimit: 'タイマーを有効にする',
+        timePerQuestion: '制限時間（秒）'
     },
     ko: {
         gameSettings: '게임 설정',
@@ -386,7 +400,9 @@ export const SETTINGS_LABELS = {
         hardcoreUnder2Seconds: '< 2초: 10점',
         hardcoreUnder5Seconds: '< 5초: 5점',
         hardcoreUnder15Seconds: '< 15초: 3점',
-        hardcoreLives: '생명 3개 제한'
+        hardcoreLives: '생명 3개 제한',
+        enableTimeLimit: '타이머 활성화',
+        timePerQuestion: '제한 시간(초)'
     },
     'zh-hans': {
         gameSettings: '游戏设置',
@@ -434,7 +450,9 @@ export const SETTINGS_LABELS = {
         hardcoreUnder2Seconds: '< 2秒：10分',
         hardcoreUnder5Seconds: '< 5秒：5分',
         hardcoreUnder15Seconds: '< 15秒：3分',
-        hardcoreLives: '3条生命限制'
+        hardcoreLives: '3条生命限制',
+        enableTimeLimit: '启用计时器',
+        timePerQuestion: '计时器时长(秒)'
     },
     'zh-hant': {
         gameSettings: '遊戲設置',
@@ -482,7 +500,9 @@ export const SETTINGS_LABELS = {
         hardcoreUnder2Seconds: '< 2秒：10分',
         hardcoreUnder5Seconds: '< 5秒：5分',
         hardcoreUnder15Seconds: '< 15秒：3分',
-        hardcoreLives: '3條生命限制'
+        hardcoreLives: '3條生命限制',
+        enableTimeLimit: '啟用計時器',
+        timePerQuestion: '計時器時長(秒)'
     }
 };
 

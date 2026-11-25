@@ -13,6 +13,7 @@ import { POKEDLE_LABELS } from './labels/pokedle';
 import { NUMBER_LABELS } from './labels/number';
 import { ZOOM_LABELS } from './labels/zoom';
 import { SHINY_LABELS } from './labels/shiny';
+import { SUDOKU_LABELS } from './labels/sudoku';
 import type { LabelKey, LanguageCode } from './types';
 
 // Re-export from shared constants
@@ -41,7 +42,8 @@ const LABELS: Record<LanguageCode, Record<string, string>> = SUPPORTED_LANGUAGES
             POKEDLE_LABELS[lang],
             NUMBER_LABELS[lang],
             ZOOM_LABELS[lang],
-            SHINY_LABELS[lang]
+            SHINY_LABELS[lang],
+            SUDOKU_LABELS[lang]
         );
         return acc;
     },

@@ -9,13 +9,17 @@ import {
     ALL_GENERATIONS,
     ALL_INFORMATION_TYPES,
     ALL_POKEDLE_COLUMNS,
+    ALL_SUDOKU_RESTRICTION_CATEGORIES,
+    ALL_SUDOKU_RESTRICTION_IDS,
+    ALL_SUDOKU_RESTRICTIONS,
     DEFAULT_QUIZ_SETTINGS,
     DEFAULT_SPRITE_QUIZ_SETTINGS,
     DEFAULT_INFORMATION_QUIZ_SETTINGS,
     DEFAULT_POKEDLE_QUIZ_SETTINGS,
     DEFAULT_NUMBER_QUIZ_SETTINGS,
     DEFAULT_ZOOM_QUIZ_SETTINGS,
-    DEFAULT_SHINY_QUIZ_SETTINGS
+    DEFAULT_SHINY_QUIZ_SETTINGS,
+    DEFAULT_SUDOKU_QUIZ_SETTINGS
 } from '../../../shared/constants';
 import type {
     DescriptionQuizSettings,
@@ -25,6 +29,10 @@ import type {
     NumberQuizSettings,
     ZoomQuizSettings,
     ShinyQuizSettings,
+    SudokuQuizSettings,
+    SudokuGameMode,
+    SudokuGridSize,
+    SudokuRestrictionCategory,
     ZoomArtworkSource,
     ShinyQuizVariant,
     GameMode,
@@ -37,7 +45,7 @@ import type {
 } from '../../../shared/types';
 import { getTodayDateString } from '../../../shared/utils/seededRng';
 
-export type QuizSlug = 'description' | 'information' | 'sprites' | 'pokedle' | 'number' | 'zoom' | 'shiny';
+export type QuizSlug = 'description' | 'information' | 'sprites' | 'pokedle' | 'number' | 'zoom' | 'shiny' | 'sudoku';
 
 export interface ParsedUrlQuizConfig {
     quizSlug: QuizSlug;
@@ -214,6 +222,25 @@ export function encodeQuizSettingsToParams(
             params.set('showRef', s.showNormalReference ? '1' : '0');
             break;
         }
+        case 'sudoku': {
+            const s = settings as SudokuQuizSettings;
+            params.set('mode', s.gameMode);
+            params.set('size', String(s.gridSize ?? 3));
+            params.set('unlimited', s.unlimitedGuesses ? '1' : '0');
+            params.set('guessLimit', String(s.guessLimit ?? 10));
+            if (s.hasTimeLimit) {
+                params.set('timer', '1');
+                params.set('time', String(s.timeLimit));
+            }
+            params.set('softLock', s.softLockGuard ? '1' : '0');
+            params.set('unique', s.uniquePokemonOnly ? '1' : '0');
+            if (s.allowedRestrictions?.length && s.allowedRestrictions.length !== ALL_SUDOKU_RESTRICTION_IDS.length) {
+                params.set('rests', s.allowedRestrictions.join(','));
+            } else if (s.allowedCategories?.length && s.allowedCategories.length !== ALL_SUDOKU_RESTRICTION_CATEGORIES.length) {
+                params.set('cats', s.allowedCategories.join(','));
+            }
+            break;
+        }
     }
 
     if (extra?.play) {
@@ -262,7 +289,7 @@ export function parseQuizSettingsFromUrl(searchStr?: string, hashStr?: string): 
         quizParam = quizParam.replace(/-quiz$/, '');
     }
 
-    const validQuizSlugs = ['description', 'information', 'sprites', 'pokedle', 'number', 'zoom', 'shiny'];
+    const validQuizSlugs = ['description', 'information', 'sprites', 'pokedle', 'number', 'zoom', 'shiny', 'sudoku'];
 
     if (!quizParam && rawHash) {
         const cleanHash = rawHash.replace(/^#\/?/, '').split('?')[0];
@@ -533,6 +560,59 @@ export function parseQuizSettingsFromUrl(searchStr?: string, hashStr?: string): 
                 showNormalReference,
                 isDailyChallenge,
                 dailySeed
+            };
+            return { quizSlug, settings, autoStart };
+        }
+
+        case 'sudoku': {
+            const def = DEFAULT_SUDOKU_QUIZ_SETTINGS;
+            const modeParam = params.get('mode') as SudokuGameMode | null;
+            let gameMode: SudokuGameMode = def.gameMode;
+            if (isDailyChallenge || modeParam === 'daily') {
+                gameMode = 'daily';
+            } else if (modeParam && ['daily', 'normal', 'custom'].includes(modeParam)) {
+                gameMode = modeParam;
+            }
+
+            const isFixed3x3 = gameMode === 'daily' || gameMode === 'normal';
+            const gridSize = (isFixed3x3 ? 3 : parseIntClamped(params.get('size') ?? params.get('gridSize'), 2, 5, def.gridSize)) as SudokuGridSize;
+            const unlimitedGuesses = isFixed3x3 ? false : parseBool(params.get('unlimited') ?? params.get('unlimitedGuesses'), def.unlimitedGuesses);
+            const guessLimit = isFixed3x3 ? 10 : parseIntClamped(params.get('guessLimit') ?? params.get('guesses'), 3, 50, def.guessLimit);
+            const hasTimeLimit = isFixed3x3 ? false : parseBool(params.get('timer') ?? params.get('hasTimeLimit'), def.hasTimeLimit);
+            const timeLimit = parseIntClamped(params.get('time') ?? params.get('timeLimit'), 30, 600, def.timeLimit);
+            const softLockGuard = isFixed3x3 ? true : parseBool(params.get('softLock') ?? params.get('softLockGuard'), def.softLockGuard);
+            const uniquePokemonOnly = isFixed3x3 ? true : parseBool(params.get('unique') ?? params.get('uniquePokemonOnly'), def.uniquePokemonOnly);
+
+            const catsRaw = params.get('cats');
+            const parsedCats = catsRaw
+                ? (catsRaw.split(',').filter(c => ALL_SUDOKU_RESTRICTION_CATEGORIES.includes(c as SudokuRestrictionCategory)) as SudokuRestrictionCategory[])
+                : [];
+            const allowedCategories = parsedCats.length > 0 ? parsedCats : [...ALL_SUDOKU_RESTRICTION_CATEGORIES];
+
+            const restsRaw = params.get('rests');
+            const parsedRests = restsRaw
+                ? restsRaw.split(',').filter(id => ALL_SUDOKU_RESTRICTION_IDS.includes(id))
+                : [];
+            const allowedRestrictions =
+                parsedRests.length > 0
+                    ? parsedRests
+                    : parsedCats.length > 0
+                    ? ALL_SUDOKU_RESTRICTIONS.filter(r => parsedCats.includes(r.category)).map(r => r.id)
+                    : [...ALL_SUDOKU_RESTRICTION_IDS];
+
+            const settings: SudokuQuizSettings = {
+                gameMode,
+                gridSize,
+                unlimitedGuesses,
+                guessLimit,
+                hasTimeLimit,
+                timeLimit,
+                softLockGuard,
+                uniquePokemonOnly,
+                allowedCategories,
+                allowedRestrictions,
+                isDailyChallenge: isDailyChallenge || gameMode === 'daily',
+                dailySeed: (isDailyChallenge || gameMode === 'daily') ? (dailySeed || getTodayDateString()) : undefined
             };
             return { quizSlug, settings, autoStart };
         }

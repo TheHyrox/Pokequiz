@@ -288,4 +288,100 @@ export const DEFAULT_SHINY_QUIZ_SETTINGS: ShinyQuizSettings = {
     showNormalReference: true
 };
 
+// ============================================================
+// SUDOKU (POKEGRID) QUIZ CONSTANTS
+// ============================================================
+import type { SudokuRestrictionCategory, SudokuRestriction, SudokuQuizSettings } from '../types';
+
+export const ALL_SUDOKU_RESTRICTION_CATEGORIES: SudokuRestrictionCategory[] = [
+    'region',
+    'type',
+    'evolution',
+    'dualType',
+    'monotype',
+    'baby',
+    'starter',
+    'fossil',
+    'legendary',
+    'mythical',
+    'ultraBeast',
+    'paradox',
+    'mega',
+    'primal',
+    'gigantamax'
+];
+
+/**
+ * @brief Canonical list of all 42 individual Sudoku restrictions grouped by category
+ */
+export const ALL_SUDOKU_RESTRICTIONS: SudokuRestriction[] = [
+    // Regions (10)
+    { id: 'region:kanto',  category: 'region', value: 'kanto',  labelKey: 'sudoku_region_kanto' },
+    { id: 'region:johto',  category: 'region', value: 'johto',  labelKey: 'sudoku_region_johto' },
+    { id: 'region:hoenn',  category: 'region', value: 'hoenn',  labelKey: 'sudoku_region_hoenn' },
+    { id: 'region:sinnoh', category: 'region', value: 'sinnoh', labelKey: 'sudoku_region_sinnoh' },
+    { id: 'region:unova',  category: 'region', value: 'unova',  labelKey: 'sudoku_region_unova' },
+    { id: 'region:kalos',  category: 'region', value: 'kalos',  labelKey: 'sudoku_region_kalos' },
+    { id: 'region:alola',  category: 'region', value: 'alola',  labelKey: 'sudoku_region_alola' },
+    { id: 'region:galar',  category: 'region', value: 'galar',  labelKey: 'sudoku_region_galar' },
+    { id: 'region:hisui',  category: 'region', value: 'hisui',  labelKey: 'sudoku_region_hisui' },
+    { id: 'region:paldea', category: 'region', value: 'paldea', labelKey: 'sudoku_region_paldea' },
+    // Types (18)
+    { id: 'type:1',  category: 'type', value: '1',  labelKey: 'sudoku_type_normal' },
+    { id: 'type:10', category: 'type', value: '10', labelKey: 'sudoku_type_fire' },
+    { id: 'type:11', category: 'type', value: '11', labelKey: 'sudoku_type_water' },
+    { id: 'type:13', category: 'type', value: '13', labelKey: 'sudoku_type_electric' },
+    { id: 'type:12', category: 'type', value: '12', labelKey: 'sudoku_type_grass' },
+    { id: 'type:15', category: 'type', value: '15', labelKey: 'sudoku_type_ice' },
+    { id: 'type:2',  category: 'type', value: '2',  labelKey: 'sudoku_type_fighting' },
+    { id: 'type:4',  category: 'type', value: '4',  labelKey: 'sudoku_type_poison' },
+    { id: 'type:5',  category: 'type', value: '5',  labelKey: 'sudoku_type_ground' },
+    { id: 'type:3',  category: 'type', value: '3',  labelKey: 'sudoku_type_flying' },
+    { id: 'type:14', category: 'type', value: '14', labelKey: 'sudoku_type_psychic' },
+    { id: 'type:7',  category: 'type', value: '7',  labelKey: 'sudoku_type_bug' },
+    { id: 'type:6',  category: 'type', value: '6',  labelKey: 'sudoku_type_rock' },
+    { id: 'type:8',  category: 'type', value: '8',  labelKey: 'sudoku_type_ghost' },
+    { id: 'type:16', category: 'type', value: '16', labelKey: 'sudoku_type_dragon' },
+    { id: 'type:17', category: 'type', value: '17', labelKey: 'sudoku_type_dark' },
+    { id: 'type:9',  category: 'type', value: '9',  labelKey: 'sudoku_type_steel' },
+    { id: 'type:18', category: 'type', value: '18', labelKey: 'sudoku_type_fairy' },
+    // Evolutions (7)
+    { id: 'evolution:basic',      category: 'evolution', value: 'basic',      labelKey: 'sudoku_evo_basic' },
+    { id: 'evolution:stage1',     category: 'evolution', value: 'stage1',     labelKey: 'sudoku_evo_stage1' },
+    { id: 'evolution:stage2',     category: 'evolution', value: 'stage2',     labelKey: 'sudoku_evo_stage2' },
+    { id: 'evolution:friendship', category: 'evolution', value: 'friendship', labelKey: 'sudoku_evo_friendship' },
+    { id: 'evolution:trade',      category: 'evolution', value: 'trade',      labelKey: 'sudoku_evo_trade' },
+    { id: 'evolution:item',       category: 'evolution', value: 'item',       labelKey: 'sudoku_evo_item' },
+    { id: 'evolution:levelup',    category: 'evolution', value: 'levelup',    labelKey: 'sudoku_evo_levelup' },
+    // Special Traits (12)
+    { id: 'dualType',   category: 'dualType',   value: 'dualType',   labelKey: 'sudoku_cat_dualType' },
+    { id: 'monotype',   category: 'monotype',   value: 'monotype',   labelKey: 'sudoku_cat_monotype' },
+    { id: 'baby',       category: 'baby',       value: 'baby',       labelKey: 'sudoku_cat_baby' },
+    { id: 'starter',    category: 'starter',    value: 'starter',    labelKey: 'sudoku_cat_starter' },
+    { id: 'fossil',     category: 'fossil',     value: 'fossil',     labelKey: 'sudoku_cat_fossil' },
+    { id: 'legendary',  category: 'legendary',  value: 'legendary',  labelKey: 'sudoku_cat_legendary' },
+    { id: 'mythical',   category: 'mythical',   value: 'mythical',   labelKey: 'sudoku_cat_mythical' },
+    { id: 'ultraBeast', category: 'ultraBeast', value: 'ultraBeast', labelKey: 'sudoku_cat_ultraBeast' },
+    { id: 'paradox',    category: 'paradox',    value: 'paradox',    labelKey: 'sudoku_cat_paradox' },
+    { id: 'mega',       category: 'mega',       value: 'mega',       labelKey: 'sudoku_cat_mega' },
+    { id: 'primal',     category: 'primal',     value: 'primal',     labelKey: 'sudoku_cat_primal' },
+    { id: 'gigantamax', category: 'gigantamax', value: 'gigantamax', labelKey: 'sudoku_cat_gigantamax' }
+];
+
+export const ALL_SUDOKU_RESTRICTION_IDS: string[] = ALL_SUDOKU_RESTRICTIONS.map(r => r.id);
+
+export const DEFAULT_SUDOKU_QUIZ_SETTINGS: SudokuQuizSettings = {
+    gameMode: 'normal',
+    gridSize: 3,
+    unlimitedGuesses: false,
+    guessLimit: 10,
+    hasTimeLimit: false,
+    timeLimit: 180,
+    softLockGuard: true,
+    uniquePokemonOnly: true,
+    allowedCategories: [...ALL_SUDOKU_RESTRICTION_CATEGORIES],
+    allowedRestrictions: [...ALL_SUDOKU_RESTRICTION_IDS]
+};
+
+
 

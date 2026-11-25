@@ -15,7 +15,8 @@ import {
     getLocalizedEnrichedPokemon
 } from './lib/pokemonData.js';
 import { spriteQuizService } from './lib/spriteQuizService.js';
-import type { SpriteSource, ZoomArtworkSource } from '../../shared/types/index.js';
+import { sudokuQuizService } from './lib/sudokuQuizService.js';
+import type { SpriteSource, ZoomArtworkSource, SudokuGridSize, SudokuRestrictionCategory } from '../../shared/types/index.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -58,6 +59,35 @@ app.get('/api/health', (req, res) => {
 
 app.get('/api/quiz', (req, res) => {
     res.json(spriteQuizService.getQuizCatalog());
+});
+
+app.get('/api/sudoku/board', (req, res) => {
+    try {
+        const sizeParam = req.query.size ? parseInt(String(req.query.size), 10) : 3;
+        const gridSize = Math.max(2, Math.min(5, isNaN(sizeParam) ? 3 : sizeParam)) as SudokuGridSize;
+        const seed = typeof req.query.seed === 'string' && req.query.seed.trim() ? req.query.seed.trim() : undefined;
+        const requireUniquePokemon = req.query.unique !== '0' && req.query.unique !== 'false';
+        const categoriesParam = typeof req.query.categories === 'string' ? req.query.categories : '';
+        const allowedCategories = categoriesParam
+            ? (categoriesParam.split(',').map(s => s.trim()).filter(Boolean) as SudokuRestrictionCategory[])
+            : undefined;
+        const restrictionsParam = typeof req.query.restrictions === 'string' ? req.query.restrictions : '';
+        const allowedRestrictions = restrictionsParam
+            ? restrictionsParam.split(',').map(s => s.trim()).filter(Boolean)
+            : undefined;
+
+        const board = sudokuQuizService.generateBoard({
+            gridSize,
+            seed,
+            requireUniquePokemon,
+            allowedCategories,
+            allowedRestrictions
+        });
+        res.json(board);
+    } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+        res.status(400).json({ error: errorMessage });
+    }
 });
 
 app.get('/api/pokemon/:id/sprites', async (req, res) => {

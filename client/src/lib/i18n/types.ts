@@ -13,6 +13,7 @@ import type { PokedleLabelKey } from './labels/pokedle';
 import type { NumberLabelKey } from './labels/number';
 import type { ZoomLabelKey } from './labels/zoom';
 import type { ShinyLabelKey } from './labels/shiny';
+import type { SudokuLabelKey } from './labels/sudoku';
 
 /** All available language codes */
 export type LanguageCode =
@@ -38,5 +39,6 @@ export type LabelKey =
     | PokedleLabelKey
     | NumberLabelKey
     | ZoomLabelKey
-    | ShinyLabelKey;
+    | ShinyLabelKey
+    | SudokuLabelKey;
 

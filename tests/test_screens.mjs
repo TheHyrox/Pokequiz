@@ -21,7 +21,8 @@ export async function runScreenMatrixTests() {
         'Zoomed Sprite Quiz',
         'Shiny Quiz',
         'Quiz Pokedle',
-        'Number Quiz'
+        'Number Quiz',
+        'PokéSudoku'
     ];
 
     try {

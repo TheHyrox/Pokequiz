@@ -20,7 +20,8 @@
     import {
         DEFAULT_QUIZ_SETTINGS,
         DEFAULT_POKEDLE_QUIZ_SETTINGS,
-        DEFAULT_NUMBER_QUIZ_SETTINGS
+        DEFAULT_NUMBER_QUIZ_SETTINGS,
+        DEFAULT_SUDOKU_QUIZ_SETTINGS
     } from '../../shared/constants';
 
     let games: QuizRegistryEntry[] = QUIZ_REGISTRY;
@@ -38,7 +39,8 @@
         statsRefreshKey,
         pokedle: getDailyChallengeStatus('pokedle', todayDateStr),
         description: getDailyChallengeStatus('description', todayDateStr),
-        number: getDailyChallengeStatus('number', todayDateStr)
+        number: getDailyChallengeStatus('number', todayDateStr),
+        sudoku: getDailyChallengeStatus('sudoku', todayDateStr)
     };
 
     // Derive language code from shared constants
@@ -214,7 +216,7 @@
     /**
      * @brief Starts a Daily Challenge directly from the Hub
      */
-    function startDailyChallenge(quizSlug: 'pokedle' | 'description' | 'number'): void {
+    function startDailyChallenge(quizSlug: 'pokedle' | 'description' | 'number' | 'sudoku'): void {
         const game = QUIZ_REGISTRY_MAP[quizSlug];
         if (!game) return;
         const seed = getTodayDateString();
@@ -229,6 +231,19 @@
         } else if (quizSlug === 'description') {
             activeQuizSettings = {
                 ...DEFAULT_QUIZ_SETTINGS,
+                isDailyChallenge: true,
+                dailySeed: seed
+            };
+        } else if (quizSlug === 'sudoku') {
+            activeQuizSettings = {
+                ...DEFAULT_SUDOKU_QUIZ_SETTINGS,
+                gameMode: 'daily',
+                gridSize: 3,
+                unlimitedGuesses: false,
+                guessLimit: 10,
+                hasTimeLimit: false,
+                softLockGuard: true,
+                uniquePokemonOnly: true,
                 isDailyChallenge: true,
                 dailySeed: seed
             };
@@ -340,6 +355,18 @@
                             <span>🔢</span>
                             <span>{getLabel(currentLanguageCode, 'number_quiz')}</span>
                             {#if dailyStatuses.number?.completed}
+                                <span class="text-xs px-1.5 py-0.5 rounded bg-green-200 dark:bg-green-800 text-green-900 dark:text-green-100">✓ {getLabel(currentLanguageCode, 'dailyViewRun')}</span>
+                            {/if}
+                        </button>
+
+                        <button
+                            type="button"
+                            on:click={() => startDailyChallenge('sudoku')}
+                            class="daily-sudoku-btn px-4 py-2.5 rounded-lg font-bold text-sm flex items-center gap-2 transition-all cursor-pointer shadow-sm {dailyStatuses.sudoku?.completed ? 'bg-green-100 dark:bg-green-900/60 text-green-800 dark:text-green-200 border border-green-400' : 'bg-purple-600 hover:bg-purple-700 text-white'}"
+                        >
+                            <span>🧩</span>
+                            <span>{getLabel(currentLanguageCode, 'sudoku_quiz')}</span>
+                            {#if dailyStatuses.sudoku?.completed}
                                 <span class="text-xs px-1.5 py-0.5 rounded bg-green-200 dark:bg-green-800 text-green-900 dark:text-green-100">✓ {getLabel(currentLanguageCode, 'dailyViewRun')}</span>
                             {/if}
                         </button>

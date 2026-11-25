@@ -11,6 +11,7 @@ import type {
     NumberQuizSettings,
     ZoomQuizSettings,
     ShinyQuizSettings,
+    SudokuQuizSettings,
     PersonalStatsStore,
     QuizModeStatEntry,
     DailyChallengeRecord
@@ -27,6 +28,7 @@ const POKEDLE_SETTINGS_KEY = 'pokequiz_pokedle_settings';
 const NUMBER_SETTINGS_KEY = 'pokequiz_number_settings';
 const ZOOM_SETTINGS_KEY = 'pokequiz_zoom_settings';
 const SHINY_SETTINGS_KEY = 'pokequiz_shiny_settings';
+const SUDOKU_SETTINGS_KEY = 'pokequiz_sudoku_settings';
 const PERSONAL_STATS_KEY = 'pokequiz_personal_stats';
 
 /**
@@ -212,6 +214,27 @@ export function saveShinySettings(settings: ShinyQuizSettings): void {
     localStorage.setItem(SHINY_SETTINGS_KEY, JSON.stringify(settings));
 }
 
+/**
+ * @brief Get cached sudoku quiz settings
+ */
+export function getCachedSudokuSettings(): SudokuQuizSettings | null {
+    if (typeof window === 'undefined') return null;
+    const cached = localStorage.getItem(SUDOKU_SETTINGS_KEY);
+    try {
+        return cached ? JSON.parse(cached) : null;
+    } catch {
+        return null;
+    }
+}
+
+/**
+ * @brief Save sudoku quiz settings to local storage
+ */
+export function saveSudokuSettings(settings: SudokuQuizSettings): void {
+    if (typeof window === 'undefined') return;
+    localStorage.setItem(SUDOKU_SETTINGS_KEY, JSON.stringify(settings));
+}
+
 // ============================================================
 // PERSONAL STATS & STREAKS (LOCAL STORAGE)
 // ============================================================
@@ -301,7 +324,7 @@ export function getModeStats(quizSlug: string, modeKey: string): QuizModeStatEnt
 }
 
 export interface RecordGameResultOptions {
-    quizSlug: 'description' | 'information' | 'sprites' | 'pokedle' | 'number' | 'zoom' | 'shiny';
+    quizSlug: 'description' | 'information' | 'sprites' | 'pokedle' | 'number' | 'zoom' | 'shiny' | 'sudoku';
     modeKey: string;
     isWin: boolean;
     score: number;
@@ -347,7 +370,7 @@ export function recordQuizGameResult(opts: RecordGameResultOptions): QuizModeSta
         : createEmptyStatEntry();
 
     // Prevent recording duplicate stats if today's daily challenge was already completed
-    if (opts.dailyChallenge && (opts.quizSlug === 'pokedle' || opts.quizSlug === 'description' || opts.quizSlug === 'number')) {
+    if (opts.dailyChallenge && (opts.quizSlug === 'pokedle' || opts.quizSlug === 'description' || opts.quizSlug === 'number' || opts.quizSlug === 'sudoku')) {
         const dateStr = opts.dailyChallenge.date || getTodayDateString();
         const dailyKey = `${opts.quizSlug}:${dateStr}`;
         const existingDaily = store.dailyChallenges[dailyKey];
@@ -391,7 +414,7 @@ export function recordQuizGameResult(opts: RecordGameResultOptions): QuizModeSta
     store.modes[key] = entry;
 
     // Also record daily challenge completion and run snapshot if applicable
-    if (opts.dailyChallenge && (opts.quizSlug === 'pokedle' || opts.quizSlug === 'description' || opts.quizSlug === 'number')) {
+    if (opts.dailyChallenge && (opts.quizSlug === 'pokedle' || opts.quizSlug === 'description' || opts.quizSlug === 'number' || opts.quizSlug === 'sudoku')) {
         const dateStr = opts.dailyChallenge.date || getTodayDateString();
         const { pruned } = pruneExpiredDailyChallenges(store.dailyChallenges, dateStr);
         store.dailyChallenges = pruned;
@@ -418,7 +441,7 @@ export function recordQuizGameResult(opts: RecordGameResultOptions): QuizModeSta
  * @brief Get daily challenge record for a quiz and date (defaults to today)
  */
 export function getDailyChallengeStatus(
-    quizSlug: 'pokedle' | 'description' | 'number',
+    quizSlug: 'pokedle' | 'description' | 'number' | 'sudoku',
     dateStr: string = getTodayDateString()
 ): DailyChallengeRecord | null {
     const store = getPersonalStats();

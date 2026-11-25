@@ -262,4 +262,28 @@ html.dark .separator {
     @apply bg-gray-700;
 }
 
+/* Sudoku Dark Mode Enhancements */
+html.dark .sudoku-search-modal,
+html.dark .sudoku-col-header,
+html.dark .sudoku-row-header {
+    @apply bg-gray-800 text-gray-100 border-gray-700;
+}
+
+html.dark .sudoku-cell-empty {
+    @apply bg-gray-800 border-gray-700 text-gray-100;
+}
+
+html.dark .sudoku-cell-empty:hover {
+    @apply bg-gray-700 border-blue-400;
+}
+
+html.dark .sudoku-cell-valid {
+    @apply bg-emerald-950/70 border-emerald-500 text-emerald-100;
+}
+
+html.dark .sudoku-cell-invalid {
+    @apply bg-red-950/70 border-red-500 text-red-100;
+}
+
+
 
