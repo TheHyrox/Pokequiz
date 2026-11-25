@@ -119,6 +119,8 @@ export async function runSudokuQuizTests() {
             }
 
             await waitFor(cdp, `document.querySelector('.modal-content.win')`, 8000);
+            const hasAnswerSectionOnWin = await evalJS(cdp, `Boolean(document.querySelector('.modal-content.win .answer-section'))`);
+            assert.equal(hasAnswerSectionOnWin, false, 'Answer section must not be shown when winning PokéSudoku');
         });
 
         await runner.test('sudoku-custom-sizes-2x2-to-5x5-and-single-answer-guard', 'Custom Mode: grouped dropdown restriction selector, 2x2 to 5x5 grids, timer, unlimited guesses, and enforces Single Answers Only', async () => {

@@ -562,6 +562,7 @@
         {languageCode}
         gameMode="score"
         isDailyChallenge={isDailyMode}
+        showAnswerOnWin={false}
         on:home={onBackToHub}
         on:changeSettings={onBackToSettings}
         on:retry={() => startNewGame(true)}

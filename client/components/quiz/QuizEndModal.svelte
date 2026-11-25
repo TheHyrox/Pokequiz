@@ -26,6 +26,8 @@
     export let gameMode: 'score' | 'infinite' | 'challenge' | 'hardcore' | 'pokedle' | 'number' = 'score';
     /** Whether retry is disabled (e.g. Daily Challenge can only be played once per day) */
     export let isDailyChallenge: boolean = false;
+    /** Whether to display the answer section when the user wins */
+    export let showAnswerOnWin: boolean = true;
 
     let selectedPokedexPokemon: { id: number; name: string } | null = null;
 
@@ -124,7 +126,7 @@
         {/if}
 
         <!-- Correct Answer Section (clickable to open Pokédex Mini-Card) -->
-        {#if correctAnswer && correctAnswer.id > 0}
+        {#if correctAnswer && correctAnswer.id > 0 && (!isWin || showAnswerOnWin)}
             <div class="answer-section">
                 <p class="answer-label">{getLabel(languageCode, 'correctAnswer')}:</p>
                 <button
