@@ -7,12 +7,14 @@
  */
 
 import { getAllPokemon, type PokemonEntry } from './pokemonData.js';
+import { getAllPokemonNames } from './pokemonCache.js';
 import {
     buildAllSudokuRestrictions,
     doesPokemonMatchRestriction,
     areRestrictionsCompatibleAxes,
     findGridSolution
 } from './utils/sudokuUtils.js';
+import { SUDOKU_ALTERNATE_FORMS, doesFormMatchRestriction } from './utils/sudokuForms.js';
 import { createSeededRng, seededShuffle } from '../../../shared/utils/seededRng.js';
 import { ALL_SUDOKU_RESTRICTION_CATEGORIES } from '../../../shared/constants/index.js';
 import type {
@@ -53,10 +55,31 @@ export class SudokuQuizService {
                     matchingIds.add(Number(p.id));
                 }
             }
+            for (const formDef of SUDOKU_ALTERNATE_FORMS) {
+                const basePokemon = allPokemonMap[String(formDef.baseId)];
+                if (basePokemon && doesFormMatchRestriction(formDef, basePokemon, r)) {
+                    matchingIds.add(formDef.id);
+                }
+            }
             this.restrictionMatches.set(r.id, matchingIds);
         }
 
         this.initialized = true;
+    }
+
+    /**
+     * @brief Returns localized display entries for all curated stat/type-changing alternate forms
+     */
+    public async getAlternateFormNames(languageId: number): Promise<Array<{ id: number; name: string }>> {
+        const baseNames = await getAllPokemonNames(languageId);
+        const nameMap = new Map<number, string>(baseNames.map(p => [Number(p.id), p.name]));
+        return SUDOKU_ALTERNATE_FORMS.map(formDef => {
+            const baseName = nameMap.get(formDef.baseId) || `#${formDef.baseId}`;
+            return {
+                id: formDef.id,
+                name: `${baseName} (${formDef.formLabel})`
+            };
+        });
     }
 
     /**

@@ -43,13 +43,29 @@ export async function runSudokuQuizTests() {
             await evalJS(cdp, `document.querySelector('.sudoku-cell[data-cell="0-0"]').click()`);
             await waitFor(cdp, `document.querySelector('.sudoku-search-modal')`);
 
-            // Verify the autocomplete component exists and EVERY Pokémon (1025) is loaded
+            // Verify the autocomplete component exists and EVERY Pokémon (1025) + alternate forms are loaded
             const namesCount = await evalJS(cdp, `(() => {
                 const input = document.querySelector('.sudoku-autocomplete-wrapper input.text-input');
                 if (input) input.focus();
                 return Object.keys(window.__apiLog.find(l => l.url.includes('/api/pokemon/names/'))?.data || []).length;
             })()`);
             assert.equal(namesCount, 1025, 'Modal must load EVERY Pokémon (1025)');
+
+            const formsCount = await evalJS(cdp, `(() => {
+                const forms = window.__apiLog.find(l => l.url.includes('/api/sudoku/forms/'))?.data || [];
+                return {
+                    count: forms.length,
+                    hasMegaCharizardX: forms.some(f => f.id === 10034),
+                    hasKyuremBlack: forms.some(f => f.id === 10022),
+                    hasNecrozmaDuskMane: forms.some(f => f.id === 10155),
+                    hasCharizardGmax: forms.some(f => f.id === 10196)
+                };
+            })()`);
+            assert.ok(formsCount.count > 100, `Expected >100 curated alternate forms, got ${formsCount.count}`);
+            assert.equal(formsCount.hasMegaCharizardX, true, 'Mega Charizard X must be selectable');
+            assert.equal(formsCount.hasKyuremBlack, true, 'Kyurem Black must be selectable');
+            assert.equal(formsCount.hasNecrozmaDuskMane, true, 'Necrozma Dusk Mane must be selectable');
+            assert.equal(formsCount.hasCharizardGmax, true, 'Charizard Gigantamax must be selectable');
 
             // Pick an INVALID Pokémon for cell (0, 0) to test error handling & red border
             const validIds00 = new Set(boardData.cellValidPokemonIds[0][0]);
@@ -103,6 +119,8 @@ export async function runSudokuQuizTests() {
             }
 
             await waitFor(cdp, `document.querySelector('.modal-content.win')`, 8000);
+            const hasAnswerSectionOnWin = await evalJS(cdp, `Boolean(document.querySelector('.modal-content.win .answer-section'))`);
+            assert.equal(hasAnswerSectionOnWin, false, 'Answer section must not be shown when winning PokéSudoku');
         });
 
         await runner.test('sudoku-custom-sizes-2x2-to-5x5-and-single-answer-guard', 'Custom Mode: grouped dropdown restriction selector, 2x2 to 5x5 grids, timer, unlimited guesses, and enforces Single Answers Only', async () => {

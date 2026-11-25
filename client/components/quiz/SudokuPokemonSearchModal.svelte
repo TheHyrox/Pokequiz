@@ -7,11 +7,11 @@
      *              Pokémon to validate it.
      */
     import { onMount, createEventDispatcher } from 'svelte';
-    import Autocomplete, { type PokemonOption } from '../Autocomplete.svelte';
+    import TextInput from '../TextInput.svelte';
+    import type { PokemonOption } from '../Autocomplete.svelte';
     import { getLabel, type LabelKey } from '../../src/lib/translations';
     import { getSpriteUrl } from '../../../shared/constants/sprites';
     import { normalizeText } from '../../../shared/utils/textUtils';
-    import { ALL_GENERATIONS } from '../../../shared/constants';
     import type { SudokuRestriction } from '../../../shared/types';
 
     /** Row index (0-based) */
@@ -37,7 +37,7 @@
     }>();
 
     let searchQuery: string = '';
-    let autocompleteRef: Autocomplete;
+    let searchInputRef: TextInput;
 
     function l(key: LabelKey): string {
         return getLabel(languageCode, key);
@@ -71,7 +71,7 @@
 
     onMount(() => {
         setTimeout(() => {
-            autocompleteRef?.focus();
+            searchInputRef?.focus();
         }, 50);
 
         const handleKeyDown = (e: KeyboardEvent) => {
@@ -137,16 +137,13 @@
             </div>
         </div>
 
-        <!-- Existing Reusable Autocomplete Component (contains EVERY Pokémon) -->
+        <!-- Existing Reusable TextInput Component (filters the picker grid below without a dropdown) -->
         <div class="mb-3 relative z-30 sudoku-autocomplete-wrapper">
-            <Autocomplete
-                bind:this={autocompleteRef}
-                pokemonList={allPokemonList}
+            <TextInput
+                bind:this={searchInputRef}
                 placeholder={l('sudoku_searchPlaceholder')}
                 bind:value={searchQuery}
-                selectedGenerations={ALL_GENERATIONS}
                 autofocus={true}
-                on:select={(e) => handleSelectPokemon(e.detail.pokemon)}
             />
         </div>
 
@@ -174,9 +171,6 @@
                         loading="lazy"
                     />
                     <div class="min-w-0 flex-1">
-                        <span class="text-[10px] font-mono font-bold text-gray-400 dark:text-gray-400 block">
-                            #{String(pokemon.id).padStart(4, '0')}
-                        </span>
                         <span class="text-xs font-bold text-gray-800 dark:text-gray-100 truncate block">
                             {pokemon.name}
                         </span>

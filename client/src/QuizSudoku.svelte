@@ -159,11 +159,25 @@
         return backtrack(0);
     }
 
+    let alternateFormsList: Array<{ id: number; name: string }> = [];
+
+    async function loadAlternateForms(langId: number): Promise<void> {
+        try {
+            const res = await fetch(`/api/sudoku/forms/${langId}`);
+            if (res.ok) {
+                alternateFormsList = await res.json();
+            }
+        } catch {
+            alternateFormsList = [];
+        }
+    }
+
     function refreshAllPokemonList(): void {
         const namesMap = getAllPokemonNamesSync(languageId);
-        allPokemonList = Object.entries(namesMap)
+        const baseList = Object.entries(namesMap)
             .map(([id, name]) => ({ id: Number(id), name: String(name) }))
             .sort((a, b) => a.id - b.id);
+        allPokemonList = [...baseList, ...alternateFormsList];
     }
 
     async function startNewGame(isRetry: boolean = false): Promise<void> {
@@ -180,7 +194,7 @@
         guessesUsed = 0;
 
         try {
-            await preloadPokemonNames(languageId);
+            await Promise.all([preloadPokemonNames(languageId), loadAlternateForms(languageId)]);
             refreshAllPokemonList();
 
             const params = new URLSearchParams();
@@ -397,12 +411,15 @@
     let lastLanguageId: number = languageId;
     $: if (languageId && languageId !== lastLanguageId && cells.length > 0) {
         lastLanguageId = languageId;
-        preloadPokemonNames(languageId).then(() => {
+        Promise.all([preloadPokemonNames(languageId), loadAlternateForms(languageId)]).then(() => {
             refreshAllPokemonList();
+            const formNameMap = new Map(alternateFormsList.map(f => [f.id, f.name]));
             cells = cells.map(row =>
                 row.map(c => ({
                     ...c,
-                    pokemonName: c.pokemonId ? getPokemonNameSync(c.pokemonId, languageId) || c.pokemonName : null
+                    pokemonName: c.pokemonId
+                        ? formNameMap.get(c.pokemonId) || getPokemonNameSync(c.pokemonId, languageId) || c.pokemonName
+                        : null
                 }))
             );
         });
@@ -545,6 +562,7 @@
         {languageCode}
         gameMode="score"
         isDailyChallenge={isDailyMode}
+        showAnswerOnWin={false}
         on:home={onBackToHub}
         on:changeSettings={onBackToSettings}
         on:retry={() => startNewGame(true)}
