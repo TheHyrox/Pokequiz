@@ -278,16 +278,16 @@
         <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
     </div>
 {:else}
-    <div class="p-8 w-full">
+    <div class="px-3 pt-16 pb-6 sm:p-6 md:p-8 w-full">
         <!-- Header -->
-        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4 mb-8">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 sm:gap-4 mb-6 sm:mb-8">
             <button
-                class="pokedle-back-btn text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white font-medium flex items-center gap-2"
+                class="pokedle-back-btn px-3.5 py-1.5 sm:px-4 sm:py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg font-medium flex items-center gap-2 text-sm sm:text-base transition-colors"
                 on:click={isDailyMode ? onBackToHub : onBackToSettings}
             >
                 {getLabel(languageCode, 'back')}
             </button>
-            <div class="text-2xl font-bold text-gray-800 dark:text-gray-100 flex items-center gap-2">
+            <div class="text-xl sm:text-2xl font-bold text-gray-800 dark:text-gray-100 flex flex-wrap items-center gap-2">
                 <span>{getLabel(languageCode, 'pokedle_quiz')}</span>
                 {#if settings.isDailyChallenge || settings.dailySeed}
                     <span class="px-2.5 py-0.5 text-xs font-mono font-bold rounded-full bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-200 border border-amber-300">
@@ -295,7 +295,7 @@
                     </span>
                 {/if}
             </div>
-            <div class="text-sm font-semibold text-white bg-blue-500 px-4 py-2 rounded-full shadow-sm">
+            <div class="text-xs sm:text-sm font-semibold text-white bg-blue-500 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-sm">
                 {getLabel(languageCode, 'pokedle_guessesLeft').replace('{0}', String(Math.max(0, settings.guessLimit - guesses.length)))}
             </div>
         </div>
@@ -355,28 +355,28 @@
                         {#each guesses as guess (guess.id)}
                             <tr transition:fade={{ duration: 300 }}>
                                 <!-- Pokemon Name and Sprite (clickable to view Pokédex Mini-Card) -->
-                                <td class="py-3 px-4 sticky left-0 bg-white dark:bg-gray-800 z-10 border-r border-gray-100 dark:border-gray-700 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)]">
+                                <td class="py-2.5 px-2.5 sm:py-3 sm:px-4 sticky left-0 bg-white dark:bg-gray-800 z-10 border-r border-gray-100 dark:border-gray-700 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)]">
                                     <button
                                         type="button"
                                         on:click={() => { selectedPokedexPokemon = { id: Number(guess.id), name: guess.name }; }}
                                         title={getLabel(languageCode, 'clickPokemonForInfo')}
-                                        class="flex flex-col items-center gap-1 min-w-[100px] w-full cursor-pointer hover:scale-105 transition-transform bg-transparent border-none"
+                                        class="flex flex-col items-center gap-1 min-w-[76px] sm:min-w-[100px] w-full cursor-pointer hover:scale-105 transition-transform bg-transparent border-none"
                                     >
-                                        <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${guess.id}.png`} alt={guess.name} class="w-16 h-16 object-contain" />
-                                        <span class="font-bold text-gray-800 dark:text-gray-100 text-sm text-center">{guess.name}</span>
+                                        <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${guess.id}.png`} alt={guess.name} class="w-12 h-12 sm:w-16 sm:h-16 object-contain" />
+                                        <span class="font-bold text-gray-800 dark:text-gray-100 text-xs sm:text-sm text-center leading-tight">{guess.name}</span>
                                     </button>
                                 </td>
                                 
                                 <!-- Attributes -->
                                 {#each settings.selectedColumns as col}
                                     {@const match = checkMatch(guess, col)}
-                                    <td class="py-3 px-4">
-                                        <div class="flex items-center justify-center w-full h-full min-h-[60px] rounded-lg shadow-sm border
+                                    <td class="py-2.5 px-2 sm:py-3 sm:px-4">
+                                        <div class="flex items-center justify-center w-full h-full min-h-[50px] sm:min-h-[60px] rounded-lg shadow-sm border
                                             {match.state === 'green' ? 'bg-green-500 border-green-600 text-white' : 
                                              match.state === 'yellow' ? 'bg-yellow-400 border-yellow-500 text-white' : 
                                              'bg-red-500 border-red-600 text-white'}">
                                             
-                                            <div class="flex items-center gap-2 px-3 py-2 text-center text-sm font-semibold whitespace-nowrap">
+                                            <div class="flex items-center gap-1.5 sm:gap-2 px-2.5 py-1.5 sm:px-3 sm:py-2 text-center text-xs sm:text-sm font-semibold whitespace-nowrap">
                                                 <span>{formatValue(guess, col)}</span>
                                                 
                                                 {#if match.arrow === 'up'}

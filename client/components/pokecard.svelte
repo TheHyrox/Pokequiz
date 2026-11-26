@@ -66,13 +66,17 @@
     }
 
     .card-inner {
-        @apply bg-white rounded-xl shadow-md p-6 flex flex-col items-center justify-center h-full;
+        @apply bg-white rounded-xl shadow-md p-3.5 sm:p-6 flex flex-col items-center justify-center h-full;
         @apply transition-all duration-300 ease-out;
         @apply border-4 border-transparent;
     }
 
     .pokemon-card:not(.disabled) .card-inner:hover {
-        @apply scale-110 shadow-xl border-blue-500;
+        @apply sm:scale-110 shadow-xl border-blue-500;
+    }
+
+    .pokemon-card:not(.disabled) .card-inner:active {
+        @apply scale-95 border-blue-500;
     }
 
     .pokemon-card.error .card-inner {
@@ -94,7 +98,7 @@
     }
 
     .pokemon-image {
-        @apply w-24 h-24 object-contain mb-4;
+        @apply w-16 h-16 sm:w-24 sm:h-24 object-contain mb-2 sm:mb-4;
         @apply transition-transform duration-300;
     }
 
@@ -103,7 +107,7 @@
     }
 
     .pokemon-name {
-        @apply text-lg font-semibold text-gray-800;
+        @apply text-sm sm:text-lg font-semibold text-gray-800 text-center break-words max-w-full;
         @apply transition-colors duration-300;
     }
 

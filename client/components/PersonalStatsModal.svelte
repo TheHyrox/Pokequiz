@@ -177,9 +177,9 @@
 >
     <div class="stats-modal-content bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-4xl w-full overflow-hidden border border-gray-200 dark:border-gray-700 flex flex-col max-h-[88vh]">
         <!-- Header -->
-        <div class="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4 flex items-center justify-between text-white shrink-0">
+        <div class="bg-gradient-to-r from-blue-600 to-indigo-600 px-4 sm:px-6 py-3.5 sm:py-4 flex items-center justify-between text-white shrink-0">
             <div>
-                <h2 class="text-2xl font-black flex items-center gap-2">
+                <h2 class="text-xl sm:text-2xl font-black flex items-center gap-2">
                     <span>📊</span> {l('personalStats')}
                 </h2>
                 <p class="text-xs text-blue-100 mt-0.5">{l('statsSubtitle')}</p>
@@ -187,7 +187,7 @@
             <button
                 type="button"
                 on:click={handleClose}
-                class="w-8 h-8 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center text-white font-bold transition-colors cursor-pointer"
+                class="w-8 h-8 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center text-white font-bold transition-colors cursor-pointer shrink-0"
                 aria-label={l('close')}
             >
                 ✕
@@ -195,7 +195,7 @@
         </div>
 
         <!-- Body -->
-        <div class="p-6 overflow-y-auto space-y-6 flex-1">
+        <div class="p-4 sm:p-6 overflow-y-auto space-y-5 sm:space-y-6 flex-1">
             {#if resetMessageShown}
                 <div class="p-3 rounded-xl bg-green-100 dark:bg-green-950/70 border border-green-300 dark:border-green-700 text-green-800 dark:text-green-200 text-sm font-semibold text-center">
                     ✓ {l('statsResetSuccess')}
@@ -203,18 +203,18 @@
             {/if}
 
             <!-- Top Global Overview Cards -->
-            <div class="grid grid-cols-3 gap-4">
-                <div class="bg-blue-50 dark:bg-gray-700/60 border border-blue-100 dark:border-gray-600 rounded-xl p-4 text-center">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+                <div class="bg-blue-50 dark:bg-gray-700/60 border border-blue-100 dark:border-gray-600 rounded-xl p-3 sm:p-4 text-center">
                     <span class="text-xs font-bold uppercase text-gray-500 dark:text-gray-300 block">{l('totalGamesPlayed')}</span>
-                    <span class="text-3xl font-black text-blue-600 dark:text-blue-400 stats-global-games">{totalAllGames}</span>
+                    <span class="text-2xl sm:text-3xl font-black text-blue-600 dark:text-blue-400 stats-global-games">{totalAllGames}</span>
                 </div>
-                <div class="bg-amber-50 dark:bg-gray-700/60 border border-amber-100 dark:border-gray-600 rounded-xl p-4 text-center">
+                <div class="bg-amber-50 dark:bg-gray-700/60 border border-amber-100 dark:border-gray-600 rounded-xl p-3 sm:p-4 text-center">
                     <span class="text-xs font-bold uppercase text-gray-500 dark:text-gray-300 block">🔥 {l('longestStreak')}</span>
-                    <span class="text-3xl font-black text-amber-600 dark:text-amber-400 stats-global-streak">{globalBestStreak}</span>
+                    <span class="text-2xl sm:text-3xl font-black text-amber-600 dark:text-amber-400 stats-global-streak">{globalBestStreak}</span>
                 </div>
-                <div class="bg-emerald-50 dark:bg-gray-700/60 border border-emerald-100 dark:border-gray-600 rounded-xl p-4 text-center">
+                <div class="bg-emerald-50 dark:bg-gray-700/60 border border-emerald-100 dark:border-gray-600 rounded-xl p-3 sm:p-4 text-center">
                     <span class="text-xs font-bold uppercase text-gray-500 dark:text-gray-300 block">🟩 Pokedle {l('averageGuesses')}</span>
-                    <span class="text-3xl font-black text-emerald-600 dark:text-emerald-400 stats-pokedle-avg">{pokedleGlobalAvgGuesses}</span>
+                    <span class="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400 stats-pokedle-avg">{pokedleGlobalAvgGuesses}</span>
                 </div>
             </div>
 

@@ -99,12 +99,11 @@ export async function runSpritesQuizTests() {
             await evalJS(cdp, `document.querySelector('.start-button').click()`);
 
             for (let q = 1; q <= 10; q++) {
-                await waitFor(cdp, `document.querySelectorAll('.pokemon-grid-item').length >= 2 && document.querySelector('.pokemon-sprite')?.complete`);
-                const prevSrc = await evalJS(cdp, `document.querySelector('.pokemon-sprite').src`);
+                await waitFor(cdp, `(document.querySelector('.quiz-header-row')?.innerText || '').includes('${q}/10') && document.querySelectorAll('.pokemon-grid-item').length >= 2 && document.querySelector('.pokemon-sprite')?.complete`);
                 const t = await getCurrentSpriteTarget(cdp);
                 await clickOption(cdp, t.name, q <= 6);
                 if (q < 10) {
-                    await waitFor(cdp, `document.querySelector('.pokemon-sprite')?.src !== ${JSON.stringify(prevSrc)}`, 10000);
+                    await waitFor(cdp, `(document.querySelector('.quiz-header-row')?.innerText || '').includes('${q + 1}/10')`, 10000);
                 }
             }
             await waitFor(cdp, `document.body.innerText.includes('6 / 10') || document.body.innerText.includes('6/10') || document.querySelectorAll('img').length >= 10`, 15000);

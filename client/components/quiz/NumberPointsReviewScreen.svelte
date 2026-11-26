@@ -185,7 +185,7 @@
 
 <style lang="postcss">
     .summary-hero-card {
-        @apply bg-white rounded-2xl shadow-xl p-8 border border-gray-100;
+        @apply bg-white rounded-2xl shadow-xl p-5 sm:p-8 border border-gray-100;
     }
 
     .score-badge-container {
@@ -193,11 +193,11 @@
     }
 
     .score-circle {
-        @apply flex flex-col items-center justify-center w-48 h-48 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-lg p-4;
+        @apply flex flex-col items-center justify-center w-40 h-40 sm:w-48 sm:h-48 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-lg p-4;
     }
 
     .score-number {
-        @apply text-4xl md:text-5xl font-black tracking-tight;
+        @apply text-3xl sm:text-4xl md:text-5xl font-black tracking-tight;
     }
 
     .score-denom {

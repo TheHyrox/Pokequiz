@@ -24,18 +24,18 @@
 
 <style lang="postcss">
     .language-selector {
-        @apply flex items-center gap-3;
+        @apply flex items-center gap-2 sm:gap-3;
     }
 
     .language-label {
-        @apply font-medium text-gray-700;
+        @apply hidden sm:inline font-medium text-gray-700 text-sm sm:text-base;
     }
 
     .language-select {
-        @apply px-3 py-2 border border-gray-300 rounded-lg;
-        @apply bg-white text-gray-800 font-medium;
+        @apply px-2.5 py-1.5 sm:px-3 sm:py-2 border border-gray-300 rounded-lg;
+        @apply bg-white text-gray-800 font-medium text-sm sm:text-base;
         @apply transition-all duration-200;
-        @apply cursor-pointer;
+        @apply cursor-pointer max-w-[130px] sm:max-w-none truncate;
     }
 
     .language-select:hover {

@@ -94,10 +94,10 @@
     aria-label="Select Pokémon"
     tabindex="-1"
 >
-    <div class="sudoku-search-modal bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-xl w-full p-6 border border-gray-200 dark:border-gray-700 flex flex-col max-h-[88vh]">
+    <div class="sudoku-search-modal bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-xl w-full p-4 sm:p-6 border border-gray-200 dark:border-gray-700 flex flex-col max-h-[90vh]">
         <!-- Header -->
-        <div class="flex items-center justify-between mb-4">
-            <h2 class="text-xl font-black text-gray-800 dark:text-gray-100">
+        <div class="flex items-center justify-between mb-3 sm:mb-4">
+            <h2 class="text-lg sm:text-xl font-black text-gray-800 dark:text-gray-100">
                 {l('sudoku_selectPokemonForCell')
                     .replace('{0}', String(rowIndex + 1))
                     .replace('{1}', String(colIndex + 1))}
@@ -105,7 +105,7 @@
             <button
                 type="button"
                 on:click={handleClose}
-                class="sudoku-modal-close w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center text-gray-700 dark:text-gray-200 font-bold transition-colors cursor-pointer"
+                class="sudoku-modal-close w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center text-gray-700 dark:text-gray-200 font-bold transition-colors cursor-pointer shrink-0"
                 aria-label={l('close')}
             >
                 ✕
@@ -113,24 +113,24 @@
         </div>
 
         <!-- Row & Column Restrictions Banner -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
-            <div class="p-3 rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 flex items-center gap-3">
+        <div class="grid grid-cols-2 gap-2.5 sm:gap-3 mb-4 sm:mb-5">
+            <div class="p-2.5 sm:p-3 rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 flex items-center gap-2 sm:gap-3">
                 <div class="min-w-0">
-                    <span class="text-[11px] font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 block">
+                    <span class="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 block">
                         {l('sudoku_rowRestriction')} ({getCategoryLabel(rowRestriction)})
                     </span>
-                    <span class="text-sm font-black text-gray-900 dark:text-gray-100 leading-snug break-words block">
+                    <span class="text-xs sm:text-sm font-black text-gray-900 dark:text-gray-100 leading-snug break-words block">
                         {getRestrictionLabel(rowRestriction)}
                     </span>
                 </div>
             </div>
 
-            <div class="p-3 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800 flex items-center gap-3">
+            <div class="p-2.5 sm:p-3 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800 flex items-center gap-2 sm:gap-3">
                 <div class="min-w-0">
-                    <span class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 block">
+                    <span class="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 block">
                         {l('sudoku_colRestriction')} ({getCategoryLabel(colRestriction)})
                     </span>
-                    <span class="text-sm font-black text-gray-900 dark:text-gray-100 leading-snug break-words block">
+                    <span class="text-xs sm:text-sm font-black text-gray-900 dark:text-gray-100 leading-snug break-words block">
                         {getRestrictionLabel(colRestriction)}
                     </span>
                 </div>

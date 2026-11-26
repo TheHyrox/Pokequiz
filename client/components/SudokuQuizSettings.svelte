@@ -350,15 +350,15 @@
 
 <style lang="postcss">
     .settings-container {
-        @apply bg-white rounded-lg shadow-lg p-8 w-full;
+        @apply bg-white rounded-lg shadow-lg p-4 sm:p-6 md:p-8 w-full;
     }
 
     .settings-grid {
-        @apply flex gap-8 mb-8;
+        @apply flex gap-6 md:gap-8 mb-6 md:mb-8;
     }
 
     .settings-column {
-        @apply flex-1;
+        @apply flex-1 min-w-0;
     }
 
     .separator {
@@ -366,7 +366,7 @@
     }
 
     .settings-section {
-        @apply mb-8;
+        @apply mb-6 md:mb-8;
     }
 
     .settings-section-title {

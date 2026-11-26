@@ -143,14 +143,19 @@
 
         remainingCells.sort((a, b) => a.candidates.length - b.candidates.length);
 
+        let steps = 0;
+        const MAX_BACKTRACK_STEPS = 5000;
+
         function backtrack(idx: number): boolean {
             if (idx >= remainingCells.length) return true;
+            if (++steps > MAX_BACKTRACK_STEPS) return true;
             const item = remainingCells[idx];
             for (const id of item.candidates) {
                 if (!usedIds.has(id)) {
                     usedIds.add(id);
                     if (backtrack(idx + 1)) return true;
                     usedIds.delete(id);
+                    if (steps > MAX_BACKTRACK_STEPS) return true;
                 }
             }
             return false;
@@ -462,7 +467,7 @@
         <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
     </div>
 {:else if board}
-    <div class="p-4 sm:p-8 max-w-6xl mx-auto w-full">
+    <div class="px-3 pt-16 pb-6 sm:p-6 md:p-8 max-w-6xl mx-auto w-full">
         <!-- Header -->
         <QuizHeader
             {languageCode}

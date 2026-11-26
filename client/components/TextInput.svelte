@@ -47,12 +47,17 @@
     on:blur
     on:input
     class="text-input"
+    autocomplete="off"
+    autocorrect="off"
+    autocapitalize="off"
+    spellcheck="false"
+    enterkeyhint="search"
 />
 
 <style lang="postcss">
     .text-input {
-        @apply w-full px-4 py-3 border-2 border-gray-300 rounded-lg;
-        @apply text-lg font-medium transition-all;
+        @apply w-full px-3.5 py-2.5 sm:px-4 sm:py-3 border-2 border-gray-300 rounded-lg;
+        @apply text-base sm:text-lg font-medium transition-all;
     }
 
     .text-input:focus {

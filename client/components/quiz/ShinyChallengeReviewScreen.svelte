@@ -23,11 +23,11 @@
         {getLabel(languageCode, 'back')}
     </button>
 
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8">
-        <h2 class="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-2">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-5 sm:p-8 mb-6 sm:mb-8">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-100 mb-2">
             {getLabel(languageCode, 'reviewAnswers')}
         </h2>
-        <p class="text-xl text-gray-600 dark:text-gray-300">
+        <p class="text-lg sm:text-xl text-gray-600 dark:text-gray-300">
             {getLabel(languageCode, 'score')}: {correctCount}/{CHALLENGE_QUESTION_COUNT}
         </p>
         <p class="text-sm text-blue-600 dark:text-blue-400 font-medium mt-2">
@@ -37,9 +37,9 @@
 
     <div class="space-y-6">
         {#each challengeQuestions as q (q.questionNumber)}
-            <div class="question-card bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+            <div class="question-card bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 sm:p-6">
                 <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
-                    <h3 class="text-2xl font-bold {q.isCorrect ? 'text-green-600' : 'text-red-600'}">
+                    <h3 class="text-lg sm:text-2xl font-bold {q.isCorrect ? 'text-green-600' : 'text-red-600'}">
                         {getLabel(languageCode, 'question')} {q.questionNumber}/{CHALLENGE_QUESTION_COUNT} — #{String(q.pokemonId).padStart(4, '0')} {capitalizeFirst(q.pokemonName)}
                     </h3>
                     <button

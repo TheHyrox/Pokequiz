@@ -1,5 +1,5 @@
 import { spawn } from 'node:child_process';
-import { CDP_URL, sleep } from './cdp_helpers.mjs';
+import { BASE_URL, CDP_URL, sleep } from './cdp_helpers.mjs';
 import { runScreenMatrixTests } from './test_screens.mjs';
 import { runDescriptionQuizTests } from './test_quiz_description.mjs';
 import { runInformationQuizTests } from './test_quiz_information.mjs';
@@ -12,6 +12,27 @@ import { runSudokuQuizTests } from './test_quiz_sudoku.mjs';
 import { runNewFunctionalityTests } from './test_new_features.mjs';
 
 const CHROME_PATH = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+
+async function ensureServer() {
+    try {
+        const res = await fetch(`${BASE_URL}/api/health`);
+        if (res.ok) return null;
+    } catch {}
+
+    const proc = spawn('node', ['server/dist/server/src/index.js'], {
+        stdio: 'ignore'
+    });
+
+    for (let i = 0; i < 30; i++) {
+        try {
+            const res = await fetch(`${BASE_URL}/api/health`);
+            if (res.ok) return proc;
+        } catch {}
+        await sleep(200);
+    }
+    proc.kill();
+    throw new Error(`Failed to start server at ${BASE_URL}`);
+}
 
 async function ensureChrome() {
     try {
@@ -40,6 +61,7 @@ async function ensureChrome() {
 }
 
 async function main() {
+    const serverProc = await ensureServer();
     const chromeProc = await ensureChrome();
     const summaries = [];
 
@@ -67,6 +89,7 @@ async function main() {
         }
     } finally {
         if (chromeProc) chromeProc.kill();
+        if (serverProc) serverProc.kill();
     }
 
     console.log('\n================ TEST SUMMARY ================');

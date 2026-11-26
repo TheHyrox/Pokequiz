@@ -195,11 +195,11 @@
     }
 
     .slider-container {
-        @apply ml-7 space-y-2;
+        @apply ml-3 sm:ml-7 space-y-2;
     }
 
     .slider-header {
-        @apply flex justify-between items-center;
+        @apply flex flex-wrap justify-between items-center gap-1;
     }
 
     .slider-label {

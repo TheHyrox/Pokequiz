@@ -624,7 +624,7 @@
 
 <svelte:window on:keydown={handleGlobalKeydown} />
 
-<main class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 p-8 flex items-center justify-center">
+<main class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 px-3 pt-16 pb-6 sm:p-6 md:p-8 flex items-center justify-center">
     <div class="max-w-4xl mx-auto w-full">
         {#if showEndModal}
             <QuizEndModal
@@ -681,13 +681,13 @@
                 {/if}
 
                 <!-- Description Section -->
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8 border border-transparent dark:border-gray-700">
-                    <p class="text-2xl text-gray-800 dark:text-gray-100 text-center leading-relaxed">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-5 sm:p-8 mb-6 sm:mb-8 border border-transparent dark:border-gray-700">
+                    <p class="text-lg sm:text-2xl text-gray-800 dark:text-gray-100 text-center leading-relaxed break-words">
                         "{@html description}"
                     </p>
 
                     {#if settings.changeDescription && currentDescriptionIndex < allDescriptions.length - 1}
-                        <div class="text-center mt-6">
+                        <div class="text-center mt-4 sm:mt-6">
                             <button
                                 on:click={changeDescription}
                                 class="change-description-btn px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors"
@@ -706,6 +706,20 @@
                             >
                                 📖 {getLabel(languageCode, 'pokedexMiniCard')}: {lastCorrectAnswer.name}
                             </button>
+                            <button
+                                type="button"
+                                on:click={() => {
+                                    if (currentQuestion < totalQuestions) {
+                                        currentQuestion++;
+                                        loadQuestion();
+                                    } else {
+                                        endQuiz();
+                                    }
+                                }}
+                                class="next-question-btn px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-bold text-sm rounded-lg transition-colors cursor-pointer"
+                            >
+                                {currentQuestion < totalQuestions ? getLabel(languageCode, 'number_nextRound') : getLabel(languageCode, 'number_finishQuiz')} →
+                            </button>
                         </div>
                     {/if}
                 </div>
@@ -713,7 +727,7 @@
                 <!-- Pokemon Cards Grid or Hardcore Input -->
                 {#if settings.gameMode === 'hardcore'}
                     <div class="max-w-2xl mx-auto">
-                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8 border border-transparent dark:border-gray-700">
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-5 sm:p-8 mb-6 sm:mb-8 border border-transparent dark:border-gray-700">
                             <div class="mb-4">
                                 <span class="block text-lg font-semibold text-gray-700 dark:text-gray-200 mb-2">
                                     {getLabel(languageCode, 'enterPokemonName')}
@@ -784,30 +798,33 @@
     }
 
     .quiz-header-row {
-        @apply flex justify-between items-start mb-8 gap-8;
+        @apply flex flex-col sm:flex-row justify-between items-start mb-5 sm:mb-8 gap-3 sm:gap-8;
     }
 
     .pokemon-grid {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 1rem;
+        gap: 0.75rem;
     }
 
     .pokemon-grid-item {
-        flex: 1 1 100%;
+        flex: 1 1 calc(50% - 0.375rem);
         max-width: 20rem;
+    }
+
+    @media (min-width: 640px) {
+        .pokemon-grid {
+            gap: 1rem;
+        }
+        .pokemon-grid-item {
+            flex-basis: calc(50% - 0.5rem);
+        }
     }
 
     @media (min-width: 768px) {
         .pokemon-grid {
             gap: 1.5rem;
-        }
-    }
-
-    @media (min-width: 640px) {
-        .pokemon-grid-item {
-            flex-basis: calc(50% - 0.5rem);
         }
     }
 

@@ -266,11 +266,11 @@
 
 <main class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 transition-colors duration-200">
     <!-- Top Right Controls: Personal Stats, Dark Mode Toggle & Language Selector -->
-    <div class="absolute top-6 right-6 z-40 flex items-center gap-3">
+    <div class="top-controls-bar absolute top-3 right-3 sm:top-6 sm:right-6 z-40 flex items-center gap-2 sm:gap-3">
         <button
             type="button"
             on:click={() => { statsRefreshKey++; showStatsModal = true; }}
-            class="theme-toggle-btn personal-stats-btn flex items-center gap-1.5 font-semibold text-sm"
+            class="theme-toggle-btn personal-stats-btn flex items-center gap-1.5 font-semibold text-xs sm:text-sm"
             aria-label={getLabel(currentLanguageCode, 'personalStats')}
             title={getLabel(currentLanguageCode, 'personalStats')}
         >
@@ -294,39 +294,39 @@
 
     <!-- Main Hub -->
     {#if !selectedGame}
-        <div class="flex flex-col items-center justify-center min-h-screen px-4 py-16">
-            <div class="text-center mb-10">
-                <h1 class="text-5xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+        <div class="flex flex-col items-center justify-center min-h-screen px-4 pt-16 pb-10 sm:pt-20 sm:pb-16">
+            <div class="text-center mb-6 sm:mb-10">
+                <h1 class="text-3xl sm:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-2 sm:mb-4">
                     {getLabel(currentLanguageCode, 'pokequiz')}
                 </h1>
-                <p class="text-lg text-gray-600 dark:text-gray-300">
+                <p class="text-base sm:text-lg text-gray-600 dark:text-gray-300">
                     {getLabel(currentLanguageCode, 'testYourKnowledge')}
                 </p>
             </div>
 
             <!-- Daily Challenge Banner (Seeded RNG: Pokedle, Description, Number Quiz) -->
-            <div class="daily-challenge-banner max-w-5xl w-full mb-8 bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border-2 border-amber-300 dark:border-amber-600">
+            <div class="daily-challenge-banner max-w-5xl w-full mb-6 sm:mb-8 bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 sm:p-6 border-2 border-amber-300 dark:border-amber-600">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>
-                        <div class="flex items-center gap-2">
-                            <span class="text-2xl">📅</span>
-                            <h2 class="text-xl font-bold text-gray-800 dark:text-gray-100">
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="text-xl sm:text-2xl">📅</span>
+                            <h2 class="text-lg sm:text-xl font-bold text-gray-800 dark:text-gray-100">
                                 {getLabel(currentLanguageCode, 'dailyChallenge')}
                             </h2>
                             <span class="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-200 daily-date-badge">
                                 {todayDateStr}
                             </span>
                         </div>
-                        <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">
+                        <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">
                             {getLabel(currentLanguageCode, 'dailyChallengeSubtitle')}
                         </p>
                     </div>
 
-                    <div class="flex flex-wrap gap-3">
+                    <div class="grid grid-cols-1 sm:flex sm:flex-wrap gap-2.5 sm:gap-3">
                         <button
                             type="button"
                             on:click={() => startDailyChallenge('pokedle')}
-                            class="daily-pokedle-btn px-4 py-2.5 rounded-lg font-bold text-sm flex items-center gap-2 transition-all cursor-pointer shadow-sm {dailyStatuses.pokedle?.completed ? 'bg-green-100 dark:bg-green-900/60 text-green-800 dark:text-green-200 border border-green-400' : 'bg-emerald-500 hover:bg-emerald-600 text-white'}"
+                            class="daily-pokedle-btn px-3.5 py-2.5 sm:px-4 rounded-lg font-bold text-sm flex items-center justify-center sm:justify-start gap-2 transition-all cursor-pointer shadow-sm {dailyStatuses.pokedle?.completed ? 'bg-green-100 dark:bg-green-900/60 text-green-800 dark:text-green-200 border border-green-400' : 'bg-emerald-500 hover:bg-emerald-600 text-white'}"
                         >
                             <span>🟩</span>
                             <span>{getLabel(currentLanguageCode, 'pokedle_quiz')}</span>
@@ -338,7 +338,7 @@
                         <button
                             type="button"
                             on:click={() => startDailyChallenge('description')}
-                            class="daily-description-btn px-4 py-2.5 rounded-lg font-bold text-sm flex items-center gap-2 transition-all cursor-pointer shadow-sm {dailyStatuses.description?.completed ? 'bg-green-100 dark:bg-green-900/60 text-green-800 dark:text-green-200 border border-green-400' : 'bg-blue-500 hover:bg-blue-600 text-white'}"
+                            class="daily-description-btn px-3.5 py-2.5 sm:px-4 rounded-lg font-bold text-sm flex items-center justify-center sm:justify-start gap-2 transition-all cursor-pointer shadow-sm {dailyStatuses.description?.completed ? 'bg-green-100 dark:bg-green-900/60 text-green-800 dark:text-green-200 border border-green-400' : 'bg-blue-500 hover:bg-blue-600 text-white'}"
                         >
                             <span>📝</span>
                             <span>{getLabel(currentLanguageCode, 'description_quiz')}</span>
@@ -350,7 +350,7 @@
                         <button
                             type="button"
                             on:click={() => startDailyChallenge('number')}
-                            class="daily-number-btn px-4 py-2.5 rounded-lg font-bold text-sm flex items-center gap-2 transition-all cursor-pointer shadow-sm {dailyStatuses.number?.completed ? 'bg-green-100 dark:bg-green-900/60 text-green-800 dark:text-green-200 border border-green-400' : 'bg-amber-500 hover:bg-amber-600 text-white'}"
+                            class="daily-number-btn px-3.5 py-2.5 sm:px-4 rounded-lg font-bold text-sm flex items-center justify-center sm:justify-start gap-2 transition-all cursor-pointer shadow-sm {dailyStatuses.number?.completed ? 'bg-green-100 dark:bg-green-900/60 text-green-800 dark:text-green-200 border border-green-400' : 'bg-amber-500 hover:bg-amber-600 text-white'}"
                         >
                             <span>🔢</span>
                             <span>{getLabel(currentLanguageCode, 'number_quiz')}</span>
@@ -362,7 +362,7 @@
                         <button
                             type="button"
                             on:click={() => startDailyChallenge('sudoku')}
-                            class="daily-sudoku-btn px-4 py-2.5 rounded-lg font-bold text-sm flex items-center gap-2 transition-all cursor-pointer shadow-sm {dailyStatuses.sudoku?.completed ? 'bg-green-100 dark:bg-green-900/60 text-green-800 dark:text-green-200 border border-green-400' : 'bg-purple-600 hover:bg-purple-700 text-white'}"
+                            class="daily-sudoku-btn px-3.5 py-2.5 sm:px-4 rounded-lg font-bold text-sm flex items-center justify-center sm:justify-start gap-2 transition-all cursor-pointer shadow-sm {dailyStatuses.sudoku?.completed ? 'bg-green-100 dark:bg-green-900/60 text-green-800 dark:text-green-200 border border-green-400' : 'bg-purple-600 hover:bg-purple-700 text-white'}"
                         >
                             <span>🧩</span>
                             <span>{getLabel(currentLanguageCode, 'sudoku_quiz')}</span>
@@ -374,7 +374,7 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl w-full">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-5xl w-full">
                 {#each games as game (game.id)}
                     <button on:click={() => selectGame(game)} class="game-card">
                         <div class="game-icon">{game.icon}</div>
@@ -390,10 +390,10 @@
         </div>
     {:else if !quizStarted}
         <!-- Settings Page -->
-        <div class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 p-8 flex flex-col">
+        <div class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 px-3 pt-16 pb-6 sm:p-6 md:p-8 flex flex-col">
             <button
                 on:click={backToHub}
-                class="mb-6 px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg transition-colors w-fit"
+                class="mb-4 sm:mb-6 px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg transition-colors w-fit"
             >
                 {getLabel(currentLanguageCode, 'back')}
             </button>
@@ -435,9 +435,9 @@
     }
 
     .theme-toggle-btn {
-        @apply px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg;
+        @apply px-2.5 py-1.5 sm:px-3 sm:py-2 border border-gray-300 dark:border-gray-600 rounded-lg;
         @apply bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100;
-        @apply transition-all duration-200 cursor-pointer text-lg leading-none shadow-sm;
+        @apply transition-all duration-200 cursor-pointer text-base sm:text-lg leading-none shadow-sm;
     }
 
     .theme-toggle-btn:hover {
@@ -445,7 +445,7 @@
     }
 
     .game-card {
-        @apply bg-white dark:bg-gray-800 rounded-xl shadow-md p-8 transition-all duration-200 cursor-pointer;
+        @apply bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 sm:p-8 transition-all duration-200 cursor-pointer;
         @apply border-2 border-transparent flex flex-col items-center text-center relative;
     }
 
@@ -454,11 +454,11 @@
     }
 
     .game-icon {
-        @apply text-6xl mb-4;
+        @apply text-5xl sm:text-6xl mb-3 sm:mb-4;
     }
 
     .game-name {
-        @apply text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2;
+        @apply text-xl sm:text-2xl font-bold text-gray-800 dark:text-gray-100 mb-1.5 sm:mb-2;
     }
 
     .game-description {

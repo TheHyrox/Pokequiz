@@ -630,8 +630,12 @@ export function findGridSolution(
     // Sort unassigned cells by Minimum Remaining Values (MRV heuristic) for instant backtracking
     unassignedCells.sort((a, b) => a.candidates.length - b.candidates.length);
 
+    let steps = 0;
+    const MAX_BACKTRACK_STEPS = 5000;
+
     function backtrack(idx: number): boolean {
         if (idx >= unassignedCells.length) return true;
+        if (++steps > MAX_BACKTRACK_STEPS) return false;
         const cell = unassignedCells[idx];
         for (const candId of cell.candidates) {
             if (!usedPokemon.has(candId)) {
@@ -640,6 +644,7 @@ export function findGridSolution(
                 if (backtrack(idx + 1)) return true;
                 usedPokemon.delete(candId);
                 solution[cell.r][cell.c] = 0;
+                if (steps > MAX_BACKTRACK_STEPS) return false;
             }
         }
         return false;

@@ -20,11 +20,11 @@
 
 <style lang="postcss">
     .timer-container {
-        @apply mb-6 text-center;
+        @apply mb-4 sm:mb-6 text-center;
     }
 
     .timer-display {
-        @apply text-6xl font-bold text-blue-600 p-4 bg-blue-100 rounded-lg inline-block;
+        @apply text-4xl sm:text-6xl font-bold text-blue-600 px-3 py-2 sm:p-4 bg-blue-100 rounded-lg inline-block;
     }
 
     .timer-danger {

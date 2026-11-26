@@ -62,20 +62,19 @@
 
 <style lang="postcss">
     .header {
-        @apply flex justify-between items-start mb-8 gap-4 w-full;
+        @apply flex flex-col sm:flex-row justify-between items-start mb-5 sm:mb-8 gap-3 sm:gap-4 w-full;
     }
 
     .title {
-        @apply text-4xl font-bold text-gray-800 mb-2;
+        @apply text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-1 sm:mb-2 leading-tight;
     }
 
     .subtitle {
-        @apply text-lg text-gray-600;
+        @apply text-sm sm:text-base md:text-lg text-gray-600;
     }
 
     .back-button {
-        @apply px-4 py-2 bg-gray-500 text-white rounded-lg transition-colors flex-shrink-0 whitespace-nowrap;
-        margin-top: 0.25rem;
+        @apply px-3.5 py-1.5 sm:px-4 sm:py-2 bg-gray-500 text-white rounded-lg transition-colors flex-shrink-0 whitespace-nowrap text-sm sm:text-base;
     }
     
     .back-button:hover {

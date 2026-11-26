@@ -220,23 +220,23 @@
 
 <style lang="postcss">
     .settings-container {
-        @apply bg-white rounded-lg shadow-lg p-8;
+        @apply bg-white rounded-lg shadow-lg p-4 sm:p-6 md:p-8;
     }
 
     .settings-grid {
-        @apply flex gap-8 mb-8;
+        @apply flex flex-col md:flex-row gap-6 md:gap-8 mb-6 md:mb-8;
     }
 
     .settings-column {
-        @apply flex-1;
+        @apply flex-1 min-w-0;
     }
 
     .separator {
-        @apply w-px bg-gray-300;
+        @apply hidden md:block w-px bg-gray-300;
     }
 
     .settings-section {
-        @apply mb-8;
+        @apply mb-6 md:mb-8;
     }
 
     .settings-section-title {
@@ -281,6 +281,12 @@
     }
 
     .ml-8 {
-        margin-left: 2rem;
+        margin-left: 1rem;
+    }
+
+    @media (min-width: 640px) {
+        .ml-8 {
+            margin-left: 2rem;
+        }
     }
 </style>

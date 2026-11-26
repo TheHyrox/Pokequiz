@@ -43,8 +43,8 @@
 
 <style lang="postcss">
     .toast {
-        @apply fixed bottom-6 left-6 px-6 py-4 rounded-lg shadow-lg max-w-sm;
-        @apply flex items-center justify-between gap-4 animate-slideIn;
+        @apply fixed bottom-4 left-4 right-4 sm:right-auto sm:bottom-6 sm:left-6 px-4 py-3 sm:px-6 sm:py-4 rounded-lg shadow-lg sm:max-w-sm;
+        @apply flex items-center justify-between gap-3 sm:gap-4 animate-slideIn;
         z-index: 9999;
     }
 

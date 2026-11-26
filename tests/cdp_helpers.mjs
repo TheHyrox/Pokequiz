@@ -26,6 +26,19 @@ export const DESKTOP_VIEWPORTS = [
     { id: 'mac-2560x1600', name: 'macOS (2560x1600@2x)', width: 2560, height: 1600, deviceScaleFactor: 2 }
 ];
 
+export const MOBILE_VIEWPORTS = [
+    // Compact & Standard Smartphones (Portrait)
+    { id: 'iphone-se', name: 'iPhone SE (375x667@2x)', width: 375, height: 667, deviceScaleFactor: 2, mobile: true },
+    { id: 'iphone-14', name: 'iPhone 14 / 15 (390x844@3x)', width: 390, height: 844, deviceScaleFactor: 3, mobile: true },
+    { id: 'iphone-15-pro-max', name: 'iPhone 15 Pro Max (430x932@3x)', width: 430, height: 932, deviceScaleFactor: 3, mobile: true },
+    { id: 'galaxy-s23', name: 'Samsung Galaxy S23 (360x780@3x)', width: 360, height: 780, deviceScaleFactor: 3, mobile: true },
+    { id: 'pixel-7', name: 'Google Pixel 7 (412x915@2.625x)', width: 412, height: 915, deviceScaleFactor: 2.625, mobile: true },
+    { id: 'small-mobile', name: 'Compact Mobile (320x568@2x)', width: 320, height: 568, deviceScaleFactor: 2, mobile: true },
+    // Mobile Landscape & Tablet
+    { id: 'mobile-landscape', name: 'Mobile Landscape (667x375@2x)', width: 667, height: 375, deviceScaleFactor: 2, mobile: true },
+    { id: 'ipad-mini', name: 'iPad Mini Portrait (768x1024@2x)', width: 768, height: 1024, deviceScaleFactor: 2, mobile: true }
+];
+
 export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 export class CDPClient {
@@ -141,7 +154,10 @@ export async function setViewport(cdp, vp) {
         width: vp.width,
         height: vp.height,
         deviceScaleFactor: vp.deviceScaleFactor ?? 1,
-        mobile: false
+        mobile: Boolean(vp.mobile)
+    });
+    await cdp.send('Emulation.setTouchEmulationEnabled', {
+        enabled: Boolean(vp.mobile)
     });
 }
 

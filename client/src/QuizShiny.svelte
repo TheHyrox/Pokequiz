@@ -607,7 +607,7 @@
 
 <svelte:window on:keydown={handleGlobalKeydown} />
 
-<main class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 p-8 flex items-center justify-center">
+<main class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 px-3 pt-16 pb-6 sm:p-6 md:p-8 flex items-center justify-center">
     <div class="max-w-4xl mx-auto w-full">
         {#if showEndModal}
             <QuizEndModal
@@ -629,7 +629,7 @@
             />
         {:else}
             <!-- Quiz Header -->
-            <div class="quiz-header-row flex justify-between items-start mb-8 gap-8">
+            <div class="quiz-header-row flex flex-col sm:flex-row justify-between items-start mb-5 sm:mb-8 gap-3 sm:gap-8">
                 <QuizHeader
                     {languageCode}
                     quizTitleLabel="shiny_quiz"
@@ -686,6 +686,14 @@
                         on:select={(e) => handleSpotAnswer(e.detail.option)}
                         on:inspectPokedex={() => {
                             selectedPokedexPokemon = { id: currentPokemonId, name: currentPokemonName };
+                        }}
+                        on:nextQuestion={() => {
+                            if (currentQuestion < totalQuestions) {
+                                currentQuestion++;
+                                loadQuestion();
+                            } else {
+                                endQuiz();
+                            }
                         }}
                     />
                 {/if}

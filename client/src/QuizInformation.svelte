@@ -688,7 +688,7 @@
 
 <svelte:window on:keydown={handleGlobalKeydown} />
 
-<main class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 p-8 flex items-center justify-center">
+<main class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 px-3 pt-16 pb-6 sm:p-6 md:p-8 flex items-center justify-center">
     {#if showEndModal && correctAnswer}
         <QuizEndModal
             {isWin}
@@ -724,8 +724,8 @@
             </div>
 
             {#if settings.gameMode === 'hardcore'}
-                <div class="flex gap-4 mb-8 items-stretch">
-                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 w-[80%] border border-transparent dark:border-gray-700">
+                <div class="flex flex-col sm:flex-row gap-4 mb-6 sm:mb-8 items-stretch">
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-5 sm:p-8 w-full sm:w-[75%] md:w-[80%] border border-transparent dark:border-gray-700">
                         <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-100">{getLabel(languageCode, 'information_hints')}</h3>
                         <div class="hints-list space-y-2">
                             {#each revealedHints as hint, hintIndex (hintIndex)}
@@ -737,13 +737,13 @@
                         </div>
                     </div>
 
-                    <div class="w-[20%] flex flex-col justify-center gap-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border border-transparent dark:border-gray-700">
+                    <div class="w-full sm:w-[25%] md:w-[20%] flex flex-row sm:flex-col items-center justify-around sm:justify-center gap-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 border border-transparent dark:border-gray-700">
                         <TimerDisplay timeRemaining={hardcoreTimeRemaining} />
                         <HardcoreLivesDisplay lives={hardcoreLives} />
                     </div>
                 </div>
             {:else} 
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8 border border-transparent dark:border-gray-700">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-5 sm:p-8 mb-6 sm:mb-8 border border-transparent dark:border-gray-700">
                     <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-100">{getLabel(languageCode, 'information_hints')}</h3>
                     <div class="hints-list space-y-2">
                         {#each revealedHints as hint, hintIndex (hintIndex)}
@@ -805,30 +805,33 @@
 
 
     .quiz-header-row {
-        @apply flex justify-between items-start mb-8 gap-8;
+        @apply flex flex-col sm:flex-row justify-between items-start mb-5 sm:mb-8 gap-3 sm:gap-8;
     }
 
     .pokemon-grid {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 1rem;
+        gap: 0.75rem;
     }
 
     .pokemon-grid-item {
-        flex: 1 1 100%;
+        flex: 1 1 calc(50% - 0.375rem);
         max-width: 20rem;
+    }
+
+    @media (min-width: 640px) {
+        .pokemon-grid {
+            gap: 1rem;
+        }
+        .pokemon-grid-item {
+            flex-basis: calc(50% - 0.5rem);
+        }
     }
 
     @media (min-width: 768px) {
         .pokemon-grid {
             gap: 1.5rem;
-        }
-    }
-
-    @media (min-width: 640px) {
-        .pokemon-grid-item {
-            flex-basis: calc(50% - 0.5rem);
         }
     }
 

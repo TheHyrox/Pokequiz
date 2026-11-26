@@ -481,7 +481,7 @@
         <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
     </div>
 {:else}
-    <main class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 p-8 flex items-center justify-center">
+    <main class="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 px-3 pt-16 pb-6 sm:p-6 md:p-8 flex items-center justify-center">
         <div class="max-w-4xl mx-auto w-full">
             <!-- Quiz Header (harmonized with Description & Information quizzes) -->
             <div class="quiz-header-row">
@@ -582,6 +582,8 @@
                     type="text"
                     inputmode="numeric"
                     pattern="[0-9]*"
+                    enterkeyhint="go"
+                    autocomplete="off"
                     placeholder={l('number_enterNumber')}
                     bind:value={currentNumberInput}
                     on:keydown={handleKeydown}
@@ -668,15 +670,15 @@
 
 <style lang="postcss">
     .quiz-header-row {
-        @apply flex justify-between items-start mb-8 gap-8;
+        @apply flex flex-col sm:flex-row justify-between items-start mb-5 sm:mb-8 gap-3 sm:gap-8;
     }
 
     .sprite-card {
-        @apply bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center border border-gray-100;
+        @apply bg-white rounded-2xl shadow-lg p-4 sm:p-6 flex flex-col items-center justify-center border border-gray-100 overflow-hidden;
     }
 
     .sprite-frame {
-        @apply w-56 h-56 md:w-64 md:h-64 flex items-center justify-center p-2;
+        @apply w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 flex items-center justify-center p-2;
     }
 
     .sprite-img {
@@ -714,7 +716,7 @@
     }
 
     .guess-row {
-        @apply flex items-center gap-4 p-3 rounded-xl border-2 font-semibold transition-all;
+        @apply flex items-center gap-2 sm:gap-4 p-2.5 sm:p-3 rounded-xl border-2 font-semibold transition-all;
     }
 
     .guess-row.correct {
@@ -726,7 +728,7 @@
     }
 
     .guess-attempt {
-        @apply text-xs font-bold text-gray-500 uppercase w-20 shrink-0;
+        @apply text-xs font-bold text-gray-500 uppercase w-16 sm:w-20 shrink-0;
     }
 
     .guess-value {

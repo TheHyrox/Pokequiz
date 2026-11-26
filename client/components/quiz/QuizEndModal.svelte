@@ -205,14 +205,14 @@
     }
 
     .modal-content {
-        @apply bg-white rounded-2xl shadow-2xl max-w-md w-full p-8;
+        @apply bg-white rounded-2xl shadow-2xl max-w-md w-full p-5 sm:p-8 max-h-[90vh] overflow-y-auto;
         @apply transform transition-all duration-300 ease-out;
         animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .modal-header {
-        @apply text-center mb-6;
-        min-height: 80px;
+        @apply text-center mb-4 sm:mb-6;
+        min-height: 64px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -227,7 +227,7 @@
     }
 
     .modal-title {
-        @apply text-3xl font-black text-center;
+        @apply text-2xl sm:text-3xl font-black text-center px-2;
     }
 
     .modal-header.win .modal-title {
@@ -239,7 +239,7 @@
     }
 
     .score-section {
-        @apply bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 mb-6;
+        @apply bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-4 sm:p-6 mb-4 sm:mb-6;
     }
 
     .score-display {
@@ -247,23 +247,23 @@
     }
 
     .score-label {
-        @apply text-gray-600 text-sm font-semibold uppercase tracking-wide mb-2;
+        @apply text-gray-600 text-xs sm:text-sm font-semibold uppercase tracking-wide mb-1 sm:mb-2;
     }
 
     .score-value {
-        @apply text-5xl font-black text-blue-600 mb-1;
+        @apply text-4xl sm:text-5xl font-black text-blue-600 mb-1;
     }
 
     .answer-section {
-        @apply mb-6;
+        @apply mb-4 sm:mb-6;
     }
 
     .answer-label {
-        @apply text-sm font-semibold text-gray-700 uppercase tracking-wide mb-3 block;
+        @apply text-xs sm:text-sm font-semibold text-gray-700 uppercase tracking-wide mb-2 sm:mb-3 block;
     }
 
     .answer-card {
-        @apply bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6;
+        @apply bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-4 sm:p-6;
         @apply border-2 border-purple-200 flex flex-col items-center;
         @apply transition-transform duration-300;
     }
@@ -273,18 +273,18 @@
     }
 
     .answer-sprite {
-        @apply max-w-xs max-h-40 mb-3;
+        @apply max-w-xs max-h-32 sm:max-h-40 mb-2 sm:mb-3;
         image-rendering: pixelated;
         image-rendering: -moz-crisp-edges;
         image-rendering: crisp-edges;
     }
 
     .answer-name {
-        @apply text-xl font-bold text-purple-700;
+        @apply text-lg sm:text-xl font-bold text-purple-700;
     }
 
     .action-buttons {
-        @apply flex gap-3;
+        @apply flex flex-col sm:flex-row gap-2.5 sm:gap-3;
     }
 
     .action-btn {

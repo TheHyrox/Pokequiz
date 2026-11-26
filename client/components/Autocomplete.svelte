@@ -162,6 +162,10 @@
         on:blur={handleBlur}
         class="text-input"
         autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+        enterkeyhint="go"
     />
 
     {#if !disabled && showSuggestions && filteredList.length > 0}
@@ -171,6 +175,7 @@
                     type="button"
                     role="option"
                     aria-selected={idx === highlightedIndex}
+                    on:mousedown|preventDefault
                     on:click={() => selectPokemon(pokemon)}
                     class="suggestion-item {idx === highlightedIndex ? 'bg-blue-100 dark:bg-gray-700' : ''}"
                 >
@@ -198,8 +203,8 @@
     }
 
     .text-input {
-        @apply w-full px-4 py-3 border-2 border-gray-300 rounded-lg;
-        @apply text-lg font-medium transition-all;
+        @apply w-full px-3.5 py-2.5 sm:px-4 sm:py-3 border-2 border-gray-300 rounded-lg;
+        @apply text-base sm:text-lg font-medium transition-all;
     }
 
     .text-input:focus {
@@ -216,11 +221,11 @@
 
     .suggestions-dropdown {
         @apply absolute top-full left-0 right-0 mt-1 bg-white border-2 border-gray-300 rounded-lg shadow-lg z-50;
-        @apply max-h-80 overflow-y-auto;
+        @apply max-h-60 sm:max-h-80 overflow-y-auto overscroll-contain;
     }
 
     .suggestion-item {
-        @apply w-full flex items-center gap-3 px-4 py-2 transition-colors;
+        @apply w-full flex items-center gap-3 px-3.5 py-2.5 sm:px-4 sm:py-2 transition-colors;
         @apply border-none bg-transparent cursor-pointer text-left;
         @apply border-b border-gray-100;
     }

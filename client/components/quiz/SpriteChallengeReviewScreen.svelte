@@ -103,27 +103,27 @@
     }
 
     .summary-card {
-        @apply bg-white rounded-lg shadow-lg p-8 mb-8;
+        @apply bg-white rounded-lg shadow-lg p-5 sm:p-8 mb-6 sm:mb-8;
     }
 
     .summary-title {
-        @apply text-3xl font-bold text-gray-800 mb-2;
+        @apply text-2xl sm:text-3xl font-bold text-gray-800 mb-2;
     }
 
     .summary-score {
-        @apply text-xl text-gray-600;
+        @apply text-lg sm:text-xl text-gray-600;
     }
 
     .questions-list {
-        @apply space-y-8;
+        @apply space-y-6 sm:space-y-8;
     }
 
     .question-card {
-        @apply bg-white rounded-lg shadow-lg p-6;
+        @apply bg-white rounded-lg shadow-lg p-4 sm:p-6;
     }
 
     .question-header {
-        @apply text-2xl font-bold mb-4;
+        @apply text-xl sm:text-2xl font-bold mb-3 sm:mb-4;
     }
 
     .question-header.correct {
@@ -135,15 +135,15 @@
     }
 
     .sprite-preview {
-        @apply w-32 h-32 mx-auto mb-6 image-rendering-pixelated;
+        @apply w-28 h-28 sm:w-32 sm:h-32 mx-auto mb-4 sm:mb-6 image-rendering-pixelated object-contain;
     }
 
     .options-grid {
-        @apply grid grid-cols-2 gap-4;
+        @apply grid grid-cols-2 gap-2.5 sm:gap-4;
     }
 
     .option-card {
-        @apply p-4 border-2 rounded-lg text-center transition-all;
+        @apply p-2.5 sm:p-4 border-2 rounded-lg text-center transition-all;
     }
 
     .option-correct {

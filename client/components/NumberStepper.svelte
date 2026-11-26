@@ -160,8 +160,8 @@
     }
 
     .stepper-input {
-        @apply w-full px-4 py-2 pr-12 border-2 border-gray-300 rounded-lg;
-        @apply text-lg font-medium text-center transition-all;
+        @apply w-full px-4 py-2.5 sm:py-2 pr-14 sm:pr-12 border-2 border-gray-300 rounded-lg;
+        @apply text-base sm:text-lg font-medium text-center transition-all;
     }
     
     .stepper-input:focus {
@@ -177,9 +177,9 @@
     }
 
     .stepper-btn {
-        @apply w-8 h-5 flex items-center justify-center rounded;
+        @apply w-10 h-6 sm:w-8 sm:h-5 flex items-center justify-center rounded;
         @apply text-xs font-bold text-blue-600 border border-blue-300;
-        @apply transition-all cursor-pointer;
+        @apply transition-all cursor-pointer select-none;
     }
 
     .stepper-btn:hover {

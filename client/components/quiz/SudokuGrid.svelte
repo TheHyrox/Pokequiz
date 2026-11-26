@@ -146,16 +146,21 @@
 <style lang="postcss">
     .sudoku-board-grid {
         display: grid;
-        grid-template-columns: minmax(95px, 135px) repeat(var(--sudoku-cols, 3), minmax(105px, 150px));
-        gap: 0.65rem;
+        grid-template-columns: minmax(76px, 110px) repeat(var(--sudoku-cols, 3), minmax(82px, 130px));
+        gap: 0.45rem;
         width: fit-content;
     }
 
     .sudoku-cell {
-        min-height: 110px;
+        min-height: 92px;
     }
 
     @media (min-width: 640px) {
+        .sudoku-board-grid {
+            grid-template-columns: minmax(95px, 135px) repeat(var(--sudoku-cols, 3), minmax(105px, 150px));
+            gap: 0.65rem;
+        }
+
         .sudoku-cell {
             min-height: 132px;
         }

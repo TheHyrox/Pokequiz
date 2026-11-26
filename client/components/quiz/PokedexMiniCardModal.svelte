@@ -138,26 +138,26 @@
     aria-label={l('pokedexMiniCard')}
     tabindex="-1"
 >
-    <div class="pokedex-minicard bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden border border-gray-200 dark:border-gray-700 animate-fadeIn">
+    <div class="pokedex-minicard bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden border border-gray-200 dark:border-gray-700 animate-fadeIn flex flex-col max-h-[90vh]">
         <!-- Header Bar -->
-        <div class="bg-gradient-to-r from-red-600 to-rose-600 px-6 py-4 flex items-center justify-between text-white">
-            <div class="flex items-center gap-3">
-                <span class="px-2.5 py-1 rounded-full bg-black/25 font-mono font-bold text-sm">
+        <div class="bg-gradient-to-r from-red-600 to-rose-600 px-4 sm:px-6 py-3.5 sm:py-4 flex items-center justify-between text-white shrink-0">
+            <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                <span class="px-2.5 py-1 rounded-full bg-black/25 font-mono font-bold text-xs sm:text-sm shrink-0">
                     #{String(pokemonId).padStart(4, '0')}
                 </span>
-                <div>
-                    <h2 class="text-xl font-black tracking-tight leading-tight">
+                <div class="min-w-0">
+                    <h2 class="text-lg sm:text-xl font-black tracking-tight leading-tight truncate">
                         {capitalizeFirst(pokemonData?.name || pokemonName || `#${pokemonId}`)}
                     </h2>
                     {#if pokemonData?.category}
-                        <p class="text-xs text-red-100 font-medium">{pokemonData.category}</p>
+                        <p class="text-xs text-red-100 font-medium truncate">{pokemonData.category}</p>
                     {/if}
                 </div>
             </div>
             <button
                 type="button"
                 on:click={handleClose}
-                class="w-8 h-8 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center text-white font-bold transition-colors cursor-pointer"
+                class="w-8 h-8 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center text-white font-bold transition-colors cursor-pointer shrink-0"
                 aria-label={l('close')}
             >
                 ✕
@@ -169,7 +169,7 @@
                 {l('loading')}
             </div>
         {:else}
-            <div class="p-6 max-h-[80vh] overflow-y-auto space-y-5">
+            <div class="p-4 sm:p-6 overflow-y-auto space-y-4 sm:space-y-5 flex-1">
                 <!-- Top Section: Sprite + Normal/Shiny Toggle + Types & Physical Info -->
                 <div class="flex flex-col sm:flex-row items-center gap-6">
                     <!-- Sprite Display & Toggle -->

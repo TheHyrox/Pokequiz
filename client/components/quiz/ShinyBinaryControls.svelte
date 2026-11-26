@@ -36,13 +36,13 @@
     }>();
 </script>
 
-<div class="shiny-binary-card bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 mb-8 flex flex-col items-center border border-gray-200 dark:border-gray-700">
+<div class="shiny-binary-card bg-white dark:bg-gray-800 rounded-xl shadow-lg p-5 sm:p-8 mb-6 sm:mb-8 flex flex-col items-center border border-gray-200 dark:border-gray-700">
     {#if showPokemonName && pokemonName}
         <div class="mb-3 text-center">
             <span class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-200">
                 #{String(pokemonId).padStart(4, '0')}
             </span>
-            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mt-1">
+            <h2 class="text-xl sm:text-2xl font-bold text-gray-800 dark:text-gray-100 mt-1">
                 {capitalizeFirst(pokemonName)}
             </h2>
         </div>
@@ -53,12 +53,12 @@
     </p>
 
     <!-- Main Sprite Frame -->
-    <div class="w-56 h-56 rounded-xl bg-gradient-to-br from-amber-50/70 to-blue-50/70 dark:from-gray-900 dark:to-gray-800 border-2 border-amber-200 dark:border-gray-600 flex items-center justify-center p-4 mb-6 shadow-inner">
+    <div class="w-48 h-48 sm:w-56 sm:h-56 rounded-xl bg-gradient-to-br from-amber-50/70 to-blue-50/70 dark:from-gray-900 dark:to-gray-800 border-2 border-amber-200 dark:border-gray-600 flex items-center justify-center p-4 mb-5 sm:mb-6 shadow-inner">
         {#if shownSpriteUrl}
             <img
                 src={shownSpriteUrl}
                 alt="Pokemon sprite"
-                class="pokemon-sprite shiny-binary-sprite w-44 h-44 object-contain image-rendering-pixelated"
+                class="pokemon-sprite shiny-binary-sprite w-36 h-36 sm:w-44 sm:h-44 object-contain image-rendering-pixelated"
                 data-pokemon-id={pokemonId}
                 data-is-shiny={isTargetShiny ? '1' : '0'}
             />
@@ -66,12 +66,12 @@
     </div>
 
     <!-- Binary Choice Buttons -->
-    <div class="grid grid-cols-2 gap-4 w-full max-w-lg">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 w-full max-w-lg">
         <button
             type="button"
             disabled={disabled}
             on:click={() => dispatch('answer', { guessedShiny: true })}
-            class="shiny-choice-btn choice-shiny py-4 px-6 rounded-xl font-black text-lg transition-all cursor-pointer border-2 flex items-center justify-center gap-2 shadow-sm
+            class="shiny-choice-btn choice-shiny py-3.5 sm:py-4 px-5 sm:px-6 rounded-xl font-black text-base sm:text-lg transition-all cursor-pointer border-2 flex items-center justify-center gap-2 shadow-sm
                 {revealed && isTargetShiny ? 'bg-green-500 text-white border-green-600 scale-105' :
                  revealed && userAnswerShiny === true && !isTargetShiny ? 'bg-red-500 text-white border-red-600' :
                  'bg-amber-400 hover:bg-amber-500 text-gray-900 border-amber-500 hover:shadow-md'}"
@@ -83,7 +83,7 @@
             type="button"
             disabled={disabled}
             on:click={() => dispatch('answer', { guessedShiny: false })}
-            class="shiny-choice-btn choice-normal py-4 px-6 rounded-xl font-black text-lg transition-all cursor-pointer border-2 flex items-center justify-center gap-2 shadow-sm
+            class="shiny-choice-btn choice-normal py-3.5 sm:py-4 px-5 sm:px-6 rounded-xl font-black text-base sm:text-lg transition-all cursor-pointer border-2 flex items-center justify-center gap-2 shadow-sm
                 {revealed && !isTargetShiny ? 'bg-green-500 text-white border-green-600 scale-105' :
                  revealed && userAnswerShiny === false && isTargetShiny ? 'bg-red-500 text-white border-red-600' :
                  'bg-slate-100 hover:bg-slate-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-100 border-slate-300 dark:border-gray-500 hover:shadow-md'}"

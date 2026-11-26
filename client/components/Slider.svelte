@@ -39,8 +39,9 @@
     }
 
     .slider-input {
-        @apply w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer;
+        @apply w-full h-2.5 sm:h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer;
         @apply accent-blue-500;
+        touch-action: pan-y;
     }
 
     .slider-input:hover {
